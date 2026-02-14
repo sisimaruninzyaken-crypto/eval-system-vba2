@@ -22,6 +22,7 @@ Public Function BuildBasicInputV1() As String
     Dim painSiteTags As String
     Dim iadlLimits As String
     Dim biLowItems As String
+    Dim romLimitTags As String
 
     keys = BasicKeysV1()
     ReDim values(LBound(keys) To UBound(keys))
@@ -31,6 +32,7 @@ Public Function BuildBasicInputV1() As String
     livingType = GetFrmEvalControlText("txtLiving")
     iadlLimits = GetIADLLimits()
     biLowItems = GetBILowItems()
+    romLimitTags = GetRomLimitTags()
 
     ' Åöí«â¡ÅFbed_mobility_band ÇÕ1âÒÇæÇØåvéZ
     bedMobilityBand = GetBedMobilityBand()
@@ -61,6 +63,8 @@ Public Function BuildBasicInputV1() As String
                 values(i) = painBand
             Case "pain_site_tags"
                 values(i) = painSiteTags
+             Case "rom_limit_tags"
+                values(i) = romLimitTags
 
             Case Else
                 values(i) = vbNullString
@@ -72,6 +76,64 @@ Public Function BuildBasicInputV1() As String
 
 BuildBasicInputV1 = Join(lines, vbCrLf)
 End Function
+
+Private Function GetRomLimitTags() As String
+    Dim ws As Worksheet
+    Dim look As Object
+    Dim nm As String
+    Dim rLatest As Long
+    Dim tags As Collection
+
+    nm = Trim$(GetFrmEvalControlText("txtName"))
+    If LenB(nm) = 0 Then Exit Function
+
+    On Error Resume Next
+    Set ws = ThisWorkbook.Worksheets("EvalData")
+    On Error GoTo 0
+    If ws Is Nothing Then Exit Function
+
+    rLatest = FindLatestRowByName(ws, nm)
+    If rLatest <= 0 Then Exit Function
+
+    Set look = BuildHeaderLookup(ws)
+    Set tags = New Collection
+
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Ankle_Dorsi_R", 10, "Ankle_DF_R", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Ankle_Dorsi_L", 10, "Ankle_DF_L", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Ankle_Plantar_R", 30, "Ankle_PF_R", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Ankle_Plantar_L", 30, "Ankle_PF_L", tags
+
+    If tags.Count = 0 Then Exit Function
+
+    Dim arr() As String
+    Dim i As Long
+    ReDim arr(0 To tags.Count - 1)
+    For i = 1 To tags.Count
+        arr(i - 1) = CStr(tags(i))
+    Next i
+
+    GetRomLimitTags = Join(arr, ", ")
+End Function
+
+Private Sub AddRomLimitTag( _
+    ByVal ws As Worksheet, _
+    ByVal look As Object, _
+    ByVal rowNum As Long, _
+    ByVal headerKey As String, _
+    ByVal threshold As Double, _
+    ByVal tag As String, _
+    ByRef tags As Collection)
+
+    Dim col As Long
+    Dim v As Variant
+
+    col = ResolveColumn(look, headerKey)
+    If col <= 0 Then Exit Sub
+
+    v = ws.Cells(rowNum, col).value
+    If Not IsNumeric(v) Then Exit Sub
+    If CDbl(v) <= threshold Then tags.Add tag
+End Sub
 
 Private Function GetPainSiteTags() As String
     Dim ws As Worksheet
