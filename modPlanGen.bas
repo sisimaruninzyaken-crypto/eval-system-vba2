@@ -110,6 +110,18 @@ Private Function GetRomLimitTags() As String
     AddRomLimitTag ws, look, rLatest, "ROM_Lower_Hip_Flex_L", 100, "Hip_Flex_L", tags
     AddRomLimitTag ws, look, rLatest, "ROM_Lower_Hip_Ext_R", 5, "Hip_Ext_R", tags
     AddRomLimitTag ws, look, rLatest, "ROM_Lower_Hip_Ext_L", 5, "Hip_Ext_L", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Hip_Abd_R", 30, "Hip_Abd_R", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Hip_Abd_L", 30, "Hip_Abd_L", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Hip_Add_R", 20, "Hip_Add_R", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Hip_Add_L", 20, "Hip_Add_L", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Upper_Shoulder_Flex_R", 150, "Shoulder_Flex_R", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Upper_Shoulder_Flex_L", 150, "Shoulder_Flex_L", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Upper_Shoulder_Abd_R", 150, "Shoulder_Abd_R", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Upper_Shoulder_Abd_L", 150, "Shoulder_Abd_L", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Upper_Shoulder_ER_R", 45, "Shoulder_ER_R", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Upper_Shoulder_ER_L", 45, "Shoulder_ER_L", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Upper_Shoulder_IR_R", 50, "Shoulder_IR_R", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Upper_Shoulder_IR_L", 50, "Shoulder_IR_L", tags
     
     If tags.Count = 0 Then Exit Function
 
