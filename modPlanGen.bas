@@ -18,6 +18,7 @@ Public Function BuildBasicInputV1() As String
     Dim careLevelBand As String
     Dim livingType As String
     Dim bedMobilityBand As String
+    Dim painBand As String
     Dim iadlLimits As String
     Dim biLowItems As String
 
@@ -32,6 +33,8 @@ Public Function BuildBasicInputV1() As String
 
     ' ★追加：bed_mobility_band は1回だけ計算
     bedMobilityBand = GetBedMobilityBand()
+    painBand = GetPainBand()
+
 
     For i = LBound(keys) To UBound(keys)
         Select Case CStr(keys(i))
@@ -52,6 +55,8 @@ Public Function BuildBasicInputV1() As String
             ' ★追加：bed_mobility_band
             Case "bed_mobility_band"
                 values(i) = bedMobilityBand
+            Case "pain_band"
+                values(i) = painBand
 
             Case Else
                 values(i) = vbNullString
@@ -63,6 +68,47 @@ Public Function BuildBasicInputV1() As String
 
 BuildBasicInputV1 = Join(lines, vbCrLf)
 End Function
+
+Private Function GetPainBand() As String
+    Dim ws As Worksheet
+    Dim nm As String
+    Dim rLatest As Long
+    Dim io As String
+    Dim vasStr As String
+    Dim vas As Double
+
+    nm = Trim$(GetFrmEvalControlText("txtName"))
+    If LenB(nm) = 0 Then Exit Function
+
+    On Error Resume Next
+    Set ws = ThisWorkbook.Worksheets("EvalData")
+    On Error GoTo 0
+    If ws Is Nothing Then Exit Function
+
+    rLatest = FindLatestRowByName(ws, nm)
+    If rLatest <= 0 Then Exit Function
+
+    io = ReadStr_Compat("IO_Pain", rLatest, ws)
+    vasStr = Trim$(IO_GetVal(io, "VAS"))
+
+    If LenB(vasStr) = 0 Then Exit Function
+    If Not IsNumeric(vasStr) Then Exit Function
+
+    vas = CDbl(vasStr)
+    If vas < 0 Or vas > 100 Then Exit Function
+
+    Select Case vas
+        Case 0
+            GetPainBand = "なし"
+        Case 1 To 30
+            GetPainBand = "軽度"
+        Case 31 To 60
+            GetPainBand = "中等度"
+        Case Else
+            GetPainBand = "重度"
+    End Select
+End Function
+
 
 ' IADL_0`IADL_8 ?uv?OA??
 Private Function GetIADLLimits() As String
