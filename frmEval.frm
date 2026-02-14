@@ -6279,7 +6279,13 @@ Private Sub mDailyExtract_Click()
             "体調面に大きな変動はなく、日々のリハビリにも安定して取り組まれていました。" & vbCrLf & _
             "今後も現在の状態を維持できるよう、引き続き経過を観察していきます。"
 
+                      Call ExportMonitoring_ToMonthlyWorkbook( _
+                CDate(Me.Controls("fraDailyLog").Controls("txtDailyDate").value), _
+                Me.Controls("frHeader").Controls("txtHdrName").value, _
+                box.value)
+
            Exit Sub
+
         End If
 
     
@@ -6288,7 +6294,13 @@ Private Sub mDailyExtract_Click()
     ' ② AIで下書きに変換
     Me.Controls("fraDailyLog").Controls("txtMonthlyMonitoringDraft").value = _
         OpenAI_BuildDraft( _
-            "・本文（経過・時系列）には、事実のみを記載する。記録に書かれていない事実や推測は、本文には含めない。「コメント・考察」欄に限り、記録内容を踏まえた今後の観察視点や留意点を記載してよい。その際は、断定を避け、「○○の可能性がある」「○○に留意して経過を確認する」などの表現に限定する。医学的判断、改善・悪化の断定、因果関係の断定は行わない。文体は「です・ます調」とし、現場記録として自然で読みやすい柔らかさを持たせる。", _
+            "【出力フォーマット厳守】" & vbCrLf & _
+"以下の見出しを、表記・順序・記号（■）を一切変えずに必ず出力すること。" & vbCrLf & _
+"見出しの追加・削除・言い換え禁止。装飾（★/【】/番号付け）禁止。" & vbCrLf & _
+"必ずこの順序：" & vbCrLf & _
+"■ この月に記録された特記事項" & vbCrLf & _
+"■ コメント・考察" & vbCrLf & vbCrLf & _
+"・本文（経過・時系列）には、事実のみを記載する。記録に書かれていない事実や推測は、本文には含めない。「コメント・考察」欄に限り、記録内容を踏まえた今後の観察視点や留意点を記載してよい。その際は、断定を避け、「○○の可能性がある」「○○に留意して経過を確認する」などの表現に限定する。医学的判断、改善・悪化の断定、因果関係の断定は行わない。文体は「です・ます調」とし、現場記録として自然で読みやすい柔らかさを持たせる。", _
             Me.Controls("fraDailyLog").Controls("txtMonthlyMonitoringDraft").value _
         )
         

@@ -586,9 +586,29 @@ Else
     special = ""
 End If
 
-If Len(special) = 0 Then special = "特記事項はありません。"
 
-wsNew.Range("A24").value = special
+
+Dim tmplNoSpecial As String
+tmplNoSpecial = "この月は特記事項となる記録はありませんでした。" & vbCrLf & _
+                "体調面に大きな変動はなく、日々のリハビリにも安定して取り組まれていました。" & vbCrLf & _
+                "今後も現在の状態を維持できるよう、引き続き経過を観察していきます。"
+
+If Len(Trim$(special)) = 0 Or InStr(special, "特記事項となる記録はありません") > 0 Then
+    
+    ' 特記事項なし
+    wsNew.Range("A24").value = tmplNoSpecial
+    wsNew.Range("A31:J37").ClearContents
+
+Else
+    
+    ' 特記事項あり
+    wsNew.Range("A24").value = special
+    wsNew.Range("A31").value = s
+
+End If
+
+
+
 wsNew.Range("A24").WrapText = True
 With wsNew.Range("A24:J29")
     .HorizontalAlignment = xlLeft
@@ -599,7 +619,7 @@ End With
 
 
 
-wsNew.Range("A31").value = s
+
 With wsNew.Range("A31:J37")
     .HorizontalAlignment = xlLeft
     .VerticalAlignment = xlTop
