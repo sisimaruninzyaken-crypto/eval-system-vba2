@@ -19,6 +19,7 @@ Public Function BuildBasicInputV1() As String
     Dim livingType As String
     Dim bedMobilityBand As String
     Dim painBand As String
+    Dim painSiteTags As String
     Dim iadlLimits As String
     Dim biLowItems As String
 
@@ -34,6 +35,7 @@ Public Function BuildBasicInputV1() As String
     ' Åöí«â¡ÅFbed_mobility_band ÇÕ1âÒÇæÇØåvéZ
     bedMobilityBand = GetBedMobilityBand()
     painBand = GetPainBand()
+    painSiteTags = GetPainSiteTags()
 
 
     For i = LBound(keys) To UBound(keys)
@@ -57,6 +59,8 @@ Public Function BuildBasicInputV1() As String
                 values(i) = bedMobilityBand
             Case "pain_band"
                 values(i) = painBand
+            Case "pain_site_tags"
+                values(i) = painSiteTags
 
             Case Else
                 values(i) = vbNullString
@@ -68,6 +72,53 @@ Public Function BuildBasicInputV1() As String
 
 BuildBasicInputV1 = Join(lines, vbCrLf)
 End Function
+
+Private Function GetPainSiteTags() As String
+    Dim ws As Worksheet
+    Dim nm As String
+    Dim rLatest As Long
+    Dim io As String
+    Dim s As String
+    Dim rawTags As Variant
+    Dim tags() As String
+    Dim i As Long
+    Dim n As Long
+    Dim v As String
+
+    nm = Trim$(GetFrmEvalControlText("txtName"))
+    If LenB(nm) = 0 Then Exit Function
+
+    On Error Resume Next
+    Set ws = ThisWorkbook.Worksheets("EvalData")
+    On Error GoTo 0
+    If ws Is Nothing Then Exit Function
+
+    rLatest = FindLatestRowByName(ws, nm)
+    If rLatest <= 0 Then Exit Function
+
+    io = ReadStr_Compat("IO_Pain", rLatest, ws)
+    s = Trim$(IO_GetVal(io, "PainSite"))
+    If LenB(s) = 0 Then Exit Function
+
+    rawTags = Split(s, "/")
+    ReDim tags(LBound(rawTags) To UBound(rawTags))
+
+    n = -1
+    For i = LBound(rawTags) To UBound(rawTags)
+        v = Trim$(CStr(rawTags(i)))
+        If LenB(v) > 0 Then
+            n = n + 1
+            tags(n) = v
+        End If
+    Next i
+
+    If n < 0 Then Exit Function
+
+    ReDim Preserve tags(0 To n)
+    GetPainSiteTags = Join(tags, ", ")
+End Function
+
+
 
 Private Function GetPainBand() As String
     Dim ws As Worksheet
