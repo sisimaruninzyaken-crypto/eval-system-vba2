@@ -102,7 +102,11 @@ Private Function GetRomLimitTags() As String
     AddRomLimitTag ws, look, rLatest, "ROM_Lower_Ankle_Dorsi_L", 10, "Ankle_DF_L", tags
     AddRomLimitTag ws, look, rLatest, "ROM_Lower_Ankle_Plantar_R", 30, "Ankle_PF_R", tags
     AddRomLimitTag ws, look, rLatest, "ROM_Lower_Ankle_Plantar_L", 30, "Ankle_PF_L", tags
-
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Knee_Flex_R", 115, "Knee_Flex_R", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Knee_Flex_L", 115, "Knee_Flex_L", tags
+    AddRomLimitTagGE ws, look, rLatest, "ROM_Lower_Knee_Ext_R", 10, "Knee_Ext_R", tags
+    AddRomLimitTagGE ws, look, rLatest, "ROM_Lower_Knee_Ext_L", 10, "Knee_Ext_L", tags
+    
     If tags.Count = 0 Then Exit Function
 
     Dim arr() As String
@@ -134,6 +138,27 @@ Private Sub AddRomLimitTag( _
     If Not IsNumeric(v) Then Exit Sub
     If CDbl(v) <= threshold Then tags.Add tag
 End Sub
+
+Private Sub AddRomLimitTagGE( _
+    ByVal ws As Worksheet, _
+    ByVal look As Object, _
+    ByVal rowNum As Long, _
+    ByVal headerKey As String, _
+    ByVal threshold As Double, _
+    ByVal tag As String, _
+    ByRef tags As Collection)
+
+    Dim col As Long
+    Dim v As Variant
+
+    col = ResolveColumn(look, headerKey)
+    If col <= 0 Then Exit Sub
+
+    v = ws.Cells(rowNum, col).value
+    If Not IsNumeric(v) Then Exit Sub
+    If CDbl(v) >= threshold Then tags.Add tag
+End Sub
+
 
 Private Function GetPainSiteTags() As String
     Dim ws As Worksheet
