@@ -106,6 +106,10 @@ Private Function GetRomLimitTags() As String
     AddRomLimitTag ws, look, rLatest, "ROM_Lower_Knee_Flex_L", 115, "Knee_Flex_L", tags
     AddRomLimitTagGE ws, look, rLatest, "ROM_Lower_Knee_Ext_R", 10, "Knee_Ext_R", tags
     AddRomLimitTagGE ws, look, rLatest, "ROM_Lower_Knee_Ext_L", 10, "Knee_Ext_L", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Hip_Flex_R", 100, "Hip_Flex_R", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Hip_Flex_L", 100, "Hip_Flex_L", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Hip_Ext_R", 5, "Hip_Ext_R", tags
+    AddRomLimitTag ws, look, rLatest, "ROM_Lower_Hip_Ext_L", 5, "Hip_Ext_L", tags
     
     If tags.Count = 0 Then Exit Function
 
