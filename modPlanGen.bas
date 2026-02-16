@@ -107,7 +107,7 @@ Private Function GetStrengthBand() As String
         Exit Function
     End If
 
-    mmtIO = ReadStr_Compat("IO_MMT", rLatest, ws)
+    mmtIO = ReadStr_Compat("MMT_IO", rLatest, ws)
     GetStrengthBand = ComputeStrengthBandFromMMTIO(mmtIO)
 End Function
 
@@ -123,13 +123,13 @@ Public Function ComputeStrengthBandFromMMTIO(ByVal mmtIO As String) As String
 
     Set targetItems = CreateObject("Scripting.Dictionary")
     targetItems.CompareMode = vbTextCompare
-    targetItems("") = True
-    targetItems("LW") = True
-    targetItems("O]") = True
-    targetItems("PLW") = True
-    targetItems("??w") = True
-    targetItems("??") = True
-    targetItems("wLW") = True
+    targetItems("ŒÒ‹ü‹È") = True
+    targetItems("ŒÒL“W") = True
+    targetItems("ŒÒŠO“]]") = True
+    targetItems("•GL“W") = True
+    targetItems("‘«ŠÖß”w‹üw") = True
+    targetItems("‘«ŠÖß’ê‹ü") = True
+    targetItems("•êæäL“W") = True
 
     Set itemScores = CreateObject("Scripting.Dictionary")
     itemScores.CompareMode = vbTextCompare
