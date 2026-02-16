@@ -5,7 +5,7 @@ Option Explicit
 
 ' [ïKê{] BASIC_KEYS_V1 ÇÃä˘ë∂ÅiÇ†Ç»ÇΩÇÃåªçsÇÃÇ‹Ç‹Åj
 Public Function BasicKeysV1() As Variant
-     BasicKeysV1 = Split("care_level_band|primary_condition_cat|comorbidity_cat_list|history_flags|living_type|support_availability|bi_total|bi_low_items|iadl_limits|bed_mobility_band|rom_limit_tags|strength_band|pain_band|pain_site_tags", "|")
+ BasicKeysV1 = Split("care_level_band|primary_condition_cat|comorbidity_cat_list|history_flags|living_type|support_availability|bi_total|bi_low_items|iadl_limits|bed_mobility_band|rom_limit_tags|strength_band|pain_band|pain_site_tags|needs_patient|needs_family", "|")
 End Function
 
 ' [ïKê{] BuildBasicInputV1Åibed_mobility_band Çí«â¡çœÇ›Åj
@@ -16,6 +16,7 @@ Public Function BuildBasicInputV1() As String
     Dim i As Long
 
     Dim careLevelBand As String
+    Dim primaryConditionCat As String
     Dim livingType As String
     Dim bedMobilityBand As String
     Dim painBand As String
@@ -24,12 +25,15 @@ Public Function BuildBasicInputV1() As String
     Dim biLowItems As String
     Dim romLimitTags As String
     Dim strengthBand As String
+    Dim needsPatient As String
+    Dim needsFamily As String
 
     keys = BasicKeysV1()
     ReDim values(LBound(keys) To UBound(keys))
     ReDim lines(LBound(keys) To UBound(keys))
 
     careLevelBand = GetFrmEvalControlText("cboCare")
+    primaryConditionCat = GetPrimaryConditionCat()
     livingType = GetFrmEvalControlText("txtLiving")
     iadlLimits = GetIADLLimits()
     biLowItems = GetBILowItems()
@@ -40,6 +44,8 @@ Public Function BuildBasicInputV1() As String
     painBand = GetPainBand()
     painSiteTags = GetPainSiteTags()
     strengthBand = GetStrengthBand()
+    needsPatient = GetLatestBasicTextByHeader("ä≥é“Needs")
+    needsFamily = GetLatestBasicTextByHeader("â∆ë∞Needs")
 
 
     For i = LBound(keys) To UBound(keys)
@@ -49,6 +55,9 @@ Public Function BuildBasicInputV1() As String
 
             Case "living_type"
                 values(i) = livingType
+                
+            Case "primary_condition_cat"
+                values(i) = primaryConditionCat
 
             Case "bi_total"
                 values(i) = GetFrmEvalControlText("txtBITotal")
@@ -69,6 +78,10 @@ Public Function BuildBasicInputV1() As String
                 values(i) = romLimitTags
             Case "strength_band"
                 values(i) = strengthBand
+            Case "needs_patient"
+                values(i) = needsPatient
+            Case "needs_family"
+                values(i) = needsFamily
 
             Case Else
                 values(i) = vbNullString
@@ -79,6 +92,46 @@ Public Function BuildBasicInputV1() As String
 
 
 BuildBasicInputV1 = Join(lines, vbCrLf)
+End Function
+
+Private Function GetLatestBasicTextByHeader(ByVal headerName As String) As String
+    Dim ws As Worksheet
+    Dim nm As String
+    Dim rLatest As Long
+
+    nm = Trim$(GetFrmEvalControlText("txtName"))
+    If LenB(nm) = 0 Then Exit Function
+
+    
+    Set ws = ThisWorkbook.Worksheets("EvalData")
+    On Error GoTo 0
+    If ws Is Nothing Then Exit Function
+
+    rLatest = FindLatestRowByName(ws, nm)
+    If rLatest <= 0 Then Exit Function
+
+    GetLatestBasicTextByHeader = Trim$(ReadStr_Compat(headerName, rLatest, ws))
+End Function
+
+
+
+Private Function GetPrimaryConditionCat() As String
+    Dim ws As Worksheet
+    Dim nm As String
+    Dim rLatest As Long
+
+    nm = Trim$(GetFrmEvalControlText("txtName"))
+    If LenB(nm) = 0 Then Exit Function
+
+    On Error Resume Next
+    Set ws = ThisWorkbook.Worksheets("EvalData")
+    On Error GoTo 0
+    If ws Is Nothing Then Exit Function
+
+    rLatest = FindLatestRowByName(ws, nm)
+    If rLatest <= 0 Then Exit Function
+
+    GetPrimaryConditionCat = Trim$(ReadStr_Compat("éÂêfíf", rLatest, ws))
 End Function
 
 Private Function GetStrengthBand() As String
