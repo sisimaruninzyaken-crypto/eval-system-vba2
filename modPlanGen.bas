@@ -23,6 +23,7 @@ Public Function BuildBasicInputV1() As String
     Dim iadlLimits As String
     Dim biLowItems As String
     Dim romLimitTags As String
+    Dim strengthBand As String
 
     keys = BasicKeysV1()
     ReDim values(LBound(keys) To UBound(keys))
@@ -38,6 +39,7 @@ Public Function BuildBasicInputV1() As String
     bedMobilityBand = GetBedMobilityBand()
     painBand = GetPainBand()
     painSiteTags = GetPainSiteTags()
+    strengthBand = GetStrengthBand()
 
 
     For i = LBound(keys) To UBound(keys)
@@ -63,8 +65,10 @@ Public Function BuildBasicInputV1() As String
                 values(i) = painBand
             Case "pain_site_tags"
                 values(i) = painSiteTags
-             Case "rom_limit_tags"
+            Case "rom_limit_tags"
                 values(i) = romLimitTags
+            Case "strength_band"
+                values(i) = strengthBand
 
             Case Else
                 values(i) = vbNullString
@@ -76,6 +80,152 @@ Public Function BuildBasicInputV1() As String
 
 BuildBasicInputV1 = Join(lines, vbCrLf)
 End Function
+
+Private Function GetStrengthBand() As String
+    Dim ws As Worksheet
+    Dim nm As String
+    Dim rLatest As Long
+    Dim mmtIO As String
+
+    nm = Trim$(GetFrmEvalControlText("txtName"))
+    If LenB(nm) = 0 Then
+        GetStrengthBand = "unknown"
+        Exit Function
+    End If
+
+    On Error Resume Next
+    Set ws = ThisWorkbook.Worksheets("EvalData")
+    On Error GoTo 0
+    If ws Is Nothing Then
+        GetStrengthBand = "unknown"
+        Exit Function
+    End If
+
+    rLatest = FindLatestRowByName(ws, nm)
+    If rLatest <= 0 Then
+        GetStrengthBand = "unknown"
+        Exit Function
+    End If
+
+    mmtIO = ReadStr_Compat("IO_MMT", rLatest, ws)
+    GetStrengthBand = ComputeStrengthBandFromMMTIO(mmtIO)
+End Function
+
+Public Function ComputeStrengthBandFromMMTIO(ByVal mmtIO As String) As String
+    Dim targetItems As Object
+    Dim itemScores As Object
+    Dim records As Variant
+    Dim fields As Variant
+    Dim rec As Variant
+    Dim itemName As String
+    Dim partFlag As String
+    Dim score As Double
+
+    Set targetItems = CreateObject("Scripting.Dictionary")
+    targetItems.CompareMode = vbTextCompare
+    targetItems("") = True
+    targetItems("LW") = True
+    targetItems("O]") = True
+    targetItems("PLW") = True
+    targetItems("??w") = True
+    targetItems("??") = True
+    targetItems("wLW") = True
+
+    Set itemScores = CreateObject("Scripting.Dictionary")
+    itemScores.CompareMode = vbTextCompare
+
+    If LenB(Trim$(mmtIO)) = 0 Then
+        ComputeStrengthBandFromMMTIO = "unknown"
+        Exit Function
+    End If
+
+    records = Split(mmtIO, ";")
+    For Each rec In records
+        rec = Trim$(CStr(rec))
+        If LenB(rec) = 0 Then GoTo ContinueRecord
+
+        fields = Split(CStr(rec), "|")
+        If UBound(fields) < 3 Then GoTo ContinueRecord
+
+        partFlag = Trim$(CStr(fields(0)))
+        If StrComp(partFlag, "1", vbBinaryCompare) <> 0 Then GoTo ContinueRecord
+
+        itemName = Trim$(CStr(fields(1)))
+        If Not targetItems.exists(itemName) Then GoTo ContinueRecord
+
+        If TryGetLowerScore(fields, score) Then
+            itemScores(itemName) = score
+        End If
+
+ContinueRecord:
+    Next rec
+
+    ComputeStrengthBandFromMMTIO = ScoreToStrengthBand(itemScores)
+End Function
+
+Private Function TryGetLowerScore(ByVal fields As Variant, ByRef score As Double) As Boolean
+    Dim hasR As Boolean
+    Dim hasL As Boolean
+    Dim rVal As Double
+    Dim lVal As Double
+
+    hasR = ParseNumericScore(CStr(fields(2)), rVal)
+    hasL = ParseNumericScore(CStr(fields(3)), lVal)
+
+    If hasR And hasL Then
+        score = IIf(rVal <= lVal, rVal, lVal)
+        TryGetLowerScore = True
+    ElseIf hasR Then
+        score = rVal
+        TryGetLowerScore = True
+    ElseIf hasL Then
+        score = lVal
+        TryGetLowerScore = True
+    End If
+End Function
+
+Private Function ParseNumericScore(ByVal src As String, ByRef outVal As Double) As Boolean
+    src = Trim$(src)
+    If LenB(src) = 0 Then Exit Function
+    If Not IsNumeric(src) Then Exit Function
+
+    outVal = CDbl(src)
+    ParseNumericScore = True
+End Function
+
+Private Function ScoreToStrengthBand(ByVal itemScores As Object) As String
+    Dim k As Variant
+    Dim total As Double
+    Dim avg As Double
+
+    If itemScores Is Nothing Then
+        ScoreToStrengthBand = "unknown"
+        Exit Function
+    End If
+    If itemScores.Count = 0 Then
+        ScoreToStrengthBand = "unknown"
+        Exit Function
+    End If
+
+    For Each k In itemScores.keys
+        total = total + CDbl(itemScores(k))
+    Next k
+
+    avg = total / CDbl(itemScores.Count)
+
+    If avg < 2# Then
+        ScoreToStrengthBand = "severe"
+    ElseIf avg < 3# Then
+        ScoreToStrengthBand = "moderate"
+    ElseIf avg < 4# Then
+        ScoreToStrengthBand = "mild"
+    ElseIf avg <= 5# Then
+        ScoreToStrengthBand = "normal"
+    Else
+        ScoreToStrengthBand = "unknown"
+    End If
+End Function
+
 
 Private Function GetRomLimitTags() As String
     Dim ws As Worksheet
