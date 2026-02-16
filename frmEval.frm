@@ -296,7 +296,7 @@ End Function
 
 Private Function CreateTextBox(parent As MSForms.Frame, x As Single, Y As Single, _
                                w As Single, h As Single, multiline As Boolean, _
-                               Optional name As String = "", Optional Tag As String = "") As MSForms.TextBox
+                               Optional name As String = "", Optional tag As String = "") As MSForms.TextBox
     Dim tb As MSForms.TextBox
     Set tb = parent.Controls.Add("Forms.TextBox.1", IIf(name = "", vbNullString, name))
     With tb
@@ -306,13 +306,13 @@ Private Function CreateTextBox(parent As MSForms.Frame, x As Single, Y As Single
         .Height = IIf(h > 0, h, 20)
         .multiline = multiline
         .EnterKeyBehavior = multiline
-        .Tag = Tag
+        .tag = tag
     End With
     Set CreateTextBox = tb
 End Function
 
 Private Function CreateCombo(parent As MSForms.Frame, x As Single, Y As Single, _
-                             w As Single, Optional name As String = "", Optional Tag As String = "") As MSForms.ComboBox
+                             w As Single, Optional name As String = "", Optional tag As String = "") As MSForms.ComboBox
     Dim cB As MSForms.ComboBox
     Set cB = parent.Controls.Add("Forms.ComboBox.1", IIf(name = "", vbNullString, name))
     With cB
@@ -320,21 +320,21 @@ Private Function CreateCombo(parent As MSForms.Frame, x As Single, Y As Single, 
         .Top = Y
         .Width = w
         .Style = fmStyleDropDownList
-        .Tag = Tag
+        .tag = tag
     End With
     Set CreateCombo = cB
 End Function
 
 Private Function CreateCheck(parent As MSForms.Frame, caption As String, _
                              x As Single, Y As Single, Optional name As String = "", _
-                             Optional Tag As String = "") As MSForms.CheckBox
+                             Optional tag As String = "") As MSForms.CheckBox
     Dim ck As MSForms.CheckBox
     Set ck = parent.Controls.Add("Forms.CheckBox.1", IIf(name = "", vbNullString, name))
     With ck
         .caption = caption
         .Left = x
         .Top = Y
-        .Tag = Tag
+        .tag = tag
     End With
     Set CreateCheck = ck
 End Function
@@ -386,7 +386,7 @@ Private Function BuildCheckFrame(parent As MSForms.Frame, _
             .caption = CStr(items(i))
             .Left = 12 + col * colW
             .Top = 18 + row * rowH
-            .Tag = IIf(Len(groupTag) = 0, "", groupTag)
+            .tag = IIf(Len(groupTag) = 0, "", groupTag)
         End With
         If row > maxRow Then maxRow = row
     Next i
@@ -771,7 +771,7 @@ End Sub
 ' このフォームで「数字欄」と見なす判定
 Private Function ShouldBeNumericField(c As MSForms.Control) As Boolean
     Dim nm As String: nm = LCase$(c.name & "")
-    Dim tg As String: tg = LCase$(c.Tag & "")
+    Dim tg As String: tg = LCase$(c.tag & "")
 
     ' 名前で判定（必要ならここに追記）
     If nm = "txtage" Or nm = "txtedate" Or nm = "txtonset" _
@@ -960,7 +960,7 @@ Set EnsureBI_IADL = mpADL
     End With
     Set txtBI = pBI.Controls.Add("Forms.TextBox.1", "txtBITotal")
     With txtBI
-        .Tag = "BI.Total"
+        .tag = "BI.Total"
         .Left = lblBI.Left + lblBI.Width + 8
         .Top = yBI - 3
         .Width = 60
@@ -975,7 +975,7 @@ Set EnsureBI_IADL = mpADL
         Set cB = pBI.Controls.Add("Forms.ComboBox.1", "cmbBI_" & CStr(idx))
         AttachBIHook cB
         With cB
-            .Tag = "BI." & CStr(biItems(idx))
+            .tag = "BI." & CStr(biItems(idx))
             .Left = 190
             .Top = yBI - 3
             .Width = 200
@@ -1044,7 +1044,7 @@ Set EnsureBI_IADL = mpADL
 
         Set cb2 = pIADL.Controls.Add("Forms.ComboBox.1", "cmbIADL_" & CStr(j))
         With cb2
-            .Tag = "IADL." & CStr(iadlItems(j))
+            .tag = "IADL." & CStr(iadlItems(j))
             .Left = xIADL + 120
             .Top = yIADL - 3
             .Width = colWIADL - 150
@@ -1059,7 +1059,7 @@ Set EnsureBI_IADL = mpADL
     With lblINote: .caption = "備考": .Left = 12: .Top = gridBottom + 12: .Width = 40: End With
     Set txtINote = pIADL.Controls.Add("Forms.TextBox.1", "txtIADLNote")
     With txtINote
-        .Tag = "IADL.備考"
+        .tag = "IADL.備考"
         .Left = 60
         .Top = lblINote.Top - 3
         .Width = mpADL.Width - 84
@@ -1497,7 +1497,7 @@ Private Sub CreatePostureRows(fr As MSForms.Frame)
         Dim cB As MSForms.ComboBox
         Set cB = fr.Controls.Add("Forms.ComboBox.1", "cmbPost_" & CStr(i), True)
         cB.Style = fmStyleDropDownList
-        cB.Tag = POSTURE_TAG_PREFIX & CStr(items(i))
+        cB.tag = POSTURE_TAG_PREFIX & CStr(items(i))
 
         ' 選択肢の設定：共通関数があれば優先、無ければフォールバック
         On Error Resume Next
@@ -1523,7 +1523,7 @@ Private Sub CreatePostureRows(fr As MSForms.Frame)
         .EnterKeyBehavior = True
         .ScrollBars = fmScrollBarsVertical
         .IMEMode = fmIMEModeHiragana   ' ← 日本語入力（全角）を明示
-        .Tag = POSTURE_TAG_PREFIX & "備考"
+        .tag = POSTURE_TAG_PREFIX & "備考"
     End With
 End Sub
 
@@ -1970,12 +1970,12 @@ Private Function CollectFormData() As Object
 End Function
 
 Private Sub CollectOne(ByRef d As Object, ByVal ctl As MSForms.Control)
-    If Len(ctl.Tag & "") = 0 Then Exit Sub
+    If Len(ctl.tag & "") = 0 Then Exit Sub
     Select Case TypeName(ctl)
-        Case "TextBox", "ComboBox": d(ctl.Tag) = ctl.Text
+        Case "TextBox", "ComboBox": d(ctl.tag) = ctl.Text
         Case "CheckBox"
-            If ctl.Tag <> "AssistiveGroup" And ctl.Tag <> "RiskGroup" Then
-                d(ctl.Tag) = IIf(ctl.value, "有", "無")
+            If ctl.tag <> "AssistiveGroup" And ctl.tag <> "RiskGroup" Then
+                d(ctl.tag) = IIf(ctl.value, "有", "無")
             End If
     End Select
 End Sub
@@ -1989,7 +1989,7 @@ Private Function AggregateChecks(ByVal groupTag As String) As String
                     If TypeName(fr) = "Frame" Then
                         For Each cc In fr.Controls
                             If TypeName(cc) = "CheckBox" Then
-                                If cc.Tag = groupTag And cc.value Then picks = IIf(Len(picks) = 0, cc.caption, picks & "/" & cc.caption)
+                                If cc.tag = groupTag And cc.value Then picks = IIf(Len(picks) = 0, cc.caption, picks & "/" & cc.caption)
                             End If
                         Next
                     End If
@@ -4617,7 +4617,7 @@ Private Sub BuildWalkIndep_DistanceOutdoor()
         Exit Sub
     End If
 
- cmbBase.Tag = "WalkIndepLevel"
+ cmbBase.tag = "WalkIndepLevel"
 
     ' 行の高さ設定
     top1 = lblBase.Top
@@ -7022,15 +7022,15 @@ Public Sub CreateHeaderButtons_Once()
     
     Set mHdr1 = New clsHeaderBtnEvents
 Set mHdr1.btn = hSave
-mHdr1.Tag = "Save"
+mHdr1.tag = "Save"
 
 Set mHdr2 = New clsHeaderBtnEvents
 Set mHdr2.btn = hClear
-mHdr2.Tag = "Clear"
+mHdr2.tag = "Clear"
 
 Set mHdr3 = New clsHeaderBtnEvents
 Set mHdr3.btn = hClose
-mHdr3.Tag = "Close"
+mHdr3.tag = "Close"
 
 
     
