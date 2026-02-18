@@ -6839,6 +6839,13 @@ End Sub
 
 
 Public Sub BuildEvalShell_Once()
+
+    '
+    ' Shell authority (final winner): BuildEvalShell_Once
+    ' LegacyInit/FitLayout do NOT own shell layout
+    ' No Controls.Add MultiPage. Use existing MultiPage1
+    ' Auto-run: Initialize only. Activate is no-op
+    '
     If mLayoutBuilt Then Exit Sub
     mLayoutBuilt = True
     
