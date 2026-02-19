@@ -16,6 +16,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Option Explicit
 
 '=== frmEval ヘッダ：共通で使う変数 ===
@@ -708,14 +709,17 @@ End If
 End Sub
 
 '=== ヘルパー：コントロール存在チェック（衝突回避の別名） ===
-Private Function FnHasControl(nm As String) As Boolean
-    Dim o As Object
-    On Error Resume Next
-    Set o = Me.Controls(nm)
-    FnHasControl = (Err.Number = 0) And Not o Is Nothing
-    Err.Clear
-    On Error GoTo 0
+Private Function FnHasControl(ByVal nm As String) As Boolean
+    Dim c As MSForms.Control
+    For Each c In Me.Controls
+        If StrComp(c.name, nm, vbTextCompare) = 0 Then
+            FnHasControl = True
+            Exit Function
+        End If
+    Next
+    FnHasControl = False
 End Function
+
 
 
 
@@ -1077,7 +1081,8 @@ Set EnsureBI_IADL = mpADL
     
    
     nextTop = mpADL.Top + mpADL.Height + 10
-    hostMove.ScrollHeight = nextTop + 10
+    If Not hostMove Is Nothing Then hostMove.ScrollHeight = nextTop + 10
+
     Set EnsureBI_IADL = mpADL
 End Function
 '=================================================================
@@ -1245,7 +1250,9 @@ End Sub
 '=== IADL備考にIMEひらがなを再適用（都度呼ぶ） ===
 Public Sub ApplyImeToIADLNote()
     On Error Resume Next
-    Dim mpA As MSForms.MultiPage, c As Control
+     Dim mpA As MSForms.MultiPage, c As Control
+     If hostMove Is Nothing Then Exit Sub
+
     For Each c In hostMove.Controls
         If TypeName(c) = "MultiPage" Then
             If c.name = "mpADL" Then Set mpA = c: Exit For
@@ -2865,7 +2872,7 @@ Call RemoveLegacyPainUI
     Me.TidyPainUI_Once
 
 If Not mPainTidyBusy Then
-    TidyPainUI_Once
+    'TidyPainUI_Once
     Me.Height = h
     DoEvents
     ClearPainUI Me   ' ← 起動時は空で開始（読み込みは手動で）
@@ -6839,6 +6846,13 @@ End Sub
 
 
 Public Sub BuildEvalShell_Once()
+
+    '
+    ' Shell authority (final winner): BuildEvalShell_Once
+    ' LegacyInit/FitLayout do NOT own shell layout
+    ' No Controls.Add MultiPage. Use existing MultiPage1
+    ' Auto-run: Initialize only. Activate is no-op
+    '
     If mLayoutBuilt Then Exit Sub
     mLayoutBuilt = True
     
