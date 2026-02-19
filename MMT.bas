@@ -5,56 +5,72 @@ Option Explicit
 ' === 生成系（Direct） ===
 
 
-'=== MMTページ内に子タブ（上肢／下肢）を作る：直置き方式 ===
 Public Sub MMT_BuildChildTabs_Direct()
-    Dim pg As Object: Set pg = GetMMTPage()
+  
+    Dim pg As Object
+    Set pg = GetMMTPage()
     If pg Is Nothing Then
         MsgBox "MMTページが見つかりません。", vbExclamation
         Exit Sub
     End If
 
-    '--- 親ページの中身を完全に削除 ---
-    Dim i As Long
-    For i = pg.Controls.Count - 1 To 0 Step -1
-        pg.Controls.Remove pg.Controls(i).name
-    Next
+    Dim host As Object, mp As Object
 
-    Dim mp As MSForms.MultiPage
+    '--- host確保（無ければ作る） ---
     On Error Resume Next
-    Set mp = pg.Controls("mpMMTChild")
-    On Error GoTo 0
-
-    If mp Is Nothing Then
-        ' 子タブ作成
-        Set mp = pg.Controls.Add("Forms.MultiPage.1", "mpMMTChild", True)
-        With mp
-            .Left = 12: .Top = 12
-            .Width = 820: .Height = 420
-            .Style = 0
-            .Pages.Clear
-            .Pages.Add.caption = "上肢"
-            .Pages.Add.caption = "下肢"
-        End With
+    Set host = pg.Controls("fraMMTHost")
+    
+    If host Is Nothing Then
+        Set host = pg.Controls.Add("Forms.Frame.1", "fraMMTHost", True)
+        host.caption = ""
+        host.Left = 6: host.Top = 6
     End If
 
-    ' 各子タブにUIを生成
-    MMT_ClearGen mp.Pages(0): MMT_ClearGen mp.Pages(1)
+    ' hostサイズは毎回追従（pgが小さくても破綻しない）
+    host.Width = pg.InsideWidth - 12
+    host.Height = pg.InsideHeight - 12
+
+    '--- mp確保（host配下） ---
+    On Error Resume Next
+    Set mp = host.Controls("mpMMTChild")
+    
+
+    If mp Is Nothing Then
+        Set mp = host.Controls.Add("Forms.MultiPage.1", "mpMMTChild", True)
+        mp.Left = 0: mp.Top = 0
+        mp.Style = 0
+        mp.Pages.Clear
+        mp.Pages.Add.caption = "上肢"
+        mp.Pages.Add.caption = "下肢"
+    End If
+
+    ' mpサイズも毎回追従
+    mp.Width = host.InsideWidth
+    mp.Height = host.InsideHeight
+
+    '--- 子タブの中身を作り直す（MMTGENだけ消す） ---
+    MMT_ClearGen mp.Pages(0)
+    MMT_ClearGen mp.Pages(1)
 
     BuildMMTPage mp.Pages(0), Array("肩屈曲", "肩伸展", "肩外転", "肩内旋", "肩外旋", _
                                     "肘屈曲", "肘伸展", "前腕回内", "前腕回外", _
                                     "手関節掌屈", "手関節背屈", "指屈曲", "指伸展", "母指対立")
     BuildMMTPage mp.Pages(1), Array("股屈曲", "股伸展", "股外転", "股内転", _
                                     "膝屈曲", "膝伸展", "足関節背屈", "足関節底屈", "母趾伸展")
+    
+    DoEvents
+    Resize_MMTChildHost_ToPage
+    
+    Exit Sub
 
-    
-    
-' 直後に読込（直近の行など任意の行を渡す）
-'LoadMMTFromSheet Worksheets("EvalData"), _
-'    Worksheets("EvalData").Cells(Worksheets("EvalData").Rows.Count, 1).End(xlUp).Row, frmEval
+   
 
-    
-    'MsgBox "MMTページ内に子タブ（上肢／下肢）を作成しました。", vbInformation
+
+RRTRACE:
+    Debug.Print "[MMT ERROR]", Err.Number, Err.Description
+
 End Sub
+
 
 
 
@@ -81,7 +97,7 @@ Private Sub MakeCbo(ByVal pg As Object, ByVal nm As String, _
     Set o = pg.Controls.Add("Forms.ComboBox.1", nm, True)
     o.Left = l: o.Top = t: o.Width = w: o.Height = h
     o.Style = MSForms.fmStyleDropDownList: o.BoundColumn = 1
-    o.List = Split("0,1,2,3,4,5", ","): o.Tag = "MMTGEN"
+    o.List = Split("0,1,2,3,4,5", ","): o.tag = "MMTGEN"
 End Sub
 
 
@@ -89,7 +105,7 @@ Private Sub MakeLbl(ByVal pg As Object, ByVal nm As String, ByVal cap As String,
                     ByVal l As Single, ByVal t As Single, ByVal w As Single, ByVal h As Single)
     Dim o As MSForms.label
     Set o = pg.Controls.Add("Forms.Label.1", nm, True)
-    o.caption = cap: o.Left = l: o.Top = t: o.Width = w: o.Height = h: o.Tag = "MMTGEN"
+    o.caption = cap: o.Left = l: o.Top = t: o.Width = w: o.Height = h: o.tag = "MMTGEN"
 End Sub
 
 
@@ -117,7 +133,7 @@ End Sub
 Private Sub MMT_ClearGen(ByVal pg As Object)
     Dim idx As Long
     For idx = pg.Controls.Count - 1 To 0 Step -1
-        If Left$(pg.Controls(idx).Tag & "", 6) = "MMTGEN" Then
+        If Left$(pg.Controls(idx).tag & "", 6) = "MMTGEN" Then
             pg.Controls.Remove pg.Controls(idx).name
         End If
     Next
