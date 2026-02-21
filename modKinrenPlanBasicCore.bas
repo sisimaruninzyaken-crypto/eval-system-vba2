@@ -15,12 +15,12 @@ Public Function BuildBasicPlanStructure(ByVal mainCause As String, _
     Set result = CreateObject("Scripting.Dictionary")
 
     Select Case result("Activity_Long")
-          Case "‰®“à•às"
-              mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "ŒÒŠO“],”w‹ü,•GL“W")
-          Case "ƒgƒCƒŒ"
-              mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "ŒÒŠO“],•GL“W,‘ÌŠ²L“W")
-          Case "‰®ŠO•às"
-              mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "”w‹ü,ŒÒŠO“],•GL“W")
+          Case "å±‹å†…æ­©è¡Œ"
+              mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "è‚¡å¤–è»¢,èƒŒå±ˆ,è†ä¼¸å±•")
+          Case "ãƒˆã‚¤ãƒ¬"
+              mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "è‚¡å¤–è»¢,è†ä¼¸å±•,ä½“å¹¹ä¼¸å±•")
+          Case "å±‹å¤–æ­©è¡Œ"
+              mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "èƒŒå±ˆ,è‚¡å¤–è»¢,è†ä¼¸å±•")
           Case Else
               mmtTargetMuscle = PickMMTTarget(mmtMap)
     End Select
@@ -33,70 +33,70 @@ Public Function BuildBasicPlanStructure(ByVal mainCause As String, _
     result("Activity_Long") = PickActivityLong(needSelf, needFamily, needByDifficulty)
 
         If Len(Trim$(needSelf)) > 0 Then
-          reason = "–{lŠó–]"
+          reason = "æœ¬äººå¸Œæœ›"
         ElseIf Len(Trim$(needFamily)) > 0 Then
-          reason = "‰Æ‘°Šó–]"
+          reason = "å®¶æ—å¸Œæœ›"
         Else
-          reason = "¢“ï“xãˆÊ"
+          reason = "å›°é›£åº¦ä¸Šä½"
         End If
 
     result("Activity_Reason") = reason
 
     Select Case mainCause
-        Case "–ƒáƒ"
+        Case "éº»ç—º"
         
         If result("MMT_MinScore") <= 2 Then
-            fxCore = mmtTargetMuscle & "‚ÌˆÓûkŠl“¾‚É‚æ‚è"
+            fxCore = mmtTargetMuscle & "ã®éšæ„åç¸®ç²å¾—ã«ã‚ˆã‚Š"
         Else
-            fxCore = mmtTargetMuscle & "‚Ì‹Ø—Í‰ü‘P‚É‚æ‚è"
+            fxCore = mmtTargetMuscle & "ã®ç­‹åŠ›æ”¹å–„ã«ã‚ˆã‚Š"
         End If
 
     Select Case result("Activity_Long")
     
-        Case "‰®“à•às"
-            result("Function_Long") = fxCore & "—§‹rŠúˆÀ’è«Œüã‚ğ}‚éB"
+        Case "å±‹å†…æ­©è¡Œ"
+            result("Function_Long") = fxCore & "ç«‹è„šæœŸå®‰å®šæ€§å‘ä¸Šã‚’å›³ã‚‹ã€‚"
         
-        Case "ƒgƒCƒŒ"
-            result("Function_Long") = fxCore & "ˆÚæx«Œüã‚ğ}‚éB"
+        Case "ãƒˆã‚¤ãƒ¬"
+            result("Function_Long") = fxCore & "ç§»ä¹—æ™‚æ”¯æŒæ€§å‘ä¸Šã‚’å›³ã‚‹ã€‚"
         
-        Case "‰®ŠO•às"
-            result("Function_Long") = fxCore & "’i·¸~‚ÌˆÀ’è«Œüã‚ğ}‚éB"
+        Case "å±‹å¤–æ­©è¡Œ"
+            result("Function_Long") = fxCore & "æ®µå·®æ˜‡é™æ™‚ã®å®‰å®šæ€§å‘ä¸Šã‚’å›³ã‚‹ã€‚"
         
         Case Else
-            result("Function_Long") = mmtTargetMuscle & "‚Ì‹Ø—Í‰ü‘P‚ğ}‚éB"
+            result("Function_Long") = mmtTargetMuscle & "ã®ç­‹åŠ›æ”¹å–„ã‚’å›³ã‚‹ã€‚"
             
     End Select
 
 
-       Case "áu’É"
-        result("Function_Long") = "áu’É‚ÌŒyŒ¸‚ğ}‚éB"
-       Case "¢“ï“x"
-        result("Function_Long") = "‰ºˆ‹@”\‚Ì‘S‘Ì“IŒüã‚ğ}‚éB"
+       Case "ç–¼ç—›"
+        result("Function_Long") = "ç–¼ç—›ã®è»½æ¸›ã‚’å›³ã‚‹ã€‚"
+       Case "å›°é›£åº¦"
+        result("Function_Long") = "ä¸‹è‚¢æ©Ÿèƒ½ã®å…¨ä½“çš„å‘ä¸Šã‚’å›³ã‚‹ã€‚"
        Case Else
         result("Function_Long") = ""
     End Select
 
     Select Case mainCause
-      Case "–ƒáƒ"
+      Case "éº»ç—º"
        If result("MMT_MinScore") <= 2 Then
-    result("Function_Short") = mmtTargetMuscle & "‚ÌˆÓûkŠl“¾‚ğ}‚éB"
+    result("Function_Short") = mmtTargetMuscle & "ã®éšæ„åç¸®ç²å¾—ã‚’å›³ã‚‹ã€‚"
 Else
-    result("Function_Short") = mmtTargetMuscle & "‚Ì‹Ø—Í‰ü‘P‚ğ}‚éB"
+    result("Function_Short") = mmtTargetMuscle & "ã®ç­‹åŠ›æ”¹å–„ã‚’å›³ã‚‹ã€‚"
 End If
 
-      Case "áu’É"
-        result("Function_Short") = "áu’É—U”­“®ì‚ÌŒyŒ¸‚¨‚æ‚Ñ•‰‰×’²®‚ğ}‚éB"
-      Case "¢“ï“x"
-        result("Function_Short") = "å—vƒ{ƒgƒ‹ƒlƒbƒN‹Ø‚Ì‹@”\‰ü‘P‚ğ}‚éB"
+      Case "ç–¼ç—›"
+        result("Function_Short") = "ç–¼ç—›èª˜ç™ºå‹•ä½œã®è»½æ¸›ãŠã‚ˆã³è² è·èª¿æ•´ã‚’å›³ã‚‹ã€‚"
+      Case "å›°é›£åº¦"
+        result("Function_Short") = "ä¸»è¦ãƒœãƒˆãƒ«ãƒãƒƒã‚¯ç­‹ã®æ©Ÿèƒ½æ”¹å–„ã‚’å›³ã‚‹ã€‚"
       Case Else
         result("Function_Short") = ""
     End Select
 
     result("Activity_Short") = BuildActivityShort_ByActivity(mainCause, result("Activity_Long"), mmtTargetMuscle, result("MMT_MinScore"))
-    result("Participation_Long") = "ˆÚ“®”\—Í‚ÌŒüã‚É‚æ‚è" & result("Activity_Long") & "‚Ì‹@‰ï‚ğ‚Ä‚éó‘Ô‚ğ–Úw‚·B"
+    result("Participation_Long") = "ç§»å‹•èƒ½åŠ›ã®å‘ä¸Šã«ã‚ˆã‚Š" & result("Activity_Long") & "ã®æ©Ÿä¼šã‚’æŒã¦ã‚‹çŠ¶æ…‹ã‚’ç›®æŒ‡ã™ã€‚"
       
-    shortCore = Replace(result("Activity_Short"), "‚ğ}‚éB", "")
-    result("Participation_Short") = shortCore & "‚ğ}‚èA" & result("Activity_Long") & "‚Ì‹@‰ïŠg‘å‚ÉŒü‚¯‚½€”õ‚ğs‚¤B"
+    shortCore = Replace(result("Activity_Short"), "ã‚’å›³ã‚‹ã€‚", "")
+    result("Participation_Short") = shortCore & "ã‚’å›³ã‚Šã€" & result("Activity_Long") & "ã®æ©Ÿä¼šæ‹¡å¤§ã«å‘ã‘ãŸæº–å‚™ã‚’è¡Œã†ã€‚"
     
 
 
@@ -124,14 +124,14 @@ End Function
 Public Function BuildActivityShort(ByVal mainCause As String, ByVal activityLong As String) As String
     
     Select Case mainCause
-        Case "–ƒáƒ"
-            BuildActivityShort = activityLong & "‚Ì–ƒáƒ‘¤x«Œüã‚ğ}‚éB"
+        Case "éº»ç—º"
+            BuildActivityShort = activityLong & "æ™‚ã®éº»ç—ºå´æ”¯æŒæ€§å‘ä¸Šã‚’å›³ã‚‹ã€‚"
             
-        Case "áu’É"
-            BuildActivityShort = activityLong & "‚Ìáu’ÉŒyŒ¸‚ğ}‚éB"
+        Case "ç–¼ç—›"
+            BuildActivityShort = activityLong & "æ™‚ã®ç–¼ç—›è»½æ¸›ã‚’å›³ã‚‹ã€‚"
             
         Case Else
-            BuildActivityShort = activityLong & "“®ì‚ÌˆÀ’è‰»‚ğ}‚éB"
+            BuildActivityShort = activityLong & "å‹•ä½œã®å®‰å®šåŒ–ã‚’å›³ã‚‹ã€‚"
     End Select
     
     
@@ -148,32 +148,32 @@ Public Function BuildActivityShort_ByActivity(ByVal mainCause As String, _
                                               
     Select Case activityLong
     
-        Case "ƒgƒCƒŒ"
+        Case "ãƒˆã‚¤ãƒ¬"
             Select Case mainCause
-                Case "–ƒáƒ": BuildActivityShort_ByActivity = "•ÖÀˆÚæ‚Ì–ƒáƒ‘¤x«Œüã‚ğ}‚éB"
-                Case "áu’É": BuildActivityShort_ByActivity = "—§‚¿ã‚ª‚è‚Ìáu’ÉŒyŒ¸‚ğ}‚éB"
-                Case Else:  BuildActivityShort_ByActivity = "•ûŒü“]Š·“®ì‚ÌˆÀ’è‰»‚ğ}‚éB"
+                Case "éº»ç—º": BuildActivityShort_ByActivity = "ä¾¿åº§ç§»ä¹—æ™‚ã®éº»ç—ºå´æ”¯æŒæ€§å‘ä¸Šã‚’å›³ã‚‹ã€‚"
+                Case "ç–¼ç—›": BuildActivityShort_ByActivity = "ç«‹ã¡ä¸ŠãŒã‚Šæ™‚ã®ç–¼ç—›è»½æ¸›ã‚’å›³ã‚‹ã€‚"
+                Case Else:  BuildActivityShort_ByActivity = "æ–¹å‘è»¢æ›å‹•ä½œã®å®‰å®šåŒ–ã‚’å›³ã‚‹ã€‚"
             End Select
             
-        Case "‰®“à•às"
+        Case "å±‹å†…æ­©è¡Œ"
             Select Case mainCause
-  Case "–ƒáƒ"
+  Case "éº»ç—º"
     If mmtMinScore <= 2 Then
-        BuildActivityShort_ByActivity = mmtTargetMuscle & "‚ÌˆÓûkŠl“¾‚ğ’Ê‚¶‚ÄA¶‰E‰×d·‚ÌŒyŒ¸‚ğ}‚éB"
+        BuildActivityShort_ByActivity = mmtTargetMuscle & "ã®éšæ„åç¸®ç²å¾—ã‚’é€šã˜ã¦ã€å·¦å³è·é‡å·®ã®è»½æ¸›ã‚’å›³ã‚‹ã€‚"
     Else
-        BuildActivityShort_ByActivity = mmtTargetMuscle & "‚Ì‹Ø—Í‰ü‘P‚ğ’Ê‚¶‚ÄA¶‰E‰×d·‚ÌŒyŒ¸‚ğ}‚éB"
+        BuildActivityShort_ByActivity = mmtTargetMuscle & "ã®ç­‹åŠ›æ”¹å–„ã‚’é€šã˜ã¦ã€å·¦å³è·é‡å·®ã®è»½æ¸›ã‚’å›³ã‚‹ã€‚"
     End If
-                Case "áu’É": BuildActivityShort_ByActivity = "•às‚Ìáu’ÉŒyŒ¸‚ğ}‚éB"
-                Case "¢“ï“x": BuildActivityShort_ByActivity = "•ûŒü“]Š·‚ÌˆÀ’è«Œüã‚ğ}‚éB"
+                Case "ç–¼ç—›": BuildActivityShort_ByActivity = "æ­©è¡Œæ™‚ã®ç–¼ç—›è»½æ¸›ã‚’å›³ã‚‹ã€‚"
+                Case "å›°é›£åº¦": BuildActivityShort_ByActivity = "æ–¹å‘è»¢æ›æ™‚ã®å®‰å®šæ€§å‘ä¸Šã‚’å›³ã‚‹ã€‚"
                 Case Else: BuildActivityShort_ByActivity = BuildActivityShort(mainCause, activityLong)
  
             End Select
             
-        Case "‰®ŠO•às"
+        Case "å±‹å¤–æ­©è¡Œ"
             Select Case mainCause
-                Case "–ƒáƒ": BuildActivityShort_ByActivity = "–ƒáƒ‘¤‰ºˆ‚Ìx«Œüã‚ğ}‚éB"
-                Case "áu’É": BuildActivityShort_ByActivity = "‰®ŠO•às‚Ìáu’ÉŒyŒ¸‚ğ}‚éB"
-                Case Else:  BuildActivityShort_ByActivity = "’i·¸~‚ÌˆÀ’è«Œüã‚ğ}‚éB"
+                Case "éº»ç—º": BuildActivityShort_ByActivity = "éº»ç—ºå´ä¸‹è‚¢ã®æ”¯æŒæ€§å‘ä¸Šã‚’å›³ã‚‹ã€‚"
+                Case "ç–¼ç—›": BuildActivityShort_ByActivity = "å±‹å¤–æ­©è¡Œæ™‚ã®ç–¼ç—›è»½æ¸›ã‚’å›³ã‚‹ã€‚"
+                Case Else:  BuildActivityShort_ByActivity = "æ®µå·®æ˜‡é™æ™‚ã®å®‰å®šæ€§å‘ä¸Šã‚’å›³ã‚‹ã€‚"
             End Select
     
             
@@ -332,7 +332,7 @@ Public Function PickMMTTarget_WithPriority(ByVal mmtMap As Object, ByVal priorit
     best = ""
     bestScore = 9999
     
-    ' Å¬ƒXƒRƒA‚ğæ‚é
+    ' æœ€å°ã‚¹ã‚³ã‚¢ã‚’å–ã‚‹
     For Each k In mmtMap.keys
         If IsNumeric(mmtMap(k)) Then
             sc = CDbl(mmtMap(k))
@@ -345,7 +345,7 @@ Public Function PickMMTTarget_WithPriority(ByVal mmtMap As Object, ByVal priorit
         Exit Function
     End If
     
-    ' “¯—¦‚Ì’†‚Å—Dæ‡‚É‘I‚Ô
+    ' åŒç‡ã®ä¸­ã§å„ªå…ˆé †ã«é¸ã¶
     pri = Split(priorityCsv, ",")
     For i = LBound(pri) To UBound(pri)
         If mmtMap.exists(Trim$(pri(i))) Then
@@ -358,7 +358,7 @@ Public Function PickMMTTarget_WithPriority(ByVal mmtMap As Object, ByVal priorit
         End If
     Next i
     
-    ' —DæƒŠƒXƒg‚É–³‚¯‚ê‚ÎÅ‰‚ÉŒ©‚Â‚©‚Á‚½Å¬‚ğ•Ô‚·
+    ' å„ªå…ˆãƒªã‚¹ãƒˆã«ç„¡ã‘ã‚Œã°æœ€åˆã«è¦‹ã¤ã‹ã£ãŸæœ€å°ã‚’è¿”ã™
     For Each k In mmtMap.keys
         If IsNumeric(mmtMap(k)) Then
             If CDbl(mmtMap(k)) = bestScore Then
@@ -374,8 +374,11 @@ End Function
 
 Public Sub Test_PickMMTTarget_WithPriority_Tie()
     Set M = CreateObject("Scripting.Dictionary")
-    M.Add "ŒÒŠO“]", 3
-    M.Add "•GL“W", 3
+    M.Add "è‚¡å¤–è»¢", 3
+    M.Add "è†ä¼¸å±•", 3
     
-    Debug.Print PickMMTTarget_WithPriority(M, "•GL“W,ŒÒŠO“]")
+    Debug.Print PickMMTTarget_WithPriority(M, "è†ä¼¸å±•,è‚¡å¤–è»¢")
 End Sub
+
+
+' encoding test
