@@ -13,12 +13,14 @@ Public Function BuildBasicPlanStructure(ByVal mainCause As String, _
     Dim fxCore As String
 
     Set result = CreateObject("Scripting.Dictionary")
-
+    result("Activity_Long") = PickActivityLong(needSelf, needFamily, needByDifficulty)
+    
+    
     Select Case result("Activity_Long")
           Case "屋内歩行"
               mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "股外転,背屈,膝伸展")
-          Case "トイレ"
-              mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "股外転,膝伸展,体幹伸展")
+          Case "トイレ動作"
+              mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "股外転,膝伸展")
           Case "屋外歩行"
               mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "背屈,股外転,膝伸展")
           Case Else
@@ -26,12 +28,10 @@ Public Function BuildBasicPlanStructure(ByVal mainCause As String, _
     End Select
 
     result("MMT_TargetMuscle") = mmtTargetMuscle
-    result("MMT_MinScore") = PickMMTMinScore(mmtMap)
+    result("MMT_MinScore") = mmtMap(mmtTargetMuscle)
     result("MainCause") = mainCause
 
     
-    result("Activity_Long") = PickActivityLong(needSelf, needFamily, needByDifficulty)
-
         If Len(Trim$(needSelf)) > 0 Then
           reason = "本人希望"
         ElseIf Len(Trim$(needFamily)) > 0 Then
@@ -56,7 +56,7 @@ Public Function BuildBasicPlanStructure(ByVal mainCause As String, _
         Case "屋内歩行"
             result("Function_Long") = fxCore & "立脚期安定性向上を図る。"
         
-        Case "トイレ"
+        Case "トイレ", "トイレ動作"
             result("Function_Long") = fxCore & "移乗時支持性向上を図る。"
         
         Case "屋外歩行"
@@ -96,7 +96,26 @@ End If
     result("Participation_Long") = "移動能力の向上により" & result("Activity_Long") & "の機会を持てる状態を目指す。"
       
     shortCore = Replace(result("Activity_Short"), "を図る。", "")
-    result("Participation_Short") = shortCore & "を図り、" & result("Activity_Long") & "の機会拡大に向けた準備を行う。"
+
+
+Select Case result("Activity_Long")
+
+    Case "屋外歩行"
+        result("Participation_Short") = shortCore & "を図り、外出機会の拡大に向けた準備を行う。"
+
+    Case "トイレ動作"
+        result("Participation_Short") = shortCore & "を図り、自立排泄機会の拡大に向けた準備を行う。"
+
+    Case "入浴一連動作"
+        result("Participation_Short") = shortCore & "を図り、入浴自立機会の拡大に向けた準備を行う。"
+
+    Case "移乗"
+        result("Participation_Short") = shortCore & "を図り、日常生活内移動機会の拡大に向けた準備を行う。"
+
+    Case Else
+        result("Participation_Short") = shortCore & "を図り、" & result("Activity_Long") & "の機会拡大に向けた準備を行う。"
+
+End Select
     
 
 
@@ -106,18 +125,26 @@ End If
 End Function
 
 
-Public Function PickActivityLong(ByVal needSelf As String, ByVal needFamily As String, ByVal needByDifficulty As String) As String
+Public Function PickActivityLong(ByVal needSelf As String, _
+                                 ByVal needFamily As String, _
+                                 ByVal needByDifficulty As String) As String
+    Dim rawValue As String
+    
     If Len(Trim$(needSelf)) > 0 Then
-        PickActivityLong = needSelf
-        Exit Function
+        rawValue = Trim$(needSelf)
+    ElseIf Len(Trim$(needFamily)) > 0 Then
+        rawValue = Trim$(needFamily)
+    Else
+        rawValue = Trim$(needByDifficulty)
     End If
     
-    If Len(Trim$(needFamily)) > 0 Then
-        PickActivityLong = needFamily
-        Exit Function
-    End If
-    
-    PickActivityLong = needByDifficulty
+    ' ---- 正規化処理 ----
+    Select Case rawValue
+        Case "トイレ"
+            PickActivityLong = "トイレ動作"
+        Case Else
+            PickActivityLong = rawValue
+    End Select
 End Function
 
 
@@ -148,12 +175,18 @@ Public Function BuildActivityShort_ByActivity(ByVal mainCause As String, _
                                               
     Select Case activityLong
     
-        Case "トイレ"
+        Case "トイレ", "トイレ動作"
             Select Case mainCause
-                Case "麻痺": BuildActivityShort_ByActivity = "便座移乗時の麻痺側支持性向上を図る。"
+                 Case "麻痺"
+                    If mmtMinScore <= 2 Then
+                        BuildActivityShort_ByActivity = mmtTargetMuscle & "の随意収縮獲得を通じて、便座移乗時の麻痺側支持性向上を図る。"
+                    Else
+                        BuildActivityShort_ByActivity = mmtTargetMuscle & "の筋力改善を通じて、便座移乗時の麻痺側支持性向上を図る。"
+                    End If
+                    
                 Case "疼痛": BuildActivityShort_ByActivity = "立ち上がり時の疼痛軽減を図る。"
                 Case Else:  BuildActivityShort_ByActivity = "方向転換動作の安定化を図る。"
-            End Select
+                End Select
             
         Case "屋内歩行"
             Select Case mainCause
@@ -171,12 +204,65 @@ Public Function BuildActivityShort_ByActivity(ByVal mainCause As String, _
             
         Case "屋外歩行"
             Select Case mainCause
-                Case "麻痺": BuildActivityShort_ByActivity = "麻痺側下肢の支持性向上を図る。"
+                Case "麻痺"
+                   If mmtMinScore <= 2 Then
+                       BuildActivityShort_ByActivity = mmtTargetMuscle & "の随意収縮獲得を通じて、段差昇降時の麻痺側支持性向上を図る。"
+                Else
+                       BuildActivityShort_ByActivity = mmtTargetMuscle & "の筋力改善を通じて、段差昇降時の麻痺側支持性向上を図る。"
+                End If
+                
                 Case "疼痛": BuildActivityShort_ByActivity = "屋外歩行時の疼痛軽減を図る。"
                 Case Else:  BuildActivityShort_ByActivity = "段差昇降時の安定性向上を図る。"
             End Select
-    
             
+    
+        Case "移乗"
+            Select Case mainCause
+                Case "麻痺"
+                    If mmtMinScore <= 2 Then
+                        BuildActivityShort_ByActivity = mmtTargetMuscle & "の随意収縮獲得を通じて、ベッド・椅子間移乗時の麻痺側支持性向上を図る。"
+                    Else
+                        BuildActivityShort_ByActivity = mmtTargetMuscle & "の筋力改善を通じて、ベッド・椅子間移乗時の麻痺側支持性向上を図る。"
+                    End If
+                Case "疼痛": BuildActivityShort_ByActivity = "移乗時の疼痛軽減を図る。"
+                Case Else:  BuildActivityShort_ByActivity = "移乗動作の安定化を図る。"
+            End Select
+            
+        Case "入浴一連動作"
+            Select Case mainCause
+                Case "麻痺"
+                    If mmtMinScore <= 2 Then
+                        BuildActivityShort_ByActivity = mmtTargetMuscle & "の随意収縮獲得を通じて、浴室内移動・立ち座り時の麻痺側支持性向上を図る。"
+                    Else
+                        BuildActivityShort_ByActivity = mmtTargetMuscle & "の筋力改善を通じて、浴室内移動・立ち座り時の麻痺側支持性向上を図る。"
+                    End If
+                Case "疼痛": BuildActivityShort_ByActivity = "入浴動作時の疼痛軽減を図る。"
+                Case Else:  BuildActivityShort_ByActivity = "入浴一連動作の安定化を図る。"
+            End Select
+            
+        Case "起居一連動作"
+            Select Case mainCause
+                Case "麻痺"
+                    If mmtMinScore <= 2 Then
+                        BuildActivityShort_ByActivity = mmtTargetMuscle & "の随意収縮獲得を通じて、起き上がり・立ち上がり時の麻痺側支持性向上を図る。"
+                    Else
+                        BuildActivityShort_ByActivity = mmtTargetMuscle & "の筋力改善を通じて、起き上がり・立ち上がり時の麻痺側支持性向上を図る。"
+                    End If
+                Case "疼痛": BuildActivityShort_ByActivity = "起居動作時の疼痛軽減を図る。"
+                Case Else:  BuildActivityShort_ByActivity = "起居一連動作の安定化を図る。"
+            End Select
+            
+        Case "立ち上がり"
+            Select Case mainCause
+                Case "麻痺"
+                    If mmtMinScore <= 2 Then
+                        BuildActivityShort_ByActivity = mmtTargetMuscle & "の随意収縮獲得を通じて、立ち上がり時の麻痺側支持性向上を図る。"
+                    Else
+                        BuildActivityShort_ByActivity = mmtTargetMuscle & "の筋力改善を通じて、立ち上がり時の麻痺側支持性向上を図る。"
+                    End If
+                Case "疼痛": BuildActivityShort_ByActivity = "立ち上がり時の疼痛軽減を図る。"
+                Case Else:  BuildActivityShort_ByActivity = "立ち上がり動作の安定化を図る。"
+            End Select
             
         Case Else
             BuildActivityShort_ByActivity = BuildActivityShort(mainCause, activityLong)
@@ -381,4 +467,123 @@ Public Sub Test_PickMMTTarget_WithPriority_Tie()
 End Sub
 
 
-' encoding test
+Public Sub Test_BuildBasicPlanStructure_ToiletMotion_MMT2()
+    Dim p As Object
+
+    Set p = BuildBasicPlan_FromPairs( _
+        "麻痺", "トイレ動作", "", "", _
+        "膝伸展", 2, "股外転", 2, "体幹伸展", 3, "背屈", 4)
+
+    Debug.Print p("MMT_TargetMuscle")
+    Debug.Print p("Function_Short")
+    Debug.Print p("Function_Long")
+    Debug.Print p("Activity_Short")
+    Debug.Print p("Participation_Short")
+End Sub
+
+Public Sub Test_BuildBasicPlanStructure_ToiletMotion_MMT3()
+    Dim p As Object
+
+    Set p = BuildBasicPlan_FromPairs( _
+        "麻痺", "トイレ動作", "", "", _
+        "膝伸展", 3, "股外転", 3, "体幹伸展", 4, "背屈", 4)
+
+    Debug.Print p("MMT_TargetMuscle")
+    Debug.Print p("Function_Short")
+    Debug.Print p("Function_Long")
+    Debug.Print p("Activity_Short")
+    Debug.Print p("Participation_Short")
+End Sub
+
+
+Public Function GetLowerMMTMap_FromFrmEval() As Object
+    Dim mp As Object, p As Object
+    Dim c As Object
+    Dim dict As Object
+    Dim nm As String
+    Dim vR As Double, vL As Double, vMin As Double
+    
+    Set dict = CreateObject("Scripting.Dictionary")
+    
+    Set mp = frmEval.Controls("MultiPage1").Pages(2).Controls("mpMMTChild")
+    Set p = mp.Pages(1) ' 下肢
+    
+    For Each c In p.Controls
+        If TypeName(c) = "Label" Then
+            If Left$(c.name, 4) = "lbl_" Then
+                nm = CStr(c.caption)
+                
+                vR = GetMMTValueSafe(p, "cboR_" & nm)
+                vL = GetMMTValueSafe(p, "cboL_" & nm)
+                
+                vMin = vR
+                If vL < vMin Then vMin = vL
+                
+                ' 未入力(99)は捨てる
+                If vMin < 99 Then
+                    dict(nm) = vMin
+                End If
+            End If
+        End If
+    Next c
+    
+    Set GetLowerMMTMap_FromFrmEval = dict
+End Function
+
+Private Function GetMMTValueSafe(ByVal container As Object, ByVal cboName As String) As Double
+    On Error GoTo EH
+    Dim v As String
+    v = Trim$(container.Controls(cboName).value & "")
+    If Len(v) = 0 Then
+        GetMMTValueSafe = 99
+        Exit Function
+    End If
+    If IsNumeric(v) Then
+        GetMMTValueSafe = CDbl(v)
+    Else
+        GetMMTValueSafe = 99
+    End If
+    Exit Function
+EH:
+    GetMMTValueSafe = 99
+End Function
+
+
+Public Sub Probe_BuildLowerMMTMap()
+    Dim mp As Object
+    Dim p As Object
+    Dim c As Object
+    Dim dict As Object
+    
+    Dim nm As String
+    Dim vR As Double, vL As Double, vMin As Double
+    
+    Set dict = CreateObject("Scripting.Dictionary")
+    
+    Set mp = frmEval.Controls("MultiPage1").Pages(2).Controls("mpMMTChild")
+    Set p = mp.Pages(1) ' 下肢
+    
+    For Each c In p.Controls
+        If TypeName(c) = "Label" Then
+            If Left$(c.name, 4) = "lbl_" Then
+                nm = CStr(c.caption)
+                
+                vR = GetMMTValueSafe(p, "cboR_" & nm)
+                vL = GetMMTValueSafe(p, "cboL_" & nm)
+                
+                vMin = vR
+                If vL < vMin Then vMin = vL
+                
+                If vMin >= 0 Then
+                    dict(nm) = vMin
+                End If
+            End If
+        End If
+    Next c
+    
+    ' 出力
+    For Each nm In dict.keys
+        Debug.Print nm & "=" & dict(nm)
+    Next nm
+End Sub
+
