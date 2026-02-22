@@ -24,6 +24,8 @@ Public Function BuildBasicPlanStructure(ByVal mainCause As String, _
               mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "ŒÒŠO“],•GL“W")
           Case "‰®ŠO•às"
               mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "”w‹ü,ŒÒŠO“],•GL“W")
+          Case "—§‚¿ã‚ª‚è"
+              mmtTargetMuscle = PickMMTTarget_WithPriority(mmtMap, "•GL“W,ŒÒŠO“],ŒÒL“W")
           Case Else
               mmtTargetMuscle = PickMMTTarget(mmtMap)
     End Select
@@ -57,6 +59,9 @@ Public Function BuildBasicPlanStructure(ByVal mainCause As String, _
         Case "‰®“à•às"
             result("Function_Long") = fxCore & "—§‹rŠúˆÀ’è«Œüã‚ğ}‚éB"
         
+        Case "—§‚¿ã‚ª‚è"
+            result("Function_Long") = fxCore & "—§‚¿ã‚ª‚è‚Ì–ƒáƒ‘¤x«Œüã‚ğ}‚éB"
+        
         Case "ƒgƒCƒŒ", "ƒgƒCƒŒ“®ì"
             result("Function_Long") = fxCore & "•ÖÀˆÚæ‚Ì–ƒáƒ‘¤x«Œüã‚ğ}‚éB"
         
@@ -71,14 +76,12 @@ Public Function BuildBasicPlanStructure(ByVal mainCause As String, _
 
         Case "‹N‹ˆê˜A“®ì"
             result("Function_Long") = fxCore & "‹N‚«ã‚ª‚è‚Ì–ƒáƒ‘¤x«Œüã‚ğ}‚éB"
-        
-        
-        
+           
         Case Else
             result("Function_Long") = mmtTargetMuscle & "‚Ì‹Ø—Í‰ü‘P‚ğ}‚éB"
             
     End Select
-
+   
     Case "áu’É"
 
     Select Case result("Activity_Long")
@@ -133,7 +136,7 @@ Public Function BuildBasicPlanStructure(ByVal mainCause As String, _
 
     End Select
     
-       Case Else
+    Case Else
         result("Function_Long") = ""
     End Select
 
@@ -569,73 +572,7 @@ Public Function PickMMTTarget_WithPriority(ByVal mmtMap As Object, ByVal priorit
     Next k
 End Function
 
-Public Sub Test_FilterMMTMap_OutdoorWalking()
-    Dim src As Object
-    Dim filtered As Object
 
-    Set src = CreateObject("Scripting.Dictionary")
-    src.Add "ŒÒ‹ü‹È", 1
-    src.Add "•GL“W", 3
-    src.Add "ŒÒŠO“]", 2
-    src.Add "”w‹ü", 4
-
-    Set filtered = FilterMMTMap(src, "‰®ŠO•às")
-
-    Debug.Print "Outdoor Count=" & filtered.Count
-    Debug.Print "Has ŒÒ‹ü‹È=" & filtered.exists("ŒÒ‹ü‹È")
-    Debug.Print "Target=" & PickMMTTarget_WithPriority(filtered, "”w‹ü,ŒÒŠO“],•GL“W")
-End Sub
-
-Public Sub Test_FilterMMTMap_Fallback()
-    Dim src As Object
-    Dim filtered As Object
-
-    Set src = CreateObject("Scripting.Dictionary")
-    src.Add "ŒÒ‹ü‹È", 1
-    src.Add "•GL“W", 3
-
-    Set filtered = FilterMMTMap(src, "–¢’è‹`Šˆ“®")
-
-    Debug.Print "Fallback same ref=" & (ObjPtr(filtered) = ObjPtr(src))
-    Debug.Print "Fallback Count=" & filtered.Count
-End Sub
-
-Public Sub Test_PickMMTTarget_WithPriority_Tie()
-    Set M = CreateObject("Scripting.Dictionary")
-    M.Add "ŒÒŠO“]", 3
-    M.Add "•GL“W", 3
-    
-    Debug.Print PickMMTTarget_WithPriority(M, "•GL“W,ŒÒŠO“]")
-End Sub
-
-
-Public Sub Test_BuildBasicPlanStructure_ToiletMotion_MMT2()
-    Dim p As Object
-
-    Set p = BuildBasicPlan_FromPairs( _
-        "–ƒáƒ", "ƒgƒCƒŒ“®ì", "", "", _
-        "•GL“W", 2, "ŒÒŠO“]", 2, "‘ÌŠ²L“W", 3, "”w‹ü", 4)
-
-    Debug.Print p("MMT_TargetMuscle")
-    Debug.Print p("Function_Short")
-    Debug.Print p("Function_Long")
-    Debug.Print p("Activity_Short")
-    Debug.Print p("Participation_Short")
-End Sub
-
-Public Sub Test_BuildBasicPlanStructure_ToiletMotion_MMT3()
-    Dim p As Object
-
-    Set p = BuildBasicPlan_FromPairs( _
-        "–ƒáƒ", "ƒgƒCƒŒ“®ì", "", "", _
-        "•GL“W", 3, "ŒÒŠO“]", 3, "‘ÌŠ²L“W", 4, "”w‹ü", 4)
-
-    Debug.Print p("MMT_TargetMuscle")
-    Debug.Print p("Function_Short")
-    Debug.Print p("Function_Long")
-    Debug.Print p("Activity_Short")
-    Debug.Print p("Participation_Short")
-End Sub
 
 
 Public Function GetLowerMMTMap_FromFrmEval() As Object
@@ -691,41 +628,4 @@ EH:
 End Function
 
 
-Public Sub Probe_BuildLowerMMTMap()
-    Dim mp As Object
-    Dim p As Object
-    Dim c As Object
-    Dim dict As Object
-    
-    Dim nm As String
-    Dim vR As Double, vL As Double, vMin As Double
-    
-    Set dict = CreateObject("Scripting.Dictionary")
-    
-    Set mp = frmEval.Controls("MultiPage1").Pages(2).Controls("mpMMTChild")
-    Set p = mp.Pages(1) ' ‰ºˆ
-    
-    For Each c In p.Controls
-        If TypeName(c) = "Label" Then
-            If Left$(c.name, 4) = "lbl_" Then
-                nm = CStr(c.caption)
-                
-                vR = GetMMTValueSafe(p, "cboR_" & nm)
-                vL = GetMMTValueSafe(p, "cboL_" & nm)
-                
-                vMin = vR
-                If vL < vMin Then vMin = vL
-                
-                If vMin >= 0 Then
-                    dict(nm) = vMin
-                End If
-            End If
-        End If
-    Next c
-    
-    ' o—Í
-    For Each nm In dict.keys
-        Debug.Print nm & "=" & dict(nm)
-    Next nm
-End Sub
 
