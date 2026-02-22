@@ -1,12 +1,12 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmEval 
-   Caption         =   "•]‰¿ƒtƒH[ƒ€"
+   Caption         =   "è©•ä¾¡ãƒ•ã‚©ãƒ¼ãƒ "
    ClientHeight    =   8580.001
    ClientLeft      =   108
    ClientTop       =   456
    ClientWidth     =   17124
    OleObjectBlob   =   "frmEval.frx":0000
-   StartUpPosition =   1  'ƒI[ƒi[ ƒtƒH[ƒ€‚Ì’†‰›
+   StartUpPosition =   1  'ã‚ªãƒ¼ãƒŠãƒ¼ ãƒ•ã‚©ãƒ¼ãƒ ã®ä¸­å¤®
 End
 Attribute VB_Name = "frmEval"
 Attribute VB_GlobalNameSpace = False
@@ -19,9 +19,9 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-'=== frmEval ƒwƒbƒ_F‹¤’Ê‚Åg‚¤•Ï” ===
-Private mp As MSForms.MultiPage            ' ƒ‹[ƒg MultiPage
-Private mpWalk As MSForms.MultiPage        ' •às•]‰¿ƒ^ƒu“à‚ÌƒTƒu MultiPage  © ‚±‚ê‚ª¡‰ñ‚Ì’Ç‰Á
+'=== frmEval ãƒ˜ãƒƒãƒ€ï¼šå…±é€šã§ä½¿ã†å¤‰æ•° ===
+Private mp As MSForms.MultiPage            ' ãƒ«ãƒ¼ãƒˆ MultiPage
+Private mpWalk As MSForms.MultiPage        ' æ­©è¡Œè©•ä¾¡ã‚¿ãƒ–å†…ã®ã‚µãƒ– MultiPage  â† ã“ã‚ŒãŒä»Šå›ã®è¿½åŠ 
 Private hostBasic As MSForms.Frame, hostPost As MSForms.Frame, hostMove As MSForms.Frame
 Private hostTests As MSForms.Frame, hostWalk As MSForms.Frame, hostCog As MSForms.Frame
 Private WithEvents btnLoadPrevCtl As MSForms.CommandButton
@@ -34,7 +34,7 @@ Private Const ADL_TOP_OFFSET As Long = -30
 Private ImeHooks As Collection
 Private MPHs As Collection
 Private builtPosture As Boolean
-Private Const CAP_POSTURE_PAGE As String = "g‘Ì‹@”\{‹N‹“®ì"
+Private Const CAP_POSTURE_PAGE As String = "èº«ä½“æ©Ÿèƒ½ï¼‹èµ·å±…å‹•ä½œ"
 Private Const POSTURE_TAG_PREFIX As String = "POSTURE|"
 Private Const POSTURE_COLS As Long = 2
 Private mStyleDone As Boolean
@@ -44,18 +44,18 @@ Private mHooked As Boolean
 Private mLayoutDone As Boolean
 Private mPainBuilt As Boolean
 Private mPainLayoutDone As Boolean
-' Šù‘¶‚ÌuƒV[ƒg‚Ö•Û‘¶vu‘O‰ñ‚Ì’l‚ğ“Ç‚İ‚Şv‚ÉƒtƒbƒN‚·‚é
+' æ—¢å­˜ã®ã€Œã‚·ãƒ¼ãƒˆã¸ä¿å­˜ã€ã€Œå‰å›ã®å€¤ã‚’èª­ã¿è¾¼ã‚€ã€ã«ãƒ•ãƒƒã‚¯ã™ã‚‹
 Private WithEvents btnHdrSave     As MSForms.CommandButton
 Attribute btnHdrSave.VB_VarHelpID = -1
 Private WithEvents btnHdrLoadPrev As MSForms.CommandButton
 Attribute btnHdrLoadPrev.VB_VarHelpID = -1
 Private fBasicRef As MSForms.Frame
 Private nextTop As Single
-' BIƒRƒ“ƒ{‚ÌƒCƒxƒ“ƒgƒtƒbƒN‚ğ•Û
+' BIã‚³ãƒ³ãƒœã®ã‚¤ãƒ™ãƒ³ãƒˆãƒ•ãƒƒã‚¯ã‚’ä¿æŒ
 Private BIHooks As Collection
-' ƒŒƒCƒAƒEƒg—p
+' ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆç”¨
 Private FWIDTH As Single, COL_LX As Single, COL_RX As Single, lblW As Single, pad As Single, rowH As Single
-' === ƒEƒBƒ“ƒhƒE§–ñiƒXƒNƒ[ƒ‹–³‚µ—p‚ÌÅ¬ƒTƒCƒYj===
+' === ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦åˆ¶ç´„ï¼ˆã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç„¡ã—ç”¨ã®æœ€å°ã‚µã‚¤ã‚ºï¼‰===
 Private Const MIN_W As Long = 720
 Private Const MIN_H As Long = 520
 Private WithEvents mVAS As MSForms.ScrollBar
@@ -86,7 +86,7 @@ Private mScrollOnce_347 As Boolean
 Private mQuitExcelRequested As Boolean
 Private Enum QuitMode
     qmNone = 0
-    qmAsk   '•Â‚¶‚éƒ{ƒ^ƒ“F•Û‘¶Šm”F‚µ‚ÄExcelI—¹
+    qmAsk   'é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³ï¼šä¿å­˜ç¢ºèªã—ã¦Excelçµ‚äº†
 End Enum
 
 Private mQuitMode As QuitMode
@@ -105,10 +105,10 @@ Public Sub SyncAgeFromBirth()
     s = Trim$(Me.Controls("txtBirth").Text)
     If Len(s) = 0 Then Exit Sub
 
-    ' yyyy/mm/dd, yyyy-mm-dd ‚ğ‘z’èiDateValue‚ÉŠñ‚¹‚éj
+    ' yyyy/mm/dd, yyyy-mm-dd ã‚’æƒ³å®šï¼ˆDateValueã«å¯„ã›ã‚‹ï¼‰
    s = Replace$(s, "-", "/")
 
-' š‚±‚±‚É“ü‚ê‚é
+' â˜…ã“ã“ã«å…¥ã‚Œã‚‹
 Dim d As String
 d = Replace$(Replace$(s, "/", ""), ".", "")
 If Len(d) = 8 And IsNumeric(d) Then
@@ -145,7 +145,7 @@ End Sub
 
 
 
-'=== ‹¤’Êƒwƒ‹ƒp[FƒtƒŒ[ƒ€‚Ì‚‚³‚ğqƒRƒ“ƒgƒ[ƒ‹‚Ìˆê”Ô‰º{—]”’‚Ü‚ÅL‚Î‚· ===
+'=== å…±é€šãƒ˜ãƒ«ãƒ‘ãƒ¼ï¼šãƒ•ãƒ¬ãƒ¼ãƒ ã®é«˜ã•ã‚’å­ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®ä¸€ç•ªä¸‹ï¼‹ä½™ç™½ã¾ã§ä¼¸ã°ã™ ===
 Private Sub FitFrameHeightToChildren(f As MSForms.Frame, Optional margin As Single = 6)
     
     'FitFrameHeightToChildren Me.Controls("Frame7")
@@ -172,11 +172,11 @@ End Sub
 
 
 
-'--- —ñ‰ğŒˆ‚ÌˆÀ‘Sƒ‰ƒbƒpi‚ ‚ê‚Î ResolveColumnLocalA‚È‚¯‚ê‚ÎŒ©o‚µ–¼‚Å’T‚·j---
+'--- åˆ—è§£æ±ºã®å®‰å…¨ãƒ©ãƒƒãƒ‘ï¼ˆã‚ã‚Œã° ResolveColumnLocalã€ãªã‘ã‚Œã°è¦‹å‡ºã—åã§æ¢ã™ï¼‰---
 Private Function RCol(ws As Worksheet, look As Object, ParamArray headers()) As Long
     Dim c As Long, i As Long
     On Error Resume Next
-    c = ResolveColumnLocal(look, CStr(headers(LBound(headers))))  ' ‘¶İ‚µ‚È‚¢ŠÂ‹«‚Å‚àOK
+    c = ResolveColumnLocal(look, CStr(headers(LBound(headers))))  ' å­˜åœ¨ã—ãªã„ç’°å¢ƒã§ã‚‚OK
     On Error GoTo 0
     If c > 0 Then
         RCol = c
@@ -191,9 +191,9 @@ End Function
 
 
 
-' Šù‘¶ƒR[ƒh‚ÅQÆ‚³‚ê‚é‚ª–¢’è‹`‚¾‚Á‚½‚à‚Ì‚ğÅ¬ŒÀ‚¾‚¯—pˆÓ
+' æ—¢å­˜ã‚³ãƒ¼ãƒ‰ã§å‚ç…§ã•ã‚Œã‚‹ãŒæœªå®šç¾©ã ã£ãŸã‚‚ã®ã‚’æœ€å°é™ã ã‘ç”¨æ„
 Private Sub SetupLayout()
-    ' ¦”’l‚Íˆê”Ê“I‚ÈŠù’èƒTƒCƒYBUIŒ©‚½–Ú‚Í•Ï‚¦‚È‚¢”ÍˆÍ‚ÅˆÀ‘S‚È’lB
+    ' â€»æ•°å€¤ã¯ä¸€èˆ¬çš„ãªæ—¢å®šã‚µã‚¤ã‚ºã€‚UIè¦‹ãŸç›®ã¯å¤‰ãˆãªã„ç¯„å›²ã§å®‰å…¨ãªå€¤ã€‚
     FWIDTH = 800
     lblW = 70
     COL_LX = 12
@@ -202,18 +202,18 @@ Private Sub SetupLayout()
     rowH = 24
 End Sub
 
-' Šù‘¶ƒR[ƒh‚Å Call ‚³‚ê‚é‚ª’†g‚ª•s—v‚ÈŒİŠ·ƒ_ƒ~[iNo-opj
+' æ—¢å­˜ã‚³ãƒ¼ãƒ‰ã§ Call ã•ã‚Œã‚‹ãŒä¸­èº«ãŒä¸è¦ãªäº’æ›ãƒ€ãƒŸãƒ¼ï¼ˆNo-opï¼‰
 Private Sub BuildBliadlControls(ByVal mp As MSForms.MultiPage)
-    ' no-opiŒİŠ·—pj
+    ' no-opï¼ˆäº’æ›ç”¨ï¼‰
 End Sub
 Private Sub BuildBIPage(ByVal mpADL As MSForms.MultiPage)
-    ' no-opiŒİŠ·—pj
+    ' no-opï¼ˆäº’æ›ç”¨ï¼‰
 End Sub
 Private Sub BuildIADLPage(ByVal mpADL As MSForms.MultiPage)
-    ' no-opiŒİŠ·—pj
+    ' no-opï¼ˆäº’æ›ç”¨ï¼‰
 End Sub
 
-' Šù‘¶‚Ì•Û‘¶ˆ—‚ÅQÆ‚³‚ê‚éƒ‰ƒbƒp[iŒ©‚½–Ú‚Æ‹““®‚Í•Ï‚¦‚È‚¢j
+' æ—¢å­˜ã®ä¿å­˜å‡¦ç†ã§å‚ç…§ã•ã‚Œã‚‹ãƒ©ãƒƒãƒ‘ãƒ¼ï¼ˆè¦‹ãŸç›®ã¨æŒ™å‹•ã¯å¤‰ãˆãªã„ï¼‰
 Private Function CtrlText(ByVal ctrlName As String) As String
     On Error Resume Next
     CtrlText = Trim$(Me.Controls(ctrlName).Text & "")
@@ -223,7 +223,7 @@ Private Sub SetCtrlText(ByVal ctrlName As String, ByVal v As String)
     Me.Controls(ctrlName).Text = v
 End Sub
 
-'=== ‚±‚±‚©‚ç ‰æ–Êì¬ƒwƒ‹ƒp[‚ÌÅ¬À‘• =========================
+'=== ã“ã“ã‹ã‚‰ ç”»é¢ä½œæˆãƒ˜ãƒ«ãƒ‘ãƒ¼ã®æœ€å°å®Ÿè£… =========================
 Private Function CreateFrameP(parent As MSForms.Frame, title As String, _
                               Optional minHeight As Single = 120) As MSForms.Frame
     Dim f As MSForms.Frame
@@ -251,7 +251,7 @@ End Sub
 
 
 
-' Šù‘¶ŒÄ‚Ño‚µŒİŠ·Fcaption ¨ x ¨ y ¨ [w] ¨ [name]
+' æ—¢å­˜å‘¼ã³å‡ºã—äº’æ›ï¼šcaption â†’ x â†’ y â†’ [w] â†’ [name]
 Function CreateLabel( _
     parent As MSForms.Frame, _
     ByVal caption As String, _
@@ -356,7 +356,7 @@ Private Sub PositionTopRightButtons(f As MSForms.Frame)
     End If
 End Sub
 
-'=== ƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ğ•À‚×‚é”Ä—pƒtƒŒ[ƒ€ ===
+'=== ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã‚’ä¸¦ã¹ã‚‹æ±ç”¨ãƒ•ãƒ¬ãƒ¼ãƒ  ===
 Private Function BuildCheckFrame(parent As MSForms.Frame, _
     title As String, x As Single, Y As Single, w As Single, _
     items As Variant, Optional groupTag As String = "") As MSForms.Frame
@@ -368,11 +368,11 @@ Private Function BuildCheckFrame(parent As MSForms.Frame, _
         .Left = x
         .Top = Y
         .Width = w
-        .Height = 60                ' ‰¼‚‚³B‰º‚Å’†g‚É‡‚í‚¹‚ÄL‚Î‚·
+        .Height = 60                ' ä»®é«˜ã•ã€‚ä¸‹ã§ä¸­èº«ã«åˆã‚ã›ã¦ä¼¸ã°ã™
         .ScrollBars = fmScrollBarsNone
     End With
 
-    ' ƒ`ƒFƒbƒN‚ğ2—ñ‚Å”z’ui’·‚­‚È‚è‚·‚¬‚È‚¢’ö“xj
+    ' ãƒã‚§ãƒƒã‚¯ã‚’2åˆ—ã§é…ç½®ï¼ˆé•·ããªã‚Šã™ããªã„ç¨‹åº¦ï¼‰
     Dim i As Long, col As Long, row As Long
     Dim colW As Single: colW = (w - 24) / 2
     Dim rowH As Single: rowH = 20
@@ -392,45 +392,89 @@ Private Function BuildCheckFrame(parent As MSForms.Frame, _
         If row > maxRow Then maxRow = row
     Next i
 
-    ' ’†g‚Ì‚‚³‚É‡‚í‚¹‚ÄƒtƒŒ[ƒ€‚ğL‚Î‚·
+    ' ä¸­èº«ã®é«˜ã•ã«åˆã‚ã›ã¦ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ä¼¸ã°ã™
     f.Height = 18 + (maxRow + 1) * rowH + 12
 
     Set BuildCheckFrame = f
 End Function
 
-'=== ŠÖßSkF¶‰Eƒ`ƒFƒbƒN‚ğ1s¶¬‚·‚éƒwƒ‹ƒp[ ======================
+Private Sub BuildAssistiveChecksInWalkEval(ByVal assistiveCsv As String)
+    Dim frTarget As MSForms.Frame
+    Set frTarget = GetWalkEvalAssistiveTargetFrame()
+    If frTarget Is Nothing Then Exit Sub
+
+    Dim i As Long
+    For i = frTarget.Controls.Count - 1 To 0 Step -1
+        If TypeName(frTarget.Controls(i)) = "CheckBox" Then
+            If frTarget.Controls(i).Tag = "AssistiveGroup" Then
+                frTarget.Controls.Remove frTarget.Controls(i).Name
+            End If
+        End If
+    Next
+
+    Dim maxBottom As Single
+    maxBottom = 0
+    For i = 0 To frTarget.Controls.Count - 1
+        With frTarget.Controls(i)
+            If .Top + .Height > maxBottom Then maxBottom = .Top + .Height
+        End With
+    Next
+
+    Dim addTop As Single
+    addTop = IIf(maxBottom <= 0, 8, maxBottom + 8)
+
+    Dim frAssist As MSForms.Frame
+    Set frAssist = BuildCheckFrame(frTarget, "è£œåŠ©å…·", 8, addTop, frTarget.InsideWidth - 16, MakeList(assistiveCsv), "AssistiveGroup")
+
+    If frAssist.Top + frAssist.Height + 8 > frTarget.Height Then
+        frTarget.Height = frAssist.Top + frAssist.Height + 8
+    End If
+End Sub
+
+Private Function GetWalkEvalAssistiveTargetFrame() As MSForms.Frame
+    On Error GoTo EH
+    Set GetWalkEvalAssistiveTargetFrame = Me.Controls("MultiPage1") _
+        .Pages("Page6").Controls("Frame6") _
+        .Controls("MultiPage2").Pages("Page8") _
+        .Controls("Frame24").Controls("Frame25")
+    Exit Function
+EH:
+    Set GetWalkEvalAssistiveTargetFrame = Nothing
+End Function
+
+'=== é–¢ç¯€æ‹˜ç¸®ï¼šå·¦å³ãƒã‚§ãƒƒã‚¯ã‚’1è¡Œç”Ÿæˆã™ã‚‹ãƒ˜ãƒ«ãƒ‘ãƒ¼ ======================
 Private Sub CreateContractureRLRow(parent As MSForms.Frame, _
                                    ByRef Y As Single, _
                                    ByVal partCaption As String, _
                                    ByVal baseTag As String)
-    ' ƒKƒCƒhFæ“ª‚ÅŒ©o‚µ‚ğì‚Á‚½ƒŒƒCƒAƒEƒg‚É‡‚í‚¹‚é
-    '   •”ˆÊ: COL_LX
-    '   ‰E  : COL_LX + 90 + 20
-    '   ¶  : i‰E‚Ì—ñj+ 60
+    ' ã‚¬ã‚¤ãƒ‰ï¼šå…ˆé ­ã§è¦‹å‡ºã—ã‚’ä½œã£ãŸãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«åˆã‚ã›ã‚‹
+    '   éƒ¨ä½: COL_LX
+    '   å³  : COL_LX + 90 + 20
+    '   å·¦  : ï¼ˆå³ã®åˆ—ï¼‰+ 60
 
-    ' Œ©o‚µi•”ˆÊ–¼j
+    ' è¦‹å‡ºã—ï¼ˆéƒ¨ä½åï¼‰
     Call CreateLabel(parent, partCaption, COL_LX, Y)
 
-    ' ‰Eƒ`ƒFƒbƒN
-    Call CreateCheck(parent, "‰E", COL_LX + 90 + 20, Y, , baseTag & ".‰E")
+    ' å³ãƒã‚§ãƒƒã‚¯
+    Call CreateCheck(parent, "å³", COL_LX + 90 + 20, Y, , baseTag & ".å³")
 
-    ' ¶ƒ`ƒFƒbƒN
-    Call CreateCheck(parent, "¶", COL_LX + 90 + 20 + 60, Y, , baseTag & ".¶")
+    ' å·¦ãƒã‚§ãƒƒã‚¯
+    Call CreateCheck(parent, "å·¦", COL_LX + 90 + 20 + 60, Y, , baseTag & ".å·¦")
 
-    ' Ÿ‚Ìs‚Ö
+    ' æ¬¡ã®è¡Œã¸
     nL Y
 End Sub
 
 
 
 
-'=== RLAƒ`ƒFƒbƒNŒQ‚ğì‚éÅ¬À‘• ======================================
+'=== RLAãƒã‚§ãƒƒã‚¯ç¾¤ã‚’ä½œã‚‹æœ€å°å®Ÿè£… ======================================
 Private Sub Build_RLA_ChecksPart(f As MSForms.Frame, ByVal kind As String)
     Dim phases As Variant
     If LCase$(kind) = "stance" Then
-        phases = Array("IC", "LR", "MSt", "TSt")        ' —§‹rŠú
+        phases = Array("IC", "LR", "MSt", "TSt")        ' ç«‹è„šæœŸ
     Else
-        phases = Array("PSw", "ISw", "MSw", "TSw")      ' —V‹rŠú
+        phases = Array("PSw", "ISw", "MSw", "TSw")      ' éŠè„šæœŸ
     End If
 
     Dim i As Long, Y As Single
@@ -439,28 +483,28 @@ Private Sub Build_RLA_ChecksPart(f As MSForms.Frame, ByVal kind As String)
     For i = LBound(phases) To UBound(phases)
         Dim key As String: key = CStr(phases(i))
 
-        ' ¶’[FƒtƒF[ƒY–¼ƒ‰ƒxƒ‹
+        ' å·¦ç«¯ï¼šãƒ•ã‚§ãƒ¼ã‚ºåãƒ©ãƒ™ãƒ«
         Call CreateLabel(f, RLAPhaseCaption(key), 12, Y, 90)
 
-        ' ŠÈˆÕƒ`ƒFƒbƒNi4‚Âj¦–¼‘O‚Í "RLA_<key>_<”Ô†>" ‚Æ‚·‚é
-        Call AddRLAChk(f, key, "‰Â“®ˆæ•s‘«", 120, Y)
-        Call AddRLAChk(f, key, "‹Ø—Í’á‰º", 300, Y)
+        ' ç°¡æ˜“ãƒã‚§ãƒƒã‚¯ï¼ˆ4ã¤ï¼‰â€»åå‰ã¯ "RLA_<key>_<ç•ªå·>" ã¨ã™ã‚‹
+        Call AddRLAChk(f, key, "å¯å‹•åŸŸä¸è¶³", 120, Y)
+        Call AddRLAChk(f, key, "ç­‹åŠ›ä½ä¸‹", 300, Y)
         Y = Y + 22
-        Call AddRLAChk(f, key, "áu’É/•sˆÀ’è", 120, Y)
-        Call AddRLAChk(f, key, "‹¦’²•s—Ç", 300, Y)
+        Call AddRLAChk(f, key, "ç–¼ç—›/ä¸å®‰å®š", 120, Y)
+        Call AddRLAChk(f, key, "å”èª¿ä¸è‰¯", 300, Y)
 
-        ' ‰E’[FƒŒƒxƒ‹‘I‘ğiOptionButton, GroupName=keyj
-        Call AddRLAOpt(f, key, "Œy“x", f.Width - 180, Y - 22)
-        Call AddRLAOpt(f, key, "’†“™“x", f.Width - 120, Y - 22)
-        Call AddRLAOpt(f, key, "‚“x", f.Width - 60, Y - 22)
+        ' å³ç«¯ï¼šãƒ¬ãƒ™ãƒ«é¸æŠï¼ˆOptionButton, GroupName=keyï¼‰
+        Call AddRLAOpt(f, key, "è»½åº¦", f.Width - 180, Y - 22)
+        Call AddRLAOpt(f, key, "ä¸­ç­‰åº¦", f.Width - 120, Y - 22)
+        Call AddRLAOpt(f, key, "é«˜åº¦", f.Width - 60, Y - 22)
 
         Y = Y + 30
     Next
 
-    ' ƒtƒŒ[ƒ€‚Ì‚‚³‚ÍŒÄ‚Ño‚µŒ³‚Å ResizeFrameToContent ‚µ‚Ä‚¢‚é‚½‚ß‚±‚±‚Å‚ÍG‚ç‚È‚¢
+    ' ãƒ•ãƒ¬ãƒ¼ãƒ ã®é«˜ã•ã¯å‘¼ã³å‡ºã—å…ƒã§ ResizeFrameToContent ã—ã¦ã„ã‚‹ãŸã‚ã“ã“ã§ã¯è§¦ã‚‰ãªã„
 End Sub
 
-' ƒtƒF[ƒY–¼iŒ©o‚µ—pj
+' ãƒ•ã‚§ãƒ¼ã‚ºåï¼ˆè¦‹å‡ºã—ç”¨ï¼‰
 Private Function RLAPhaseCaption(ByVal key As String) As String
     Select Case key
         Case "IC":  RLAPhaseCaption = "IC"
@@ -475,7 +519,7 @@ Private Function RLAPhaseCaption(ByVal key As String) As String
     End Select
 End Function
 
-' ƒ`ƒFƒbƒNƒ{ƒbƒNƒX’Ç‰Ái–¼‘O‚Í RLA_<key>_nj
+' ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹è¿½åŠ ï¼ˆåå‰ã¯ RLA_<key>_nï¼‰
 Private Sub AddRLAChk(f As MSForms.Frame, ByVal key As String, ByVal caption As String, _
                       ByVal x As Single, ByVal Y As Single)
     Dim ck As MSForms.CheckBox
@@ -487,7 +531,7 @@ Private Sub AddRLAChk(f As MSForms.Frame, ByVal key As String, ByVal caption As 
     End With
 End Sub
 
-' ƒŒƒxƒ‹—pƒIƒvƒVƒ‡ƒ“ƒ{ƒ^ƒ“iGroupName=keyj
+' ãƒ¬ãƒ™ãƒ«ç”¨ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒœã‚¿ãƒ³ï¼ˆGroupName=keyï¼‰
 Private Sub AddRLAOpt(f As MSForms.Frame, ByVal key As String, ByVal caption As String, _
                       ByVal x As Single, ByVal Y As Single)
     Dim ob As MSForms.OptionButton
@@ -500,28 +544,28 @@ Private Sub AddRLAOpt(f As MSForms.Frame, ByVal key As String, ByVal caption As 
     End With
 End Sub
 
-' ŒÄ‚Ño‚µŒ³‚ÅQÆ‚µ‚Ä‚¢‚é‚½‚ß‚ÌŒİŠ·ƒ_ƒ~[iŠù’è‘I‘ğ‚Í“Á‚Éİ’è‚µ‚È‚¢j
+' å‘¼ã³å‡ºã—å…ƒã§å‚ç…§ã—ã¦ã„ã‚‹ãŸã‚ã®äº’æ›ãƒ€ãƒŸãƒ¼ï¼ˆæ—¢å®šé¸æŠã¯ç‰¹ã«è¨­å®šã—ãªã„ï¼‰
 Private Sub InitRLAdefaults()
     ' no-op
 End Sub
 '======================================================================
 
-'=== ‚±‚±‚©‚çFƒwƒbƒ_ŒŸõŒn‚ÌŒİŠ·ƒ‰ƒbƒp[ =========================
-' LocalÀ‘•‚ğŠù‚É“ü‚ê‚Ä‚¢‚é‘O’ñiBuildHeaderLookupLocal / ResolveColumnLocal / EnsureHeaderColumnLocalj
-' ŒÄ‚Ño‚µŒ³‚ÆƒVƒOƒlƒ`ƒƒ‚ğ‡‚í‚¹‚é‚½‚ß‚Ì”–‚¢ƒ‰ƒbƒp[‚¾‚¯—pˆÓ
+'=== ã“ã“ã‹ã‚‰ï¼šãƒ˜ãƒƒãƒ€æ¤œç´¢ç³»ã®äº’æ›ãƒ©ãƒƒãƒ‘ãƒ¼ =========================
+' Localå®Ÿè£…ã‚’æ—¢ã«å…¥ã‚Œã¦ã„ã‚‹å‰æï¼ˆBuildHeaderLookupLocal / ResolveColumnLocal / EnsureHeaderColumnLocalï¼‰
+' å‘¼ã³å‡ºã—å…ƒã¨ã‚·ã‚°ãƒãƒãƒ£ã‚’åˆã‚ã›ã‚‹ãŸã‚ã®è–„ã„ãƒ©ãƒƒãƒ‘ãƒ¼ã ã‘ç”¨æ„
 
-' 1) BuildHeaderLookup ‚Ì•Ê–¼ƒ‰ƒbƒp[
+' 1) BuildHeaderLookup ã®åˆ¥åãƒ©ãƒƒãƒ‘ãƒ¼
 Private Function BuildHeaderLookup(ByVal ws As Worksheet) As Object
     Set BuildHeaderLookup = BuildHeaderLookupLocal(ws)
 End Function
 
-' 2) ResolveColumn ‚Ì•Ê–¼ƒ‰ƒbƒp[
+' 2) ResolveColumn ã®åˆ¥åãƒ©ãƒƒãƒ‘ãƒ¼
 Private Function ResolveColumn(ByVal look As Object, ByVal key As String) As Long
     ResolveColumn = ResolveColumnLocal(look, key)
 End Function
 
 ' 3) ResolveColOrCreate
-'    ‘æ1—DæƒL[‚ª–³‚¯‚ê‚ÎƒGƒCƒŠƒAƒX‚ğ‡‚É’T‚µA‚»‚ê‚Å‚à–³‚¯‚ê‚Î‘æ1—DæƒL[‚Å—ñ‚ğV‹Kì¬
+'    ç¬¬1å„ªå…ˆã‚­ãƒ¼ãŒç„¡ã‘ã‚Œã°ã‚¨ã‚¤ãƒªã‚¢ã‚¹ã‚’é †ã«æ¢ã—ã€ãã‚Œã§ã‚‚ç„¡ã‘ã‚Œã°ç¬¬1å„ªå…ˆã‚­ãƒ¼ã§åˆ—ã‚’æ–°è¦ä½œæˆ
 Private Function ResolveColOrCreate(ByVal ws As Worksheet, ByVal look As Object, _
                                     ByVal primaryKey As String, ParamArray aliases() As Variant) As Long
     Dim col As Long, i As Long
@@ -538,7 +582,7 @@ Private Function ResolveColOrCreate(ByVal ws As Worksheet, ByVal look As Object,
     ResolveColOrCreate = col
 End Function
 
-'=== ComboBox ‚É”z—ñ‚ğŠmÀ‚É—¬‚µ‚ŞÅ¬ƒwƒ‹ƒp[ ===
+'=== ComboBox ã«é…åˆ—ã‚’ç¢ºå®Ÿã«æµã—è¾¼ã‚€æœ€å°ãƒ˜ãƒ«ãƒ‘ãƒ¼ ===
 Private Sub SetComboItems(ByRef cbo As MSForms.ComboBox, ByVal items As Variant)
     Dim k As Long
     cbo.Clear
@@ -553,25 +597,25 @@ End Sub
 
 
 
-'=== ƒŒƒCƒAƒEƒg©“®ƒtƒBƒbƒgiˆÀ‘SƒK[ƒh•t‚«j ===
+'=== ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè‡ªå‹•ãƒ•ã‚£ãƒƒãƒˆï¼ˆå®‰å…¨ã‚¬ãƒ¼ãƒ‰ä»˜ãï¼‰ ===
 Private Sub FitLayout()
     On Error Resume Next
 
-    ' ƒ‹[ƒg‚Ì—LŒø¡–@i‰ºŒÀ‚ÅƒNƒ‰ƒ“ƒvj
+    ' ãƒ«ãƒ¼ãƒˆã®æœ‰åŠ¹å¯¸æ³•ï¼ˆä¸‹é™ã§ã‚¯ãƒ©ãƒ³ãƒ—ï¼‰
     Dim iw As Single, iH As Single
     iw = Me.InsideWidth - 12
     iH = Me.InsideHeight - 60
-    If iw < 240 Then iw = 240          ' •‚Ì‰ºŒÀ
-    If iH < 180 Then iH = 180          ' ‚‚³‚Ì‰ºŒÀi©ƒRƒR‚ª 0 ˆÈ‰º‚É‚È‚é‚Æ 380j
+    If iw < 240 Then iw = 240          ' å¹…ã®ä¸‹é™
+    If iH < 180 Then iH = 180          ' é«˜ã•ã®ä¸‹é™ï¼ˆâ†ã‚³ã‚³ãŒ 0 ä»¥ä¸‹ã«ãªã‚‹ã¨ 380ï¼‰
 
-    ' ƒ‹[ƒg MultiPage
+    ' ãƒ«ãƒ¼ãƒˆ MultiPage
     If Not mp Is Nothing Then
         mp.Left = 6: mp.Top = 6
         mp.Width = iw
         mp.Height = iH
     End If
 
-    ' ŠeƒzƒXƒgƒtƒŒ[ƒ€‚à“¯—l‚ÉƒNƒ‰ƒ“ƒv
+    ' å„ãƒ›ã‚¹ãƒˆãƒ•ãƒ¬ãƒ¼ãƒ ã‚‚åŒæ§˜ã«ã‚¯ãƒ©ãƒ³ãƒ—
     Dim hosts As Variant, h As MSForms.Frame, i As Long
     hosts = Array(hostBasic, hostPost, hostMove, hostTests, hostWalk, hostCog)
     For i = LBound(hosts) To UBound(hosts)
@@ -584,7 +628,7 @@ Private Sub FitLayout()
         End If
     Next i
 
-    ' u•Â‚¶‚évƒ{ƒ^ƒ“
+    ' ã€Œé–‰ã˜ã‚‹ã€ãƒœã‚¿ãƒ³
     If Not btnCloseCtl Is Nothing Then
         btnCloseCtl.Left = Me.InsideWidth - btnCloseCtl.Width - 10
         btnCloseCtl.Top = 6 + iH + 8
@@ -595,18 +639,18 @@ Private Sub FitLayout()
 End Sub
 
 
-'=== ŒİŠ·ƒ_ƒ~[Fƒ^ƒu‡ƒŠƒZƒbƒgi‰½‚à‚µ‚È‚¢j =================
+'=== äº’æ›ãƒ€ãƒŸãƒ¼ï¼šã‚¿ãƒ–é †ãƒªã‚»ãƒƒãƒˆï¼ˆä½•ã‚‚ã—ãªã„ï¼‰ =================
 Private Sub ResetTabOrder()
 End Sub
 '============================================================
 
-'=== –¼‚ÅŒó•âs‚ğW‚ß‚Ä Variant ”z—ñ‚É‚µ‚Ä•Ô‚· =====================
+'=== æ°åã§å€™è£œè¡Œã‚’é›†ã‚ã¦ Variant é…åˆ—ã«ã—ã¦è¿”ã™ =====================
 Private Function CollectCandidatesByNameLocal(ByVal ws As Worksheet, _
                                               ByVal look As Object, _
                                               ByVal pname As String) As Variant
     Dim nameCol As Long
     nameCol = ResolveColumnLocal(look, "Basic.Name")
-    If nameCol = 0 Then nameCol = ResolveColumnLocal(look, "–¼")
+    If nameCol = 0 Then nameCol = ResolveColumnLocal(look, "æ°å")
     If nameCol = 0 Then nameCol = ResolveColumnLocal(look, "Name")
     If nameCol = 0 Then Exit Function
 
@@ -633,13 +677,13 @@ End Function
 
 
 
-' ¦Šù‚É“¯–¼‚ÌŠÖ”‚ª‚ ‚ê‚Î‚»‚¿‚ç‚ğg‚Á‚Ä‚­‚¾‚³‚¢
+' â€»æ—¢ã«åŒåã®é–¢æ•°ãŒã‚ã‚Œã°ãã¡ã‚‰ã‚’ä½¿ã£ã¦ãã ã•ã„
 Private Function NormName(ByVal s As String) As String
     s = Replace(s, vbCrLf, "")
     s = Replace(s, " ", "")
-    s = Replace(s, "@", "")
+    s = Replace(s, "ã€€", "")
     On Error Resume Next
-    s = StrConv(s, vbNarrow)    ' ‘SŠp¨”¼ŠpiŠÂ‹«‚É‚æ‚è¸”s‚µ‚Ä‚àOKj
+    s = StrConv(s, vbNarrow)    ' å…¨è§’â†’åŠè§’ï¼ˆç’°å¢ƒã«ã‚ˆã‚Šå¤±æ•—ã—ã¦ã‚‚OKï¼‰
     On Error GoTo 0
     NormName = LCase$(s)
 End Function
@@ -648,43 +692,43 @@ End Function
 
 
 
-'=== •¶š—ñ‚Ì³‹K‰»F”¼Šp/‘SŠpE—]•ªƒXƒy[ƒXE‘å¬‚ğ‹zû‚µ‚ÄÆ‡—pƒL[‚É‚·‚é ===
+'=== æ–‡å­—åˆ—ã®æ­£è¦åŒ–ï¼šåŠè§’/å…¨è§’ãƒ»ä½™åˆ†ã‚¹ãƒšãƒ¼ã‚¹ãƒ»å¤§å°ã‚’å¸åã—ã¦ç…§åˆç”¨ã‚­ãƒ¼ã«ã™ã‚‹ ===
 Private Function KeyNormalize(ByVal v As Variant) As String
     Dim s As String: s = CStr(v)
 
-    ' ‰üs‚â‘SŠpƒXƒy[ƒX‚ğ’ÊíƒXƒy[ƒX‚É
+    ' æ”¹è¡Œã‚„å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹ã‚’é€šå¸¸ã‚¹ãƒšãƒ¼ã‚¹ã«
     s = Replace(s, vbCrLf, " ")
     s = Replace(s, vbCr, " ")
     s = Replace(s, vbLf, " ")
-    s = Replace(s, ChrW(&H3000), " ") ' ‘SŠpƒXƒy[ƒX¨”¼Šp
+    s = Replace(s, ChrW(&H3000), " ") ' å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹â†’åŠè§’
 
-    ' ˜A‘±ƒXƒy[ƒXˆ³k•‘OŒãƒgƒŠƒ€
+    ' é€£ç¶šã‚¹ãƒšãƒ¼ã‚¹åœ§ç¸®ï¼†å‰å¾Œãƒˆãƒªãƒ 
     Do While InStr(s, "  ") > 0: s = Replace(s, "  ", " "): Loop
     s = Trim$(s)
 
-    ' ‘SŠp¨”¼ŠpiASCII/”š/ƒJƒ^ƒJƒi‚È‚Ç‘ÎÛj
+    ' å…¨è§’â†’åŠè§’ï¼ˆASCII/æ•°å­—/ã‚«ã‚¿ã‚«ãƒŠãªã©å¯¾è±¡ï¼‰
     On Error Resume Next
     s = StrConv(s, vbNarrow)
     On Error GoTo 0
 
-    ' ‚æ‚­‚ ‚éƒnƒCƒtƒ“—Ş‚Ì“ˆêi??|]¨-j
-    s = Replace(s, "|", "-")
+    ' ã‚ˆãã‚ã‚‹ãƒã‚¤ãƒ•ãƒ³é¡ã®çµ±ä¸€ï¼ˆ??ï¼â€â†’-ï¼‰
+    s = Replace(s, "ï¼", "-")
     s = Replace(s, "?", "-")
     s = Replace(s, "?", "-")
-    s = Replace(s, "]", "-")
+    s = Replace(s, "â€", "-")
 
-    ' ‘å•¶š‰»i‰pš‚ä‚ç‚¬‘Îôj
+    ' å¤§æ–‡å­—åŒ–ï¼ˆè‹±å­—ã‚†ã‚‰ãå¯¾ç­–ï¼‰
     s = UCase$(s)
 
-    ' Æ‡‚ÍƒXƒy[ƒX–³‹
+    ' ç…§åˆæ™‚ã¯ã‚¹ãƒšãƒ¼ã‚¹ç„¡è¦–
     s = Replace(s, " ", "")
 
     KeyNormalize = s
 End Function
 
-'=== “ü—Íƒ‚[ƒhF“ú–{Œê/”¼Šp‚Ì©“®Ø‘Ö ===============================
+'=== å…¥åŠ›ãƒ¢ãƒ¼ãƒ‰ï¼šæ—¥æœ¬èª/åŠè§’ã®è‡ªå‹•åˆ‡æ›¿ ===============================
 
-' ‰æ–Ê‘S‘Ì‚ÌƒRƒ“ƒgƒ[ƒ‹‚É IME ƒ‚[ƒh‚ğ“K—piÄ‹Aj
+' ç”»é¢å…¨ä½“ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã« IME ãƒ¢ãƒ¼ãƒ‰ã‚’é©ç”¨ï¼ˆå†å¸°ï¼‰
 Private Sub SetupInputModesJP()
     ApplyInputModeJP Me
 
@@ -708,7 +752,7 @@ End If
 
 End Sub
 
-'=== ƒwƒ‹ƒp[FƒRƒ“ƒgƒ[ƒ‹‘¶İƒ`ƒFƒbƒNiÕ“Ë‰ñ”ğ‚Ì•Ê–¼j ===
+'=== ãƒ˜ãƒ«ãƒ‘ãƒ¼ï¼šã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«å­˜åœ¨ãƒã‚§ãƒƒã‚¯ï¼ˆè¡çªå›é¿ã®åˆ¥åï¼‰ ===
 Private Function FnHasControl(ByVal nm As String) As Boolean
     Dim c As MSForms.Control
     For Each c In Me.Controls
@@ -727,7 +771,7 @@ End Function
 
 
 
-'=== IMEØ‘ÖFƒRƒ“ƒeƒi‚ğÄ‹A“I‚Éˆ—iMultiPage‘Î‰”Åj ==============
+'=== IMEåˆ‡æ›¿ï¼šã‚³ãƒ³ãƒ†ãƒŠã‚’å†å¸°çš„ã«å‡¦ç†ï¼ˆMultiPageå¯¾å¿œç‰ˆï¼‰ ==============
 Private Sub ApplyInputModeJP(container As Object)
     Dim typ As String
     On Error Resume Next
@@ -743,7 +787,7 @@ Private Sub ApplyInputModeJP(container As Object)
       End If
 
 
-    ' Controls ‚ğ‚½‚È‚¢‚à‚Ì‚ÍI—¹iFrame/Page ˆÈŠO‚ÌˆÀ‘S‘Îôj
+    ' Controls ã‚’æŒãŸãªã„ã‚‚ã®ã¯çµ‚äº†ï¼ˆFrame/Page ä»¥å¤–ã®å®‰å…¨å¯¾ç­–ï¼‰
     If Not HasControls(container) Then Exit Sub
 
     Dim c As MSForms.Control
@@ -752,17 +796,17 @@ Private Sub ApplyInputModeJP(container As Object)
             Case "TextBox", "ComboBox"
                 On Error Resume Next
                 If ShouldBeNumericField(c) Then
-                    c.IMEMode = fmIMEModeDisable     ' ”¼Šp‰p”
+                    c.IMEMode = fmIMEModeDisable     ' åŠè§’è‹±æ•°
                 Else
-                    c.IMEMode = fmIMEModeHiragana     ' ‚Ğ‚ç‚ª‚È
+                    c.IMEMode = fmIMEModeHiragana     ' ã²ã‚‰ãŒãª
                 End If
                 On Error GoTo 0
 
             Case "Frame", "Page"
-                ApplyInputModeJP c                   ' q‚ÖÄ‹A
+                ApplyInputModeJP c                   ' å­ã¸å†å¸°
 
             Case "MultiPage"
-                ' q‚É MultiPage ‚ª‚Ô‚ç‰º‚ª‚Á‚Ä‚¢‚éê‡‚Í Pages ‚ğ‰ñ‚·
+                ' å­ã« MultiPage ãŒã¶ã‚‰ä¸‹ãŒã£ã¦ã„ã‚‹å ´åˆã¯ Pages ã‚’å›ã™
                 Dim p As MSForms.Page
                 For Each p In c.Pages
                     ApplyInputModeJP p
@@ -772,12 +816,12 @@ Private Sub ApplyInputModeJP(container As Object)
 End Sub
 
 
-' ‚±‚ÌƒtƒH[ƒ€‚Åu”š—“v‚ÆŒ©‚È‚·”»’è
+' ã“ã®ãƒ•ã‚©ãƒ¼ãƒ ã§ã€Œæ•°å­—æ¬„ã€ã¨è¦‹ãªã™åˆ¤å®š
 Private Function ShouldBeNumericField(c As MSForms.Control) As Boolean
     Dim nm As String: nm = LCase$(c.name & "")
     Dim tg As String: tg = LCase$(c.tag & "")
 
-    ' –¼‘O‚Å”»’èi•K—v‚È‚ç‚±‚±‚É’Ç‹Lj
+    ' åå‰ã§åˆ¤å®šï¼ˆå¿…è¦ãªã‚‰ã“ã“ã«è¿½è¨˜ï¼‰
     If nm = "txtage" Or nm = "txtedate" Or nm = "txtonset" _
        Or nm = "txttenmwalk" Or nm = "txttug" Or nm = "txtfivests" _
        Or nm = "txtsemi" Or nm = "txtgripr" Or nm = "txtgripl" _
@@ -785,13 +829,13 @@ Private Function ShouldBeNumericField(c As MSForms.Control) As Boolean
         ShouldBeNumericField = True: Exit Function
     End If
 
-    ' Tag‚Å”»’èiŠù‘¶‚ÌTag‚ğŠˆ—pj
+    ' Tagã§åˆ¤å®šï¼ˆæ—¢å­˜ã®Tagã‚’æ´»ç”¨ï¼‰
     If InStr(tg, "evaldate") > 0 Or InStr(tg, "onsetdate") > 0 Then ShouldBeNumericField = True: Exit Function
     If Left$(tg, 5) = "test." Or Left$(tg, 5) = "grip." Then ShouldBeNumericField = True: Exit Function
     If Right$(tg, 4) = ".age" Or tg = "bi.total" Then ShouldBeNumericField = True: Exit Function
 End Function
 
-' i”CˆÓj•Û‘¶‘O‚É”š—“‚ğ”¼Šp‚É“ˆê‚µ‚Ä‚¨‚­
+' ï¼ˆä»»æ„ï¼‰ä¿å­˜å‰ã«æ•°å­—æ¬„ã‚’åŠè§’ã«çµ±ä¸€ã—ã¦ãŠã
 Private Sub NormalizeNumericInputsToHalfwidth()
     Dim c As MSForms.Control
     For Each c In Me.Controls
@@ -799,7 +843,7 @@ Private Sub NormalizeNumericInputsToHalfwidth()
     Next
 End Sub
 
-'=== ”’l—“‚Ì”¼Šp“ˆêFMultiPage‘Î‰”Å ================================
+'=== æ•°å€¤æ¬„ã®åŠè§’çµ±ä¸€ï¼šMultiPageå¯¾å¿œç‰ˆ ================================
 Private Sub NormalizeNumericInContainer(container As Object)
     Dim typ As String
     On Error Resume Next
@@ -822,7 +866,7 @@ Private Sub NormalizeNumericInContainer(container As Object)
             Case "TextBox", "ComboBox"
                 If ShouldBeNumericField(c) Then
                     On Error Resume Next
-                    c.Text = StrConv(c.Text, vbNarrow) ' ‘SŠp¨”¼Šp
+                    c.Text = StrConv(c.Text, vbNarrow) ' å…¨è§’â†’åŠè§’
                     On Error GoTo 0
                 End If
 
@@ -848,7 +892,7 @@ Private Function HasControls(o As Object) As Boolean
 End Function
 '====================================================================
 
-'=== ComboBox ‚É”z—ñ‚ğŠmÀ‚É—¬‚µ‚ŞÅ¬ƒwƒ‹ƒp[ ===
+'=== ComboBox ã«é…åˆ—ã‚’ç¢ºå®Ÿã«æµã—è¾¼ã‚€æœ€å°ãƒ˜ãƒ«ãƒ‘ãƒ¼ ===
 Private Sub FillComboItems(ByRef cbo As MSForms.ComboBox, ByVal items As Variant)
     Dim k As Long
     cbo.Clear
@@ -857,18 +901,18 @@ Private Sub FillComboItems(ByRef cbo As MSForms.ComboBox, ByVal items As Variant
             cbo.AddItem CStr(items(k))
         Next
     End If
-    ' Šù’è‘I‘ğ‚È‚µ
+    ' æ—¢å®šé¸æŠãªã—
     On Error Resume Next
     cbo.ListIndex = -1
 End Sub
 
 
 
-'=== BI/IADL ‚ğ‹­§Ä\’zi•K‚¸’†g‚ğ•\¦j ===============================
+'=== BI/IADL ã‚’å¼·åˆ¶å†æ§‹ç¯‰ï¼ˆå¿…ãšä¸­èº«ã‚’è¡¨ç¤ºï¼‰ ===============================
 Private Function EnsureBI_IADL() As MSForms.MultiPage
     On Error Resume Next
 
-    Trace "EnsureBI_IADL start", "BI/IADL"   ' ©‡@‚±‚±
+    Trace "EnsureBI_IADL start", "BI/IADL"   ' â†â‘ ã“ã“
 
 
 
@@ -880,20 +924,20 @@ Private Function EnsureBI_IADL() As MSForms.MultiPage
 
  
 
- ' 1) ƒ‹[ƒg MultiPage ‚Æu“úí¶Šˆ“®ìvƒy[ƒW‚ğ“Á’è
+ ' 1) ãƒ«ãƒ¼ãƒˆ MultiPage ã¨ã€Œæ—¥å¸¸ç”Ÿæ´»å‹•ä½œã€ãƒšãƒ¼ã‚¸ã‚’ç‰¹å®š
     Dim mp As MSForms.MultiPage: Set mp = FindMainMultiPage()
     If mp Is Nothing Then Exit Function
 
-    Dim pgMove As MSForms.Page: Set pgMove = FindPageByCaption(mp, "“úí¶Šˆ“®ì")
+    Dim pgMove As MSForms.Page: Set pgMove = FindPageByCaption(mp, "æ—¥å¸¸ç”Ÿæ´»å‹•ä½œ")
     If pgMove Is Nothing Then
         If mp.Pages.Count >= 3 Then
-            Set pgMove = mp.Pages(2) ' ƒtƒH[ƒ‹ƒoƒbƒN
+            Set pgMove = mp.Pages(2) ' ãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯
         Else
             Exit Function
         End If
     End If
 
-    ' 2) ƒy[ƒW“à‚ÌƒzƒXƒg Frame ‚ğæ“¾i–³‚¯‚ê‚Îì¬j
+    ' 2) ãƒšãƒ¼ã‚¸å†…ã®ãƒ›ã‚¹ãƒˆ Frame ã‚’å–å¾—ï¼ˆç„¡ã‘ã‚Œã°ä½œæˆï¼‰
     Dim host As MSForms.Frame, c As Control
     For Each c In pgMove.Controls
         If TypeName(c) = "Frame" Then Set host = c: Exit For
@@ -905,7 +949,7 @@ Private Function EnsureBI_IADL() As MSForms.MultiPage
         host.Height = pgMove.InsideHeight - 12
     End If
 
-    ' 3) host “à‚Ì MultiPage ‚¾‚¯‚ğ‘SÁ‹i‚Ù‚©‚ÍG‚ç‚È‚¢j
+    ' 3) host å†…ã® MultiPage ã ã‘ã‚’å…¨æ¶ˆå»ï¼ˆã»ã‹ã¯è§¦ã‚‰ãªã„ï¼‰
     Dim i As Long
     For i = host.Controls.Count - 1 To 0 Step -1
         If TypeName(host.Controls(i)) = "MultiPage" Then
@@ -913,7 +957,7 @@ Private Function EnsureBI_IADL() As MSForms.MultiPage
         End If
     Next
 
-    ' 4) mpADL ‚ğì¬•3–‡•ÛØi0:BI / 1:IADL / 2:‹N‹“®ìj
+    ' 4) mpADL ã‚’ä½œæˆï¼†3æšä¿è¨¼ï¼ˆ0:BI / 1:IADL / 2:èµ·å±…å‹•ä½œï¼‰
     Set mpADL = host.Controls.Add("Forms.MultiPage.1", "mpADL")
     Trace "mpADL ready; pages=" & mpADL.Pages.Count, "BI/IADL"
 
@@ -926,30 +970,30 @@ Private Function EnsureBI_IADL() As MSForms.MultiPage
         AttachMPHook mpADL
     End With
     Do While mpADL.Pages.Count < 3: mpADL.Pages.Add: Loop
-    mpADL.Pages(0).caption = "ƒo[ƒTƒ‹ƒCƒ“ƒfƒbƒNƒX"
+    mpADL.Pages(0).caption = "ãƒãƒ¼ã‚µãƒ«ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹"
     mpADL.Pages(1).caption = "IADL"
-    mpADL.Pages(2).caption = "‹N‹“®ì"
+    mpADL.Pages(2).caption = "èµ·å±…å‹•ä½œ"
     
     
 Trace "EnsureBI_IADL end; pages=" & mpADL.Pages.Count, "BI/IADL"
 Set EnsureBI_IADL = mpADL
 
-    ' 5) ‹N‹“®ìƒ^ƒu‚ÌUI
+    ' 5) èµ·å±…å‹•ä½œã‚¿ãƒ–ã®UI
     mp.value = 0
     BuildKyoOnADL mpADL.Pages(2)
 
 
-    '======================== BIi10€–Új ========================
+    '======================== BIï¼ˆ10é …ç›®ï¼‰ ========================
     Dim pBI As MSForms.Page: Set pBI = mpADL.Pages(0)
-    ' ˆê’UƒNƒŠƒA‚µ‚Ä‚©‚çì¬i‹ó^d•¡‚Ç‚¿‚ç‚É‚à‘Î‰j
+    ' ä¸€æ—¦ã‚¯ãƒªã‚¢ã—ã¦ã‹ã‚‰ä½œæˆï¼ˆç©ºï¼é‡è¤‡ã©ã¡ã‚‰ã«ã‚‚å¯¾å¿œï¼‰
     Dim iCtl As Long
     For iCtl = pBI.Controls.Count - 1 To 0 Step -1
         pBI.Controls.Remove pBI.Controls(iCtl).name
     Next
 
     Dim biItems As Variant, biChoices As Variant
-    biItems = Array("ÛH", "Ô‚¢‚·-ƒxƒbƒhˆÚæ", "®—e", "ƒgƒCƒŒ“®ì", "“ü—", _
-                    "•às/Ô‚¢‚·ˆÚ“®", "ŠK’i¸~", "Xˆß", "”r•ÖƒRƒ“ƒgƒ[ƒ‹", "”r”AƒRƒ“ƒgƒ[ƒ‹")
+    biItems = Array("æ‘‚é£Ÿ", "è»Šã„ã™-ãƒ™ãƒƒãƒ‰ç§»ä¹—", "æ•´å®¹", "ãƒˆã‚¤ãƒ¬å‹•ä½œ", "å…¥æµ´", _
+                    "æ­©è¡Œ/è»Šã„ã™ç§»å‹•", "éšæ®µæ˜‡é™", "æ›´è¡£", "æ’ä¾¿ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«", "æ’å°¿ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«")
     biChoices = Array()
 
 
@@ -959,7 +1003,7 @@ Set EnsureBI_IADL = mpADL
     Dim lblBI As MSForms.label, txtBI As MSForms.TextBox
     Set lblBI = pBI.Controls.Add("Forms.Label.1", "lblBIHeader")
     With lblBI
-        .caption = "ƒo[ƒTƒ‹ƒCƒ“ƒfƒbƒNƒXi“_j"
+        .caption = "ãƒãƒ¼ã‚µãƒ«ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ï¼ˆç‚¹ï¼‰"
         .Left = 12: .Top = yBI: .Width = 160
     End With
     Set txtBI = pBI.Controls.Add("Forms.TextBox.1", "txtBITotal")
@@ -985,27 +1029,27 @@ Set EnsureBI_IADL = mpADL
             .Width = 200
             .Style = fmStyleDropDownList
         End With
-               ' €–Ú‚²‚Æ‚Éƒo[ƒTƒ‹•W€‚Ì“_”Œó•â‚ğİ’è
+               ' é …ç›®ã”ã¨ã«ãƒãƒ¼ã‚µãƒ«æ¨™æº–ã®ç‚¹æ•°å€™è£œã‚’è¨­å®š
         Select Case idx
-            ' 0: ÛH
-            ' 3: ƒgƒCƒŒ“®ì
-            ' 6: ŠK’i¸~
-            ' 7: Xˆß
-            ' 8: ”r•ÖƒRƒ“ƒgƒ[ƒ‹
-            ' 9: ”r”AƒRƒ“ƒgƒ[ƒ‹
-            ' ¨ 0 / 5 / 10 “_
+            ' 0: æ‘‚é£Ÿ
+            ' 3: ãƒˆã‚¤ãƒ¬å‹•ä½œ
+            ' 6: éšæ®µæ˜‡é™
+            ' 7: æ›´è¡£
+            ' 8: æ’ä¾¿ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
+            ' 9: æ’å°¿ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
+            ' â†’ 0 / 5 / 10 ç‚¹
             Case 0, 3, 6, 7, 8, 9
                 AddItemsToCombo cB, Array("0", "5", "10")
 
-            ' 2: ®—e
-            ' 4: “ü—
-            ' ¨ 0 / 5 “_
+            ' 2: æ•´å®¹
+            ' 4: å…¥æµ´
+            ' â†’ 0 / 5 ç‚¹
             Case 2, 4
                 AddItemsToCombo cB, Array("0", "5")
 
-            ' 1: Ô‚¢‚·-ƒxƒbƒhˆÚæ
-            ' 5: •às/Ô‚¢‚·ˆÚ“®
-            ' ¨ 0 / 5 / 10 / 15 “_
+            ' 1: è»Šã„ã™-ãƒ™ãƒƒãƒ‰ç§»ä¹—
+            ' 5: æ­©è¡Œ/è»Šã„ã™ç§»å‹•
+            ' â†’ 0 / 5 / 10 / 15 ç‚¹
             Case 1, 5
                 AddItemsToCombo cB, Array("0", "5", "10", "15")
         End Select
@@ -1016,16 +1060,16 @@ Set EnsureBI_IADL = mpADL
     pBI.ScrollBars = fmScrollBarsNone
     pBI.ScrollHeight = yBI + 8
 
-    '======================== IADLi9€–Új ========================
+    '======================== IADLï¼ˆ9é …ç›®ï¼‰ ========================
     Dim pIADL As MSForms.Page: Set pIADL = mpADL.Pages(1)
     For iCtl = pIADL.Controls.Count - 1 To 0 Step -1
         pIADL.Controls.Remove pIADL.Controls(iCtl).name
     Next
 
     Dim iadlItems As Variant, iadlChoices As Variant
-    iadlItems = Array("’²—", "ô‘ó", "‘|œ", "”ƒ‚¢•¨", "‹à‘KŠÇ—", "•–òŠÇ—", _
-                      "ï–¡E—]‰ÉŠˆ“®", "Ğ‰ïQ‰ÁiŠOoE’nˆæŠˆ“®j", "ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“i“d˜bE‰ï˜bj")
-    iadlChoices = Array("©—§", "Œ©ç‚èiŠÄ‹‰ºj", "ˆê•”‰î•", "‘S‰î•")
+    iadlItems = Array("èª¿ç†", "æ´—æ¿¯", "æƒé™¤", "è²·ã„ç‰©", "é‡‘éŠ­ç®¡ç†", "æœè–¬ç®¡ç†", _
+                      "è¶£å‘³ãƒ»ä½™æš‡æ´»å‹•", "ç¤¾ä¼šå‚åŠ ï¼ˆå¤–å‡ºãƒ»åœ°åŸŸæ´»å‹•ï¼‰", "ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ï¼ˆé›»è©±ãƒ»ä¼šè©±ï¼‰")
+    iadlChoices = Array("è‡ªç«‹", "è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰", "ä¸€éƒ¨ä»‹åŠ©", "å…¨ä»‹åŠ©")
 
     Dim iadlCount As Long, iadlCols As Long, iadlRows As Long
     iadlCount = UBound(iadlItems) - LBound(iadlItems) + 1
@@ -1060,10 +1104,10 @@ Set EnsureBI_IADL = mpADL
     Dim gridBottom As Single: gridBottom = 18 + iadlRows * rowH
     Dim lblINote As MSForms.label, txtINote As MSForms.TextBox
     Set lblINote = pIADL.Controls.Add("Forms.Label.1", "lblIADLNote")
-    With lblINote: .caption = "”õl": .Left = 12: .Top = gridBottom + 12: .Width = 40: End With
+    With lblINote: .caption = "å‚™è€ƒ": .Left = 12: .Top = gridBottom + 12: .Width = 40: End With
     Set txtINote = pIADL.Controls.Add("Forms.TextBox.1", "txtIADLNote")
     With txtINote
-        .tag = "IADL.”õl"
+        .tag = "IADL.å‚™è€ƒ"
         .Left = 60
         .Top = lblINote.Top - 3
         .Width = mpADL.Width - 84
@@ -1072,7 +1116,7 @@ Set EnsureBI_IADL = mpADL
         .EnterKeyBehavior = True
     End With
 
-    '---- ‚‚³XV ----
+    '---- é«˜ã•æ›´æ–° ----
     Dim bottomI As Single: bottomI = txtINote.Top + txtINote.Height + 18
     pIADL.ScrollBars = fmScrollBarsNone
     pIADL.ScrollHeight = bottomI
@@ -1087,7 +1131,7 @@ Set EnsureBI_IADL = mpADL
 End Function
 '=================================================================
 
-'=== BIƒRƒ“ƒ{‚ÉƒCƒxƒ“ƒgƒtƒbƒN‚ğ’£‚é ===
+'=== BIã‚³ãƒ³ãƒœã«ã‚¤ãƒ™ãƒ³ãƒˆãƒ•ãƒƒã‚¯ã‚’å¼µã‚‹ ===
 Private Sub AttachBIHook(ByRef cB As MSForms.ComboBox)
     If BIHooks Is Nothing Then Set BIHooks = New Collection
     Dim h As CboBIHook
@@ -1096,76 +1140,76 @@ Private Sub AttachBIHook(ByRef cB As MSForms.ComboBox)
     BIHooks.Add h
 End Sub
 
-'=== BIF€–Ú~‘I‘ğˆ ¨ “_”iBarthel•W€‚É‰ˆ‚¤j ==================
+'=== BIï¼šé …ç›®Ã—é¸æŠè‚¢ â†’ ç‚¹æ•°ï¼ˆBarthelæ¨™æº–ã«æ²¿ã†ï¼‰ ==================
 Private Function BIItemScore(ByVal itemName As String, ByVal level As String) As Long
     Select Case itemName
-        Case "ÛH"                         ' 10 / 5 / 0
+        Case "æ‘‚é£Ÿ"                         ' 10 / 5 / 0
             Select Case level
-                Case "©—§":                   BIItemScore = 10
-                Case "Œ©ç‚èiŠÄ‹‰ºj", "ˆê•”‰î•": BIItemScore = 5
+                Case "è‡ªç«‹":                   BIItemScore = 10
+                Case "è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰", "ä¸€éƒ¨ä»‹åŠ©": BIItemScore = 5
                 Case Else:                     BIItemScore = 0
             End Select
 
-        Case "Ô‚¢‚·-ƒxƒbƒhˆÚæ"            ' 15 / 10 / 5 / 0
+        Case "è»Šã„ã™-ãƒ™ãƒƒãƒ‰ç§»ä¹—"            ' 15 / 10 / 5 / 0
             Select Case level
-                Case "©—§":                   BIItemScore = 15
-                Case "Œ©ç‚èiŠÄ‹‰ºj":       BIItemScore = 10
-                Case "ˆê•”‰î•":               BIItemScore = 5
+                Case "è‡ªç«‹":                   BIItemScore = 15
+                Case "è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰":       BIItemScore = 10
+                Case "ä¸€éƒ¨ä»‹åŠ©":               BIItemScore = 5
                 Case Else:                     BIItemScore = 0
             End Select
 
-        Case "®—e"                         ' 5 / 0
+        Case "æ•´å®¹"                         ' 5 / 0
             Select Case level
-                Case "©—§":                   BIItemScore = 5
+                Case "è‡ªç«‹":                   BIItemScore = 5
                 Case Else:                     BIItemScore = 0
             End Select
 
-        Case "ƒgƒCƒŒ“®ì"                   ' 10 / 5 / 0
+        Case "ãƒˆã‚¤ãƒ¬å‹•ä½œ"                   ' 10 / 5 / 0
             Select Case level
-                Case "©—§":                   BIItemScore = 10
-                Case "Œ©ç‚èiŠÄ‹‰ºj", "ˆê•”‰î•": BIItemScore = 5
+                Case "è‡ªç«‹":                   BIItemScore = 10
+                Case "è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰", "ä¸€éƒ¨ä»‹åŠ©": BIItemScore = 5
                 Case Else:                     BIItemScore = 0
             End Select
 
-        Case "“ü—"                         ' 5 / 0
+        Case "å…¥æµ´"                         ' 5 / 0
             Select Case level
-                Case "©—§":                   BIItemScore = 5
+                Case "è‡ªç«‹":                   BIItemScore = 5
                 Case Else:                     BIItemScore = 0
             End Select
 
-        Case "•às/Ô‚¢‚·ˆÚ“®"              ' 15 / 10 / 5 / 0
+        Case "æ­©è¡Œ/è»Šã„ã™ç§»å‹•"              ' 15 / 10 / 5 / 0
             Select Case level
-                Case "©—§":                   BIItemScore = 15
-                Case "Œ©ç‚èiŠÄ‹‰ºj":       BIItemScore = 10
-                Case "ˆê•”‰î•":               BIItemScore = 5
+                Case "è‡ªç«‹":                   BIItemScore = 15
+                Case "è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰":       BIItemScore = 10
+                Case "ä¸€éƒ¨ä»‹åŠ©":               BIItemScore = 5
                 Case Else:                     BIItemScore = 0
             End Select
 
-        Case "ŠK’i¸~"                     ' 10 / 5 / 0
+        Case "éšæ®µæ˜‡é™"                     ' 10 / 5 / 0
             Select Case level
-                Case "©—§":                   BIItemScore = 10
-                Case "Œ©ç‚èiŠÄ‹‰ºj", "ˆê•”‰î•": BIItemScore = 5
+                Case "è‡ªç«‹":                   BIItemScore = 10
+                Case "è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰", "ä¸€éƒ¨ä»‹åŠ©": BIItemScore = 5
                 Case Else:                     BIItemScore = 0
             End Select
 
-        Case "Xˆß"                         ' 10 / 5 / 0
+        Case "æ›´è¡£"                         ' 10 / 5 / 0
             Select Case level
-                Case "©—§":                   BIItemScore = 10
-                Case "Œ©ç‚èiŠÄ‹‰ºj", "ˆê•”‰î•": BIItemScore = 5
+                Case "è‡ªç«‹":                   BIItemScore = 10
+                Case "è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰", "ä¸€éƒ¨ä»‹åŠ©": BIItemScore = 5
                 Case Else:                     BIItemScore = 0
             End Select
 
-        Case "”r•ÖƒRƒ“ƒgƒ[ƒ‹"             ' 10 / 5 / 0
+        Case "æ’ä¾¿ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«"             ' 10 / 5 / 0
             Select Case level
-                Case "©—§":                   BIItemScore = 10
-                Case "Œ©ç‚èiŠÄ‹‰ºj", "ˆê•”‰î•": BIItemScore = 5
+                Case "è‡ªç«‹":                   BIItemScore = 10
+                Case "è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰", "ä¸€éƒ¨ä»‹åŠ©": BIItemScore = 5
                 Case Else:                     BIItemScore = 0
             End Select
 
-        Case "”r”AƒRƒ“ƒgƒ[ƒ‹"             ' 10 / 5 / 0
+        Case "æ’å°¿ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«"             ' 10 / 5 / 0
             Select Case level
-                Case "©—§":                   BIItemScore = 10
-                Case "Œ©ç‚èiŠÄ‹‰ºj", "ˆê•”‰î•": BIItemScore = 5
+                Case "è‡ªç«‹":                   BIItemScore = 10
+                Case "è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰", "ä¸€éƒ¨ä»‹åŠ©": BIItemScore = 5
                 Case Else:                     BIItemScore = 0
             End Select
 
@@ -1187,13 +1231,13 @@ Public Sub RecalcBI()
 
     On Error Resume Next
 
-    ' --- uƒo[ƒTƒ‹ƒCƒ“ƒfƒbƒNƒXvƒ^ƒu‚ğ‚Â MultiPage ‚ğ’T‚· ---
+    ' --- ã€Œãƒãƒ¼ã‚µãƒ«ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã€ã‚¿ãƒ–ã‚’æŒã¤ MultiPage ã‚’æ¢ã™ ---
     Set mpADL = Nothing
     For Each ctrl In Me.Controls
         If TypeOf ctrl Is MSForms.MultiPage Then
             Set mpADL = ctrl
             If mpADL.Pages.Count > 0 Then
-                If mpADL.Pages(0).caption = "ƒo[ƒTƒ‹ƒCƒ“ƒfƒbƒNƒX" Then
+                If mpADL.Pages(0).caption = "ãƒãƒ¼ã‚µãƒ«ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹" Then
                     Exit For
                 End If
             End If
@@ -1203,9 +1247,9 @@ Public Sub RecalcBI()
 
     If mpADL Is Nothing Then Exit Sub
 
-    Set pBI = mpADL.Pages(0)   ' 0ƒy[ƒW–Ú‚ªƒo[ƒTƒ‹ƒCƒ“ƒfƒbƒNƒX
+    Set pBI = mpADL.Pages(0)   ' 0ãƒšãƒ¼ã‚¸ç›®ãŒãƒãƒ¼ã‚µãƒ«ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 
-    ' --- 10€–Ú•ª‚Ì“_”‚ğ’Pƒ‚É‡Œv‚·‚éiƒRƒ“ƒ{‚Ì’l‚ª‚»‚Ì‚Ü‚Ü“_”j ---
+    ' --- 10é …ç›®åˆ†ã®ç‚¹æ•°ã‚’å˜ç´”ã«åˆè¨ˆã™ã‚‹ï¼ˆã‚³ãƒ³ãƒœã®å€¤ãŒãã®ã¾ã¾ç‚¹æ•°ï¼‰ ---
     total = 0
     For idx = 0 To 9
         Set cB = Nothing
@@ -1218,7 +1262,7 @@ Public Sub RecalcBI()
         End If
     Next idx
 
-    ' --- ‡Œv‚ğ txtBITotal ‚É”½‰f ---
+    ' --- åˆè¨ˆã‚’ txtBITotal ã«åæ˜  ---
     Set txt = pBI.Controls("txtBITotal")
     If Not txt Is Nothing Then
         txt.value = total
@@ -1226,19 +1270,19 @@ Public Sub RecalcBI()
 End Sub
 
 
-'=== ”CˆÓ‚ÌTextBox‚ÉIME‚Ğ‚ç‚ª‚ÈƒtƒbƒN‚ğ’£‚é ===
+'=== ä»»æ„ã®TextBoxã«IMEã²ã‚‰ãŒãªãƒ•ãƒƒã‚¯ã‚’å¼µã‚‹ ===
 Private Sub AttachImeHiragana(tb As MSForms.TextBox)
     If ImeHooks Is Nothing Then Set ImeHooks = New Collection
     Dim h As TxtImeHook
     Set h = New TxtImeHook
     h.Init tb
     ImeHooks.Add h
-    ' ”O‚Ì‚½‚ß’¼‚¿‚É”½‰f
+    ' å¿µã®ãŸã‚ç›´ã¡ã«åæ˜ 
     On Error Resume Next
     tb.IMEMode = fmIMEModeHiragana
 End Sub
 
-'=== MultiPage ‚ÉƒtƒbƒN‚ğ’£‚é ===
+'=== MultiPage ã«ãƒ•ãƒƒã‚¯ã‚’å¼µã‚‹ ===
 Private Sub AttachMPHook(mp As MSForms.MultiPage)
     If MPHs Is Nothing Then Set MPHs = New Collection
     Dim h As MPHook
@@ -1247,7 +1291,7 @@ Private Sub AttachMPHook(mp As MSForms.MultiPage)
     MPHs.Add h
 End Sub
 
-'=== IADL”õl‚ÉIME‚Ğ‚ç‚ª‚È‚ğÄ“K—pi“s“xŒÄ‚Ôj ===
+'=== IADLå‚™è€ƒã«IMEã²ã‚‰ãŒãªã‚’å†é©ç”¨ï¼ˆéƒ½åº¦å‘¼ã¶ï¼‰ ===
 Public Sub ApplyImeToIADLNote()
     On Error Resume Next
      Dim mpA As MSForms.MultiPage, c As Control
@@ -1265,10 +1309,10 @@ Public Sub ApplyImeToIADLNote()
     If Not tb Is Nothing Then tb.IMEMode = fmIMEModeHiragana
 End Sub
 
-'=== ‚Ç‚±‚©‚Éc‚Á‚Ä‚¢‚é mpADL ‚ğ‘S•”Á‚· ===
+'=== ã©ã“ã‹ã«æ®‹ã£ã¦ã„ã‚‹ mpADL ã‚’å…¨éƒ¨æ¶ˆã™ ===
 Private Sub RemoveAllMpADL()
     Dim i As Long, c As Control
-    ' ƒtƒH[ƒ€’¼‰º
+    ' ãƒ•ã‚©ãƒ¼ãƒ ç›´ä¸‹
     For i = Me.Controls.Count - 1 To 0 Step -1
         If TypeName(Me.Controls(i)) = "MultiPage" Then
             If Me.Controls(i).name = "mpADL" Then
@@ -1277,7 +1321,7 @@ Private Sub RemoveAllMpADL()
         End If
     Next i
 
-    ' ƒ‹[ƒg MultiPageimpj‚ÌŠeƒy[ƒW“à
+    ' ãƒ«ãƒ¼ãƒˆ MultiPageï¼ˆmpï¼‰ã®å„ãƒšãƒ¼ã‚¸å†…
     Dim mp As MSForms.MultiPage, p As MSForms.Page
     For Each c In Me.Controls
         If TypeName(c) = "MultiPage" Then Set mp = c: Exit For
@@ -1294,20 +1338,20 @@ Private Sub RemoveAllMpADL()
 End Sub
 
 
-'=== ADLƒ^ƒu“à‚Ì3–‡–Úu‹N‹“®ìvƒy[ƒW‚ğ‘g‚İ—§‚Ä‚é ======================
+'=== ADLã‚¿ãƒ–å†…ã®3æšç›®ã€Œèµ·å±…å‹•ä½œã€ãƒšãƒ¼ã‚¸ã‚’çµ„ã¿ç«‹ã¦ã‚‹ ======================
 Private Sub BuildKyoOnADL(pg As MSForms.Page)
 
     Dim fr As MSForms.Frame
-    ' Šù‘¶‚ª‚ ‚ê‚ÎÄ—˜—pA–³‚¯‚ê‚Îì¬iFindOrAddFrame‚ÍŠù‘¶ƒwƒ‹ƒp[j
+    ' æ—¢å­˜ãŒã‚ã‚Œã°å†åˆ©ç”¨ã€ç„¡ã‘ã‚Œã°ä½œæˆï¼ˆFindOrAddFrameã¯æ—¢å­˜ãƒ˜ãƒ«ãƒ‘ãƒ¼ï¼‰
     Set fr = FindOrAddFrame(pg, "frKyo")
-    fr.caption = "‹N‹“®ì"
+    fr.caption = "èµ·å±…å‹•ä½œ"
     ClearChildren fr
     
-     ' š’Ç‰ÁFˆÊ’u‚ÆƒTƒCƒYiƒy[ƒW‚¢‚Á‚Ï‚¢‚ÉL‚°‚éj
+     ' â˜…è¿½åŠ ï¼šä½ç½®ã¨ã‚µã‚¤ã‚ºï¼ˆãƒšãƒ¼ã‚¸ã„ã£ã±ã„ã«åºƒã’ã‚‹ï¼‰
     With fr
         .Left = 12
         .Top = 12
-        .Width = pg.parent.Width - 24   ' © MultiPage‚Ì•‚É’Ç]
+        .Width = pg.parent.Width - 24   ' â† MultiPageã®å¹…ã«è¿½å¾“
     End With
     
 
@@ -1315,51 +1359,51 @@ Private Sub BuildKyoOnADL(pg As MSForms.Page)
     Dim lb As MSForms.label, cB As MSForms.ComboBox, txt As MSForms.TextBox
     Dim choices As Variant
 
-    ' Œó•âFŠù‘¶‚Ì PostureChoices() ‚ª‚ ‚ê‚Î—˜—pA–³‚¯‚ê‚ÎƒfƒtƒHƒ‹ƒg
+    ' å€™è£œï¼šæ—¢å­˜ã® PostureChoices() ãŒã‚ã‚Œã°åˆ©ç”¨ã€ç„¡ã‘ã‚Œã°ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ
     On Error Resume Next
     choices = PostureChoices()
     If Err.Number <> 0 Then
-        choices = Array("©—§", "Œ©ç‚èiŠÄ‹‰ºj", "ˆê•”‰î•", "‘S‰î•")
+        choices = Array("è‡ªç«‹", "è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰", "ä¸€éƒ¨ä»‹åŠ©", "å…¨ä»‹åŠ©")
         Err.Clear
     End If
     On Error GoTo 0
     
     
-' Q•Ô‚è
-Set lb = CreateLabel(fr, "Q•Ô‚è", COL_LX, Y)
+' å¯è¿”ã‚Š
+Set lb = CreateLabel(fr, "å¯è¿”ã‚Š", COL_LX, Y)
 Set cB = fr.Controls.Add("Forms.ComboBox.1", "cmbKyo_Roll", True)
 With cB: .Left = COL_LX + lblW + 60: .Top = Y - 3: .Width = 120: End With
 AddItemsToCombo cB, choices
 Y = Y + rowH
 
-' ‹N‚«ã‚ª‚è
-Set lb = CreateLabel(fr, "‹N‚«ã‚ª‚è", COL_LX, Y)
+' èµ·ãä¸ŠãŒã‚Š
+Set lb = CreateLabel(fr, "èµ·ãä¸ŠãŒã‚Š", COL_LX, Y)
 Set cB = fr.Controls.Add("Forms.ComboBox.1", "cmbKyo_SitUp", True)
 With cB: .Left = COL_LX + lblW + 60: .Top = Y - 3: .Width = 120: End With
 AddItemsToCombo cB, choices
 Y = Y + rowH
 
-' ÀˆÊ•Û
-Set lb = CreateLabel(fr, "ÀˆÊ•Û", COL_LX, Y)
+' åº§ä½ä¿æŒ
+Set lb = CreateLabel(fr, "åº§ä½ä¿æŒ", COL_LX, Y)
 Set cB = fr.Controls.Add("Forms.ComboBox.1", "cmbKyo_SitHold", True)
 With cB: .Left = COL_LX + lblW + 60: .Top = Y - 3: .Width = 120: End With
 AddItemsToCombo cB, choices
 Y = Y + rowH
 
     
-  ' ‰E—ñF—§‚¿ã‚ª‚è / —§ˆÊ•Ûi¶—ñ‚Æ“¯‚¶sY=22,46^ƒIƒtƒZƒbƒg+60^•120‚Å‘µ‚¦‚éj
-CreateLabel fr, "—§‚¿ã‚ª‚è", COL_RX, 22
+  ' å³åˆ—ï¼šç«‹ã¡ä¸ŠãŒã‚Š / ç«‹ä½ä¿æŒï¼ˆå·¦åˆ—ã¨åŒã˜è¡ŒY=22,46ï¼ã‚ªãƒ•ã‚»ãƒƒãƒˆ+60ï¼å¹…120ã§æƒãˆã‚‹ï¼‰
+CreateLabel fr, "ç«‹ã¡ä¸ŠãŒã‚Š", COL_RX, 22
 Dim cboUp As MSForms.ComboBox
-Set cboUp = CreateCombo(fr, COL_RX + lblW + 60, 22, 120, , "POSTURE|—§‚¿ã‚ª‚è")
-cboUp.List = MakeList("©—§,Œ©ç‚èiŠÄ‹‰ºj,ˆê•”‰î•,‘S‰î•")
+Set cboUp = CreateCombo(fr, COL_RX + lblW + 60, 22, 120, , "POSTURE|ç«‹ã¡ä¸ŠãŒã‚Š")
+cboUp.List = MakeList("è‡ªç«‹,è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰,ä¸€éƒ¨ä»‹åŠ©,å…¨ä»‹åŠ©")
 
-CreateLabel fr, "—§ˆÊ•Û", COL_RX, 46
+CreateLabel fr, "ç«‹ä½ä¿æŒ", COL_RX, 46
 Dim cboStand As MSForms.ComboBox
-Set cboStand = CreateCombo(fr, COL_RX + lblW + 60, 46, 120, , "POSTURE|—§ˆÊ•Û")
-cboStand.List = MakeList("©—§,Œ©ç‚èiŠÄ‹‰ºj,ˆê•”‰î•,‘S‰î•")
+Set cboStand = CreateCombo(fr, COL_RX + lblW + 60, 46, 120, , "POSTURE|ç«‹ä½ä¿æŒ")
+cboStand.List = MakeList("è‡ªç«‹,è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰,ä¸€éƒ¨ä»‹åŠ©,å…¨ä»‹åŠ©")
 
-    ' ”õl
-    Set lb = CreateLabel(fr, "”õl", COL_LX, Y)
+    ' å‚™è€ƒ
+    Set lb = CreateLabel(fr, "å‚™è€ƒ", COL_LX, Y)
     Set txt = fr.Controls.Add("Forms.TextBox.1", "txtKyoNote")
     With txt
         .Left = COL_LX + 40
@@ -1374,7 +1418,7 @@ cboStand.List = MakeList("©—§,Œ©ç‚èiŠÄ‹‰ºj,ˆê•”‰î•,‘S‰î•")
     fr.Height = Y + 12
 End Sub
 
-'ADL-‹N‹“®ì—pFƒRƒ“ƒ{‚ÉŒó•â‚ğƒZƒbƒg
+'ADL-èµ·å±…å‹•ä½œç”¨ï¼šã‚³ãƒ³ãƒœã«å€™è£œã‚’ã‚»ãƒƒãƒˆ
 Private Sub AddItemsToCombo(cB As MSForms.ComboBox, items As Variant)
     Dim k As Long
     On Error Resume Next
@@ -1396,15 +1440,15 @@ End Sub
 
 
 '======================================================================
-' ‹N‹“®ìiug‘Ì‹@”\{‹N‹“®ìvƒy[ƒWj? ˆÀ’èƒeƒ“ƒvƒŒi”õl‚ ‚èj
-' E“r’†‚Éƒ^ƒu‚ğ‘}“ü‚µ‚Ä‚à‰ó‚ê‚È‚¢FCaptionŒŸõ
-' E¶¬iBuildj‚Æ®—ñiLayoutj‚ğ•ª—£FŠg’£‚Ì–ŒÌ‚ğÅ¬‰»
-' E•Û‘¶/“Ç‚Í Tag="POSTURE|c" ‚ÅŠù‘¶ƒƒWƒbƒN‚É‚»‚Ì‚Ü‚Üæ‚é
+' èµ·å±…å‹•ä½œï¼ˆã€Œèº«ä½“æ©Ÿèƒ½ï¼‹èµ·å±…å‹•ä½œã€ãƒšãƒ¼ã‚¸ï¼‰? å®‰å®šãƒ†ãƒ³ãƒ—ãƒ¬ï¼ˆå‚™è€ƒã‚ã‚Šï¼‰
+' ãƒ»é€”ä¸­ã«ã‚¿ãƒ–ã‚’æŒ¿å…¥ã—ã¦ã‚‚å£Šã‚Œãªã„ï¼šCaptionæ¤œç´¢
+' ãƒ»ç”Ÿæˆï¼ˆBuildï¼‰ã¨æ•´åˆ—ï¼ˆLayoutï¼‰ã‚’åˆ†é›¢ï¼šæ‹¡å¼µæ™‚ã®äº‹æ•…ã‚’æœ€å°åŒ–
+' ãƒ»ä¿å­˜/èª­è¾¼ã¯ Tag="POSTURE|â€¦" ã§æ—¢å­˜ãƒ­ã‚¸ãƒƒã‚¯ã«ãã®ã¾ã¾ä¹—ã‚‹
 '======================================================================
 
 
 
-'\\ ƒtƒH[ƒ€“à‚Ì MultiPage ‚ğ©“®ŒŸoi–¼‘O‚ÉˆË‘¶‚µ‚È‚¢j
+'â€•â€• ãƒ•ã‚©ãƒ¼ãƒ å†…ã® MultiPage ã‚’è‡ªå‹•æ¤œå‡ºï¼ˆåå‰ã«ä¾å­˜ã—ãªã„ï¼‰
 Private Function FindMainMultiPage() As MSForms.MultiPage
     Dim c As MSForms.Control
     For Each c In Me.Controls
@@ -1415,7 +1459,7 @@ Private Function FindMainMultiPage() As MSForms.MultiPage
     Next
 End Function
 
-'\\ Caption ‚Éw’è•¶š—ñ‚ğŠÜ‚Şƒy[ƒW‚ğ•Ô‚·i–³‚¯‚ê‚Î Nothingj
+'â€•â€• Caption ã«æŒ‡å®šæ–‡å­—åˆ—ã‚’å«ã‚€ãƒšãƒ¼ã‚¸ã‚’è¿”ã™ï¼ˆç„¡ã‘ã‚Œã° Nothingï¼‰
 Private Function FindPageByCaption(mp As MSForms.MultiPage, cap As String) As MSForms.Page
     Dim pg As MSForms.Page
     For Each pg In mp.Pages
@@ -1426,7 +1470,7 @@ Private Function FindPageByCaption(mp As MSForms.MultiPage, cap As String) As MS
     Next
 End Function
 
-'\\ Page “à‚Å Frame ‚ğæ“¾i–³‚¯‚ê‚Îì¬j
+'â€•â€• Page å†…ã§ Frame ã‚’å–å¾—ï¼ˆç„¡ã‘ã‚Œã°ä½œæˆï¼‰
 Private Function FindOrAddFrame(pg As MSForms.Page, nm As String) As MSForms.Frame
     Dim c As MSForms.Control
     For Each c In pg.Controls
@@ -1440,7 +1484,7 @@ Private Function FindOrAddFrame(pg As MSForms.Page, nm As String) As MSForms.Fra
     Set FindOrAddFrame = pg.Controls.Add("Forms.Frame.1", nm, True)
 End Function
 
-'\\ qƒRƒ“ƒgƒ[ƒ‹‘Síœi¶¬‘O‚Éˆê“x‚¾‚¯j
+'â€•â€• å­ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«å…¨å‰Šé™¤ï¼ˆç”Ÿæˆå‰ã«ä¸€åº¦ã ã‘ï¼‰
 Private Sub ClearChildren(fr As MSForms.Frame)
     Dim i As Long
     For i = fr.Controls.Count - 1 To 0 Step -1
@@ -1450,17 +1494,17 @@ End Sub
 
 
 Private Function PostureItems() As Variant
-    PostureItems = Array("Q•Ô‚è", "‹N‚«ã‚ª‚è", "ÀˆÊ•Û", "—§‚¿ã‚ª‚è", "—§ˆÊ•Û")
+    PostureItems = Array("å¯è¿”ã‚Š", "èµ·ãä¸ŠãŒã‚Š", "åº§ä½ä¿æŒ", "ç«‹ã¡ä¸ŠãŒã‚Š", "ç«‹ä½ä¿æŒ")
 End Function
 
 
 
 Private Function PostureChoices() As Variant
-    PostureChoices = Array("©—§", "Œ©ç‚èiŠÄ‹‰ºj", "ˆê•”‰î•", "‘S‰î•")
+    PostureChoices = Array("è‡ªç«‹", "è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰", "ä¸€éƒ¨ä»‹åŠ©", "å…¨ä»‹åŠ©")
 End Function
 '======================================================================
 
-'\\ ‰‰ñ‚¾‚¯g¶¬h‚·‚éiActivate ‚©‚çŒÄ‚Î‚ê‚éj
+'â€•â€• åˆå›ã ã‘â€œç”Ÿæˆâ€ã™ã‚‹ï¼ˆActivate ã‹ã‚‰å‘¼ã°ã‚Œã‚‹ï¼‰
 Private Sub BuildPostureUI()
 
 Debug.Print "BuildPostureUI CALLED", Join(PostureItems, " / ")
@@ -1468,45 +1512,45 @@ Debug.Print "BuildPostureUI CALLED", Join(PostureItems, " / ")
     Dim mp As MSForms.MultiPage: Set mp = FindMainMultiPage()
     If mp Is Nothing Then Exit Sub
 
-    ' ŠY“–ƒy[ƒW‚ğ Caption ‚Åæ“¾i–³‚¯‚ê‚Îì‚éj
+    ' è©²å½“ãƒšãƒ¼ã‚¸ã‚’ Caption ã§å–å¾—ï¼ˆç„¡ã‘ã‚Œã°ä½œã‚‹ï¼‰
     Dim pg As MSForms.Page
     Set pg = FindPageByCaption(mp, CAP_POSTURE_PAGE)
     If pg Is Nothing Then
         Set pg = mp.Pages.Add
         pg.caption = CAP_POSTURE_PAGE
     End If
-    mp.value = pg.Index   ' ‚±‚Ìƒ^ƒu‚ğ‘O–Ê‚Ö
+    mp.value = pg.Index   ' ã“ã®ã‚¿ãƒ–ã‚’å‰é¢ã¸
 
-    ' ƒtƒŒ[ƒ€æ“¾
+    ' ãƒ•ãƒ¬ãƒ¼ãƒ å–å¾—
     Dim fr As MSForms.Frame: Set fr = FindOrAddFrame(pg, "frPosture")
 
-    ' Šù‘¶‚ğƒNƒŠƒA ¨ s¶¬
+    ' æ—¢å­˜ã‚’ã‚¯ãƒªã‚¢ â†’ è¡Œç”Ÿæˆ
     ClearChildren fr
-    CreatePostureRows fr    ' ƒ‰ƒxƒ‹/ƒRƒ“ƒ{/”õl‚ğì‚éiÀ•W‚Í Layout ‚Å’²®j
+    CreatePostureRows fr    ' ãƒ©ãƒ™ãƒ«/ã‚³ãƒ³ãƒœ/å‚™è€ƒã‚’ä½œã‚‹ï¼ˆåº§æ¨™ã¯ Layout ã§èª¿æ•´ï¼‰
 
-    ' ¶¬’¼Œã‚Éˆê“xƒŒƒCƒAƒEƒg
+    ' ç”Ÿæˆç›´å¾Œã«ä¸€åº¦ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
     LayoutPosture
 End Sub
 
-'\\ ƒ‰ƒxƒ‹•ƒRƒ“ƒ{s{”õl—“‚ğì‚éiˆÊ’u‚Í‚±‚±‚Å‚ÍŒˆ‚ß‚È‚¢j
+'â€•â€• ãƒ©ãƒ™ãƒ«ï¼†ã‚³ãƒ³ãƒœè¡Œï¼‹å‚™è€ƒæ¬„ã‚’ä½œã‚‹ï¼ˆä½ç½®ã¯ã“ã“ã§ã¯æ±ºã‚ãªã„ï¼‰
 Private Sub CreatePostureRows(fr As MSForms.Frame)
     Dim items As Variant:   items = PostureItems()
     Dim choices As Variant: choices = PostureChoices()
 
     Dim i As Long
     For i = LBound(items) To UBound(items)
-        ' ƒ‰ƒxƒ‹
+        ' ãƒ©ãƒ™ãƒ«
         Dim lb As MSForms.label
         Set lb = fr.Controls.Add("Forms.Label.1", "lblPost_" & CStr(i), True)
         lb.caption = CStr(items(i))
 
-        ' ƒRƒ“ƒ{i•Û‘¶/“Ç‚Ég‚¤ Tag ‚ğ•t—^j
+        ' ã‚³ãƒ³ãƒœï¼ˆä¿å­˜/èª­è¾¼ã«ä½¿ã† Tag ã‚’ä»˜ä¸ï¼‰
         Dim cB As MSForms.ComboBox
         Set cB = fr.Controls.Add("Forms.ComboBox.1", "cmbPost_" & CStr(i), True)
         cB.Style = fmStyleDropDownList
         cB.tag = POSTURE_TAG_PREFIX & CStr(items(i))
 
-        ' ‘I‘ğˆ‚Ìİ’èF‹¤’ÊŠÖ”‚ª‚ ‚ê‚Î—DæA–³‚¯‚ê‚ÎƒtƒH[ƒ‹ƒoƒbƒN
+        ' é¸æŠè‚¢ã®è¨­å®šï¼šå…±é€šé–¢æ•°ãŒã‚ã‚Œã°å„ªå…ˆã€ç„¡ã‘ã‚Œã°ãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯
         On Error Resume Next
         SetComboItems cB, choices
         If Err.Number <> 0 Then
@@ -1518,10 +1562,10 @@ Private Sub CreatePostureRows(fr As MSForms.Frame)
         On Error GoTo 0
     Next i
 
-    '\\ ”õlƒ‰ƒxƒ‹{ƒeƒLƒXƒgƒ{ƒbƒNƒXi5s‘Š“–j
+    'â€•â€• å‚™è€ƒãƒ©ãƒ™ãƒ«ï¼‹ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ï¼ˆ5è¡Œç›¸å½“ï¼‰
     Dim lbNote As MSForms.label
     Set lbNote = fr.Controls.Add("Forms.Label.1", "lblPost_Note", True)
-    lbNote.caption = "”õl"
+    lbNote.caption = "å‚™è€ƒ"
 
     Dim txtNote As MSForms.TextBox
     Set txtNote = fr.Controls.Add("Forms.TextBox.1", "txtPost_Note", True)
@@ -1529,12 +1573,12 @@ Private Sub CreatePostureRows(fr As MSForms.Frame)
         .multiline = True
         .EnterKeyBehavior = True
         .ScrollBars = fmScrollBarsVertical
-        .IMEMode = fmIMEModeHiragana   ' © “ú–{Œê“ü—Íi‘SŠpj‚ğ–¾¦
-        .tag = POSTURE_TAG_PREFIX & "”õl"
+        .IMEMode = fmIMEModeHiragana   ' â† æ—¥æœ¬èªå…¥åŠ›ï¼ˆå…¨è§’ï¼‰ã‚’æ˜ç¤º
+        .tag = POSTURE_TAG_PREFIX & "å‚™è€ƒ"
     End With
 End Sub
 
-'\\ ˆÊ’uEƒTƒCƒY’²®iResize –ˆ‚ÉŒÄ‚Ô^Ä¶¬‚µ‚È‚¢j
+'â€•â€• ä½ç½®ãƒ»ã‚µã‚¤ã‚ºèª¿æ•´ï¼ˆResize æ¯ã«å‘¼ã¶ï¼å†ç”Ÿæˆã—ãªã„ï¼‰
 Private Sub LayoutPosture()
     Dim mp As MSForms.MultiPage: Set mp = FindMainMultiPage()
     If mp Is Nothing Then Exit Sub
@@ -1544,14 +1588,14 @@ Private Sub LayoutPosture()
 
     Dim fr As MSForms.Frame: Set fr = FindOrAddFrame(pg, "frPosture")
 
-    ' ƒtƒŒ[ƒ€‚ÌŠî€¡–@iMultiPage ‚ª 0 ‚Ìê‡‚Í Form ‚©‚çƒtƒH[ƒ‹ƒoƒbƒNj
+    ' ãƒ•ãƒ¬ãƒ¼ãƒ ã®åŸºæº–å¯¸æ³•ï¼ˆMultiPage ãŒ 0 ã®å ´åˆã¯ Form ã‹ã‚‰ãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯ï¼‰
     fr.Visible = True
     fr.Left = 6: fr.Top = 6
     fr.Width = Application.Max(120, IIf(mp.Width > 0, mp.Width, Me.InsideWidth) - 12)
     fr.Height = Application.Max(120, IIf(mp.Height > 0, mp.Height, Me.InsideHeight) - 30)
     fr.ZOrder 0
 
-    ' ƒŒƒCƒAƒEƒgi2—ñj
+    ' ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆï¼ˆ2åˆ—ï¼‰
     Dim items As Variant: items = PostureItems()
     Dim cols As Long: cols = POSTURE_COLS
     Dim colW As Single: colW = Application.Max(120, (fr.Width - 24) / cols)
@@ -1582,7 +1626,7 @@ Private Sub LayoutPosture()
         End With
     Next i
 
-    '\\ ”õl‚ÌˆÊ’u‚ÆƒTƒCƒYi5s•ª à –ñ90pxj
+    'â€•â€• å‚™è€ƒã®ä½ç½®ã¨ã‚µã‚¤ã‚ºï¼ˆ5è¡Œåˆ† â‰’ ç´„90pxï¼‰
     Dim noteTop As Single: noteTop = startY + rows * rowH + 10
     With fr.Controls("lblPost_Note")
         .Left = 12
@@ -1594,16 +1638,16 @@ Private Sub LayoutPosture()
         .Left = 12 + 40 + 6
         .Top = noteTop
         .Width = fr.Width - 24 - 46
-        .Height = 90          ' © ‚¾‚¢‚½‚¢5s‘Š“–
+        .Height = 90          ' â† ã ã„ãŸã„5è¡Œç›¸å½“
         .Visible = True
     End With
 
-    ' ƒXƒNƒ[ƒ‹i”õl‚Ì‰º’[‚Ü‚Å‚ğƒJƒo[j
+    ' ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ï¼ˆå‚™è€ƒã®ä¸‹ç«¯ã¾ã§ã‚’ã‚«ãƒãƒ¼ï¼‰
     fr.ScrollBars = fmScrollBarsNone
     fr.ScrollHeight = noteTop + 90 + 12
     If fr.Height < fr.ScrollHeight Then fr.ScrollBars = fmScrollBarsVertical
     
-    ' Call UserForm_Resize  ' NOTE: ’¼ŒÄ‚Ñ‚·‚é‚Æ mpPhys ‚Ì‚‚³‚ªÄŒvZ‚³‚êu‘S‘Ì‚ª’Z‚¢vÄ”­Œ¹‚É‚È‚é‚½‚ß‹Ö~
+    ' Call UserForm_Resize  ' NOTE: ç›´å‘¼ã³ã™ã‚‹ã¨ mpPhys ã®é«˜ã•ãŒå†è¨ˆç®—ã•ã‚Œã€Œå…¨ä½“ãŒçŸ­ã„ã€å†ç™ºæºã«ãªã‚‹ãŸã‚ç¦æ­¢
 
     
     Debug.Print "[init] call phys root"
@@ -1628,7 +1672,7 @@ End Sub
 
 
 '====================
-' ƒwƒ‹ƒp[ŠÖ”
+' ãƒ˜ãƒ«ãƒ‘ãƒ¼é–¢æ•°
 '====================
 
 Private Function RequiredOk() As Boolean
@@ -1675,7 +1719,7 @@ Public Sub UpdateNameSuggest()
 
 
 
-    ' Œó•âƒŠƒXƒgŠm•Û
+    ' å€™è£œãƒªã‚¹ãƒˆç¢ºä¿
     On Error Resume Next
         Dim i As Long
         Set lb = Nothing
@@ -1703,13 +1747,13 @@ Next i
 
     Set ws = ThisWorkbook.Worksheets(EVAL_SHEET_NAME)
 
-    ' –¼—ñiŠù‘¶ƒƒWƒbƒN‚Æ“¯‚¶’T‚µ•ûj
+    ' æ°ååˆ—ï¼ˆæ—¢å­˜ãƒ­ã‚¸ãƒƒã‚¯ã¨åŒã˜æ¢ã—æ–¹ï¼‰
     cName = FindHeaderColLocal(ws, "Basic.Name")
-    If cName = 0 Then cName = FindHeaderColLocal(ws, "–¼")
+    If cName = 0 Then cName = FindHeaderColLocal(ws, "æ°å")
     If cName = 0 Then cName = FindHeaderColLocal(ws, "Name")
     If cName = 0 Then Exit Sub
 
-    ' ID—ñi‚ ‚ê‚Î•¹‹Lj
+    ' IDåˆ—ï¼ˆã‚ã‚Œã°ä½µè¨˜ï¼‰
     cID = FindHeaderColLocal(ws, "Basic.ID")
     If cID = 0 Then cID = FindHeaderColLocal(ws, "ID")
     If cID = 0 Then cID = FindHeaderColLocal(ws, "PID")
@@ -1717,7 +1761,7 @@ Next i
 
     lastRow = ws.Cells(ws.rows.Count, cName).End(xlUp).row
 
-    ' 2—ñ‚É‚µ‚ÄA2—ñ–ÚiIDj‚Í”ñ•\¦‰^—pi•\¦•¶š—ñ‚É•¹‹L‚·‚éj
+    ' 2åˆ—ã«ã—ã¦ã€2åˆ—ç›®ï¼ˆIDï¼‰ã¯éè¡¨ç¤ºé‹ç”¨ï¼ˆè¡¨ç¤ºæ–‡å­—åˆ—ã«ä½µè¨˜ã™ã‚‹ï¼‰
     lb.ColumnCount = 2
     lb.ColumnWidths = CStr(lb.Width - 2) & ";0"
     
@@ -1758,7 +1802,7 @@ Next i
         mDupNameWarned = False
     ElseIf lb.ListCount > 1 Then
        If Not mDupNameWarned Then
-           MsgBox "“¯©“¯–¼‚ÌŒó•â‚ª•¡”‚ ‚è‚Ü‚·B•K—v‚È‚çID‚Åi‚è‚İ‚µ‚Ä‚­‚¾‚³‚¢B", vbInformation
+           MsgBox "åŒå§“åŒåã®å€™è£œãŒè¤‡æ•°ã‚ã‚Šã¾ã™ã€‚å¿…è¦ãªã‚‰IDã§çµã‚Šè¾¼ã¿ã—ã¦ãã ã•ã„ã€‚", vbInformation
            mDupNameWarned = True
       End If
     End If
@@ -1788,7 +1832,7 @@ Private Sub txtAge_Change():  RefreshSaveEnabled: End Sub
 
 
 '========================
-' ƒXƒNƒ[ƒ‹–³‚µ‚ÌƒzƒXƒgƒtƒŒ[ƒ€
+' ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç„¡ã—ã®ãƒ›ã‚¹ãƒˆãƒ•ãƒ¬ãƒ¼ãƒ 
 '========================
 Private Function CreateScrollHost(pg As MSForms.Page) As MSForms.Frame
     Dim host As MSForms.Frame
@@ -1809,7 +1853,7 @@ End Function
 
 
 '========================
-' ƒV[ƒgiEvalDataj ¦frmEvalƒ[ƒJƒ‹”Å
+' ã‚·ãƒ¼ãƒˆï¼ˆEvalDataï¼‰ â€»frmEvalãƒ­ãƒ¼ã‚«ãƒ«ç‰ˆ
 '========================
 Private Function EnsureEvalData() As Worksheet
     Const sh As String = "EvalData"
@@ -1835,22 +1879,22 @@ Private Sub EnsureJapaneseHeaderRow(ws As Worksheet)
         For c = 1 To lastCol
             Select Case CStr(ws.Cells(1, c).value)
                 Case "PatientID":        ws.Cells(2, c).value = "ID"
-                Case "EvalDate":         ws.Cells(2, c).value = "•]‰¿“ú"
-                Case "Basic.Name":       ws.Cells(2, c).value = "–¼"
-                Case "Basic.Age":        ws.Cells(2, c).value = "”N—î"
-                Case "Basic.Gender":     ws.Cells(2, c).value = "«•Ê"
-                Case "Basic.PrimaryDx":  ws.Cells(2, c).value = "åf’f"
-                Case "Basic.OnsetDate":  ws.Cells(2, c).value = "”­Ç“ú"
-                Case "Basic.Living":     ws.Cells(2, c).value = "¶Šˆó‹µ"
-                Case "Basic.CareLevel":  ws.Cells(2, c).value = "—v‰îŒì“x"
-                ' •K—v‚É‰‚¶‚Ä’Ç‰Á
+                Case "EvalDate":         ws.Cells(2, c).value = "è©•ä¾¡æ—¥"
+                Case "Basic.Name":       ws.Cells(2, c).value = "æ°å"
+                Case "Basic.Age":        ws.Cells(2, c).value = "å¹´é½¢"
+                Case "Basic.Gender":     ws.Cells(2, c).value = "æ€§åˆ¥"
+                Case "Basic.PrimaryDx":  ws.Cells(2, c).value = "ä¸»è¨ºæ–­"
+                Case "Basic.OnsetDate":  ws.Cells(2, c).value = "ç™ºç—‡æ—¥"
+                Case "Basic.Living":     ws.Cells(2, c).value = "ç”Ÿæ´»çŠ¶æ³"
+                Case "Basic.CareLevel":  ws.Cells(2, c).value = "è¦ä»‹è­·åº¦"
+                ' å¿…è¦ã«å¿œã˜ã¦è¿½åŠ 
             End Select
         Next
     End If
 End Sub
 
 '========================
-' ’¼‹ßs’TõiPIDj
+' ç›´è¿‘è¡Œæ¢ç´¢ï¼ˆPIDï¼‰
 '========================
 Private Function FindLastRowByPID(ByVal pid As String, ByVal ws As Worksheet) As Long
     Dim colPID As Variant, colDate As Variant, colTS As Variant
@@ -1900,7 +1944,7 @@ Private Function FindLastRowByPID(ByVal pid As String, ByVal ws As Worksheet) As
 End Function
 
 '========================
-' RLA ƒŒƒxƒ‹æ“¾
+' RLA ãƒ¬ãƒ™ãƒ«å–å¾—
 '========================
 Private Function GetRLAGroupLevel(ByVal grp As String) As String
     Dim c As MSForms.Control, p As MSForms.Page, fr As MSForms.Control, ob As MSForms.Control
@@ -1922,7 +1966,7 @@ Private Function GetRLAGroupLevel(ByVal grp As String) As String
 End Function
 
 '========================
-' ûW
+' åé›†
 '========================
 Private Function CollectFormData() As Object
     Dim d As Object: Set d = CreateObject("Scripting.Dictionary")
@@ -1960,7 +2004,7 @@ Private Function CollectFormData() As Object
     d("Basic.Assistive") = AggregateChecks("AssistiveGroup")
     d("Basic.Risks") = AggregateChecks("RiskGroup")
 
-    Dim frames As Collection: Set frames = FindAllFramesByCaptionPart("RLA•àsüŠú")
+    Dim frames As Collection: Set frames = FindAllFramesByCaptionPart("RLAæ­©è¡Œå‘¨æœŸ")
     Dim keys As Variant: keys = Array("IC", "LR", "MSt", "TSt", "PSw", "ISw", "MSw", "TSw")
     Dim f As MSForms.Frame, k As Variant, s As String
     For Each k In keys
@@ -1982,7 +2026,7 @@ Private Sub CollectOne(ByRef d As Object, ByVal ctl As MSForms.Control)
         Case "TextBox", "ComboBox": d(ctl.tag) = ctl.Text
         Case "CheckBox"
             If ctl.tag <> "AssistiveGroup" And ctl.tag <> "RiskGroup" Then
-                d(ctl.tag) = IIf(ctl.value, "—L", "–³")
+                d(ctl.tag) = IIf(ctl.value, "æœ‰", "ç„¡")
             End If
     End Select
 End Sub
@@ -2046,15 +2090,15 @@ Private Function FindAllFramesByCaptionPart(ByVal part As String) As Collection
 End Function
 
 '========================
-' “ü—Íƒ`ƒFƒbƒN
+' å…¥åŠ›ãƒã‚§ãƒƒã‚¯
 '========================
 Private Function CheckRange(frm As Object, ByVal nm As String, ByVal lo As Double, ByVal hi As Double, ByVal message As String, ByRef sb As String) As Boolean
     If Not FnHasControl(nm) Then CheckRange = True: Exit Function
     Dim t As String: t = Trim$(frm.Controls(nm).Text & "")
     If t = "" Then CheckRange = True: Exit Function
-    If Not IsNumeric(t) Then sb = sb & "E" & message & vbCrLf: CheckRange = False: Exit Function
+    If Not IsNumeric(t) Then sb = sb & "ãƒ»" & message & vbCrLf: CheckRange = False: Exit Function
     Dim v As Double: v = CDbl(t)
-    If v < lo Or v > hi Then sb = sb & "E" & message & vbCrLf: CheckRange = False: Exit Function
+    If v < lo Or v > hi Then sb = sb & "ãƒ»" & message & vbCrLf: CheckRange = False: Exit Function
     CheckRange = True
 End Function
 
@@ -2062,28 +2106,28 @@ Private Function ValidateForm(ByRef errmsg As String) As Boolean
     Dim ok As Boolean: ok = True
     Dim sb As String: sb = ""
 
-    If FnHasControl("txtName") Then If Trim$(Me.Controls("txtName").Text) = "" Then ok = False: sb = sb & "E–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B" & vbCrLf
+    If FnHasControl("txtName") Then If Trim$(Me.Controls("txtName").Text) = "" Then ok = False: sb = sb & "ãƒ»æ°åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚" & vbCrLf
     If FnHasControl("txtAge") Then
         If Trim$(Me.Controls("txtAge").Text) = "" Or Not IsNumeric(Me.Controls("txtAge").Text) Then
-            ok = False: sb = sb & "E”N—î‚ğ”’l‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B" & vbCrLf
+            ok = False: sb = sb & "ãƒ»å¹´é½¢ã‚’æ•°å€¤ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚" & vbCrLf
         ElseIf val(Me.Controls("txtAge").Text) < 0 Or val(Me.Controls("txtAge").Text) > 120 Then
-            ok = False: sb = sb & "E”N—î‚Í0`120‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B" & vbCrLf
+            ok = False: sb = sb & "ãƒ»å¹´é½¢ã¯0ï½120ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚" & vbCrLf
         End If
     End If
 
-    ' •]‰¿“úƒ`ƒFƒbƒN
+    ' è©•ä¾¡æ—¥ãƒã‚§ãƒƒã‚¯
     If FnHasControl("txtEDate") Then
         If Not IsDate(Me.Controls("txtEDate").Text) Then
-            ok = False: sb = sb & "E•]‰¿“ú‚ğ³‚µ‚¢“ú•tiyyyy/mm/dd “™j‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B" & vbCrLf
+            ok = False: sb = sb & "ãƒ»è©•ä¾¡æ—¥ã‚’æ­£ã—ã„æ—¥ä»˜ï¼ˆyyyy/mm/dd ç­‰ï¼‰ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚" & vbCrLf
         End If
     End If
 
-    ok = ok And CheckRange(Me, "txtTenMWalk", 0, 300, "10m•àsi•bj‚Í0`300‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", sb)
-    ok = ok And CheckRange(Me, "txtTUG", 0, 300, "TUGi•bj‚Í0`300‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", sb)
-    ok = ok And CheckRange(Me, "txtFiveSTS", 0, 300, "5‰ñ—§‚¿ã‚ª‚èi•bj‚Í0`300‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", sb)
-    ok = ok And CheckRange(Me, "txtSemi", 0, 300, "ƒZƒ~ƒ^ƒ“ƒfƒ€i•bj‚Í0`300‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", sb)
-    ok = ok And CheckRange(Me, "txtGripR", 0, 120, "ˆ¬—Í ‰Eikgj‚Í0`120‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", sb)
-    ok = ok And CheckRange(Me, "txtGripL", 0, 120, "ˆ¬—Í ¶ikgj‚Í0`120‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", sb)
+    ok = ok And CheckRange(Me, "txtTenMWalk", 0, 300, "10mæ­©è¡Œï¼ˆç§’ï¼‰ã¯0ï½300ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", sb)
+    ok = ok And CheckRange(Me, "txtTUG", 0, 300, "TUGï¼ˆç§’ï¼‰ã¯0ï½300ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", sb)
+    ok = ok And CheckRange(Me, "txtFiveSTS", 0, 300, "5å›ç«‹ã¡ä¸ŠãŒã‚Šï¼ˆç§’ï¼‰ã¯0ï½300ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", sb)
+    ok = ok And CheckRange(Me, "txtSemi", 0, 300, "ã‚»ãƒŸã‚¿ãƒ³ãƒ‡ãƒ ï¼ˆç§’ï¼‰ã¯0ï½300ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", sb)
+    ok = ok And CheckRange(Me, "txtGripR", 0, 120, "æ¡åŠ› å³ï¼ˆkgï¼‰ã¯0ï½120ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", sb)
+    ok = ok And CheckRange(Me, "txtGripL", 0, 120, "æ¡åŠ› å·¦ï¼ˆkgï¼‰ã¯0ï½120ã§å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", sb)
 
     errmsg = IIf(ok, "", sb)
     ValidateForm = ok
@@ -2097,7 +2141,7 @@ End Sub
 
 
 
-'=== frmEvalF‘O‰ñ“Çƒ{ƒ^ƒ“ Š®‘S“\‚è‘Ö‚¦ ============================
+'=== frmEvalï¼šå‰å›èª­è¾¼ãƒœã‚¿ãƒ³ å®Œå…¨è²¼ã‚Šæ›¿ãˆ ============================
 Private Sub btnLoadPrevCtl_Click()
 
 Me.Controls("txtName").Text = Me.Controls("txtHdrName").Text
@@ -2108,7 +2152,7 @@ On Error Resume Next
 pname = Trim$(Me.Controls("txtName").Text)
 On Error GoTo 0
 If Len(pname) = 0 Then
-    MsgBox "–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", vbExclamation
+    MsgBox "æ°åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", vbExclamation
     Exit Sub
 End If
 
@@ -2122,7 +2166,7 @@ look("IO_ADL") = HeaderCol_Compat("IO_ADL", ws)
 look("IO_MMT") = HeaderCol_Compat("IO_MMT", ws)
 look("IO_Tone") = HeaderCol_Compat("IO_Tone", ws)
 
-' ROM‚Í•¡”—ñ‚Ì‚½‚ßŸè‚Å•Êˆ—
+' ROMã¯è¤‡æ•°åˆ—ã®ãŸã‚æ¬¡æ‰‹ã§åˆ¥å‡¦ç†
 
 
 Dim r As Long
@@ -2164,19 +2208,19 @@ Me.Repaint
 End Sub
 
 
-' ‰º‚©‚ç‘k‚Á‚Ä–¼ˆê’v‚ÌuÅV?Å‘å5Œv‚ğW‚ßA
-' Œ”=1‚È‚ç‚»‚ê‚ğ•Ô‚µA2ˆÈã‚È‚ç”Ô†‘I‘ğ‚ÌInputBox‚ğo‚·
+' ä¸‹ã‹ã‚‰é¡ã£ã¦æ°åä¸€è‡´ã®ã€Œæœ€æ–°?æœ€å¤§5ä»¶ã€ã‚’é›†ã‚ã€
+' ä»¶æ•°=1ãªã‚‰ãã‚Œã‚’è¿”ã—ã€2ä»¥ä¸Šãªã‚‰ç•ªå·é¸æŠã®InputBoxã‚’å‡ºã™
 Private Function FindRowByNameWithPickLocal(ws As Worksheet, nameText As String, Optional maxCount As Long = 5) As Long
     Dim colName As Long, colDate As Long
-    colName = modEvalIOEntry.FindColByHeaderExact(ws, "–¼")
-    If colName = 0 Then colName = modEvalIOEntry.FindColByHeaderExact(ws, "—˜—pÒ–¼")
-    If colName = 0 Then colName = modEvalIOEntry.FindColByHeaderExact(ws, "–¼‘O")
+    colName = modEvalIOEntry.FindColByHeaderExact(ws, "æ°å")
+    If colName = 0 Then colName = modEvalIOEntry.FindColByHeaderExact(ws, "åˆ©ç”¨è€…å")
+    If colName = 0 Then colName = modEvalIOEntry.FindColByHeaderExact(ws, "åå‰")
     If colName = 0 Then Exit Function
 
-    colDate = modEvalIOEntry.FindColByHeaderExact(ws, "•]‰¿“ú")
-    If colDate = 0 Then colDate = modEvalIOEntry.FindColByHeaderExact(ws, "‹L˜^“ú")
-    If colDate = 0 Then colDate = modEvalIOEntry.FindColByHeaderExact(ws, "XV“ú")
-    If colDate = 0 Then colDate = modEvalIOEntry.FindColByHeaderExact(ws, "ì¬“ú")
+    colDate = modEvalIOEntry.FindColByHeaderExact(ws, "è©•ä¾¡æ—¥")
+    If colDate = 0 Then colDate = modEvalIOEntry.FindColByHeaderExact(ws, "è¨˜éŒ²æ—¥")
+    If colDate = 0 Then colDate = modEvalIOEntry.FindColByHeaderExact(ws, "æ›´æ–°æ—¥")
+    If colDate = 0 Then colDate = modEvalIOEntry.FindColByHeaderExact(ws, "ä½œæˆæ—¥")
 
     Dim lastRow As Long: lastRow = ws.Cells(ws.rows.Count, colName).End(xlUp).row
     Dim rows() As Long, cnt As Long, r As Long
@@ -2203,7 +2247,7 @@ Private Function FindRowByNameWithPickLocal(ws As Worksheet, nameText As String,
             If IsDate(d) Then
                 disp = disp & i & ") " & Format$(d, "yyyy-mm-dd") & "   Row:" & rows(i) & vbCrLf
             Else
-                disp = disp & i & ") i“ú•t‚È‚µj  Row:" & rows(i) & vbCrLf
+                disp = disp & i & ") ï¼ˆæ—¥ä»˜ãªã—ï¼‰  Row:" & rows(i) & vbCrLf
             End If
         Else
             disp = disp & i & ") Row:" & rows(i) & vbCrLf
@@ -2212,8 +2256,8 @@ Private Function FindRowByNameWithPickLocal(ws As Worksheet, nameText As String,
 
     Dim idx As Variant
     idx = Application.InputBox( _
-            Prompt:="“¯©“¯–¼‚Ì’¼‹ß" & cnt & "ŒiÅV¨ŒÃ‚¢j:" & vbCrLf & disp & vbCrLf & _
-                    "”Ô†‚ğ“ü—Íi1-" & cnt & "AƒLƒƒƒ“ƒZƒ‹=’†~j", _
+            Prompt:="åŒå§“åŒåã®ç›´è¿‘" & cnt & "ä»¶ï¼ˆæœ€æ–°â†’å¤ã„ï¼‰:" & vbCrLf & disp & vbCrLf & _
+                    "ç•ªå·ã‚’å…¥åŠ›ï¼ˆ1-" & cnt & "ã€ã‚­ãƒ£ãƒ³ã‚»ãƒ«=ä¸­æ­¢ï¼‰", _
             Type:=1)
     If idx = False Then Exit Function
     If idx >= 1 And idx <= cnt Then
@@ -2223,7 +2267,7 @@ End Function
 
 
 
-'=== Œó•âˆê——‚ğ•\¦‚µ‚Ä”Ô†“ü—Í‚Å1‚Â‘I‚ñ‚Å‚à‚ç‚¤ ======================
+'=== å€™è£œä¸€è¦§ã‚’è¡¨ç¤ºã—ã¦ç•ªå·å…¥åŠ›ã§1ã¤é¸ã‚“ã§ã‚‚ã‚‰ã† ======================
 Public Function PickCandidateRowByNameLocal(ByVal ws As Worksheet, _
                                              ByVal look As Object, _
                                              ByVal candidates As Variant, _
@@ -2236,11 +2280,11 @@ Public Function PickCandidateRowByNameLocal(ByVal ws As Worksheet, _
     If Not IsArray(candidates) Then Exit Function
 
     Dim pidCol As Long, ageCol As Long, dtCol As Long
-    pidCol = RCol(ws, look, "Basic.ID", "ID", "ŒÂlID")
-ageCol = RCol(ws, look, "Basic.Age", "”N—î")
-dtCol = RCol(ws, look, "Basic.EvalDate", "•]‰¿“ú", "‹L˜^“ú", "XV“ú", "ì¬“ú")
+    pidCol = RCol(ws, look, "Basic.ID", "ID", "å€‹äººID")
+ageCol = RCol(ws, look, "Basic.Age", "å¹´é½¢")
+dtCol = RCol(ws, look, "Basic.EvalDate", "è©•ä¾¡æ—¥", "è¨˜éŒ²æ—¥", "æ›´æ–°æ—¥", "ä½œæˆæ—¥")
 
-    If dtCol = 0 Then dtCol = ResolveColumnLocal(look, "•]‰¿“ú")
+    If dtCol = 0 Then dtCol = ResolveColumnLocal(look, "è©•ä¾¡æ—¥")
     If dtCol = 0 Then dtCol = ResolveColumnLocal(look, "EvalDate")
 
     Dim lb As Long, ub As Long, cnt As Long
@@ -2250,7 +2294,7 @@ dtCol = RCol(ws, look, "Basic.EvalDate", "•]‰¿“ú", "‹L˜^“ú", "XV“ú", "ì¬“ú")
 
 
     Dim i As Long, r As Long, msg As String, disp As Long
-    msg = "“¯©“¯–¼‚ªŒ©‚Â‚©‚è‚Ü‚µ‚½B“Ç‚İ‚Şƒf[ƒ^‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢i”Ô†‚ğ“ü—ÍjB" & vbCrLf & vbCrLf
+    msg = "åŒå§“åŒåãŒè¦‹ã¤ã‹ã‚Šã¾ã—ãŸã€‚èª­ã¿è¾¼ã‚€ãƒ‡ãƒ¼ã‚¿ã‚’é¸æŠã—ã¦ãã ã•ã„ï¼ˆç•ªå·ã‚’å…¥åŠ›ï¼‰ã€‚" & vbCrLf & vbCrLf
     For i = lb To ub
         r = candidates(i)
         disp = i - lb + 1
@@ -2262,20 +2306,20 @@ dtCol = RCol(ws, look, "Basic.EvalDate", "•]‰¿“ú", "‹L˜^“ú", "XV“ú", "ì¬“ú")
                 msg = msg & CStr(ws.Cells(r, dtCol).value)
             End If
         Else
-            msg = msg & "(•]‰¿“ú‚È‚µ)"
+            msg = msg & "(è©•ä¾¡æ—¥ãªã—)"
         End If
-        If ageCol > 0 Then msg = msg & " | ”N—î:" & Trim$(CStr(ws.Cells(r, ageCol).value))
+        If ageCol > 0 Then msg = msg & " | å¹´é½¢:" & Trim$(CStr(ws.Cells(r, ageCol).value))
         If pidCol > 0 Then msg = msg & " | ID:" & Trim$(CStr(ws.Cells(r, pidCol).value))
         msg = msg & vbCrLf
     Next i
 
-   ' “ü—Íæ“¾i”’l‚Ì‚İj
+   ' å…¥åŠ›å–å¾—ï¼ˆæ•°å€¤ã®ã¿ï¼‰
 Dim sel As Variant
-sel = Application.InputBox(msg, "Œó•â‘I‘ğ - " & pname, Type:=1)
+sel = Application.InputBox(msg, "å€™è£œé¸æŠ - " & pname, Type:=1)
 
-' Cancel / ƒGƒ‰[ / ”ñ”’l / ‹ó ‚ğ’e‚­i’Z—‚Å”»’èj
+' Cancel / ã‚¨ãƒ©ãƒ¼ / éæ•°å€¤ / ç©º ã‚’å¼¾ãï¼ˆçŸ­çµ¡ã§åˆ¤å®šï¼‰
 If VarType(sel) = vbBoolean Then Exit Function   ' Cancel
-If IsError(sel) Then Exit Function               ' ‚Ü‚ê‚É CVErr
+If IsError(sel) Then Exit Function               ' ã¾ã‚Œã« CVErr
 If Not IsNumeric(sel) Then Exit Function
 If Len(CStr(sel)) = 0 Then Exit Function
 
@@ -2308,7 +2352,7 @@ End Sub
 
 
 
-'=== ‚±‚±‚©‚ç•â•ŠÖ”ŒQifrmEval ƒ[ƒJƒ‹j ============================
+'=== ã“ã“ã‹ã‚‰è£œåŠ©é–¢æ•°ç¾¤ï¼ˆfrmEval ãƒ­ãƒ¼ã‚«ãƒ«ï¼‰ ============================
 Private Function FxGetText(ByVal ctrlName As String) As String
     On Error Resume Next
     FxGetText = Trim$(Me.Controls(ctrlName).Text)
@@ -2400,14 +2444,14 @@ Private Function FindLastRowByPIDLocal(ByVal ws As Worksheet, ByVal look As Obje
     FindLastRowByPIDLocal = pick
 End Function
 
-'=== –¼‚ÅÅVs‚ğ’T‚·iID”Å‚ÌŠ®‘SŒİŠ·ƒƒWƒbƒNj =====================
+'=== æ°åã§æœ€æ–°è¡Œã‚’æ¢ã™ï¼ˆIDç‰ˆã®å®Œå…¨äº’æ›ãƒ­ã‚¸ãƒƒã‚¯ï¼‰ =====================
 Private Function FindLastRowByNameLocal(ByVal ws As Worksheet, _
                                         ByVal look As Object, _
                                         ByVal pname As String) As Long
-    ' Œ©o‚µ‚Ì—ñˆÊ’ui–³‚¯‚ê‚Îì¬‚µ‚Ä‘µ‚¦‚éFID”Å‚Æ“¯‚¶•ûjj
-    Dim nameCol As Long: nameCol = ResolveColOrCreate(ws, look, "Basic.Name", "–¼", "Name")
+    ' è¦‹å‡ºã—ã®åˆ—ä½ç½®ï¼ˆç„¡ã‘ã‚Œã°ä½œæˆã—ã¦æƒãˆã‚‹ï¼šIDç‰ˆã¨åŒã˜æ–¹é‡ï¼‰
+    Dim nameCol As Long: nameCol = ResolveColOrCreate(ws, look, "Basic.Name", "æ°å", "Name")
     Dim tsCol As Long:   tsCol = ResolveColOrCreate(ws, look, "Timestamp")
-    Dim dtCol As Long:   dtCol = ResolveColOrCreate(ws, look, "Basic.EvalDate", "•]‰¿“ú", "EvalDate")
+    Dim dtCol As Long:   dtCol = ResolveColOrCreate(ws, look, "Basic.EvalDate", "è©•ä¾¡æ—¥", "EvalDate")
 
     Dim lastRow As Long: lastRow = ws.Cells(ws.rows.Count, nameCol).End(xlUp).row
     Dim r As Long, pick As Long, best As Date, curTs As Date, curDt As Date
@@ -2446,11 +2490,11 @@ Private Function NormalizeKeyLocal(ByVal s As String) As String
     s = Trim$(s)
     s = Replace(s, vbCr, " ")
     s = Replace(s, vbLf, " ")
-    s = Replace(s, "@", " ")
+    s = Replace(s, "ã€€", " ")
     Do While InStr(s, "  ") > 0: s = Replace(s, "  ", " "): Loop
     NormalizeKeyLocal = LCase$(s)
 End Function
-'=== •â•ŠÖ”ŒQ ‚±‚±‚Ü‚Å ===============================================
+'=== è£œåŠ©é–¢æ•°ç¾¤ ã“ã“ã¾ã§ ===============================================
 
 Private Sub btnCloseCtl_Click()
 
@@ -2470,7 +2514,7 @@ Private Sub SetImeRecursive(container As Object)
 
             Case "MultiPage"
                 Dim p As MSForms.Page
-                For Each p In ctl.Pages          ' š Pages ‚ğ—ñ‹“‚·‚é‚Ì‚ªd—v
+                For Each p In ctl.Pages          ' â˜… Pages ã‚’åˆ—æŒ™ã™ã‚‹ã®ãŒé‡è¦
                     SetImeRecursive p
                 Next
         End Select
@@ -2480,13 +2524,13 @@ End Sub
 Private Sub FixRestNRS_Once()
     Dim l As Control, c As Control
     On Error Resume Next
-    Set c = Me.Controls("cmbNRS_Move")                  ' “®ìNRS‚ÌƒRƒ“ƒ{
+    Set c = Me.Controls("cmbNRS_Move")                  ' å‹•ä½œæ™‚NRSã®ã‚³ãƒ³ãƒœ
     If c Is Nothing Then Exit Sub
 
-    ' ‹ß‚¢‚‚³‚É‚ ‚éƒ‰ƒxƒ‹‚ğ’T‚·iŒ©‚Â‚©‚ç‚È‚¯‚ê‚ÎV‹K‚Éì‚éj
+    ' è¿‘ã„é«˜ã•ã«ã‚ã‚‹ãƒ©ãƒ™ãƒ«ã‚’æ¢ã™ï¼ˆè¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°æ–°è¦ã«ä½œã‚‹ï¼‰
     For Each l In Me.Controls
         If TypeName(l) = "Label" Then
-            If l.caption = "ˆÀÃNRS" Or (Abs(l.Top - c.Top) <= 20 And l.Left < c.Left) Then
+            If l.caption = "å®‰é™æ™‚NRS" Or (Abs(l.Top - c.Top) <= 20 And l.Left < c.Left) Then
                 Exit For
             End If
         End If
@@ -2495,8 +2539,8 @@ Private Sub FixRestNRS_Once()
         Set l = c.parent.Controls.Add("Forms.Label.1", "lblNRS_Rest", True)
     End If
 
-    ' •\¦EˆÊ’uEƒTƒCƒY‚ğŠm’è
-    l.caption = "ˆÀÃNRS"
+    ' è¡¨ç¤ºãƒ»ä½ç½®ãƒ»ã‚µã‚¤ã‚ºã‚’ç¢ºå®š
+    l.caption = "å®‰é™æ™‚NRS"
     l.Visible = True
     l.WordWrap = False
     l.Width = 72
@@ -2514,11 +2558,11 @@ End Sub
 
 
 
-'=== ’Ç‰ÁFMultiPage‚ÌŠù’èƒy[ƒW‚ğ‘|œi"Page*" ‚ğ‘S•”íœj ===
+'=== è¿½åŠ ï¼šMultiPageã®æ—¢å®šãƒšãƒ¼ã‚¸ã‚’æƒé™¤ï¼ˆ"Page*" ã‚’å…¨éƒ¨å‰Šé™¤ï¼‰ ===
 Private Sub CleanDefaultPages(mp As MSForms.MultiPage)
     On Error Resume Next
     Dim i As Long
-    ' ƒLƒƒƒvƒVƒ‡ƒ“‚ª "Page" ‚Ån‚Ü‚éƒy[ƒW‚ğŒã‚ë‚©‚çíœ
+    ' ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ãŒ "Page" ã§å§‹ã¾ã‚‹ãƒšãƒ¼ã‚¸ã‚’å¾Œã‚ã‹ã‚‰å‰Šé™¤
     For i = mp.Pages.Count - 1 To 0 Step -1
         If Left$(mp.Pages(i).caption, 4) = "Page" Then
             mp.Pages.Remove i
@@ -2527,7 +2571,7 @@ Private Sub CleanDefaultPages(mp As MSForms.MultiPage)
 End Sub
 
 
-' w’èƒLƒƒƒvƒVƒ‡ƒ“‚Ìƒ{ƒ^ƒ“‚ğÄ‹A‚Å’T‚·
+' æŒ‡å®šã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã®ãƒœã‚¿ãƒ³ã‚’å†å¸°ã§æ¢ã™
 Private Function FindButtonByCaption(container As Object, ByVal cap As String) As MSForms.CommandButton
     Dim c As Object, hit As MSForms.CommandButton
     For Each c In container.Controls
@@ -2549,22 +2593,22 @@ Private Sub HookHeaderButtons()
     Set btnHdrSave = Nothing
     Set btnHdrLoadPrev = Nothing
 
-    ' ‚Ü‚¸ƒLƒƒƒvƒVƒ‡ƒ“•”•ªˆê’v‚Å
-    '=== ‚Ü‚¸ƒLƒƒƒvƒVƒ‡ƒ“ˆê’vi’è”‚ÅŒµ–§‚Éj ===
-Const CAP_SAVE As String = "ƒV[ƒg‚Ö•Û‘¶"          ' © cap=[ ] ‚Ì’†g‚¾‚¯
-Const CAP_LOAD As String = "‘O‰ñ‚Ì’l‚ğ“Ç‚İ‚Ş"    ' © cap=[ ] ‚Ì’†g‚¾‚¯
+    ' ã¾ãšã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³éƒ¨åˆ†ä¸€è‡´ã§
+    '=== ã¾ãšã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ä¸€è‡´ï¼ˆå®šæ•°ã§å³å¯†ã«ï¼‰ ===
+Const CAP_SAVE As String = "ã‚·ãƒ¼ãƒˆã¸ä¿å­˜"          ' â† cap=[ ] ã®ä¸­èº«ã ã‘
+Const CAP_LOAD As String = "å‰å›ã®å€¤ã‚’èª­ã¿è¾¼ã‚€"    ' â† cap=[ ] ã®ä¸­èº«ã ã‘
 
-Debug.Print "[TEST] •Û‘¶like:", TypeName(FindButtonByCaptionLike(Me, "•Û‘¶"))
-Debug.Print "[TEST] “Ç‚İlike:", TypeName(FindButtonByCaptionLike(Me, "“Ç‚İ"))
+Debug.Print "[TEST] ä¿å­˜like:", TypeName(FindButtonByCaptionLike(Me, "ä¿å­˜"))
+Debug.Print "[TEST] èª­ã¿è¾¼like:", TypeName(FindButtonByCaptionLike(Me, "èª­ã¿è¾¼"))
 
 
 Set btnHdrSave = FindButtonByCaptionLike(Me, CAP_SAVE)
 Set btnHdrLoadPrev = FindButtonByCaptionLike(Me, CAP_LOAD)
 
 
-    If btnHdrLoadPrev Is Nothing Then Set btnHdrLoadPrev = FindButtonByCaptionLike(Me, "“Ç")
+    If btnHdrLoadPrev Is Nothing Then Set btnHdrLoadPrev = FindButtonByCaptionLike(Me, "èª­")
 
-    ' Œ©‚Â‚©‚ç‚È‚¯‚ê‚ÎÅã’i‚Ì‰E‘¤‚Q‚Â‚ğÌ—p
+    ' è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°æœ€ä¸Šæ®µã®å³å´ï¼’ã¤ã‚’æ¡ç”¨
     If (btnHdrSave Is Nothing) Or (btnHdrLoadPrev Is Nothing) Then
         FindHeaderButtonsByPosition Me, btnHdrSave, btnHdrLoadPrev
     End If
@@ -2577,7 +2621,7 @@ End Sub
 
 
 
-'=== ƒ{ƒ^ƒ“‚ğƒLƒƒƒvƒVƒ‡ƒ“•”•ªˆê’v‚Å’T‚·iFrame/MultiPage/Page ‚ğÄ‹Aj===
+'=== ãƒœã‚¿ãƒ³ã‚’ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³éƒ¨åˆ†ä¸€è‡´ã§æ¢ã™ï¼ˆFrame/MultiPage/Page ã‚’å†å¸°ï¼‰===
 Public Function FindButtonByCaptionLike(container As Object, _
                                         ByVal needle As String) As Object
     On Error GoTo SafeExit
@@ -2586,7 +2630,7 @@ Public Function FindButtonByCaptionLike(container As Object, _
     Dim pg As MSForms.Page
     Dim hit As Object
 
-    ' MultiPage ‚Í Pages Œo—R‚Åö‚éi‚±‚±‚ªd—vj
+    ' MultiPage ã¯ Pages çµŒç”±ã§æ½œã‚‹ï¼ˆã“ã“ãŒé‡è¦ï¼‰
     If TypeName(container) = "MultiPage" Then
         For Each pg In container.Pages
             Set hit = FindButtonByCaptionLike(pg, needle)
@@ -2598,7 +2642,7 @@ Public Function FindButtonByCaptionLike(container As Object, _
         Exit Function
     End If
 
-    ' ‚»‚êˆÈŠO‚Í Controls ‚ğ‘–¸
+    ' ãã‚Œä»¥å¤–ã¯ Controls ã‚’èµ°æŸ»
     For Each c In container.Controls
         If TypeName(c) = "CommandButton" Then
             If InStr(Replace$(c.caption, vbCrLf, ""), needle) > 0 Then
@@ -2618,12 +2662,12 @@ SafeExit:
 End Function
 
 
-'=== ˆÊ’u‚Åƒwƒbƒ_s‚Ìƒ{ƒ^ƒ“‚ğE‚¤iÅã’i‚Ì‰E‘¤ 2 ŒÂ‚ğÌ—pj===
+'=== ä½ç½®ã§ãƒ˜ãƒƒãƒ€è¡Œã®ãƒœã‚¿ãƒ³ã‚’æ‹¾ã†ï¼ˆæœ€ä¸Šæ®µã®å³å´ 2 å€‹ã‚’æ¡ç”¨ï¼‰===
 Private Sub GatherButtons(container As Object, ByRef arr As Collection)
     Dim c  As Object
     Dim pg As MSForms.Page
 
-    ' MultiPage ‚Í Pages ‚ğÄ‹A
+    ' MultiPage ã¯ Pages ã‚’å†å¸°
     If TypeName(container) = "MultiPage" Then
         For Each pg In container.Pages
             GatherButtons pg, arr
@@ -2631,7 +2675,7 @@ Private Sub GatherButtons(container As Object, ByRef arr As Collection)
         Exit Sub
     End If
 
-    ' ‚»‚êˆÈŠO‚Í Controls
+    ' ãã‚Œä»¥å¤–ã¯ Controls
     For Each c In container.Controls
         If TypeName(c) = "CommandButton" Then arr.Add c
         If TypeName(c) = "Frame" Or TypeName(c) = "Page" Then
@@ -2654,15 +2698,15 @@ Private Sub FindHeaderButtonsByPosition(container As Object, _
 
     Dim cand As New Collection
     For i = 1 To arr.Count
-        If arr(i).Top <= minTop + 10 Then cand.Add arr(i)   'Åã’i}10px
+        If arr(i).Top <= minTop + 10 Then cand.Add arr(i)   'æœ€ä¸Šæ®µÂ±10px
     Next
-    ' ƒL[ƒ[ƒh‚Å—Dæ”»’è
+    ' ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã§å„ªå…ˆåˆ¤å®š
     For i = 1 To cand.Count
         Dim cap As String: cap = Replace(CStr(cand(i).caption), vbCrLf, "")
-        If InStr(cap, "•Û‘¶") > 0 Then Set bSave = cand(i)
-        If InStr(cap, "“Ç") > 0 Or InStr(cap, "") > 0 Then Set bLoad = cand(i)
+        If InStr(cap, "ä¿å­˜") > 0 Then Set bSave = cand(i)
+        If InStr(cap, "èª­") > 0 Or InStr(cap, "è¾¼") > 0 Then Set bLoad = cand(i)
     Next
-    ' ‚Ü‚¾‹ó‚¢‚Ä‚¢‚½‚ç‰E‘¤‚Q‚Â‚ğŠ„‚è“–‚Ä
+    ' ã¾ã ç©ºã„ã¦ã„ãŸã‚‰å³å´ï¼’ã¤ã‚’å‰²ã‚Šå½“ã¦
     Dim right1 As MSForms.CommandButton, right2 As MSForms.CommandButton
     For i = 1 To cand.Count
         If right1 Is Nothing Or cand(i).Left > right1.Left Then
@@ -2678,18 +2722,18 @@ End Sub
 
 
 
-'=== ˆê——‚ğo‚·“üŒûiŒöŠJj ===
+'=== ä¸€è¦§ã‚’å‡ºã™å…¥å£ï¼ˆå…¬é–‹ï¼‰ ===
 Public Sub Debug_ListButtons()
     DumpButtonsProc Me
 End Sub
 
-'=== ƒ{ƒ^ƒ“—ñ‹“iMultiPage‘Î‰”Åj ===
+'=== ãƒœã‚¿ãƒ³åˆ—æŒ™ï¼ˆMultiPageå¯¾å¿œç‰ˆï¼‰ ===
 Private Sub DumpButtonsProc(container As Object)
     Dim c As Control
     Dim pg As MSForms.Page
 
     If TypeName(container) = "MultiPage" Then
-        'MultiPage ‚Í Pages ”z‰º‚ğ‰ñ‚·
+        'MultiPage ã¯ Pages é…ä¸‹ã‚’å›ã™
         For Each pg In container.Pages
             For Each c In pg.Controls
                 If TypeName(c) = "CommandButton" Then
@@ -2702,7 +2746,7 @@ Private Sub DumpButtonsProc(container As Object)
             Next
         Next
     Else
-        '’Êí‚ÌƒRƒ“ƒeƒiiUserForm / Frame / Page ‚È‚Çj
+        'é€šå¸¸ã®ã‚³ãƒ³ãƒ†ãƒŠï¼ˆUserForm / Frame / Page ãªã©ï¼‰
         For Each c In container.Controls
             If TypeName(c) = "CommandButton" Then
                 Debug.Print "Type=CommandButton, cap=[" & c.caption & _
@@ -2717,78 +2761,78 @@ End Sub
 
 
 
-' ========= ‚±‚±‚©‚ç“\‚éicmdLoadPrev_Click ‘S‘Ìj=========
+' ========= ã“ã“ã‹ã‚‰è²¼ã‚‹ï¼ˆcmdLoadPrev_Click å…¨ä½“ï¼‰=========
 Private Sub cmdLoadPrev_Click()
 Debug.Print "[ENTER] cmdLoadPrev_Click", Timer
 
 
     Dim ws As Worksheet: Set ws = modSchema.GetEvalDataSheet()
 
-    ' 1) –¼‚ğƒtƒH[ƒ€‚©‚çæ“¾iƒ‰ƒxƒ‹E‚¢j
+    ' 1) æ°åã‚’ãƒ•ã‚©ãƒ¼ãƒ ã‹ã‚‰å–å¾—ï¼ˆãƒ©ãƒ™ãƒ«æ‹¾ã„ï¼‰
     Dim frm As MSForms.Frame
     Dim pname As String
     Set frm = modEvalIOEntry.GetBasicInfoFrame(Me)
-    pname = GetTextByLabelInFrame(frm, "–¼")
+    pname = GetTextByLabelInFrame(frm, "æ°å")
     If Trim$(pname) = "" Then
-        MsgBox "–¼‚ª‹ó‚Å‚·B“Ç‚İ‚ß‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "æ°åãŒç©ºã§ã™ã€‚èª­ã¿è¾¼ã‚ã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
 
-    ' 2) QÆ—ñ‚ğ€”õi‘¶İ‚·‚ê‚Îg‚¤B‚È‚¯‚ê‚ÎƒXƒLƒbƒv‚ÅOKj
+    ' 2) å‚ç…§åˆ—ã‚’æº–å‚™ï¼ˆå­˜åœ¨ã™ã‚Œã°ä½¿ã†ã€‚ãªã‘ã‚Œã°ã‚¹ã‚­ãƒƒãƒ—ã§OKï¼‰
     Dim look As Object: Set look = CreateObject("Scripting.Dictionary")
     look.CompareMode = 1
-   ' --- Œ©o‚µ‚Ì—ñˆÊ’u‚ğ look ‚É’¼‘‚«‚Å“ü‚ê‚éi–¢’è‹`ŠÖ”‚Íg‚í‚È‚¢j ---
+   ' --- è¦‹å‡ºã—ã®åˆ—ä½ç½®ã‚’ look ã«ç›´æ›¸ãã§å…¥ã‚Œã‚‹ï¼ˆæœªå®šç¾©é–¢æ•°ã¯ä½¿ã‚ãªã„ï¼‰ ---
 look.RemoveAll
 look.CompareMode = 1  ' vbTextCompare
 
-' –¼
+' æ°å
 look("Basic.Name") = modEvalIOEntry.FindColByHeaderExact(ws, "Basic.Name")
-If look("Basic.Name") = 0 Then look("Basic.Name") = modEvalIOEntry.FindColByHeaderExact(ws, "–¼")
+If look("Basic.Name") = 0 Then look("Basic.Name") = modEvalIOEntry.FindColByHeaderExact(ws, "æ°å")
 If look("Basic.Name") = 0 Then look("Basic.Name") = modEvalIOEntry.FindColByHeaderExact(ws, "Name")
 
-' IDiŒó•â•\¦—p‚Ég‚¤‚¾‚¯j
+' IDï¼ˆå€™è£œè¡¨ç¤ºç”¨ã«ä½¿ã†ã ã‘ï¼‰
 look("Basic.ID") = modEvalIOEntry.FindColByHeaderExact(ws, "Basic.ID")
 If look("Basic.ID") = 0 Then look("Basic.ID") = modEvalIOEntry.FindColByHeaderExact(ws, "BasicInfo_ID")
 If look("Basic.ID") = 0 Then look("Basic.ID") = modEvalIOEntry.FindColByHeaderExact(ws, "ID")
 
-' ”N—îiŒó•â•\¦—pj
+' å¹´é½¢ï¼ˆå€™è£œè¡¨ç¤ºç”¨ï¼‰
 look("Basic.Age") = modEvalIOEntry.FindColByHeaderExact(ws, "Basic.Age")
-If look("Basic.Age") = 0 Then look("Basic.Age") = modEvalIOEntry.FindColByHeaderExact(ws, "”N—î")
+If look("Basic.Age") = 0 Then look("Basic.Age") = modEvalIOEntry.FindColByHeaderExact(ws, "å¹´é½¢")
 If look("Basic.Age") = 0 Then look("Basic.Age") = modEvalIOEntry.FindColByHeaderExact(ws, "Age")
 
-' •]‰¿“úiŒó•â•\¦—pj
+' è©•ä¾¡æ—¥ï¼ˆå€™è£œè¡¨ç¤ºç”¨ï¼‰
 look("Basic.EvalDate") = modEvalIOEntry.FindColByHeaderExact(ws, "Basic.EvalDate")
-If look("Basic.EvalDate") = 0 Then look("Basic.EvalDate") = modEvalIOEntry.FindColByHeaderExact(ws, "•]‰¿“ú")
+If look("Basic.EvalDate") = 0 Then look("Basic.EvalDate") = modEvalIOEntry.FindColByHeaderExact(ws, "è©•ä¾¡æ—¥")
 If look("Basic.EvalDate") = 0 Then look("Basic.EvalDate") = modEvalIOEntry.FindColByHeaderExact(ws, "EvalDate")
 
 
-    ' 3) –¼‘O‚Å’Tõi•¡”‚È‚çŒó•â”Ô†‚ğ‘I‚Î‚¹‚éj
-  ' ‡B –¼‘O‚Ås”Ô†‚ğ“Á’è
+    ' 3) åå‰ã§æ¢ç´¢ï¼ˆè¤‡æ•°ãªã‚‰å€™è£œç•ªå·ã‚’é¸ã°ã›ã‚‹ï¼‰
+  ' â‘¢ åå‰ã§è¡Œç•ªå·ã‚’ç‰¹å®š
 Dim r As Long
 r = FindRowByNameWithPickLocal(ws, pname)
 
 
 If r <= 0 Then
-    MsgBox "‘O‰ñ‚Ì’l‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbInformation
+    MsgBox "å‰å›ã®å€¤ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbInformation
     Exit Sub
 End If
 
-' š–¼ˆê’vƒK[ƒhi‘I‘ğs‚ª“ü—Í–¼‚Æˆê’v‚µ‚È‚¯‚ê‚Î’†~j
+' â˜…æ°åä¸€è‡´ã‚¬ãƒ¼ãƒ‰ï¼ˆé¸æŠè¡ŒãŒå…¥åŠ›åã¨ä¸€è‡´ã—ãªã‘ã‚Œã°ä¸­æ­¢ï¼‰
 Dim cName As Long
-cName = modEvalIOEntry.FindColByHeaderExact(ws, "–¼")
-If cName = 0 Then cName = modEvalIOEntry.FindColByHeaderExact(ws, "—˜—pÒ–¼")
-If cName = 0 Then cName = modEvalIOEntry.FindColByHeaderExact(ws, "–¼‘O")
+cName = modEvalIOEntry.FindColByHeaderExact(ws, "æ°å")
+If cName = 0 Then cName = modEvalIOEntry.FindColByHeaderExact(ws, "åˆ©ç”¨è€…å")
+If cName = 0 Then cName = modEvalIOEntry.FindColByHeaderExact(ws, "åå‰")
 If cName = 0 Then
-    MsgBox "–¼—ñ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+    MsgBox "æ°ååˆ—ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
     Exit Sub
 End If
 If StrComp(CStr(ws.Cells(r, cName).value), pname, vbTextCompare) <> 0 Then
-    MsgBox "‘I‘ğs‚Ì–¼‚ªu" & pname & "v‚Æˆê’v‚µ‚Ü‚¹‚ñB“Ç‚İ‚İ‚ğ’†~‚µ‚Ü‚·B", vbExclamation
+    MsgBox "é¸æŠè¡Œã®æ°åãŒã€Œ" & pname & "ã€ã¨ä¸€è‡´ã—ã¾ã›ã‚“ã€‚èª­ã¿è¾¼ã¿ã‚’ä¸­æ­¢ã—ã¾ã™ã€‚", vbExclamation
     Exit Sub
 End If
 
 
-' Œ©‚Â‚©‚Á‚½‚ç–Ù‚Á‚Ä“Ç‚İ‚İ
+' è¦‹ã¤ã‹ã£ãŸã‚‰é»™ã£ã¦èª­ã¿è¾¼ã¿
     Call modEvalIOEntry.LoadEvaluation_ByName_From(Me)
 
 
@@ -2820,7 +2864,7 @@ End Sub
 
 
 
-'==== UserForm ƒR[ƒhƒ‚ƒWƒ…[ƒ‹ifraDynPainBox ‚ªÚ‚Á‚Ä‚¢‚éƒtƒH[ƒ€j====
+'==== UserForm ã‚³ãƒ¼ãƒ‰ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ï¼ˆfraDynPainBox ãŒè¼‰ã£ã¦ã„ã‚‹ãƒ•ã‚©ãƒ¼ãƒ ï¼‰====
 
 Private Sub UserForm_Initialize()
 
@@ -2862,8 +2906,8 @@ Call RemoveLegacyPainUI
         mPainLayoutDone = True
     End If
     
-    TidyPainBoxes        ' © ‰E—ñ(—UˆöEŒyŒ¸ˆöq)‚ÌP‹v”z’u
-    TidyPainCourse       ' © š’Ç‰ÁFŒo‰ßEŠÔ‚Ì•Ï‰»‚ÌP‹v”z’u
+    TidyPainBoxes        ' â† å³åˆ—(èª˜å› ãƒ»è»½æ¸›å› å­)ã®æ’ä¹…é…ç½®
+    TidyPainCourse       ' â† â˜…è¿½åŠ ï¼šçµŒéãƒ»æ™‚é–“ã®å¤‰åŒ–ã®æ’ä¹…é…ç½®
     Me.WidenAndTidyPainCourse
  
    
@@ -2875,15 +2919,15 @@ If Not mPainTidyBusy Then
     'TidyPainUI_Once
     Me.Height = h
     DoEvents
-    ClearPainUI Me   ' © ‹N“®‚Í‹ó‚ÅŠJni“Ç‚İ‚İ‚Íè“®‚Åj
+    ClearPainUI Me   ' â† èµ·å‹•æ™‚ã¯ç©ºã§é–‹å§‹ï¼ˆèª­ã¿è¾¼ã¿ã¯æ‰‹å‹•ã§ï¼‰
 End If
 
         BuildWalkUI_All
 
     Me.Controls("Frame31").caption = ""
     BuildCogMentalUI_Simple
-    BuildCog_CognitionCore      '© ”F’m6€–Ú‚ğ¶¬
-    BuildCog_DementiaBlock      '© ”F’mÇ‚Ìí—Ş{”õl‚ğ¶¬
+    BuildCog_CognitionCore      'â† èªçŸ¥6é …ç›®ã‚’ç”Ÿæˆ
+    BuildCog_DementiaBlock      'â† èªçŸ¥ç—‡ã®ç¨®é¡ï¼‹å‚™è€ƒã‚’ç”Ÿæˆ
     BuildCog_BPSD
     BuildCog_MentalBlock
     BuildDailyLogTab
@@ -2924,7 +2968,7 @@ If mBaseLayoutDone Then
 End If
 
 
-'--- Fix: qMultiPageŒ©Ø‚ê‘Îôi2025-12-13 OKƒXƒiƒbƒvƒVƒ‡ƒbƒgŒÅ’èj
+'--- Fix: å­MultiPageè¦‹åˆ‡ã‚Œå¯¾ç­–ï¼ˆ2025-12-13 OKã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆå›ºå®šï¼‰
 
 'Me.Controls("mpPhys").Height = 520#
 'Me.Controls("cmdSaveGlobal").Top = Me.InsideHeight - Me.Controls("cmdSaveGlobal").Height - 12
@@ -3000,7 +3044,7 @@ End Sub
     cmb.Style = fmStyleDropDownList
     cmb.MatchRequired = True
 End Sub
-'=== frmEval ‚ÌƒR[ƒhƒ‚ƒWƒ…[ƒ‹‚É“\‚éi‚±‚±‚Ü‚Åj ===
+'=== frmEval ã®ã‚³ãƒ¼ãƒ‰ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã«è²¼ã‚‹ï¼ˆã“ã“ã¾ã§ï¼‰ ===
 
 
 
@@ -3015,10 +3059,10 @@ Private Sub LegacyInit()
 
 SetupLayout
 
-    Me.caption = "•]‰¿ƒtƒH[ƒ€"
+    Me.caption = "è©•ä¾¡ãƒ•ã‚©ãƒ¼ãƒ "
 Me.ScrollBars = fmScrollBarsNone
 
-' ‰æ–ÊƒTƒCƒY‚É‡‚í‚¹‚ÄãŒÀ‚ğ‚©‚¯‚éiÅ¬•ÏXj
+' ç”»é¢ã‚µã‚¤ã‚ºã«åˆã‚ã›ã¦ä¸Šé™ã‚’ã‹ã‘ã‚‹ï¼ˆæœ€å°å¤‰æ›´ï¼‰
 Const MARGIN_W As Single = 80
 Const MARGIN_H As Single = 140
 
@@ -3031,11 +3075,11 @@ If initH < 640 Then initH = 640
 If initH > 820 Then initH = 820
 Me.Width = initW
 'Me.Height = initH
-Me.StartUpPosition = 1      ' CenterOwneri”CˆÓF’†‰›‚Éo‚µ‚½‚¢ê‡j
+Me.StartUpPosition = 1      ' CenterOwnerï¼ˆä»»æ„ï¼šä¸­å¤®ã«å‡ºã—ãŸã„å ´åˆï¼‰
 
 
 
-    ' ƒ‹[ƒg MultiPage
+    ' ãƒ«ãƒ¼ãƒˆ MultiPage
     Set mp = Me.Controls.Add("Forms.MultiPage.1")
     With mp
         .Left = 6: .Top = 6
@@ -3043,26 +3087,26 @@ Me.StartUpPosition = 1      ' CenterOwneri”CˆÓF’†‰›‚Éo‚µ‚½‚¢ê‡j
         .Height = Me.InsideHeight - 60
         .Style = fmTabStyleTabs
     End With
-    ' ˆÀ‘SôFÅ’á2ƒy[ƒW‚ğ•ÛØiŠÂ‹«·‘Îôj
+    ' å®‰å…¨ç­–ï¼šæœ€ä½2ãƒšãƒ¼ã‚¸ã‚’ä¿è¨¼ï¼ˆç’°å¢ƒå·®å¯¾ç­–ï¼‰
     If mp.Pages.Count = 0 Then mp.Pages.Add: mp.Pages.Add
 
-    ' æ“ª2–‡‚ÍŠù‘¶
-mp.Pages(0).caption = "Šî–{î•ñ"
-mp.Pages(1).caption = "p¨•]‰¿"
+    ' å…ˆé ­2æšã¯æ—¢å­˜
+mp.Pages(0).caption = "åŸºæœ¬æƒ…å ±"
+mp.Pages(1).caption = "å§¿å‹¢è©•ä¾¡"
 
-' ©‚±‚±‚Åug‘Ì‹@”\•]‰¿v‚ğæ‚É’Ç‰Á
-Dim pgPhys  As MSForms.Page: Set pgPhys = mp.Pages.Add: pgPhys.caption = "g‘Ì‹@”\•]‰¿"
+' â†ã“ã“ã§ã€Œèº«ä½“æ©Ÿèƒ½è©•ä¾¡ã€ã‚’å…ˆã«è¿½åŠ 
+Dim pgPhys  As MSForms.Page: Set pgPhys = mp.Pages.Add: pgPhys.caption = "èº«ä½“æ©Ÿèƒ½è©•ä¾¡"
 
-' c‚è‚Ìeƒ^ƒu
-Dim pgMove  As MSForms.Page: Set pgMove = mp.Pages.Add: pgMove.caption = "“úí¶Šˆ“®ì"
-Dim pgTests As MSForms.Page: Set pgTests = mp.Pages.Add: pgTests.caption = "ƒeƒXƒgE•]‰¿"
-Dim pgWalk  As MSForms.Page: Set pgWalk = mp.Pages.Add: pgWalk.caption = "•às•]‰¿"
-Dim pgCog   As MSForms.Page: Set pgCog = mp.Pages.Add: pgCog.caption = "”F’mE¸_"
+' æ®‹ã‚Šã®è¦ªã‚¿ãƒ–
+Dim pgMove  As MSForms.Page: Set pgMove = mp.Pages.Add: pgMove.caption = "æ—¥å¸¸ç”Ÿæ´»å‹•ä½œ"
+Dim pgTests As MSForms.Page: Set pgTests = mp.Pages.Add: pgTests.caption = "ãƒ†ã‚¹ãƒˆãƒ»è©•ä¾¡"
+Dim pgWalk  As MSForms.Page: Set pgWalk = mp.Pages.Add: pgWalk.caption = "æ­©è¡Œè©•ä¾¡"
+Dim pgCog   As MSForms.Page: Set pgCog = mp.Pages.Add: pgCog.caption = "èªçŸ¥ãƒ»ç²¾ç¥"
 
-' --- ƒzƒXƒg•Ï”‚ÌéŒ¾i‚±‚±‚ğ’Ç‰Áj---
-' --- ƒzƒXƒg•Ï”‚ÌéŒ¾ ---
+' --- ãƒ›ã‚¹ãƒˆå¤‰æ•°ã®å®£è¨€ï¼ˆã“ã“ã‚’è¿½åŠ ï¼‰---
+' --- ãƒ›ã‚¹ãƒˆå¤‰æ•°ã®å®£è¨€ ---
 Dim hostBasic As MSForms.Frame
-Dim hostPost  As MSForms.Frame   ' © ‹Œ hostBody ‚ğg‚Á‚Ä‚¢‚½‚ç’uŠ·
+Dim hostPost  As MSForms.Frame   ' â† æ—§ hostBody ã‚’ä½¿ã£ã¦ã„ãŸã‚‰ç½®æ›
 Dim hostPhys  As MSForms.Frame
 Dim hostMove  As MSForms.Frame
 Dim hostTests As MSForms.Frame
@@ -3070,7 +3114,7 @@ Dim hostWalk  As MSForms.Frame
 Dim hostCog   As MSForms.Frame
 
 
-' --- ‚±‚±‚©‚çŠù‘¶‚ÌƒzƒXƒg¶¬ ---
+' --- ã“ã“ã‹ã‚‰æ—¢å­˜ã®ãƒ›ã‚¹ãƒˆç”Ÿæˆ ---
 Set hostBasic = CreateScrollHost(mp.Pages(0))
 Set hostPost = CreateScrollHost(mp.Pages(1))
 Set hostPhys = CreateScrollHost(pgPhys)
@@ -3087,34 +3131,34 @@ Set hostCog = CreateScrollHost(pgCog)
     
     
     
-' --- –Àq‚Ì mpADL ‚ğ‘SÁ‹i•ÛŒ¯j ---
+' --- è¿·å­ã® mpADL ã‚’å…¨æ¶ˆå»ï¼ˆä¿é™ºï¼‰ ---
 Trace "RemoveAllMpADL()", "Initialize"
 RemoveAllMpADL
 Trace "RemoveAllMpADL() done", "Initialize"
 
 
-' --- mpADL ‚ÌŠí‚ğ—pˆÓiƒy[ƒW0‚Æ1‚ğì‚éj ---
+' --- mpADL ã®å™¨ã‚’ç”¨æ„ï¼ˆãƒšãƒ¼ã‚¸0ã¨1ã‚’ä½œã‚‹ï¼‰ ---
 Trace "EnsureBI_IADL() call", "Initialize"
 Dim mpADL As MSForms.MultiPage
 Set mpADL = EnsureBI_IADL()
 Trace "EnsureBI_IADL() returned; pages=" & mpADL.Pages.Count, "Initialize"
 
 
-' --- ‹N‹“®ìƒy[ƒW‚ÌUI‚ğì‚é ---
+' --- èµ·å±…å‹•ä½œãƒšãƒ¼ã‚¸ã®UIã‚’ä½œã‚‹ ---
 Trace "BuildKyoOnADL Page(2) start", "Initialize"
 BuildKyoOnADL mpADL.Pages(2)
 Trace "BuildKyoOnADL Page(2) end", "Initialize"
 
 
 
-' ‰Šú•\¦‚ÍBI‚ÅOK‚È‚ç 0 ‚Ì‚Ü‚Ü
+' åˆæœŸè¡¨ç¤ºã¯BIã§OKãªã‚‰ 0 ã®ã¾ã¾
 mpADL.value = 0
 
 
-' i”CˆÓjIADL”õl‚ÌIMEÄİ’è
+' ï¼ˆä»»æ„ï¼‰IADLå‚™è€ƒã®IMEå†è¨­å®š
 ApplyImeToIADLNote
 
-' --- ‰º‚É‘±‚­ nextTop ‚ÌXV‚È‚Ç ---
+' --- ä¸‹ã«ç¶šã nextTop ã®æ›´æ–°ãªã© ---
 Trace "update nextTop start", "Initialize"
 
 nextTop = mpADL.Top + mpADL.Height + 10
@@ -3129,36 +3173,36 @@ Dim Y As Single, cboTmp As MSForms.ComboBox
 
 
 
-    '================ ƒeƒXƒgE•]‰¿ ================
+    '================ ãƒ†ã‚¹ãƒˆãƒ»è©•ä¾¡ ================
     Trace "TESTS start", "Init"
     
     nextTop = pad
-    Dim fTests As MSForms.Frame: Set fTests = CreateFrameP(hostTests, "ƒeƒXƒgE•]‰¿i•b=¬”2Œ…Eˆ¬—Í=¬”1Œ…E0ˆÈãj", 150)
+    Dim fTests As MSForms.Frame: Set fTests = CreateFrameP(hostTests, "ãƒ†ã‚¹ãƒˆãƒ»è©•ä¾¡ï¼ˆç§’=å°æ•°2æ¡ãƒ»æ¡åŠ›=å°æ•°1æ¡ãƒ»0ä»¥ä¸Šï¼‰", 150)
     Y = 22
-    CreateLabel fTests, "10m•àsi•bj", COL_LX, Y: CreateTextBox fTests, COL_LX + lblW + 20, Y, 80, 0, False, "txtTenMWalk", "Test.10m": nL Y
-    CreateLabel fTests, "TUGi•bj", COL_LX, Y: CreateTextBox fTests, COL_LX + lblW + 20, Y, 80, 0, False, "txtTUG", "Test.TUG"
-    CreateLabel fTests, "5‰ñ—§‚¿ã‚ª‚èi•bj", COL_RX, 22: CreateTextBox fTests, COL_RX + lblW + 60, 22, 80, 0, False, "txtFiveSTS", "Test.5xSTS"
-    CreateLabel fTests, "ƒZƒ~ƒ^ƒ“ƒfƒ€i•bj", COL_RX, 46: CreateTextBox fTests, COL_RX + lblW + 60, 46, 80, 0, False, "txtSemi", "Test.Semi"
-    CreateLabel fTests, "ˆ¬—Í ‰Eikgj", COL_LX, 94: CreateTextBox fTests, COL_LX + lblW + 20, 94, 80, 0, False, "txtGripR", "Grip.R"
-    CreateLabel fTests, "ˆ¬—Í ¶ikgj", COL_RX, 94: CreateTextBox fTests, COL_RX + lblW + 40, 94, 80, 0, False, "txtGripL", "Grip.L"
+    CreateLabel fTests, "10mæ­©è¡Œï¼ˆç§’ï¼‰", COL_LX, Y: CreateTextBox fTests, COL_LX + lblW + 20, Y, 80, 0, False, "txtTenMWalk", "Test.10m": nL Y
+    CreateLabel fTests, "TUGï¼ˆç§’ï¼‰", COL_LX, Y: CreateTextBox fTests, COL_LX + lblW + 20, Y, 80, 0, False, "txtTUG", "Test.TUG"
+    CreateLabel fTests, "5å›ç«‹ã¡ä¸ŠãŒã‚Šï¼ˆç§’ï¼‰", COL_RX, 22: CreateTextBox fTests, COL_RX + lblW + 60, 22, 80, 0, False, "txtFiveSTS", "Test.5xSTS"
+    CreateLabel fTests, "ã‚»ãƒŸã‚¿ãƒ³ãƒ‡ãƒ ï¼ˆç§’ï¼‰", COL_RX, 46: CreateTextBox fTests, COL_RX + lblW + 60, 46, 80, 0, False, "txtSemi", "Test.Semi"
+    CreateLabel fTests, "æ¡åŠ› å³ï¼ˆkgï¼‰", COL_LX, 94: CreateTextBox fTests, COL_LX + lblW + 20, 94, 80, 0, False, "txtGripR", "Grip.R"
+    CreateLabel fTests, "æ¡åŠ› å·¦ï¼ˆkgï¼‰", COL_RX, 94: CreateTextBox fTests, COL_RX + lblW + 40, 94, 80, 0, False, "txtGripL", "Grip.L"
     ResizeFrameToContent fTests, 120
 
     Trace "TESTS end", "Init"
 
     
-    '================ •às•]‰¿i©—§“x / RLAj ================
+    '================ æ­©è¡Œè©•ä¾¡ï¼ˆè‡ªç«‹åº¦ / RLAï¼‰ ================
 Trace "WALK start", "Init"
 
 Set mpWalk = hostWalk.Controls.Add("Forms.MultiPage.1")
 
-' •Ï”éŒ¾‚Í With ‚ÌŠO‚ÅOK
+' å¤‰æ•°å®£è¨€ã¯ With ã®å¤–ã§OK
 Dim w As Single, h As Single
 
 With mpWalk
     .Left = 0
     .Top = 0
 
-    ' “à¡ƒx[ƒX‚ÅZo‚µA‰ºŒÀ‚ğ•t‚¯‚ÄƒNƒ‰ƒ“ƒv
+    ' å†…å¯¸ãƒ™ãƒ¼ã‚¹ã§ç®—å‡ºã—ã€ä¸‹é™ã‚’ä»˜ã‘ã¦ã‚¯ãƒ©ãƒ³ãƒ—
     w = hostWalk.InsideWidth - 12:  If w < 200 Then w = 200
     h = hostWalk.InsideHeight - 12: If h < 150 Then h = 150
 
@@ -3167,11 +3211,11 @@ With mpWalk
     .Style = fmTabStyleTabs
 End With
 
-' ƒy[ƒW(0),(1)‚ğG‚é‘O‚É2–‡•ÛØ
+' ãƒšãƒ¼ã‚¸(0),(1)ã‚’è§¦ã‚‹å‰ã«2æšä¿è¨¼
 Do While mpWalk.Pages.Count < 2
     mpWalk.Pages.Add
 Loop
-mpWalk.Pages(0).caption = "©—§“x"
+mpWalk.Pages(0).caption = "è‡ªç«‹åº¦"
 mpWalk.Pages(1).caption = "RLA"
 
 
@@ -3182,20 +3226,20 @@ mpWalk.Pages(1).caption = "RLA"
     .Left = 0: .Top = 0
     .Width = mpWalk.Width - 12
     Dim tGait As Single: tGait = mpWalk.Height - 30
-    If tGait < 120 Then tGait = 120     ' © ‚±‚±‚ğ t ¨ tGait ‚É
-    .Height = tGait                      ' © ‚±‚±‚à t ¨ tGait ‚É
+    If tGait < 120 Then tGait = 120     ' â† ã“ã“ã‚’ t â†’ tGait ã«
+    .Height = tGait                      ' â† ã“ã“ã‚‚ t â†’ tGait ã«
     .ScrollBars = fmScrollBarsNone
 End With
 
 
     nextTop = pad
-    Dim fGait As MSForms.Frame: Set fGait = CreateFrameP(hostWalkGait, "•às•]‰¿i©—§“xj", 90)
+    Dim fGait As MSForms.Frame: Set fGait = CreateFrameP(hostWalkGait, "æ­©è¡Œè©•ä¾¡ï¼ˆè‡ªç«‹åº¦ï¼‰", 90)
     Y = 22
     Dim rowH As Single: rowH = 28
     
-    CreateLabel fGait, "•às©—§“x", COL_LX, Y
-    Dim cboGait As MSForms.ComboBox: Set cboGait = CreateCombo(fGait, COL_LX + lblW, Y, 500, , "Gait.©—§“x")
-    cboGait.List = MakeList("Š®‘S©—§,C³©—§i•â•‹ïg—pj,ŠÄ‹EŒ©ç‚è,Œy‰î•i25%–¢–j,’†“™“x‰î•i25-50%j,d‰î•i50%ˆÈãj,‘S‰î•")
+    CreateLabel fGait, "æ­©è¡Œè‡ªç«‹åº¦", COL_LX, Y
+    Dim cboGait As MSForms.ComboBox: Set cboGait = CreateCombo(fGait, COL_LX + lblW, Y, 500, , "Gait.è‡ªç«‹åº¦")
+    cboGait.List = MakeList("å®Œå…¨è‡ªç«‹,ä¿®æ­£è‡ªç«‹ï¼ˆè£œåŠ©å…·ä½¿ç”¨ï¼‰,ç›£è¦–ãƒ»è¦‹å®ˆã‚Š,è»½ä»‹åŠ©ï¼ˆ25%æœªæº€ï¼‰,ä¸­ç­‰åº¦ä»‹åŠ©ï¼ˆ25-50%ï¼‰,é‡ä»‹åŠ©ï¼ˆ50%ä»¥ä¸Šï¼‰,å…¨ä»‹åŠ©")
     ResizeFrameToContent fGait, Y + rowH
 
     Dim hostWalkRLA As MSForms.Frame
@@ -3210,8 +3254,8 @@ End With
         .Height = hostWalkRLA.Height - 6
         .Style = fmTabStyleTabs
     End With
-    mpRLA.Pages(0).caption = "—§‹rŠúiIC-TStj"
-    mpRLA.Pages(1).caption = "—V‹rŠúiPSw-TSwj"
+    mpRLA.Pages(0).caption = "ç«‹è„šæœŸï¼ˆIC-TStï¼‰"
+    mpRLA.Pages(1).caption = "éŠè„šæœŸï¼ˆPSw-TSwï¼‰"
 
     Dim hostRLAStance As MSForms.Frame
     Set hostRLAStance = mpRLA.Pages(0).Controls.Add("Forms.Frame.1")
@@ -3226,7 +3270,7 @@ With hostRLAStance
 End With
 
     nextTop = pad
-    Dim fRLA1 As MSForms.Frame: Set fRLA1 = CreateFrameP(hostRLAStance, "RLA•àsüŠúiIC / LR / MSt / TStj", 280)
+    Dim fRLA1 As MSForms.Frame: Set fRLA1 = CreateFrameP(hostRLAStance, "RLAæ­©è¡Œå‘¨æœŸï¼ˆIC / LR / MSt / TStï¼‰", 280)
     Build_RLA_ChecksPart fRLA1, "stance": ResizeFrameToContent fRLA1, 260
 
     Dim hostRLASwing As MSForms.Frame
@@ -3243,7 +3287,7 @@ End With
 
 
     nextTop = pad
-    Dim fRLA2 As MSForms.Frame: Set fRLA2 = CreateFrameP(hostRLASwing, "RLA•àsüŠúiPSw / ISw / MSw / TSwj", 280)
+    Dim fRLA2 As MSForms.Frame: Set fRLA2 = CreateFrameP(hostRLASwing, "RLAæ­©è¡Œå‘¨æœŸï¼ˆPSw / ISw / MSw / TSwï¼‰", 280)
     Build_RLA_ChecksPart fRLA2, "swing": ResizeFrameToContent fRLA2, 260
 
     
@@ -3252,20 +3296,20 @@ End With
 
 
 
-    '================ ”F’mE¸_ ================
+    '================ èªçŸ¥ãƒ»ç²¾ç¥ ================
    Trace "COG start", "Init"
     
     nextTop = pad
-    Dim fCog As MSForms.Frame: Set fCog = CreateFrameP(hostCog, "”F’m‹@”\E¸_–Ê", 110)
+    Dim fCog As MSForms.Frame: Set fCog = CreateFrameP(hostCog, "èªçŸ¥æ©Ÿèƒ½ãƒ»ç²¾ç¥é¢", 110)
     Y = 22
-    CreateLabel fCog, "”F’m‹@”\ƒŒƒxƒ‹", COL_LX, Y
+    CreateLabel fCog, "èªçŸ¥æ©Ÿèƒ½ãƒ¬ãƒ™ãƒ«", COL_LX, Y
     Dim cboCog As MSForms.ComboBox: Set cboCog = CreateCombo(fCog, COL_LX + lblW, Y, 160, , "Cognition.Level")
-    cboCog.List = MakeList("³í,Œy“x’á‰º,’†“™“x’á‰º,‚“x’á‰º")
-    CreateLabel fCog, "¸_–Ê", COL_RX, Y
+    cboCog.List = MakeList("æ­£å¸¸,è»½åº¦ä½ä¸‹,ä¸­ç­‰åº¦ä½ä¸‹,é«˜åº¦ä½ä¸‹")
+    CreateLabel fCog, "ç²¾ç¥é¢", COL_RX, Y
     Dim cboPsy As MSForms.ComboBox: Set cboPsy = CreateCombo(fCog, COL_RX + lblW, Y, 160, , "Psych.Status")
-    cboPsy.List = MakeList("ˆÀ’è,•sˆÀŒXŒü,—}‚¤‚ÂŒXŒü,‚»‚Ì‘¼")
-    CreateLabel fCog, "”õl", COL_LX, Y + 28
-    CreateTextBox fCog, COL_LX + lblW, Y + 26, 610, 50, True, , "Cognition.”õl"
+    cboPsy.List = MakeList("å®‰å®š,ä¸å®‰å‚¾å‘,æŠ‘ã†ã¤å‚¾å‘,ãã®ä»–")
+    CreateLabel fCog, "å‚™è€ƒ", COL_LX, Y + 28
+    CreateTextBox fCog, COL_LX + lblW, Y + 26, 610, 50, True, , "Cognition.å‚™è€ƒ"
     ResizeFrameToContent fCog, Y + 26 + 50
     
     Trace "COG end", "Init"
@@ -3273,12 +3317,12 @@ End With
 
 
 
-    '--- ‰º•”‚Ìu•Â‚¶‚év ---
+    '--- ä¸‹éƒ¨ã®ã€Œé–‰ã˜ã‚‹ã€ ---
     Trace "CLOSE start", "Init"
 
 Set btnCloseCtl = Me.Controls.Add("Forms.CommandButton.1")
 With btnCloseCtl
-    .caption = "•Â‚¶‚é"
+    .caption = "é–‰ã˜ã‚‹"
     .Width = 60
     .Height = 26
     .Left = Me.InsideWidth - .Width - 20
@@ -3299,53 +3343,53 @@ RecalcBI
     
     
 
-    '================ Šî–{î•ñF‘S–ÊƒŒƒCƒAƒEƒg ================
+    '================ åŸºæœ¬æƒ…å ±ï¼šå…¨é¢ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ ================
     nextTop = pad
-  Dim fBasic As MSForms.Frame: Set fBasic = CreateFrameP(hostBasic, "Šî–{î•ñ", 360)
+  Dim fBasic As MSForms.Frame: Set fBasic = CreateFrameP(hostBasic, "åŸºæœ¬æƒ…å ±", 360)
     Set fBasicRef = fBasic
     Y = 22
 
-    ' --- Åã’iFƒ†[ƒeƒBƒŠƒeƒBs ---
+    ' --- æœ€ä¸Šæ®µï¼šãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£è¡Œ ---
     Dim chkDelta As MSForms.CheckBox
-    Set chkDelta = CreateCheck(fBasic, "•ÏX“_‚Ì‚İ•Û‘¶i‹ó—“‚Í‘O‰ñ’l‚ğˆøŒp‚¬j", COL_LX, 6, "chkDeltaOnly", "Delta.Only")
+    Set chkDelta = CreateCheck(fBasic, "å¤‰æ›´ç‚¹ã®ã¿ä¿å­˜ï¼ˆç©ºæ¬„ã¯å‰å›å€¤ã‚’å¼•ç¶™ãï¼‰", COL_LX, 6, "chkDeltaOnly", "Delta.Only")
     chkDelta.AutoSize = True: chkDelta.WordWrap = False
 
     Set btnLoadPrevCtl = fBasic.Controls.Add("Forms.CommandButton.1")
     With btnLoadPrevCtl
-        .caption = "‘O‰ñ‚Ì’l‚ğ“Ç‚İ‚Ş": .Accelerator = "L"
+        .caption = "å‰å›ã®å€¤ã‚’èª­ã¿è¾¼ã‚€": .Accelerator = "L"
         .Width = 180: .Height = 24: .name = "btnLoadPrevCtl"
     End With
     Set btnSaveCtl = fBasic.Controls.Add("Forms.CommandButton.1")
     With btnSaveCtl
-        .caption = "ƒV[ƒg‚Ö•Û‘¶": .Accelerator = "S"
+        .caption = "ã‚·ãƒ¼ãƒˆã¸ä¿å­˜": .Accelerator = "S"
         .Width = 120: .Height = 24: .name = "btnSaveCtl"
     End With
     PositionTopRightButtons fBasic
     nL Y, 1
 
-    ' s1FID / •]‰¿“ú / •]‰¿Òi¬‚³‚ßj
+    ' è¡Œ1ï¼šID / è©•ä¾¡æ—¥ / è©•ä¾¡è€…ï¼ˆå°ã•ã‚ï¼‰
     CreateLabel fBasic, "ID", COL_LX, Y
     CreateTextBox fBasic, COL_LX + lblW, Y, 120, 0, False, "txtPID", "PatientID"
-    CreateLabel fBasic, "•]‰¿“ú", COL_RX, Y
+    CreateLabel fBasic, "è©•ä¾¡æ—¥", COL_RX, Y
     Dim tbED As MSForms.TextBox: Set tbED = CreateTextBox(fBasic, COL_RX + lblW, Y, 120, 0, False, "txtEDate", "EvalDate")
     tbED.Text = Format(Date, "yyyy/mm/dd")
-    CreateLabel fBasic, "•]‰¿Ò", COL_RX + lblW + 130, Y
+    CreateLabel fBasic, "è©•ä¾¡è€…", COL_RX + lblW + 130, Y
     Dim tbEva As MSForms.TextBox: Set tbEva = CreateTextBox(fBasic, COL_RX + lblW + 180, Y, 90, 0, False, "txtEvaluator", "Basic.Evaluator")
     tbEva.Font.Size = 8
     nL Y
 
-    ' s2F–¼ / ”N—î / «•Ê
-    CreateLabel fBasic, "–¼", COL_LX, Y
+    ' è¡Œ2ï¼šæ°å / å¹´é½¢ / æ€§åˆ¥
+    CreateLabel fBasic, "æ°å", COL_LX, Y
     CreateTextBox fBasic, COL_LX + lblW, Y, 200, 0, False, "txtName", "Basic.Name"
-    CreateLabel fBasic, "”N—î", COL_RX, Y
+    CreateLabel fBasic, "å¹´é½¢", COL_RX, Y
     CreateTextBox fBasic, COL_RX + lblW, Y, 60, 0, False, "txtAge", "Basic.Age"
-    CreateLabel fBasic, "«•Ê", COL_RX + lblW + 70, Y
+    CreateLabel fBasic, "æ€§åˆ¥", COL_RX + lblW + 70, Y
     Dim cboSex As MSForms.ComboBox: Set cboSex = CreateCombo(fBasic, COL_RX + lblW + 110, Y, 90, "cboSex", "Basic.Gender")
-    cboSex.List = MakeList("’j«,—«,‚»‚Ì‘¼,•s–¾")
+    cboSex.List = MakeList("ç”·æ€§,å¥³æ€§,ãã®ä»–,ä¸æ˜")
     nL Y
     
-    ' s2.5F¶”NŒ“ú
-    CreateLabel fBasic, "¶”NŒ“ú", COL_RX, Y
+    ' è¡Œ2.5ï¼šç”Ÿå¹´æœˆæ—¥
+    CreateLabel fBasic, "ç”Ÿå¹´æœˆæ—¥", COL_RX, Y
     Dim tbBirth As MSForms.TextBox
     Set tbBirth = CreateTextBox(fBasic, COL_RX + lblW, Y, 120, 0, False, "txtBirth", "Basic.BirthDate")
     tbBirth.IMEMode = fmIMEModeOff
@@ -3353,139 +3397,141 @@ RecalcBI
 
     nL Y
     
-    CreateLabel fBasic, "¦¶”NŒ“ú‚Í 19990804 ‚ÌŒ`®‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢i”N—î‚Í©“®ŒvZ‚³‚ê‚Ü‚·j", COL_RX + lblW + 130, Y
+    CreateLabel fBasic, "â€»ç”Ÿå¹´æœˆæ—¥ã¯ 19990804 ã®å½¢å¼ã§å…¥åŠ›ã—ã¦ãã ã•ã„ï¼ˆå¹´é½¢ã¯è‡ªå‹•è¨ˆç®—ã•ã‚Œã¾ã™ï¼‰", COL_RX + lblW + 130, Y
     fBasic.Controls(fBasic.Controls.Count - 1).Font.Size = 8
     fBasic.Controls(fBasic.Controls.Count - 1).Top = Y - 21
 
 
 
-    ' s3Fåf’f / ”­Ç“ú
-    CreateLabel fBasic, "åf’f", COL_LX, Y
+    ' è¡Œ3ï¼šä¸»è¨ºæ–­ / ç™ºç—‡æ—¥
+    CreateLabel fBasic, "ä¸»è¨ºæ–­", COL_LX, Y
     CreateTextBox fBasic, COL_LX + lblW, Y, 260, 0, False, "txtDx", "Basic.PrimaryDx"
-    CreateLabel fBasic, "”­Ç“ú", COL_RX, Y
+    CreateLabel fBasic, "ç™ºç—‡æ—¥", COL_RX, Y
     CreateTextBox fBasic, COL_RX + lblW, Y, 120, 0, False, "txtOnset", "Basic.OnsetDate"
     nL Y
 
-    ' s4F¶Šˆó‹µ / —v‰îŒì“x
-    CreateLabel fBasic, "¶Šˆó‹µ", COL_LX, Y
+    ' è¡Œ4ï¼šç”Ÿæ´»çŠ¶æ³ / è¦ä»‹è­·åº¦
+    CreateLabel fBasic, "ç”Ÿæ´»çŠ¶æ³", COL_LX, Y
     CreateTextBox fBasic, COL_LX + lblW, Y, 220, 0, False, "txtLiving", "Basic.Living"
-    CreateLabel fBasic, "—v‰îŒì“x", COL_RX, Y
+    CreateLabel fBasic, "è¦ä»‹è­·åº¦", COL_RX, Y
     Dim cboLev As MSForms.ComboBox: Set cboLev = CreateCombo(fBasic, COL_RX + lblW, Y, 150, "cboCare", "Basic.CareLevel")
-    cboLev.List = MakeList("—vx‰‡1,—vx‰‡2,—v‰îŒì1,—v‰îŒì2,—v‰îŒì3,—v‰îŒì4,—v‰îŒì5")
+    cboLev.List = MakeList("è¦æ”¯æ´1,è¦æ”¯æ´2,è¦ä»‹è­·1,è¦ä»‹è­·2,è¦ä»‹è­·3,è¦ä»‹è­·4,è¦ä»‹è­·5")
     nL Y
 
-    ' s5FáŠQ‚—îÒ^”F’mÇ‚—îÒiƒ‰ƒxƒ‹ŒÂ•Ê•j
+    ' è¡Œ5ï¼šéšœå®³é«˜é½¢è€…ï¼èªçŸ¥ç—‡é«˜é½¢è€…ï¼ˆãƒ©ãƒ™ãƒ«å€‹åˆ¥å¹…ï¼‰
     Dim LBLW_LONG_LEFT As Long:  LBLW_LONG_LEFT = 150
     Dim LBLW_LONG_RIGHT As Long: LBLW_LONG_RIGHT = 170
 
-    CreateLabel fBasic, "áŠQ‚—îÒ‚Ì“úí¶Šˆ©—§“x", COL_LX, Y, LBLW_LONG_LEFT
+    CreateLabel fBasic, "éšœå®³é«˜é½¢è€…ã®æ—¥å¸¸ç”Ÿæ´»è‡ªç«‹åº¦", COL_LX, Y, LBLW_LONG_LEFT
     Dim cboEL As MSForms.ComboBox
     Set cboEL = CreateCombo(fBasic, COL_LX + LBLW_LONG_LEFT + 6, Y, 180, "cboElder", "Basic.ElderlyLevel")
-    cboEL.List = MakeList("©—§,J1,J2,A1,A2,B1,B2,C1,C2")
+    cboEL.List = MakeList("è‡ªç«‹,J1,J2,A1,A2,B1,B2,C1,C2")
 
-    CreateLabel fBasic, "”F’mÇ‚—îÒ‚Ì“úí¶Šˆ©—§“x", COL_RX, Y, LBLW_LONG_RIGHT
+    CreateLabel fBasic, "èªçŸ¥ç—‡é«˜é½¢è€…ã®æ—¥å¸¸ç”Ÿæ´»è‡ªç«‹åº¦", COL_RX, Y, LBLW_LONG_RIGHT
     Dim cboDL As MSForms.ComboBox
     Set cboDL = CreateCombo(fBasic, COL_RX + LBLW_LONG_RIGHT + 6, Y, 160, "cboDementia", "Basic.DementiaLevel")
-    cboDL.List = MakeList("©—§,I,IIa,IIb,IIIa,IIIb,IV,M")
+    cboDL.List = MakeList("è‡ªç«‹,I,IIa,IIb,IIIa,IIIb,IV,M")
     nL Y, 1
 
-    ' •â•‹ï^ƒŠƒXƒNi2—ñj
+    ' è£œåŠ©å…·ï¼ãƒªã‚¹ã‚¯ï¼ˆ2åˆ—ï¼‰
     nL Y, 1
-    Dim frAssist As MSForms.Frame, frRisk As MSForms.Frame
-    Dim ASSISTIVE_CSV As String: ASSISTIVE_CSV = "ñ,ƒVƒ‹ƒo[ƒJ[,•àsŠí,Ô‚¢‚·,’Z‰ºˆ‘•‹ï,‰î•ƒxƒ‹ƒg,è‚·‚è,ƒXƒ[ƒv"
-    Dim RISK_CSV As String: RISK_CSV = "“]“|,Œëš‹,¸‹Ö,åñáŒ,’á‰h—{,œpœj,‚¹‚ñ–Ï,ADL’á‰º"
 
-    Set frAssist = BuildCheckFrame(fBasic, "•â•‹ï", COL_LX, Y, 370, MakeList(ASSISTIVE_CSV), "AssistiveGroup")
-    Set frRisk = BuildCheckFrame(fBasic, "ƒŠƒXƒN", COL_RX, Y, 370, MakeList(RISK_CSV), "RiskGroup")
+    Dim frRisk As MSForms.Frame
+    Dim ASSISTIVE_CSV As String: ASSISTIVE_CSV = "æ–,ã‚·ãƒ«ãƒãƒ¼ã‚«ãƒ¼,æ­©è¡Œå™¨,è»Šã„ã™,çŸ­ä¸‹è‚¢è£…å…·,ä»‹åŠ©ãƒ™ãƒ«ãƒˆ,æ‰‹ã™ã‚Š,ã‚¹ãƒ­ãƒ¼ãƒ—"
+    Dim RISK_CSV As String: RISK_CSV = "è»¢å€’,èª¤åš¥,å¤±ç¦,è¤¥ç˜¡,ä½æ „é¤Š,å¾˜å¾Š,ã›ã‚“å¦„,ADLä½ä¸‹"
+
+    Set frRisk = BuildCheckFrame(fBasic, "ãƒªã‚¹ã‚¯", COL_RX, Y, 370, MakeList(RISK_CSV), "RiskGroup")
 
     Dim nextY As Single
-    nextY = Application.WorksheetFunction.Max(frAssist.Top + frAssist.Height, frRisk.Top + frRisk.Height)
+    nextY = frRisk.Top + frRisk.Height
     Y = nextY + 8
 
-    ' Needsi¶‰E2ƒJƒ‰ƒ€j
+    BuildAssistiveChecksInWalkEval ASSISTIVE_CSV
+
+    ' Needsï¼ˆå·¦å³2ã‚«ãƒ©ãƒ ï¼‰
     Dim needsH As Single: needsH = 36
-    CreateLabel fBasic, "Š³ÒNeeds", COL_LX, Y
+    CreateLabel fBasic, "æ‚£è€…Needs", COL_LX, Y
     CreateTextBox fBasic, COL_LX + lblW, Y, 270, needsH, True, "txtNeedsPt", "Needs.Patient"
-    CreateLabel fBasic, "‰Æ‘°Needs", COL_RX, Y
+    CreateLabel fBasic, "å®¶æ—Needs", COL_RX, Y
     CreateTextBox fBasic, COL_RX + lblW, Y, 270, needsH, True, "txtNeedsFam", "Needs.Family"
     Y = Y + needsH + 10
 
     ResizeFrameToContent fBasic, Y
     
     
-    ' ƒŒƒCƒAƒEƒg•ƒ^ƒu‡
+    ' ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆï¼†ã‚¿ãƒ–é †
     FitLayout
     If Not fBasicRef Is Nothing Then PositionTopRightButtons fBasicRef
     ResetTabOrder
 
-    ' ‰Šú‚Ì•Û‘¶ƒ{ƒ^ƒ“Šˆ«ó‘Ô‚ğ”½‰f
+    ' åˆæœŸã®ä¿å­˜ãƒœã‚¿ãƒ³æ´»æ€§çŠ¶æ…‹ã‚’åæ˜ 
     RefreshSaveEnabled
-    Me.Controls("btnSaveCtl").Enabled = True  ' © ˆê’UA•Û‘¶ƒ{ƒ^ƒ“‚ğí—LŒø‰»
+    Me.Controls("btnSaveCtl").Enabled = True  ' â† ä¸€æ—¦ã€ä¿å­˜ãƒœã‚¿ãƒ³ã‚’å¸¸æ™‚æœ‰åŠ¹åŒ–
     
     
 
-    '================ p¨•]‰¿i•ÏŒ`—vˆö‚Í”õl‚Öj ================
+    '================ å§¿å‹¢è©•ä¾¡ï¼ˆå¤‰å½¢è¦å› ã¯å‚™è€ƒã¸ï¼‰ ================
     nextTop = pad
     Dim fPost As MSForms.Frame
-    Set fPost = CreateFrameP(hostPost, "p¨•]‰¿i•ÏŒ`—vˆö‚Í”õl‚Öj", 200)
+    Set fPost = CreateFrameP(hostPost, "å§¿å‹¢è©•ä¾¡ï¼ˆå¤‰å½¢è¦å› ã¯å‚™è€ƒã¸ï¼‰", 200)
 
     Dim yP As Single: yP = 22
 
-    ' 1s–Ú
-    CreateCheck fPost, "“ª•”‘O•û“Ëo", COL_LX, yP, , "Posture.“ª•”‘O•û“Ëo"
-    CreateCheck fPost, "‰~”w", COL_LX + 150, yP, , "Posture.‰~”w"
-    CreateCheck fPost, "‘¤œ^", COL_LX + 300, yP, , "Posture.‘¤œ^"
-    CreateLabel fPost, "œ”ÕŒXÎ", COL_RX, yP - 2
+    ' 1è¡Œç›®
+    CreateCheck fPost, "é ­éƒ¨å‰æ–¹çªå‡º", COL_LX, yP, , "Posture.é ­éƒ¨å‰æ–¹çªå‡º"
+    CreateCheck fPost, "å††èƒŒ", COL_LX + 150, yP, , "Posture.å††èƒŒ"
+    CreateCheck fPost, "å´å¼¯", COL_LX + 300, yP, , "Posture.å´å¼¯"
+    CreateLabel fPost, "éª¨ç›¤å‚¾æ–œ", COL_RX, yP - 2
     Dim cboPel As MSForms.ComboBox
-    Set cboPel = CreateCombo(fPost, COL_RX + lblW, yP - 2, 120, , "Posture.œ”ÕŒXÎ")
-    cboPel.List = MakeList("‘OŒX,ŒãŒX,³í,•s–¾")
+    Set cboPel = CreateCombo(fPost, COL_RX + lblW, yP - 2, 120, , "Posture.éª¨ç›¤å‚¾æ–œ")
+    cboPel.List = MakeList("å‰å‚¾,å¾Œå‚¾,æ­£å¸¸,ä¸æ˜")
     nL yP
 
-    ' 2s–Ú
-    CreateCheck fPost, "‘ÌŠ²‰ñù", COL_LX, yP, , "Posture.‘ÌŠ²‰ñù"
-    CreateCheck fPost, "”½’£•G", COL_LX + 150, yP, , "Posture.”½’£•G"
+    ' 2è¡Œç›®
+    CreateCheck fPost, "ä½“å¹¹å›æ—‹", COL_LX, yP, , "Posture.ä½“å¹¹å›æ—‹"
+    CreateCheck fPost, "åå¼µè†", COL_LX + 150, yP, , "Posture.åå¼µè†"
 
-    ' ”õli‰Eãj
-    CreateLabel fPost, "”õl", COL_RX, yP - 2
-    CreateTextBox fPost, COL_RX + lblW + 10, yP - 4, 190, 50, True, "", "Posture.”õl"
+    ' å‚™è€ƒï¼ˆå³ä¸Šï¼‰
+    CreateLabel fPost, "å‚™è€ƒ", COL_RX, yP - 2
+    CreateTextBox fPost, COL_RX + lblW + 10, yP - 4, 190, 50, True, "", "Posture.å‚™è€ƒ"
 
     nL yP, 3
     ResizeFrameToContent fPost, yP
 
     nextTop = fPost.Top + fPost.Height + 6
 
-    '================ ŠÖßSki‰EE¶j{”õl ================
-    Dim fCon As MSForms.Frame: Set fCon = CreateFrameP(hostPost, "ŠÖßSki‰EE¶j{”õl", 180)
+    '================ é–¢ç¯€æ‹˜ç¸®ï¼ˆå³ãƒ»å·¦ï¼‰ï¼‹å‚™è€ƒ ================
+    Dim fCon As MSForms.Frame: Set fCon = CreateFrameP(hostPost, "é–¢ç¯€æ‹˜ç¸®ï¼ˆå³ãƒ»å·¦ï¼‰ï¼‹å‚™è€ƒ", 180)
     Dim y0 As Single: y0 = 22
     Y = y0
 
-    ' ƒKƒCƒhŒ©o‚µ
-    CreateLabel fCon, "•”ˆÊ", COL_LX, Y
-    CreateLabel fCon, "‰E", COL_LX + 90 + 20, Y
-    CreateLabel fCon, "¶", COL_LX + 90 + 20 + 60, Y
+    ' ã‚¬ã‚¤ãƒ‰è¦‹å‡ºã—
+    CreateLabel fCon, "éƒ¨ä½", COL_LX, Y
+    CreateLabel fCon, "å³", COL_LX + 90 + 20, Y
+    CreateLabel fCon, "å·¦", COL_LX + 90 + 20 + 60, Y
     nL Y
 
-    CreateCheck fCon, "èò•”i¶‰E‚È‚µj", COL_LX, Y, "", "Contracture.èò•”": nL Y
+    CreateCheck fCon, "é ¸éƒ¨ï¼ˆå·¦å³ãªã—ï¼‰", COL_LX, Y, "", "Contracture.é ¸éƒ¨": nL Y
 
-    ' •”ˆÊ‚²‚Æ‚ÉR/Lƒ`ƒFƒbƒN
-    CreateContractureRLRow fCon, Y, "Œ¨ŠÖß", "Contracture.Œ¨"
-    CreateContractureRLRow fCon, Y, "•IŠÖß", "Contracture.•I"
-    CreateContractureRLRow fCon, Y, "èŠÖß", "Contracture.èŠÖß"
-    CreateContractureRLRow fCon, Y, "ŒÒŠÖß", "Contracture.ŒÒŠÖß"
-    CreateContractureRLRow fCon, Y, "•GŠÖß", "Contracture.•GŠÖß"
-    CreateContractureRLRow fCon, Y, "‘«ŠÖß", "Contracture.‘«ŠÖß"
+    ' éƒ¨ä½ã”ã¨ã«R/Lãƒã‚§ãƒƒã‚¯
+    CreateContractureRLRow fCon, Y, "è‚©é–¢ç¯€", "Contracture.è‚©"
+    CreateContractureRLRow fCon, Y, "è‚˜é–¢ç¯€", "Contracture.è‚˜"
+    CreateContractureRLRow fCon, Y, "æ‰‹é–¢ç¯€", "Contracture.æ‰‹é–¢ç¯€"
+    CreateContractureRLRow fCon, Y, "è‚¡é–¢ç¯€", "Contracture.è‚¡é–¢ç¯€"
+    CreateContractureRLRow fCon, Y, "è†é–¢ç¯€", "Contracture.è†é–¢ç¯€"
+    CreateContractureRLRow fCon, Y, "è¶³é–¢ç¯€", "Contracture.è¶³é–¢ç¯€"
 
-    ' ”õli‰E‘¤ã•”‚Éj
-    CreateLabel fCon, "”õl", COL_RX, y0 - 2
-    CreateTextBox fCon, COL_RX + lblW, y0 - 4, 250, 80, True, "", "Contracture.”õl"
+    ' å‚™è€ƒï¼ˆå³å´ä¸Šéƒ¨ã«ï¼‰
+    CreateLabel fCon, "å‚™è€ƒ", COL_RX, y0 - 2
+    CreateTextBox fCon, COL_RX + lblW, y0 - 4, 250, 80, True, "", "Contracture.å‚™è€ƒ"
 
-    ' ‚‚³’²®
+    ' é«˜ã•èª¿æ•´
     ResizeFrameToContent fCon, Application.WorksheetFunction.Max(Y, y0 + 80)
 
 
   SetupInputModesJP
   
-'== ROM“à‚Ì‹óƒy[ƒW(Page14/15)‚ğ‹N“®‚É©“®íœ ==
+'== ROMå†…ã®ç©ºãƒšãƒ¼ã‚¸(Page14/15)ã‚’èµ·å‹•æ™‚ã«è‡ªå‹•å‰Šé™¤ ==
 Dim ctlZ As Object, mpZ As MSForms.MultiPage, iZ As Long, capZ As String
 For Each ctlZ In Me.Controls
     If TypeName(ctlZ) = "MultiPage" Then
@@ -3498,11 +3544,11 @@ For Each ctlZ In Me.Controls
 Next ctlZ
 
 
-'== ”õl—“iƒ‰ƒxƒ‹{‘å‚«‚¢TextBoxj‚ğ”ñ•\¦ ==
+'== å‚™è€ƒæ¬„ï¼ˆãƒ©ãƒ™ãƒ«ï¼‹å¤§ãã„TextBoxï¼‰ã‚’éè¡¨ç¤º ==
 
 Dim mpN As Object, pgN As Object, pN As Object, cN As Object
 
-' --- ROMƒy[ƒW“Á’èi"ROM" ‚Ü‚½‚Í "å—vŠÖß"j ---
+' --- ROMãƒšãƒ¼ã‚¸ç‰¹å®šï¼ˆ"ROM" ã¾ãŸã¯ "ä¸»è¦é–¢ç¯€"ï¼‰ ---
 Set mpN = Nothing: Set pgN = Nothing
 For Each cN In Me.Controls
     If TypeName(cN) = "MultiPage" Then
@@ -3514,7 +3560,7 @@ Next cN
 If Not mpN Is Nothing Then
     For Each pN In mpN.Pages
     If InStr(1, CStr(pN.caption), "ROM", vbTextCompare) > 0 _
-       Or InStr(1, CStr(pN.caption), "å—vŠÖß", vbTextCompare) > 0 Then
+       Or InStr(1, CStr(pN.caption), "ä¸»è¦é–¢ç¯€", vbTextCompare) > 0 Then
         Set pgN = pN: Exit For
     End If
 Next pN
@@ -3528,7 +3574,7 @@ If Not pgN Is Nothing Then
     Dim parent As Object, ctl As Object
     Dim nLbl As Object, nTB As Object, isML As Boolean
 
-    ' qƒRƒ“ƒeƒi‚ğŠÜ‚ß‚Ä[‚³—Dæ‚Å’Tõ
+    ' å­ã‚³ãƒ³ãƒ†ãƒŠã‚’å«ã‚ã¦æ·±ã•å„ªå…ˆã§æ¢ç´¢
     stk.Add pgN
     Do While stk.Count > 0
         Set parent = stk(1): stk.Remove 1
@@ -3537,10 +3583,10 @@ If Not pgN Is Nothing Then
             On Error GoTo 0
             Select Case TypeName(ctl)
                 Case "Frame", "MultiPage", "Page"
-                    stk.Add ctl                      ' q‚ğ‚½‚Ç‚é
+                    stk.Add ctl                      ' å­ã‚’ãŸã©ã‚‹
                 Case "Label"
-                    If InStr(1, CStr(ctl.caption), "”õl", vbTextCompare) > 0 Then
-                        Set nLbl = ctl              ' u”õl/”õl—“v‚ğ•ß‘¨
+                    If InStr(1, CStr(ctl.caption), "å‚™è€ƒ", vbTextCompare) > 0 Then
+                        Set nLbl = ctl              ' ã€Œå‚™è€ƒ/å‚™è€ƒæ¬„ã€ã‚’æ•æ‰
                     End If
                 Case "TextBox"
                     isML = False
@@ -3549,27 +3595,27 @@ If Not pgN Is Nothing Then
                         If nTB Is Nothing Then
                             Set nTB = ctl
                         ElseIf ctl.Height * ctl.Width > nTB.Height * nTB.Width Then
-                            Set nTB = ctl          ' Å‘åƒTƒCƒY‚ğ”õl‚Æ‚µ‚ÄÌ—p
+                            Set nTB = ctl          ' æœ€å¤§ã‚µã‚¤ã‚ºã‚’å‚™è€ƒã¨ã—ã¦æ¡ç”¨
                         End If
                     End If
             End Select
         Next ctl
     Loop
 
-    ' Œ©‚Â‚©‚Á‚½‚ç”ñ•\¦
+    ' è¦‹ã¤ã‹ã£ãŸã‚‰éè¡¨ç¤º
     If Not nLbl Is Nothing Then nLbl.Visible = False
     If Not nTB Is Nothing Then nTB.Visible = False
 End If
 
 
-'=== ”õlƒ‰ƒxƒ‹‚Æ”õlƒeƒLƒXƒg‚ğÄ‹A“I‚É”ñ•\¦i‘SƒRƒ“ƒeƒi‘Î‰j ===
+'=== å‚™è€ƒãƒ©ãƒ™ãƒ«ã¨å‚™è€ƒãƒ†ã‚­ã‚¹ãƒˆã‚’å†å¸°çš„ã«éè¡¨ç¤ºï¼ˆå…¨ã‚³ãƒ³ãƒ†ãƒŠå¯¾å¿œï¼‰ ===
 Dim qH As New Collection, parentH As Object, ctlH As Object, iH As Long
 Dim noteTB As Object, areaMax As Double
 
 
 
 
-' ROMƒy[ƒW‚ğ‚»‚Ìê‚Å“Á’è‚µ‚Ä‚©‚çŠJn
+' ROMãƒšãƒ¼ã‚¸ã‚’ãã®å ´ã§ç‰¹å®šã—ã¦ã‹ã‚‰é–‹å§‹
 Dim rootPg As Object, c0 As Object, mp0 As Object, i0 As Long
 Set rootPg = Nothing
 For Each c0 In Me.Controls
@@ -3577,7 +3623,7 @@ For Each c0 In Me.Controls
         Set mp0 = c0
         For i0 = 0 To mp0.Pages.Count - 1
             If InStr(1, CStr(mp0.Pages(i0).caption), "ROM", vbTextCompare) > 0 _
-               Or InStr(1, CStr(mp0.Pages(i0).caption), "å—vŠÖß", vbTextCompare) > 0 Then
+               Or InStr(1, CStr(mp0.Pages(i0).caption), "ä¸»è¦é–¢ç¯€", vbTextCompare) > 0 Then
                 Set rootPg = mp0.Pages(i0): Exit For
             End If
         Next i0
@@ -3591,7 +3637,7 @@ Do While qH.Count > 0
     Set parentH = qH(1): qH.Remove 1
 
     If TypeName(parentH) = "MultiPage" Then
-        ' MultiPage ‚Í Controls ‚ğ‚½‚È‚¢‚Ì‚Å Pages ‚ğŒÂ•Ê‚É’H‚é
+        ' MultiPage ã¯ Controls ã‚’æŒãŸãªã„ã®ã§ Pages ã‚’å€‹åˆ¥ã«è¾¿ã‚‹
         For iH = 0 To parentH.Pages.Count - 1
             qH.Add parentH.Pages(iH)
         Next iH
@@ -3601,22 +3647,22 @@ Do While qH.Count > 0
             On Error GoTo 0
            Select Case TypeName(ctlH)
     Case "Frame", "Page"
-        qH.Add ctlH                      ' qƒRƒ“ƒeƒi‚ğ’H‚é
+        qH.Add ctlH                      ' å­ã‚³ãƒ³ãƒ†ãƒŠã‚’è¾¿ã‚‹
     Case "MultiPage"
         For iH = 0 To ctlH.Pages.Count - 1
-            qH.Add ctlH.Pages(iH)        ' ƒy[ƒW‚ğŒÂ•Ê‚É’H‚é
+            qH.Add ctlH.Pages(iH)        ' ãƒšãƒ¼ã‚¸ã‚’å€‹åˆ¥ã«è¾¿ã‚‹
         Next iH
     Case "Label"
-        If InStr(1, CStr(ctlH.caption), "”õl", vbTextCompare) > 0 Then
+        If InStr(1, CStr(ctlH.caption), "å‚™è€ƒ", vbTextCompare) > 0 Then
             Set nLbl = ctlH
             Set noteTB = ctlH
-            ctlH.Visible = False         ' ”õlƒ‰ƒxƒ‹‚ğÁ‚·
+            ctlH.Visible = False         ' å‚™è€ƒãƒ©ãƒ™ãƒ«ã‚’æ¶ˆã™
         End If
     Case "TextBox"
         Dim mlH As Boolean: mlH = False
         On Error Resume Next: mlH = ctlH.multiline: On Error GoTo 0
         If mlH Or ctlH.Height >= 80 Or ctlH.Width >= 400 Then
-            ctlH.Visible = False         ' ‘å‚«‚¢ƒeƒLƒXƒgBOX‚ğÁ‚·
+            ctlH.Visible = False         ' å¤§ãã„ãƒ†ã‚­ã‚¹ãƒˆBOXã‚’æ¶ˆã™
         End If
 End Select
 
@@ -3627,7 +3673,7 @@ Loop
 If Not noteTB Is Nothing Then noteTB.Visible = False
 'Debug.Print "[ROM_Note] hidden lbl=" & (Not (nLbl Is Nothing)) & "  tb=" & (Not (noteTB Is Nothing))
 
-'=== /”õl”ñ•\¦ ===
+'=== /å‚™è€ƒéè¡¨ç¤º ===
 
 Call ROM_Fix_TextBoxHeight_Recursive_OnROM_Once
 Call ROM_CheckBoxes_Up12_OnROM_Recursive_Once_V2
@@ -3638,21 +3684,21 @@ Dim c As Control
 For Each c In Me.Controls
     If TypeName(c) = "Label" Then
         If c.caption = "NRS" Then
-            c.caption = "ˆÀÃNRS"
+            c.caption = "å®‰é™æ™‚NRS"
             Exit For
         End If
     End If
 Next
 
-'--- “®ìNRS‚ğ©“®’Ç‰Ái1‰ñ‚¾‚¯j ---
+'--- å‹•ä½œæ™‚NRSã‚’è‡ªå‹•è¿½åŠ ï¼ˆ1å›ã ã‘ï¼‰ ---
 Dim srcLbl As MSForms.label, srcCmb As MSForms.ComboBox
 Dim lbl As MSForms.label, cmb As MSForms.ComboBox
 Dim ct As Control
 
-' ˆÀÃNRSƒ‰ƒxƒ‹‚ğ“Á’è
+' å®‰é™æ™‚NRSãƒ©ãƒ™ãƒ«ã‚’ç‰¹å®š
 For Each ct In Me.Controls
     If TypeName(ct) = "Label" Then
-        If ct.caption = "ˆÀÃNRS" Then
+        If ct.caption = "å®‰é™æ™‚NRS" Then
             Set srcLbl = ct
             Exit For
         End If
@@ -3660,7 +3706,7 @@ For Each ct In Me.Controls
 Next
 
 If Not srcLbl Is Nothing Then
-    ' ˆÀÃNRS‚Ì‰E‘¤‚É‚ ‚éŠù‘¶Combo‚ğ„’èi“¯‚¶‚‚³}6j
+    ' å®‰é™æ™‚NRSã®å³å´ã«ã‚ã‚‹æ—¢å­˜Comboã‚’æ¨å®šï¼ˆåŒã˜é«˜ã•Â±6ï¼‰
     For Each ct In Me.Controls
         If TypeName(ct) = "ComboBox" Then
             If Abs(ct.Top - srcLbl.Top) <= 20 And ct.Left > srcLbl.Left Then
@@ -3671,7 +3717,7 @@ If Not srcLbl Is Nothing Then
         End If
     Next
 
-    ' Šù‚Éì¬Ï‚İ‚È‚ç‰½‚à‚µ‚È‚¢
+    ' æ—¢ã«ä½œæˆæ¸ˆã¿ãªã‚‰ä½•ã‚‚ã—ãªã„
     For Each ct In Me.Controls
         If TypeName(ct) = "Label" And ct.name = "lblNRS_Move" Then Set lbl = ct
         If TypeName(ct) = "ComboBox" And ct.name = "cmbNRS_Move" Then Set cmb = ct
@@ -3679,7 +3725,7 @@ If Not srcLbl Is Nothing Then
 
     If lbl Is Nothing Then
        Set lbl = srcLbl.parent.Controls.Add("Forms.Label.1", "lblNRS_Move", True)
-        lbl.caption = "“®ìNRS"
+        lbl.caption = "å‹•ä½œæ™‚NRS"
     End If
 
     If cmb Is Nothing Then
@@ -3689,7 +3735,7 @@ If Not srcLbl Is Nothing Then
         For i = 0 To 10: cmb.AddItem CStr(i): Next i
     End If
 
-    ' ˆÊ’uŒˆ‚ßiˆÀÃNRS‚Ìu‰ºv‚É”z’uj
+    ' ä½ç½®æ±ºã‚ï¼ˆå®‰é™æ™‚NRSã®ã€Œä¸‹ã€ã«é…ç½®ï¼‰
 Dim baseLeft As Single, baseTop As Single, gap As Single
 gap = 8
 baseLeft = 12
@@ -3716,15 +3762,15 @@ Sub ShowFrame12()
         If TypeName(f) = "Frame" Then
             For Each t In f.Controls
                 If TypeName(t) = "TextBox" And t.name = "TextBox2" Then
-                    f.ZOrder 0                 'ˆê”Ôè‘O‚É
-                    f.caption = "š‚±‚ê‚ªFrame12š" 'Œ©‚Â‚¯‚â‚·‚­‚·‚é
+                    f.ZOrder 0                 'ä¸€ç•ªæ‰‹å‰ã«
+                    f.caption = "â˜…ã“ã‚ŒãŒFrame12â˜…" 'è¦‹ã¤ã‘ã‚„ã™ãã™ã‚‹
                     Beep
                     Exit Sub
                 End If
             Next
         End If
     Next
-    MsgBox "TextBox2 ‚ÌeƒtƒŒ[ƒ€‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB"
+    MsgBox "TextBox2 ã®è¦ªãƒ•ãƒ¬ãƒ¼ãƒ ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚"
 End Sub
 
 
@@ -3746,24 +3792,24 @@ Public Sub AddPainQualUI()
     Dim items As Variant
     Dim i As Long
 
-    ' Šù‘¶ƒ`ƒFƒbƒNiˆÀ‘S”Åj
+    ' æ—¢å­˜ãƒã‚§ãƒƒã‚¯ï¼ˆå®‰å…¨ç‰ˆï¼‰
 Dim t As Object: Err.Clear
 On Error Resume Next: Set t = Me.Controls("lstPainQual")
 If Err.Number = 0 And Not t Is Nothing Then On Error GoTo 0: Exit Sub
 On Error GoTo 0
 
 
-    ' Šù‘¶NRS‚ÌeƒtƒŒ[ƒ€‚É’Ç‰Á‚·‚é
+    ' æ—¢å­˜NRSã®è¦ªãƒ•ãƒ¬ãƒ¼ãƒ ã«è¿½åŠ ã™ã‚‹
     Set host = Me.Controls("cmbNRS_Move").parent
 
-    ' Œ©o‚µ
+    ' è¦‹å‡ºã—
     Set cap = host.Controls.Add("Forms.Label.1", "lblPainQual", True)
-    cap.caption = "’É‚İ‚Ì«¿i•¡”‘I‘ğ‰Âj"
+    cap.caption = "ç—›ã¿ã®æ€§è³ªï¼ˆè¤‡æ•°é¸æŠå¯ï¼‰"
     cap.Left = 12
     cap.Top = 12
     cap.AutoSize = True
 
-    ' ƒŠƒXƒgƒ{ƒbƒNƒXi•¡”‘I‘ğj
+    ' ãƒªã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ï¼ˆè¤‡æ•°é¸æŠï¼‰
     Set lb = host.Controls.Add("Forms.ListBox.1", "lstPainQual", True)
     lb.Left = 12
     lb.Top = cap.Top + cap.Height + 6
@@ -3772,9 +3818,9 @@ On Error GoTo 0
     lb.MultiSelect = fmMultiSelectMulti
     lb.IntegralHeight = False
 
-    ' ‘I‘ğˆ
-    items = Array("“İ’É", "h‚·‚æ‚¤‚È’É‚İ", "‚µ‚Ñ‚ê", "Ü”MŠ´", "ƒYƒLƒYƒL", _
-                  "’÷‚ß•t‚¯Š´", "ˆ³”—Š´", "ˆø‚«‚Â‚è", "“dŒ‚’É", "‚±‚í‚Î‚è", "‚¯‚¢‚ê‚ñ", "‚»‚Ì‘¼")
+    ' é¸æŠè‚¢
+    items = Array("éˆç—›", "åˆºã™ã‚ˆã†ãªç—›ã¿", "ã—ã³ã‚Œ", "ç¼ç†±æ„Ÿ", "ã‚ºã‚­ã‚ºã‚­", _
+                  "ç· ã‚ä»˜ã‘æ„Ÿ", "åœ§è¿«æ„Ÿ", "å¼•ãã¤ã‚Š", "é›»æ’ƒç—›", "ã“ã‚ã°ã‚Š", "ã‘ã„ã‚Œã‚“", "ãã®ä»–")
     For i = LBound(items) To UBound(items)
         lb.AddItem items(i)
     Next i
@@ -3801,49 +3847,49 @@ Public Sub AddPainFactorsUI()
     Dim cap As MSForms.label
     Dim i As Long, Y As Single
 
-    ' Šù‘¶ƒ`ƒFƒbƒNid•¡¶¬–h~j
+    ' æ—¢å­˜ãƒã‚§ãƒƒã‚¯ï¼ˆé‡è¤‡ç”Ÿæˆé˜²æ­¢ï¼‰
     Dim t As Object: Err.Clear
     On Error Resume Next: Set t = Me.Controls("fraPainFactors")
     If Err.Number = 0 And Not t Is Nothing Then On Error GoTo 0: Exit Sub
     On Error GoTo 0
 
-    ' ’Ç‰Áæ‚Íáu’Éƒ^ƒu‚ÌƒtƒŒ[ƒ€iNRS‚Ìej
+    ' è¿½åŠ å…ˆã¯ç–¼ç—›ã‚¿ãƒ–ã®ãƒ•ãƒ¬ãƒ¼ãƒ ï¼ˆNRSã®è¦ªï¼‰
     Set host = Me.Controls("cmbNRS_Move").parent
 
-    ' Œ©o‚µ
+    ' è¦‹å‡ºã—
     Set cap = host.Controls.Add("Forms.Label.1", "lblPainFactors", True)
-    cap.caption = "—UˆöEŒyŒ¸ˆöq"
+    cap.caption = "èª˜å› ãƒ»è»½æ¸›å› å­"
     cap.Left = 270
     cap.Top = 280
     cap.AutoSize = True
 
-    ' ƒRƒ“ƒeƒiƒtƒŒ[ƒ€
+    ' ã‚³ãƒ³ãƒ†ãƒŠãƒ•ãƒ¬ãƒ¼ãƒ 
     Set fr = host.Controls.Add("Forms.Frame.1", "fraPainFactors", True)
     fr.Left = cap.Left
     fr.Top = cap.Top + cap.Height + 4
     fr.Width = 360
     fr.Height = 120
 
-    ' ¶—ñF—UˆöiProvokingj
+    ' å·¦åˆ—ï¼šèª˜å› ï¼ˆProvokingï¼‰
     Dim provItems As Variant, relItems As Variant
     provItems = Array( _
-        Array("chkPainProv_Move", "“®ì"), _
-        Array("chkPainProv_Posture", "p¨"), _
-        Array("chkPainProv_Walk", "•às"), _
-        Array("chkPainProv_Lift", "‚¿ã‚°"), _
-        Array("chkPainProv_Cough", "ŠP/‚­‚µ‚á‚İ") _
+        Array("chkPainProv_Move", "å‹•ä½œ"), _
+        Array("chkPainProv_Posture", "å§¿å‹¢"), _
+        Array("chkPainProv_Walk", "æ­©è¡Œ"), _
+        Array("chkPainProv_Lift", "æŒã¡ä¸Šã’"), _
+        Array("chkPainProv_Cough", "å’³/ãã—ã‚ƒã¿") _
     )
 
-    ' ‰E—ñFŒyŒ¸iRelievingj
+    ' å³åˆ—ï¼šè»½æ¸›ï¼ˆRelievingï¼‰
     relItems = Array( _
-        Array("chkPainRelief_Rest", "ˆÀÃ"), _
-        Array("chkPainRelief_Heat", "‰·”M"), _
-        Array("chkPainRelief_Cold", "—â‹p"), _
-        Array("chkPainRelief_Med", "•–ò"), _
-        Array("chkPainRelief_Brace", "ƒRƒ‹ƒZƒbƒg") _
+        Array("chkPainRelief_Rest", "å®‰é™"), _
+        Array("chkPainRelief_Heat", "æ¸©ç†±"), _
+        Array("chkPainRelief_Cold", "å†·å´"), _
+        Array("chkPainRelief_Med", "æœè–¬"), _
+        Array("chkPainRelief_Brace", "ã‚³ãƒ«ã‚»ãƒƒãƒˆ") _
     )
 
-    ' ¶—ñ”z’u
+    ' å·¦åˆ—é…ç½®
     Y = 8
     For i = LBound(provItems) To UBound(provItems)
         Dim cB As MSForms.CheckBox
@@ -3854,7 +3900,7 @@ Public Sub AddPainFactorsUI()
         Y = Y + cB.Height + 2
     Next i
 
-    ' ‰E—ñ”z’u
+    ' å³åˆ—é…ç½®
     Y = 8
     For i = LBound(relItems) To UBound(relItems)
         Dim cb2 As MSForms.CheckBox
@@ -3873,37 +3919,37 @@ Public Sub AddVASUI()
     Dim tb As MSForms.TextBox
     Dim sb As MSForms.ScrollBar
 
-    ' d•¡¶¬–h~
+    ' é‡è¤‡ç”Ÿæˆé˜²æ­¢
     Dim t As Object: Err.Clear
     On Error Resume Next: Set t = Me.Controls("fraVAS")
     If Err.Number = 0 And Not t Is Nothing Then On Error GoTo 0: Exit Sub
     On Error GoTo 0
 
-    ' ’Ç‰Áæáu’Éƒ^ƒu‚ÌƒtƒŒ[ƒ€iNRS‚Ìej
+    ' è¿½åŠ å…ˆï¼ç–¼ç—›ã‚¿ãƒ–ã®ãƒ•ãƒ¬ãƒ¼ãƒ ï¼ˆNRSã®è¦ªï¼‰
     Set host = Me.Controls("cmbNRS_Move").parent
 
-    ' Œ©o‚µ
+    ' è¦‹å‡ºã—
     Set cap = host.Controls.Add("Forms.Label.1", "lblVAS", True)
-    cap.caption = "VASi0?100j"
+    cap.caption = "VASï¼ˆ0?100ï¼‰"
     cap.Left = 640
     cap.Top = 280
     cap.AutoSize = True
 
-    ' ƒRƒ“ƒeƒi
+    ' ã‚³ãƒ³ãƒ†ãƒŠ
     Set fr = host.Controls.Add("Forms.Frame.1", "fraVAS", True)
     fr.Left = cap.Left
     fr.Top = cap.Top + cap.Height + 4
     fr.Width = 122
     fr.Height = 64
 
-    ' ƒeƒLƒXƒgƒ{ƒbƒNƒXi”’l 0?100j
+    ' ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ï¼ˆæ•°å€¤ 0?100ï¼‰
     Set tb = fr.Controls.Add("Forms.TextBox.1", "txtVAS", True)
     tb.Left = 8
     tb.Top = 10
     tb.Width = 40
     tb.Text = "0"
 
-    ' ƒXƒNƒ[ƒ‹ƒo[i‰¡j0?100
+    ' ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ï¼ˆæ¨ªï¼‰0?100
     Set sb = fr.Controls.Add("Forms.ScrollBar.1", "sldVAS", True)
     sb.Left = tb.Left + tb.Width + 6
     sb.Top = tb.Top + 2
@@ -3944,23 +3990,23 @@ Public Sub AddPainCourseUI()
     Dim tb As MSForms.TextBox
     Dim i As Long
 
-    ' d•¡¶¬–h~
+    ' é‡è¤‡ç”Ÿæˆé˜²æ­¢
     Dim t As Object: Err.Clear
     On Error Resume Next: Set t = Me.Controls("fraPainCourse")
     If Err.Number = 0 And Not t Is Nothing Then On Error GoTo 0: Exit Sub
     On Error GoTo 0
 
-    ' ’Ç‰Áæáu’Éƒ^ƒu‚ÌƒtƒŒ[ƒ€iNRS‚Ìej
+    ' è¿½åŠ å…ˆï¼ç–¼ç—›ã‚¿ãƒ–ã®ãƒ•ãƒ¬ãƒ¼ãƒ ï¼ˆNRSã®è¦ªï¼‰
     Set host = Me.Controls("cmbNRS_Move").parent
 
-    ' Œ©o‚µ
+    ' è¦‹å‡ºã—
     Set lb = host.Controls.Add("Forms.Label.1", "lblPainCourse", True)
-    lb.caption = "’É‚İ‚ÌŒo‰ßEŠÔ•Ï‰»"
+    lb.caption = "ç—›ã¿ã®çµŒéãƒ»æ™‚é–“å¤‰åŒ–"
     lb.Left = 12
     lb.Top = 280
     lb.AutoSize = True
 
-    ' ƒRƒ“ƒeƒi
+    ' ã‚³ãƒ³ãƒ†ãƒŠ
     Dim fr As MSForms.Frame
     Set fr = host.Controls.Add("Forms.Frame.1", "fraPainCourse", True)
     fr.Left = lb.Left
@@ -3968,18 +4014,18 @@ Public Sub AddPainCourseUI()
     fr.Width = 610
     fr.Height = 78
 
-    ' ”­ÇŠú
+    ' ç™ºç—‡æ™‚æœŸ
     Set lb = fr.Controls.Add("Forms.Label.1", "lblPainOnset", True)
-    lb.caption = "”­ÇŠú"
+    lb.caption = "ç™ºç—‡æ™‚æœŸ"
     lb.Left = 12: lb.Top = 10: lb.AutoSize = True
 
     Set cB = fr.Controls.Add("Forms.ComboBox.1", "cmbPainOnset", True)
     cB.Left = lb.Left + 60: cB.Top = 8: cB.Width = 140
-    cB.List = Array("‹}«i?1Tj", "ˆŸ‹}«i?3‚©Œj", "–«i3‚©Œ?j", "Ä”R^Ä”­", "•s–¾")
+    cB.List = Array("æ€¥æ€§ï¼ˆ?1é€±ï¼‰", "äºœæ€¥æ€§ï¼ˆ?3ã‹æœˆï¼‰", "æ…¢æ€§ï¼ˆ3ã‹æœˆ?ï¼‰", "å†ç‡ƒï¼å†ç™º", "ä¸æ˜")
 
-    ' ‘±ŠÔ
+    ' æŒç¶šæ™‚é–“
     Set lb = fr.Controls.Add("Forms.Label.1", "lblPainDuration", True)
-    lb.caption = "‘±"
+    lb.caption = "æŒç¶š"
     lb.Left = 260: lb.Top = 10: lb.AutoSize = True
 
     Set tb = fr.Controls.Add("Forms.TextBox.1", "txtPainDuration", True)
@@ -3987,16 +4033,16 @@ Public Sub AddPainCourseUI()
 
     Set cB = fr.Controls.Add("Forms.ComboBox.1", "cmbPainDurationUnit", True)
     cB.Left = tb.Left + tb.Width + 6: cB.Top = 8: cB.Width = 70
-    cB.List = Array("“ú", "T", "‚©Œ", "”N")
+    cB.List = Array("æ—¥", "é€±", "ã‹æœˆ", "å¹´")
 
-    ' “ú“à•Ï“®
+    ' æ—¥å†…å¤‰å‹•
     Set lb = fr.Controls.Add("Forms.Label.1", "lblPainDayPeriod", True)
-    lb.caption = "“ú“à•Ï“®"
+    lb.caption = "æ—¥å†…å¤‰å‹•"
     lb.Left = 12: lb.Top = 38: lb.AutoSize = True
 
     Set cB = fr.Controls.Add("Forms.ComboBox.1", "cmbPainDayPeriod", True)
     cB.Left = lb.Left + 54: cB.Top = 36: cB.Width = 260
-    cB.List = Array("’©‚É‹­‚¢", "’‹‚É‹­‚¢", "–é‚É‹­‚¢", "“ü—Œã‚ÉŒyŒ¸", "Šˆ“®Œã‚É‘ˆ«", "ˆê’è‚Å•Ï‰»‚È‚µ")
+    cB.List = Array("æœã«å¼·ã„", "æ˜¼ã«å¼·ã„", "å¤œã«å¼·ã„", "å…¥æµ´å¾Œã«è»½æ¸›", "æ´»å‹•å¾Œã«å¢—æ‚ª", "ä¸€å®šã§å¤‰åŒ–ãªã—")
 End Sub
 
 
@@ -4014,30 +4060,30 @@ Public Sub AddPainSiteUI()
     Dim i As Long
     Dim items As Variant
 
-    ' d•¡¶¬–h~
+    ' é‡è¤‡ç”Ÿæˆé˜²æ­¢
     Dim t As Object: Err.Clear
     On Error Resume Next: Set t = Me.Controls("fraPainSite")
     If Err.Number = 0 And Not t Is Nothing Then On Error GoTo 0: Exit Sub
     On Error GoTo 0
 
-    ' ’Ç‰Áæáu’Éƒ^ƒu‚ÌƒtƒŒ[ƒ€iNRS‚Ìej
+    ' è¿½åŠ å…ˆï¼ç–¼ç—›ã‚¿ãƒ–ã®ãƒ•ãƒ¬ãƒ¼ãƒ ï¼ˆNRSã®è¦ªï¼‰
     Set host = Me.Controls("cmbNRS_Move").parent
 
-    ' Œ©o‚µ
+    ' è¦‹å‡ºã—
     Set lb = host.Controls.Add("Forms.Label.1", "lblPainSite", True)
-    lb.caption = "áu’É•”ˆÊi•¡”‘I‘ğ‰Âj"
+    lb.caption = "ç–¼ç—›éƒ¨ä½ï¼ˆè¤‡æ•°é¸æŠå¯ï¼‰"
     lb.Left = 12
     lb.Top = 380
     lb.AutoSize = True
 
-    ' ƒtƒŒ[ƒ€
+    ' ãƒ•ãƒ¬ãƒ¼ãƒ 
     Set fr = host.Controls.Add("Forms.Frame.1", "fraPainSite", True)
     fr.Left = lb.Left
     fr.Top = lb.Top + lb.Height + 4
     fr.Width = 360
     fr.Height = 140
 
-    ' ƒŠƒXƒgi•¡”‘I‘ğj
+    ' ãƒªã‚¹ãƒˆï¼ˆè¤‡æ•°é¸æŠï¼‰
     Set lst = fr.Controls.Add("Forms.ListBox.1", "lstPainSite", True)
     lst.Left = 12
     lst.Top = 10
@@ -4046,12 +4092,12 @@ Public Sub AddPainSiteUI()
     lst.MultiSelect = fmMultiSelectMulti
     lst.IntegralHeight = False
 
-    ' •”ˆÊŒó•â
+    ' éƒ¨ä½å€™è£œ
     items = Array( _
-        "“ª•”", "èò•”", "Œ¨", "Œ¨b•”", "ã˜r", "•I", "‘O˜r", "èñ", "è/w", _
-        "‹¹•”", "”w•”ã•”", "”w•”‰º•”i˜j", _
-        "œ”Õ•”/å’°•”", _
-        "ŒÒ", "‘å‘Ú", "•G", "‰º‘Ú", "‘«ñ", "‘«/æä" _
+        "é ­éƒ¨", "é ¸éƒ¨", "è‚©", "è‚©ç”²éƒ¨", "ä¸Šè…•", "è‚˜", "å‰è…•", "æ‰‹é¦–", "æ‰‹/æŒ‡", _
+        "èƒ¸éƒ¨", "èƒŒéƒ¨ä¸Šéƒ¨", "èƒŒéƒ¨ä¸‹éƒ¨ï¼ˆè…°ï¼‰", _
+        "éª¨ç›¤éƒ¨/ä»™è…¸éƒ¨", _
+        "è‚¡", "å¤§è…¿", "è†", "ä¸‹è…¿", "è¶³é¦–", "è¶³/è¶¾" _
     )
     For i = LBound(items) To UBound(items)
         lst.AddItem items(i)
@@ -4074,7 +4120,7 @@ Public Sub SummarizePainUI()
 
     Set fr = Me.Controls("Frame12")
 
-    ' QÆæ“¾
+    ' å‚ç…§å–å¾—
     On Error Resume Next
     Set lbQ = fr.Controls("lstPainQual")
     Set lbS = fr.Controls("fraPainSite").Controls("lstPainSite")
@@ -4086,47 +4132,47 @@ Public Sub SummarizePainUI()
     day = fr.Controls("fraPainCourse").Controls("cmbPainDayPeriod").Text
     On Error GoTo 0
 
-    ' ’É‚İ‚Ì«¿
-    s = "yáu’É‚Ü‚Æ‚ßz"
-    s = s & " «¿: "
+    ' ç—›ã¿ã®æ€§è³ª
+    s = "ã€ç–¼ç—›ã¾ã¨ã‚ã€‘"
+    s = s & " æ€§è³ª: "
     If Not lbQ Is Nothing Then
         For i = 0 To lbQ.ListCount - 1
-            If lbQ.Selected(i) Then s = s & lbQ.List(i) & "^"
+            If lbQ.Selected(i) Then s = s & lbQ.List(i) & "ï¼"
         Next
-        If Right$(s, 1) = "^" Then s = Left$(s, Len(s) - 1)
+        If Right$(s, 1) = "ï¼" Then s = Left$(s, Len(s) - 1)
     End If
 
-    ' •”ˆÊ
-    s = s & "b•”ˆÊ: "
+    ' éƒ¨ä½
+    s = s & "ï½œéƒ¨ä½: "
     If Not lbS Is Nothing Then
         Dim tmpS As String: tmpS = ""
         For i = 0 To lbS.ListCount - 1
-            If lbS.Selected(i) Then tmpS = tmpS & lbS.List(i) & "^"
+            If lbS.Selected(i) Then tmpS = tmpS & lbS.List(i) & "ï¼"
         Next
         If tmpS <> "" Then tmpS = Left$(tmpS, Len(tmpS) - 1)
         s = s & tmpS
     End If
 
-    ' —UˆöEŒyŒ¸ˆöq
-    s = s & "bˆöq: "
+    ' èª˜å› ãƒ»è»½æ¸›å› å­
+    s = s & "ï½œå› å­: "
     If Not frF Is Nothing Then
         Dim tmpF As String: tmpF = ""
         For Each c In frF.Controls
             If TypeName(c) = "CheckBox" Then
-                If c.value = True Then tmpF = tmpF & c.caption & "^"
+                If c.value = True Then tmpF = tmpF & c.caption & "ï¼"
             End If
         Next
         If tmpF <> "" Then tmpF = Left$(tmpF, Len(tmpF) - 1)
         s = s & tmpF
     End If
 
-    ' Œo‰ß{VAS
-    If onset <> "" Then s = s & "b”­Ç: " & onset
-    If dura <> "" Or unit <> "" Then s = s & "b‘±: " & dura & unit
-    If day <> "" Then s = s & "b“ú“à: " & day
-    If vas <> "" Then s = s & "bVAS: " & vas
+    ' çµŒéï¼‹VAS
+    If onset <> "" Then s = s & "ï½œç™ºç—‡: " & onset
+    If dura <> "" Or unit <> "" Then s = s & "ï½œæŒç¶š: " & dura & unit
+    If day <> "" Then s = s & "ï½œæ—¥å†…: " & day
+    If vas <> "" Then s = s & "ï½œVAS: " & vas
 
-    ' ƒƒ‚‚Ö”½‰f
+    ' ãƒ¡ãƒ¢ã¸åæ˜ 
     On Error Resume Next
     Me.Controls("Frame12").Controls("txtPainMemo").Text = s
 End Sub
@@ -4147,12 +4193,12 @@ End Sub
 
 
 
-' áu’Éƒ^ƒu( Frame12 )‚Éc‚Á‚Ä‚¢‚é‹ŒUI‚ğœ‹‚·‚é
+' ç–¼ç—›ã‚¿ãƒ–( Frame12 )ã«æ®‹ã£ã¦ã„ã‚‹æ—§UIã‚’é™¤å»ã™ã‚‹
 Public Sub RemoveLegacyPainUI()
     Dim f As MSForms.Frame, n As Variant
     Set f = Me.Controls("Frame12")
 
-    ' Probe‚Å[LEGACY?]‚Æ”»’è‚³‚ê‚½‚à‚Ì‚¾‚¯íœiVUI‚âNRS/”õl‚Íc‚·j
+    ' Probeã§[LEGACY?]ã¨åˆ¤å®šã•ã‚ŒãŸã‚‚ã®ã ã‘å‰Šé™¤ï¼ˆæ–°UIã‚„NRS/å‚™è€ƒã¯æ®‹ã™ï¼‰
     For Each n In Array("Label85", "TextBox1", "Label86", "Label87", "ComboBox39", "TextBox2", "txtPainMemo_lbl", "txtPainMemo", "lblNRS_Move", "cmbNRS_Move")
         On Error Resume Next
         f.Controls.Remove CStr(n)
@@ -4173,7 +4219,7 @@ Public Sub ArrangePainLayout()
     Dim f As MSForms.Frame
     Set f = Me.Controls("Frame12")
 
-    ' ã’iF¶«¿A‰EVAS
+    ' ä¸Šæ®µï¼šå·¦ï¼æ€§è³ªã€å³ï¼VAS
     With f.Controls("lblPainQual")
         .Left = 12: .Top = 12: .ZOrder 0
     End With
@@ -4192,7 +4238,7 @@ Public Sub ArrangePainLayout()
         .ZOrder 0
     End With
 
-    ' ’†’iF¶Œo‰ßA‰E—UˆöEŒyŒ¸
+    ' ä¸­æ®µï¼šå·¦ï¼çµŒéã€å³ï¼èª˜å› ãƒ»è»½æ¸›
     With f.Controls("lblPainCourse")
         .Left = 12: .Top = 160: .ZOrder 0
     End With
@@ -4212,7 +4258,7 @@ Public Sub ArrangePainLayout()
         .ZOrder 0
     End With
 
-    ' ‰º’iF¶•”ˆÊAÅ‰º’i”õl
+    ' ä¸‹æ®µï¼šå·¦ï¼éƒ¨ä½ã€æœ€ä¸‹æ®µï¼å‚™è€ƒ
     With f.Controls("lblPainSite")
         .Left = 12: .Top = 300: .ZOrder 0
     End With
@@ -4259,8 +4305,8 @@ End Sub
 Public Sub MatchPainFrameHeights()
     Dim z As MSForms.Frame, pf As MSForms.Frame, ps As MSForms.Frame, lb As MSForms.label
     Set z = Me.Controls("Frame12")
-    Set pf = z.Controls("fraPainFactors")   ' —UˆöEŒyŒ¸ˆöq
-    Set ps = z.Controls("fraPainSite")      ' áu’É•”ˆÊ
+    Set pf = z.Controls("fraPainFactors")   ' èª˜å› ãƒ»è»½æ¸›å› å­
+    Set ps = z.Controls("fraPainSite")      ' ç–¼ç—›éƒ¨ä½
     Set lb = z.Controls("lblPainFactors")
 
     Dim newH As Single, bottom As Single, availH As Single
@@ -4283,7 +4329,7 @@ End Sub
 
 
 
-'== frmEval ‚ÌƒR[ƒh‚É“\‚è•t‚¯ ==
+'== frmEval ã®ã‚³ãƒ¼ãƒ‰ã«è²¼ã‚Šä»˜ã‘ ==
 Public Sub TidyPainBoxes()
     Const gap As Single = 24
 
@@ -4297,15 +4343,15 @@ Public Sub TidyPainBoxes()
     Set lbPS = z.Controls("lblPainSite")
     Set lbPF = z.Controls("lblPainFactors")
 
-    ' áu’É•”ˆÊ‚Ìƒ‰ƒxƒ‹‚ğ˜g’¼ã‚É‘µ‚¦‚éiˆÊ’u‚ÍŒ»óˆÛ‚È‚ç•s—vj
+    ' ç–¼ç—›éƒ¨ä½ã®ãƒ©ãƒ™ãƒ«ã‚’æ ç›´ä¸Šã«æƒãˆã‚‹ï¼ˆä½ç½®ã¯ç¾çŠ¶ç¶­æŒãªã‚‰ä¸è¦ï¼‰
     lbPS.Left = ps.Left: lbPS.Top = ps.Top - lbPS.Height - 4
 
-    ' —UˆöEŒyŒ¸ˆöq‚ğuáu’É•”ˆÊ‚Ì‰E—×v‚É”z’u
+    ' èª˜å› ãƒ»è»½æ¸›å› å­ã‚’ã€Œç–¼ç—›éƒ¨ä½ã®å³éš£ã€ã«é…ç½®
     pf.Top = ps.Top
     pf.Left = ps.Left + ps.Width + gap
-    pf.Height = ps.Height   ' ‚‚³ˆê’v
+    pf.Height = ps.Height   ' é«˜ã•ä¸€è‡´
 
-    ' ƒ‰ƒxƒ‹‚à˜g‚Ì’¼ã‚É
+    ' ãƒ©ãƒ™ãƒ«ã‚‚æ ã®ç›´ä¸Šã«
     lbPF.Left = pf.Left
     lbPF.Top = pf.Top - lbPF.Height - 4
 
@@ -4320,14 +4366,14 @@ End Sub
 
 
 '--------------------------------------------
-' ”Ä—p: ƒtƒŒ[ƒ€“àƒRƒ“ƒgƒ[ƒ‹æ“¾iNothing‹–—ej
+' æ±ç”¨: ãƒ•ãƒ¬ãƒ¼ãƒ å†…ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«å–å¾—ï¼ˆNothingè¨±å®¹ï¼‰
 Private Function GetCtl(ByVal host As Object, ByVal name As String) As Object
     On Error Resume Next
     Set GetCtl = host.Controls(name)
     On Error GoTo 0
 End Function
 
-' ’É‚İ‚ÌŒo‰ßEŠÔƒuƒƒbƒN‚ğP‹vƒŒƒCƒAƒEƒg
+' ç—›ã¿ã®çµŒéãƒ»æ™‚é–“ãƒ–ãƒ­ãƒƒã‚¯ã‚’æ’ä¹…ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 Public Sub TidyPainCourse()
     Dim f As MSForms.Frame
     Dim frCourse As MSForms.Frame, lbCourse As MSForms.label
@@ -4338,7 +4384,7 @@ Public Sub TidyPainCourse()
     Set f = Me.Controls("Frame12")
     If f Is Nothing Then Exit Sub
 
-    ' QÆi‘¶İ‚µ‚È‚¢ê‡‚Í‰½‚à‚µ‚È‚¢j
+    ' å‚ç…§ï¼ˆå­˜åœ¨ã—ãªã„å ´åˆã¯ä½•ã‚‚ã—ãªã„ï¼‰
     Set lbCourse = GetCtl(f, "lblPainCourse")
     Set frCourse = GetCtl(f, "fraPainCourse")
     Set frSite = GetCtl(f, "fraPainSite")
@@ -4346,33 +4392,33 @@ Public Sub TidyPainCourse()
 
     If lbCourse Is Nothing Or frCourse Is Nothing Then Exit Sub
 
-    ' ƒŒƒCƒAƒEƒg’è”
-    M = 12        ' ƒtƒŒ[ƒ€“à‚Ì¶‰Eƒ}[ƒWƒ“
-    gap = 8       ' ƒRƒ“ƒgƒ[ƒ‹ŠÔ‚ÌƒMƒƒƒbƒv
-    L0 = frSite.Left                        ' ¶—ñ‚ÌŠJnˆÊ’uiáu’É•”ˆÊ‚Æ‡‚í‚¹‚éj
-    wLeftCol = frSite.Width                 ' ¶—ñ‚Ì•‚ğáu’É•”ˆÊ‚Æˆê’v‚³‚¹‚é
+    ' ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆå®šæ•°
+    M = 12        ' ãƒ•ãƒ¬ãƒ¼ãƒ å†…ã®å·¦å³ãƒãƒ¼ã‚¸ãƒ³
+    gap = 8       ' ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é–“ã®ã‚®ãƒ£ãƒƒãƒ—
+    L0 = frSite.Left                        ' å·¦åˆ—ã®é–‹å§‹ä½ç½®ï¼ˆç–¼ç—›éƒ¨ä½ã¨åˆã‚ã›ã‚‹ï¼‰
+    wLeftCol = frSite.Width                 ' å·¦åˆ—ã®å¹…ã‚’ç–¼ç—›éƒ¨ä½ã¨ä¸€è‡´ã•ã›ã‚‹
 
-    ' u—UˆöEŒyŒ¸ˆöqv‚ğ‰E—ñ‚É‰º‚°‚½‘O’ñ‚ÅA¶—ñ‚Ì•‚ÅL‚°‚é
+    ' ã€Œèª˜å› ãƒ»è»½æ¸›å› å­ã€ã‚’å³åˆ—ã«ä¸‹ã’ãŸå‰æã§ã€å·¦åˆ—ã®å¹…ã§åºƒã’ã‚‹
     lbCourse.Left = L0
     frCourse.Left = L0
-    frCourse.Width = wLeftCol               ' © ¶—ñ‚Æ“¯‚¶•‚ÉP‹v‰»
-    ' ‚‚³‚Í’†‚ÌƒŒƒCƒAƒEƒg‚ÉˆË‘¶B•K—v‚È‚çÅŒã‚É©“®‚Å”wä’²®‚à‰Â
+    frCourse.Width = wLeftCol               ' â† å·¦åˆ—ã¨åŒã˜å¹…ã«æ’ä¹…åŒ–
+    ' é«˜ã•ã¯ä¸­ã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«ä¾å­˜ã€‚å¿…è¦ãªã‚‰æœ€å¾Œã«è‡ªå‹•ã§èƒŒä¸ˆèª¿æ•´ã‚‚å¯
 
-    ' cˆÊ’uF’É‚İ‚Ì«¿‚Ì‰ºiŒ»İ”z’u‚³‚ê‚Ä‚¢‚éˆÊ’u‚©‚ç­‚µ‹l‚ß‚éj
-    ' ‚±‚±‚Å‚Íu’É‚İ‚Ì«¿vƒŠƒXƒg‚Ì‰º’[{—]”’‚Å‡‚í‚¹‚é
+    ' ç¸¦ä½ç½®ï¼šç—›ã¿ã®æ€§è³ªã®ä¸‹ï¼ˆç¾åœ¨é…ç½®ã•ã‚Œã¦ã„ã‚‹ä½ç½®ã‹ã‚‰å°‘ã—è©°ã‚ã‚‹ï¼‰
+    ' ã“ã“ã§ã¯ã€Œç—›ã¿ã®æ€§è³ªã€ãƒªã‚¹ãƒˆã®ä¸‹ç«¯ï¼‹ä½™ç™½ã§åˆã‚ã›ã‚‹
     Dim lstQual As MSForms.ListBox
     Set lstQual = GetCtl(f, "lstPainQual")
     If Not lstQual Is Nothing Then
         lbCourse.Top = lstQual.Top + lstQual.Height + 20
     Else
-        ' ƒtƒH[ƒ‹ƒoƒbƒNiŒ»İ‚ÌTop‚ğ‘¸dj
+        ' ãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯ï¼ˆç¾åœ¨ã®Topã‚’å°Šé‡ï¼‰
         lbCourse.Top = lbCourse.Top
     End If
     frCourse.Top = lbCourse.Top + lbCourse.Height + gap
 
-    ' --- “à•”€–Ú‚Ì•À‚ÑiŠù‘¶‚Ì‘Š‘Î”z’u‚ğˆÛ‚µ‚Â‚Â•‚¾‚¯’Ç]j ---
-    '   [”­ÇŠú] [‘± ”’l][’PˆÊ]     ©1’i–Ú
-    '   [“ú“à•Ï“®: QQQQQQQQQQ ] ©2’i–Ú •‚¢‚Á‚Ï‚¢
+    ' --- å†…éƒ¨é …ç›®ã®ä¸¦ã³ï¼ˆæ—¢å­˜ã®ç›¸å¯¾é…ç½®ã‚’ç¶­æŒã—ã¤ã¤å¹…ã ã‘è¿½å¾“ï¼‰ ---
+    '   [ç™ºç—‡æ™‚æœŸ] [æŒç¶š æ•°å€¤][å˜ä½]     â†1æ®µç›®
+    '   [æ—¥å†…å¤‰å‹•: ï¼¿ï¼¿ï¼¿ï¼¿ï¼¿ï¼¿ï¼¿ï¼¿ï¼¿ï¼¿ ] â†2æ®µç›® å¹…ã„ã£ã±ã„
     Dim lblOn As MSForms.label, cmbOn As MSForms.ComboBox
     Dim lblDur As MSForms.label, txtDur As MSForms.TextBox, cmbUnit As MSForms.ComboBox
     Dim lblDay As MSForms.label, cmbDay As MSForms.ComboBox
@@ -4385,20 +4431,20 @@ Public Sub TidyPainCourse()
     Set lblDay = GetCtl(frCourse, "lblPainDayPeriod")
     Set cmbDay = GetCtl(frCourse, "cmbPainDayPeriod")
 
-    ' 1’i–Ú‚ÍŠù‘¶‚ÌLeft‚ğg‚¢‚Â‚ÂA‰E’[‚ª‚Í‚İo‚³‚È‚¢‚æ‚¤‚É”÷’²®
+    ' 1æ®µç›®ã¯æ—¢å­˜ã®Leftã‚’ä½¿ã„ã¤ã¤ã€å³ç«¯ãŒã¯ã¿å‡ºã•ãªã„ã‚ˆã†ã«å¾®èª¿æ•´
     Dim right1 As Single
     right1 = cmbUnit.Left + cmbUnit.Width
     If right1 > frCourse.Width - M Then
         cmbUnit.Left = frCourse.Width - M - cmbUnit.Width
-        ' ”’lEƒ‰ƒxƒ‹‚à¶‚Ö‹l‚ß‚é
+        ' æ•°å€¤ãƒ»ãƒ©ãƒ™ãƒ«ã‚‚å·¦ã¸è©°ã‚ã‚‹
         If Not txtDur Is Nothing Then txtDur.Left = cmbUnit.Left - gap - txtDur.Width
-        If Not lblDur Is Nothing Then lblDur.Left = txtDur.Left - gap - lblDur.Width - 4   ' © š­‚µ—]”’
+        If Not lblDur Is Nothing Then lblDur.Left = txtDur.Left - gap - lblDur.Width - 4   ' â† â˜…å°‘ã—ä½™ç™½
     Else
-        ' š’Êí‚àŒy‚­¶‚É—]”’‚ğ‚Æ‚éi”í‚è–h~j
+        ' â˜…é€šå¸¸æ™‚ã‚‚è»½ãå·¦ã«ä½™ç™½ã‚’ã¨ã‚‹ï¼ˆè¢«ã‚Šé˜²æ­¢ï¼‰
         If Not lblDur Is Nothing Then lblDur.Left = txtDur.Left - gap - lblDur.Width - 4
     End If
 
-    ' 2’i–Úiu“ú“à•Ï“®vƒRƒ“ƒ{j‚Í˜g“à‚¢‚Á‚Ï‚¢‚É
+    ' 2æ®µç›®ï¼ˆã€Œæ—¥å†…å¤‰å‹•ã€ã‚³ãƒ³ãƒœï¼‰ã¯æ å†…ã„ã£ã±ã„ã«
     If Not lblDay Is Nothing Then lblDay.Left = M
     If Not cmbDay Is Nothing Then
         cmbDay.Left = IIf(lblDay Is Nothing, M, lblDay.Left + lblDay.Width + gap)
@@ -4406,7 +4452,7 @@ Public Sub TidyPainCourse()
         If cmbDay.Width < 80 Then cmbDay.Width = 80
     End If
 
-    ' ‚‚³‚ğ©“®’²®iÅ‰º•”‚ÌƒRƒ“ƒgƒ[ƒ‹‰º’[{ƒ}[ƒWƒ“j
+    ' é«˜ã•ã‚’è‡ªå‹•èª¿æ•´ï¼ˆæœ€ä¸‹éƒ¨ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ä¸‹ç«¯ï¼‹ãƒãƒ¼ã‚¸ãƒ³ï¼‰
     Dim bottomY As Single
     bottomY = 0
     Dim c As Control
@@ -4419,12 +4465,12 @@ End Sub
 
 
 Public Sub WidenAndTidyPainCourse()
-    ' ‘ŠŒİŒÄ‚Ño‚µ‚È‚µ^è“®Às‘O’ñ
+    ' ç›¸äº’å‘¼ã³å‡ºã—ãªã—ï¼æ‰‹å‹•å®Ÿè¡Œå‰æ
     Dim f As MSForms.Frame
    Set f = Me.Controls("fraPainCourse")
 
     With f
-        ' QÆ
+        ' å‚ç…§
         Dim cmbOnset As MSForms.ComboBox
         Dim lblDur As MSForms.label
         Dim txtDur As MSForms.TextBox
@@ -4435,7 +4481,7 @@ Public Sub WidenAndTidyPainCourse()
         Set txtDur = .Controls("txtPainDuration")
         Set cmbUnit = .Controls("cmbPainDurationUnit")
 
-        ' ‰¡•À‚Ñ‚ÌŠm’èƒƒWƒbƒNi¡‰ñuŠ®àøv‚É‚È‚Á‚½®‚Æ“¯‚¶j
+        ' æ¨ªä¸¦ã³ã®ç¢ºå®šãƒ­ã‚¸ãƒƒã‚¯ï¼ˆä»Šå›ã€Œå®Œç’§ã€ã«ãªã£ãŸå¼ã¨åŒã˜ï¼‰
         lblDur.Left = cmbOnset.Left + cmbOnset.Width + 12
         txtDur.Left = lblDur.Left + lblDur.Width + 12
         cmbUnit.Left = txtDur.Left + txtDur.Width + 8
@@ -4443,7 +4489,7 @@ Public Sub WidenAndTidyPainCourse()
 
       
 
-        ' ‰E—]”’‚ğ24ptŠm•Û
+        ' å³ä½™ç™½ã‚’24ptç¢ºä¿
         .Width = cmbUnit.Left + cmbUnit.Width + 24
     End With
 
@@ -4458,39 +4504,39 @@ Public Sub TidyPainUI_Once()
 
 
 
-    Me.TidyPainBoxes   '¦“à•”‚Å WidenAndTidyPainCourse ‚ğ1‰ñ‚¾‚¯ŒÄ‚Ô
+    Me.TidyPainBoxes   'â€»å†…éƒ¨ã§ WidenAndTidyPainCourse ã‚’1å›ã ã‘å‘¼ã¶
 
 Clean:
 
     mPainTidyBusy = False
-    Call FixPainCaptionsAndWidth   ' © ‚±‚Ìs‚¾‚¯’Ç‰Ái1j
+    Call FixPainCaptionsAndWidth   ' â† ã“ã®è¡Œã ã‘è¿½åŠ ï¼ˆ1ï¼‰
     
     '=== Pain headings finalize (once) ===
 Dim f As MSForms.Frame
 Dim l As MSForms.label
 
 On Error Resume Next
-'--- ’¼‰º ---
-Set l = Me.Controls("lblVAS"):           If Not l Is Nothing Then l.WordWrap = False: l.caption = "VASi0`100j": l.WordWrap = False: l.AutoSize = False: l.Width = 120
+'--- ç›´ä¸‹ ---
+Set l = Me.Controls("lblVAS"):           If Not l Is Nothing Then l.WordWrap = False: l.caption = "VASï¼ˆ0ï½100ï¼‰": l.WordWrap = False: l.AutoSize = False: l.Width = 120
 Set l = Me.Controls("lblPainQual"):      If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
 Set l = Me.Controls("lblPainCourse"):    If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
 Set l = Me.Controls("lblPainSite"):      If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 150
 Set l = Me.Controls("lblPainFactors"):   If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 150
 
-'--- Frame3 “à ---
+'--- Frame3 å†… ---
 Set f = Me.Controls("Frame3")
 If Not f Is Nothing Then
-    Set l = f.Controls("lblVAS"):         If Not l Is Nothing Then l.WordWrap = False: l.caption = "VASi0`100j": l.WordWrap = False: l.AutoSize = False: l.Width = 120
+    Set l = f.Controls("lblVAS"):         If Not l Is Nothing Then l.WordWrap = False: l.caption = "VASï¼ˆ0ï½100ï¼‰": l.WordWrap = False: l.AutoSize = False: l.Width = 120
     Set l = f.Controls("lblPainQual"):    If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
     Set l = f.Controls("lblPainCourse"):  If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
     Set l = f.Controls("lblPainSite"):    If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 150
     Set l = f.Controls("lblPainFactors"): If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 150
 End If
 
-'--- Frame12 “à ---
+'--- Frame12 å†… ---
 Set f = Me.Controls("Frame12")
 If Not f Is Nothing Then
-    Set l = f.Controls("lblVAS"):         If Not l Is Nothing Then l.WordWrap = False: l.caption = "VASi0`100j": l.WordWrap = False: l.AutoSize = False: l.Width = 120
+    Set l = f.Controls("lblVAS"):         If Not l Is Nothing Then l.WordWrap = False: l.caption = "VASï¼ˆ0ï½100ï¼‰": l.WordWrap = False: l.AutoSize = False: l.Width = 120
     Set l = f.Controls("lblPainQual"):    If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
     Set l = f.Controls("lblPainCourse"):  If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
     Set l = f.Controls("lblPainSite"):    If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 150
@@ -4505,15 +4551,15 @@ Private Sub FixPainCaptionsAndWidth()
     Dim c As Control
     For Each c In Me.Controls
         If TypeName(c) = "Frame" Then
-            ' ¶FŒ©o‚µi’É‚İ‚Ì«¿cj‚ğÜ‚è•Ô‚³‚È‚¢•‚É‚·‚éie‰E’[?24ptj
-            If InStr(c.caption, "’É") > 0 And InStr(c.caption, "«¿") > 0 Then
+            ' å·¦ï¼šè¦‹å‡ºã—ï¼ˆç—›ã¿ã®æ€§è³ªâ€¦ï¼‰ã‚’æŠ˜ã‚Šè¿”ã•ãªã„å¹…ã«ã™ã‚‹ï¼ˆè¦ªå³ç«¯?24ptï¼‰
+            If InStr(c.caption, "ç—›") > 0 And InStr(c.caption, "æ€§è³ª") > 0 Then
                 On Error Resume Next
                 c.Width = c.parent.InsideWidth - c.Left - 24
                 On Error GoTo 0
             End If
-            ' ‰EFVAS‚Ì•\‹L‚ğŒÅ’è
+            ' å³ï¼šVASã®è¡¨è¨˜ã‚’å›ºå®š
             If InStr(c.caption, "VAS") > 0 Then
-                c.caption = "VASi0`100j"
+                c.caption = "VASï¼ˆ0ï½100ï¼‰"
             End If
         End If
     Next
@@ -4522,22 +4568,22 @@ End Sub
 Public Sub FixPainLabels_Final()
     Dim f As Control, c As Control, l As Object
 
-    '--- ’¼‰º‚Ìƒ‰ƒxƒ‹‚ğˆ— ---
+    '--- ç›´ä¸‹ã®ãƒ©ãƒ™ãƒ«ã‚’å‡¦ç† ---
     For Each c In Me.Controls
         If TypeName(c) = "Label" Then
             If c.name = "lblPainQual" Then
                 Set l = c
                 On Error Resume Next
-                CallByName l, "AutoSize", VbLet, True   ' •K—v•‚ğæ“¾
-                CallByName l, "AutoSize", VbLet, False  ' ŒÅ’è‚É–ß‚·iÜ•Ô‚µ–h~j
+                CallByName l, "AutoSize", VbLet, True   ' å¿…è¦å¹…ã‚’å–å¾—
+                CallByName l, "AutoSize", VbLet, False  ' å›ºå®šã«æˆ»ã™ï¼ˆæŠ˜è¿”ã—é˜²æ­¢ï¼‰
                 On Error GoTo 0
             ElseIf c.name = "lblVAS" Then
-                c.caption = "VASi0`100j"
+                c.caption = "VASï¼ˆ0ï½100ï¼‰"
             End If
         End If
     Next
 
-    '--- ŠeFrame“à‚Ìƒ‰ƒxƒ‹‚ğˆ— ---
+    '--- å„Frameå†…ã®ãƒ©ãƒ™ãƒ«ã‚’å‡¦ç† ---
     For Each f In Me.Controls
         If TypeName(f) = "Frame" Then
             For Each c In f.Controls
@@ -4549,7 +4595,7 @@ Public Sub FixPainLabels_Final()
                         CallByName l, "AutoSize", VbLet, False
                         On Error GoTo 0
                     ElseIf c.name = "lblVAS" Then
-                        c.caption = "VASi0`100j"
+                        c.caption = "VASï¼ˆ0ï½100ï¼‰"
                     End If
                 End If
             Next
@@ -4564,7 +4610,7 @@ Public Sub ListToneKeyCaptions()
         On Error Resume Next
         If TypeName(c) = "CheckBox" Or TypeName(c) = "OptionButton" Or TypeName(c) = "Label" Then
             Dim cap As String: cap = CStr(c.caption)
-            If InStr(cap, "MAS_") > 0 Or InStr(cap, "”½Ë_") > 0 Then
+            If InStr(cap, "MAS_") > 0 Or InStr(cap, "åå°„_") > 0 Then
                 Debug.Print "[TONE-CTL]", TypeName(c), c.name, "|", cap
             End If
         End If
@@ -4575,7 +4621,7 @@ End Sub
 Private Sub BuildWalkIndep_DistanceOutdoor()
     Dim ctl As MSForms.Control
     Dim f As MSForms.Frame
-    Dim lblBase As MSForms.label   ' ©—§“x‚Ìƒ‰ƒxƒ‹iLabel100j
+    Dim lblBase As MSForms.label   ' è‡ªç«‹åº¦ã®ãƒ©ãƒ™ãƒ«ï¼ˆLabel100ï¼‰
     Dim cmbBase As MSForms.ComboBox
     Dim lblDist As MSForms.label
     Dim cmbDist As MSForms.ComboBox
@@ -4583,12 +4629,12 @@ Private Sub BuildWalkIndep_DistanceOutdoor()
     Dim cmbOut As MSForms.ComboBox
     Dim top1 As Single, top2 As Single, top3 As Single
 
-       ' u•àsv©—§“xƒtƒŒ[ƒ€æ“¾i‹¤’Êƒwƒ‹ƒp[Œo—Rj
-       ' u•àsv‚Æu©—§v‚ğŠÜ‚ŞƒtƒŒ[ƒ€‚ğ’T‚·
+       ' ã€Œæ­©è¡Œã€è‡ªç«‹åº¦ãƒ•ãƒ¬ãƒ¼ãƒ å–å¾—ï¼ˆå…±é€šãƒ˜ãƒ«ãƒ‘ãƒ¼çµŒç”±ï¼‰
+       ' ã€Œæ­©è¡Œã€ã¨ã€Œè‡ªç«‹ã€ã‚’å«ã‚€ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’æ¢ã™
     For Each ctl In Me.Controls
         If TypeName(ctl) = "Frame" Then
             Set f = ctl
-            If InStr(f.caption, "•às") > 0 And InStr(f.caption, "©—§") > 0 Then
+            If InStr(f.caption, "æ­©è¡Œ") > 0 And InStr(f.caption, "è‡ªç«‹") > 0 Then
                 Exit For
             End If
             Set f = Nothing
@@ -4601,7 +4647,7 @@ Private Sub BuildWalkIndep_DistanceOutdoor()
 
 
 
-    ' ƒx[ƒXi©—§“xjæ“¾
+    ' ãƒ™ãƒ¼ã‚¹ï¼ˆè‡ªç«‹åº¦ï¼‰å–å¾—
     On Error Resume Next
     Set lblBase = f.Controls("Label100")
     On Error GoTo 0
@@ -4610,7 +4656,7 @@ Private Sub BuildWalkIndep_DistanceOutdoor()
         Exit Sub
     End If
 
-    ' ©—§“xƒRƒ“ƒ{i“¯‚¶s‚É‚ ‚é ComboBox ‚ğ’T‚·j
+    ' è‡ªç«‹åº¦ã‚³ãƒ³ãƒœï¼ˆåŒã˜è¡Œã«ã‚ã‚‹ ComboBox ã‚’æ¢ã™ï¼‰
     For Each ctl In f.Controls
         If TypeName(ctl) = "ComboBox" Then
             If Abs(ctl.Top - lblBase.Top) < 0.5 Then
@@ -4626,12 +4672,12 @@ Private Sub BuildWalkIndep_DistanceOutdoor()
 
  cmbBase.tag = "WalkIndepLevel"
 
-    ' s‚Ì‚‚³İ’è
+    ' è¡Œã®é«˜ã•è¨­å®š
     top1 = lblBase.Top
     top2 = top1 + 24
     top3 = top2 + 24
 
-    ' --- ‹——£i2’i–Új ---
+    ' --- è·é›¢ï¼ˆ2æ®µç›®ï¼‰ ---
     On Error Resume Next
     Set lblDist = f.Controls("lblWalkDistance")
     On Error GoTo 0
@@ -4640,7 +4686,7 @@ Private Sub BuildWalkIndep_DistanceOutdoor()
         Set lblDist = f.Controls.Add("Forms.Label.1", "lblWalkDistance", True)
     End If
     With lblDist
-        .caption = "•às‹——£"
+        .caption = "æ­©è¡Œè·é›¢"
         .Left = 12
         .Top = top2
         .Width = 60
@@ -4660,16 +4706,16 @@ Private Sub BuildWalkIndep_DistanceOutdoor()
         .Width = 300
         .Height = 18
         If .ListCount = 0 Then
-            .AddItem "5m–¢–"
-            .AddItem "5`10m"
-            .AddItem "10`30m"
-            .AddItem "30`50m"
-            .AddItem "50`100m"
-            .AddItem "100mˆÈã"
+            .AddItem "5mæœªæº€"
+            .AddItem "5ï½10m"
+            .AddItem "10ï½30m"
+            .AddItem "30ï½50m"
+            .AddItem "50ï½100m"
+            .AddItem "100mä»¥ä¸Š"
         End If
     End With
 
-    ' --- ‰®ŠO•àsi3’i–Új ---
+    ' --- å±‹å¤–æ­©è¡Œï¼ˆ3æ®µç›®ï¼‰ ---
     On Error Resume Next
     Set lblOut = f.Controls("lblWalkOutdoor")
     On Error GoTo 0
@@ -4678,7 +4724,7 @@ Private Sub BuildWalkIndep_DistanceOutdoor()
         Set lblOut = f.Controls.Add("Forms.Label.1", "lblWalkOutdoor", True)
     End If
     With lblOut
-        .caption = "‰®ŠO•às"
+        .caption = "å±‹å¤–æ­©è¡Œ"
         .Left = 12
         .Top = top3
         .Width = 60
@@ -4698,16 +4744,16 @@ Private Sub BuildWalkIndep_DistanceOutdoor()
         .Width = 300
         .Height = 18
         If .ListCount = 0 Then
-            .AddItem "‰®“à‚Ì‚İ‰Â"
-            .AddItem "‰®ŠO‚à’Z‹——£‚È‚ç‰Â"
-            .AddItem "‰®ŠO’·‹——£‚à‰Â"
-            .AddItem "‰®ŠO•às‚ÍŒ´‘¥•s‰Â"
+            .AddItem "å±‹å†…ã®ã¿å¯"
+            .AddItem "å±‹å¤–ã‚‚çŸ­è·é›¢ãªã‚‰å¯"
+            .AddItem "å±‹å¤–é•·è·é›¢ã‚‚å¯"
+            .AddItem "å±‹å¤–æ­©è¡Œã¯åŸå‰‡ä¸å¯"
         End If
     End With
 
 
     BuildWalkIndep_Stability
-    BuildWalkIndep_Speed   'š ‚±‚Ìs‚ğ’Ç‰Á
+    BuildWalkIndep_Speed   'â˜… ã“ã®è¡Œã‚’è¿½åŠ 
 
 End Sub
 
@@ -4722,11 +4768,11 @@ Private Sub BuildWalkIndep_Stability()
     Dim leftPos As Single
     Dim nm As Variant
 
-    ' u•àsv‚Æu©—§v‚ğŠÜ‚ŞƒtƒŒ[ƒ€‚ğ’T‚·
+    ' ã€Œæ­©è¡Œã€ã¨ã€Œè‡ªç«‹ã€ã‚’å«ã‚€ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’æ¢ã™
     For Each ctl In Me.Controls
         If TypeName(ctl) = "Frame" Then
             Set f = ctl
-            If InStr(f.caption, "•às") > 0 And InStr(f.caption, "©—§") > 0 Then
+            If InStr(f.caption, "æ­©è¡Œ") > 0 And InStr(f.caption, "è‡ªç«‹") > 0 Then
                 Exit For
             End If
             Set f = Nothing
@@ -4735,18 +4781,18 @@ Private Sub BuildWalkIndep_Stability()
 
     If f Is Nothing Then Exit Sub
 
-    ' ƒx[ƒXsiLabel100j‚Ì Top ‚ğŠî€‚ÉsˆÊ’u‚ğŒˆ‚ß‚é
+    ' ãƒ™ãƒ¼ã‚¹è¡Œï¼ˆLabel100ï¼‰ã® Top ã‚’åŸºæº–ã«è¡Œä½ç½®ã‚’æ±ºã‚ã‚‹
     On Error Resume Next
     Set lblBase = f.Controls("Label100")
     On Error GoTo 0
     If lblBase Is Nothing Then Exit Sub
 
     top1 = lblBase.Top
-    top2 = top1 + 24          ' ‹——£
-    top3 = top2 + 24          ' ‰®ŠO•às
-    top4 = top3 + 24          ' ˆÀ’è«iV‹Kj
+    top2 = top1 + 24          ' è·é›¢
+    top3 = top2 + 24          ' å±‹å¤–æ­©è¡Œ
+    top4 = top3 + 24          ' å®‰å®šæ€§ï¼ˆæ–°è¦ï¼‰
 
-    ' ‚Ü‚¸Šù‘¶‚ÌˆÀ’è«ƒ`ƒFƒbƒN‚ğ‘S•”íœ
+    ' ã¾ãšæ—¢å­˜ã®å®‰å®šæ€§ãƒã‚§ãƒƒã‚¯ã‚’å…¨éƒ¨å‰Šé™¤
     For Each nm In Array( _
         "chkWalkStab_Furatsuki", _
         "chkWalkStab_Foot", _
@@ -4758,17 +4804,17 @@ Private Sub BuildWalkIndep_Stability()
         On Error GoTo 0
     Next
 
-    ' ƒtƒŒ[ƒ€‚‚³‚ª‘«‚è‚È‚¯‚ê‚ÎL‚Î‚·
+    ' ãƒ•ãƒ¬ãƒ¼ãƒ é«˜ã•ãŒè¶³ã‚Šãªã‘ã‚Œã°ä¼¸ã°ã™
     If f.Height < top4 + 24 Then
         f.Height = top4 + 24
     End If
 
     leftPos = 12
 
-    ' ‚Ó‚ç‚Â‚«‚ ‚è
+    ' ãµã‚‰ã¤ãã‚ã‚Š
     Set chk = f.Controls.Add("Forms.CheckBox.1", "chkWalkStab_Furatsuki", True)
     With chk
-        .caption = "‚Ó‚ç‚Â‚«‚ ‚è"
+        .caption = "ãµã‚‰ã¤ãã‚ã‚Š"
         .Left = leftPos
         .Top = top4
         .Width = 90
@@ -4776,10 +4822,10 @@ Private Sub BuildWalkIndep_Stability()
     End With
     leftPos = leftPos + chk.Width + 12
 
-    ' ‘«‰^‚Ñ•sˆÀ’è
+    ' è¶³é‹ã³ä¸å®‰å®š
     Set chk = f.Controls.Add("Forms.CheckBox.1", "chkWalkStab_Foot", True)
     With chk
-        .caption = "‘«‰^‚Ñ•sˆÀ’è"
+        .caption = "è¶³é‹ã³ä¸å®‰å®š"
         .Left = leftPos
         .Top = top4
         .Width = 100
@@ -4787,10 +4833,10 @@ Private Sub BuildWalkIndep_Stability()
     End With
     leftPos = leftPos + chk.Width + 12
 
-    ' •ûŒü“]Š·•sˆÀ
+    ' æ–¹å‘è»¢æ›ä¸å®‰
     Set chk = f.Controls.Add("Forms.CheckBox.1", "chkWalkStab_Turn", True)
     With chk
-        .caption = "•ûŒü“]Š·•sˆÀ"
+        .caption = "æ–¹å‘è»¢æ›ä¸å®‰"
         .Left = leftPos
         .Top = top4
         .Width = 100
@@ -4798,10 +4844,10 @@ Private Sub BuildWalkIndep_Stability()
     End With
     leftPos = leftPos + chk.Width + 12
 
-    ' ‘¬“x’á‰º
+    ' é€Ÿåº¦ä½ä¸‹
     Set chk = f.Controls.Add("Forms.CheckBox.1", "chkWalkStab_Slow", True)
     With chk
-        .caption = "‘¬“x’á‰º"
+        .caption = "é€Ÿåº¦ä½ä¸‹"
         .Left = leftPos
         .Top = top4
         .Width = 80
@@ -4809,10 +4855,10 @@ Private Sub BuildWalkIndep_Stability()
     End With
     leftPos = leftPos + chk.Width + 12
 
-    ' “]“|ƒŠƒXƒN‚‚¢
+    ' è»¢å€’ãƒªã‚¹ã‚¯é«˜ã„
     Set chk = f.Controls.Add("Forms.CheckBox.1", "chkWalkStab_FallRisk", True)
     With chk
-        .caption = "“]“|ƒŠƒXƒN‚‚¢"
+        .caption = "è»¢å€’ãƒªã‚¹ã‚¯é«˜ã„"
         .Left = leftPos
         .Top = top4
         .Width = 110
@@ -4829,11 +4875,11 @@ Private Sub BuildWalkIndep_Speed()
     Dim lbl As MSForms.label
     Dim cmb As MSForms.ComboBox
 
-    ' u•àsv‚Æu©—§v‚ğŠÜ‚ŞƒtƒŒ[ƒ€‚ğ’T‚·
+    ' ã€Œæ­©è¡Œã€ã¨ã€Œè‡ªç«‹ã€ã‚’å«ã‚€ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’æ¢ã™
     For Each ctl In Me.Controls
         If TypeName(ctl) = "Frame" Then
             Set f = ctl
-            If InStr(f.caption, "•às") > 0 And InStr(f.caption, "©—§") > 0 Then
+            If InStr(f.caption, "æ­©è¡Œ") > 0 And InStr(f.caption, "è‡ªç«‹") > 0 Then
                 Exit For
             End If
             Set f = Nothing
@@ -4842,24 +4888,24 @@ Private Sub BuildWalkIndep_Speed()
 
     If f Is Nothing Then Exit Sub
 
-    ' ƒx[ƒXsiLabel100j‚Ì Top ‚©‚ç’i‚ğŒˆ‚ß‚é
+    ' ãƒ™ãƒ¼ã‚¹è¡Œï¼ˆLabel100ï¼‰ã® Top ã‹ã‚‰æ®µã‚’æ±ºã‚ã‚‹
     On Error Resume Next
     Set lblBase = f.Controls("Label100")
     On Error GoTo 0
     If lblBase Is Nothing Then Exit Sub
 
-    top1 = lblBase.Top          ' ©—§“x
-    top2 = top1 + 24            ' ‹——£
-    top3 = top2 + 24            ' ‰®ŠO•às
-    top4 = top3 + 24            ' ˆÀ’è«
-    top5 = top4 + 24            ' š•às‘¬“xiV‹Kj
+    top1 = lblBase.Top          ' è‡ªç«‹åº¦
+    top2 = top1 + 24            ' è·é›¢
+    top3 = top2 + 24            ' å±‹å¤–æ­©è¡Œ
+    top4 = top3 + 24            ' å®‰å®šæ€§
+    top5 = top4 + 24            ' â˜…æ­©è¡Œé€Ÿåº¦ï¼ˆæ–°è¦ï¼‰
 
-    ' ƒtƒŒ[ƒ€‚‚³‚ğ•K—v‚É‰‚¶‚ÄL‚Î‚·
+    ' ãƒ•ãƒ¬ãƒ¼ãƒ é«˜ã•ã‚’å¿…è¦ã«å¿œã˜ã¦ä¼¸ã°ã™
     If f.Height < top5 + 24 Then
         f.Height = top5 + 24
     End If
 
-    ' ƒ‰ƒxƒ‹i•às‘¬“xj
+    ' ãƒ©ãƒ™ãƒ«ï¼ˆæ­©è¡Œé€Ÿåº¦ï¼‰
     On Error Resume Next
     Set lbl = f.Controls("lblWalkSpeed")
     On Error GoTo 0
@@ -4867,14 +4913,14 @@ Private Sub BuildWalkIndep_Speed()
         Set lbl = f.Controls.Add("Forms.Label.1", "lblWalkSpeed", True)
     End If
     With lbl
-        .caption = "•às‘¬“x"
+        .caption = "æ­©è¡Œé€Ÿåº¦"
         .Left = 12
         .Top = top5
         .Width = 60
         .Height = 18
     End With
 
-    ' ƒRƒ“ƒ{ƒ{ƒbƒNƒXi‘¬“x‹æ•ªj
+    ' ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ï¼ˆé€Ÿåº¦åŒºåˆ†ï¼‰
     On Error Resume Next
     Set cmb = f.Controls("cmbWalkSpeed")
     On Error GoTo 0
@@ -4887,11 +4933,11 @@ Private Sub BuildWalkIndep_Speed()
         .Width = 200
         .Height = 18
         If .ListCount = 0 Then
-            .AddItem "‘¬‚¢"
-            .AddItem "‚â‚â‘¬‚¢"
-            .AddItem "‚Ó‚Â‚¤"
-            .AddItem "‚â‚â’x‚¢"
-            .AddItem "’x‚¢"
+            .AddItem "é€Ÿã„"
+            .AddItem "ã‚„ã‚„é€Ÿã„"
+            .AddItem "ãµã¤ã†"
+            .AddItem "ã‚„ã‚„é…ã„"
+            .AddItem "é…ã„"
         End If
     End With
 End Sub
@@ -4901,7 +4947,7 @@ Private Sub BuildWalk_AbnormalTab()
     Dim mp As MSForms.MultiPage
     Dim pg As MSForms.Page
 
-    ' •às•]‰¿—p‚Ì MultiPage2 ‚ğ’T‚·
+    ' æ­©è¡Œè©•ä¾¡ç”¨ã® MultiPage2 ã‚’æ¢ã™
     For Each ctl In Me.Controls
         If TypeName(ctl) = "MultiPage" Then
             If ctl.name = "MultiPage2" Then
@@ -4913,22 +4959,22 @@ Private Sub BuildWalk_AbnormalTab()
 
     If mp Is Nothing Then Exit Sub
 
-    ' Šù‚ÉuˆÙí•àsvƒ^ƒu‚ª‚ ‚ê‚Î‰½‚à‚µ‚È‚¢
+    ' æ—¢ã«ã€Œç•°å¸¸æ­©è¡Œã€ã‚¿ãƒ–ãŒã‚ã‚Œã°ä½•ã‚‚ã—ãªã„
     On Error Resume Next
     Set pg = mp.Pages("pgWalkAbnormal")
     On Error GoTo 0
     If Not pg Is Nothing Then Exit Sub
 
-    ' V‚µ‚¢ƒy[ƒW‚ğ’Ç‰ÁiIndex=2‘z’èF©—§“x, RLA ‚ÌŸj
+    ' æ–°ã—ã„ãƒšãƒ¼ã‚¸ã‚’è¿½åŠ ï¼ˆIndex=2æƒ³å®šï¼šè‡ªç«‹åº¦, RLA ã®æ¬¡ï¼‰
     Set pg = mp.Pages.Add
     pg.name = "pgWalkAbnormal"
-    pg.caption = "ˆÙí•às"
+    pg.caption = "ç•°å¸¸æ­©è¡Œ"
 
-    ' ‚Ğ‚Æ‚Ü‚¸’†‚É‹ó‚ÌƒtƒŒ[ƒ€‚¾‚¯’u‚¢‚Ä‚¨‚­i’†g‚ÍŒã‚Åì‚éj
+    ' ã²ã¨ã¾ãšä¸­ã«ç©ºã®ãƒ•ãƒ¬ãƒ¼ãƒ ã ã‘ç½®ã„ã¦ãŠãï¼ˆä¸­èº«ã¯å¾Œã§ä½œã‚‹ï¼‰
     Dim f As MSForms.Frame
     Set f = pg.Controls.Add("Forms.Frame.1", "fraWalkAbnormal", True)
     With f
-        .caption = "ˆÙí•àsƒpƒ^[ƒ“iƒ`ƒFƒbƒNj"
+        .caption = "ç•°å¸¸æ­©è¡Œãƒ‘ã‚¿ãƒ¼ãƒ³ï¼ˆãƒã‚§ãƒƒã‚¯ï¼‰"
         .Left = 6
         .Top = 6
         .Width = mp.Width - 24
@@ -4944,7 +4990,7 @@ Private Sub BuildWalkAbnormal_Frames()
     Dim f As MSForms.Frame
     Dim w As Single, h As Single
 
-    ' MultiPage2i•às•]‰¿j‚ğæ“¾
+    ' MultiPage2ï¼ˆæ­©è¡Œè©•ä¾¡ï¼‰ã‚’å–å¾—
     For Each ctl In Me.Controls
         If TypeName(ctl) = "MultiPage" And ctl.name = "MultiPage2" Then
             Set mp = ctl
@@ -4953,57 +4999,57 @@ Private Sub BuildWalkAbnormal_Frames()
     Next
     If mp Is Nothing Then Exit Sub
 
-    ' ˆÙí•àsƒy[ƒWæ“¾
+    ' ç•°å¸¸æ­©è¡Œãƒšãƒ¼ã‚¸å–å¾—
     On Error Resume Next
     Set pg = mp.Pages("pgWalkAbnormal")
     On Error GoTo 0
     If pg Is Nothing Then Exit Sub
 
-    ' ƒy[ƒW‚Ìƒ[ƒNƒGƒŠƒAƒTƒCƒY
+    ' ãƒšãƒ¼ã‚¸ã®ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚µã‚¤ã‚º
     w = mp.Width - 24
     h = mp.Height - 24
 
-    ' Šù‘¶ƒtƒŒ[ƒ€íœiÄ¶¬—pj
+    ' æ—¢å­˜ãƒ•ãƒ¬ãƒ¼ãƒ å‰Šé™¤ï¼ˆå†ç”Ÿæˆç”¨ï¼‰
     For Each ctl In pg.Controls
         If TypeName(ctl) = "Frame" Then
             pg.Controls.Remove ctl.name
         End If
     Next
 
-    ' --- AF•Ğ–ƒáƒŒn ---
+    ' --- Aï¼šç‰‡éº»ç—ºç³» ---
     Set f = pg.Controls.Add("Forms.Frame.1", "fraWalkAbn_A", True)
     With f
-        .caption = "AF•Ğ–ƒáƒE”]ŒŒŠÇáŠQƒpƒ^[ƒ“"
+        .caption = "Aï¼šç‰‡éº»ç—ºãƒ»è„³è¡€ç®¡éšœå®³ãƒ‘ã‚¿ãƒ¼ãƒ³"
         .Left = 6
         .Top = 6
         .Width = w / 2 - 12
         .Height = h / 2 - 12
     End With
 
-    ' --- BFƒp[ƒLƒ“ƒ\ƒ“Œn ---
+    ' --- Bï¼šãƒ‘ãƒ¼ã‚­ãƒ³ã‚½ãƒ³ç³» ---
     Set f = pg.Controls.Add("Forms.Frame.1", "fraWalkAbn_B", True)
     With f
-        .caption = "BFƒp[ƒLƒ“ƒ\ƒ“ŠÖ˜Aƒpƒ^[ƒ“"
+        .caption = "Bï¼šãƒ‘ãƒ¼ã‚­ãƒ³ã‚½ãƒ³é–¢é€£ãƒ‘ã‚¿ãƒ¼ãƒ³"
         .Left = w / 2 + 6
         .Top = 6
         .Width = w / 2 - 12
         .Height = h / 2 - 12
     End With
 
-    ' --- CF®Œ`E‚—îÒ•sˆÀ’è•às ---
+    ' --- Cï¼šæ•´å½¢ãƒ»é«˜é½¢è€…ä¸å®‰å®šæ­©è¡Œ ---
     Set f = pg.Controls.Add("Forms.Frame.1", "fraWalkAbn_C", True)
     With f
-        .caption = "CF®Œ`E‚—îÒ•sˆÀ’è•às"
+        .caption = "Cï¼šæ•´å½¢ãƒ»é«˜é½¢è€…ä¸å®‰å®šæ­©è¡Œ"
         .Left = 6
         .Top = h / 2 + 6
         .Width = w / 2 - 12
         .Height = h / 2 - 12
     End With
 
-    ' --- DF‹¦’²áŠQE¸’² ---
+    ' --- Dï¼šå”èª¿éšœå®³ãƒ»å¤±èª¿ ---
     Set f = pg.Controls.Add("Forms.Frame.1", "fraWalkAbn_D", True)
     With f
-        .caption = "DF‹¦’²áŠQE¸’²ƒpƒ^[ƒ“"
+        .caption = "Dï¼šå”èª¿éšœå®³ãƒ»å¤±èª¿ãƒ‘ã‚¿ãƒ¼ãƒ³"
         .Left = w / 2 + 6
         .Top = h / 2 + 6
         .Width = w / 2 - 12
@@ -5021,7 +5067,7 @@ Private Sub BuildWalkAbnormal_Checks()
     Dim items As Variant
     Dim i As Long, topPos As Single
     
-    ' MultiPage2 ‚ğæ“¾
+    ' MultiPage2 ã‚’å–å¾—
     For Each ctl In Me.Controls
         If TypeName(ctl) = "MultiPage" And ctl.name = "MultiPage2" Then
             Set mp = ctl
@@ -5030,13 +5076,13 @@ Private Sub BuildWalkAbnormal_Checks()
     Next
     If mp Is Nothing Then Exit Sub
 
-    ' ˆÙí•àsƒy[ƒW‚ğæ“¾
+    ' ç•°å¸¸æ­©è¡Œãƒšãƒ¼ã‚¸ã‚’å–å¾—
     On Error Resume Next
     Set pg = mp.Pages("pgWalkAbnormal")
     On Error GoTo 0
     If pg Is Nothing Then Exit Sub
 
-    ' 4‚Â‚ÌƒtƒŒ[ƒ€‚ğ‡”Ô‚Éˆ—
+    ' 4ã¤ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’é †ç•ªã«å‡¦ç†
     Dim fNames As Variant
     fNames = Array("fraWalkAbn_A", "fraWalkAbn_B", "fraWalkAbn_C", "fraWalkAbn_D")
     
@@ -5046,67 +5092,67 @@ Private Sub BuildWalkAbnormal_Checks()
     Dim D_items As Variant
 
     ' ----------------------
-    ' AF•Ğ–ƒáƒE”]ŒŒŠÇáŠQi1`10j
+    ' Aï¼šç‰‡éº»ç—ºãƒ»è„³è¡€ç®¡éšœå®³ï¼ˆ1ï½10ï¼‰
     ' ----------------------
     A_items = Array( _
-        "‚·‚è‘«•às", _
-        "‚Ô‚ñ‰ñ‚µ•às", _
-        "”½’£•G•àsi•G‰ßL“Wj", _
-        "ƒgƒŒƒ“ƒfƒŒƒ“ƒuƒ‹ƒO•às", _
-        "ƒfƒ…ƒVƒFƒ“ƒk•às", _
-        "‰º‚‘«iƒtƒbƒgƒXƒ‰ƒbƒvj", _
-        "‹¤“¯‰^“®ƒpƒ^[ƒ“‚Ì‹­‚³", _
-        "œ”ÕŒãŒX^‘ÌŠ²ŒãŒX‚Ì—§‹r", _
-        "•Ğ‹r—§‹r‚Ì’˜‚µ‚¢’Zk", _
-        "‘«•”ƒNƒŠƒAƒ‰ƒ“ƒX•s—Ç" _
+        "ã™ã‚Šè¶³æ­©è¡Œ", _
+        "ã¶ã‚“å›ã—æ­©è¡Œ", _
+        "åå¼µè†æ­©è¡Œï¼ˆè†éä¼¸å±•ï¼‰", _
+        "ãƒˆãƒ¬ãƒ³ãƒ‡ãƒ¬ãƒ³ãƒ–ãƒ«ã‚°æ­©è¡Œ", _
+        "ãƒ‡ãƒ¥ã‚·ã‚§ãƒ³ãƒŒæ­©è¡Œ", _
+        "ä¸‹å‚è¶³ï¼ˆãƒ•ãƒƒãƒˆã‚¹ãƒ©ãƒƒãƒ—ï¼‰", _
+        "å…±åŒé‹å‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ã®å¼·ã•", _
+        "éª¨ç›¤å¾Œå‚¾ï¼ä½“å¹¹å¾Œå‚¾ã®ç«‹è„š", _
+        "ç‰‡è„šç«‹è„šã®è‘—ã—ã„çŸ­ç¸®", _
+        "è¶³éƒ¨ã‚¯ãƒªã‚¢ãƒ©ãƒ³ã‚¹ä¸è‰¯" _
     )
 
     ' ----------------------
-    ' BFƒp[ƒLƒ“ƒ\ƒ“Œni1`9j
+    ' Bï¼šãƒ‘ãƒ¼ã‚­ãƒ³ã‚½ãƒ³ç³»ï¼ˆ1ï½9ï¼‰
     ' ----------------------
     B_items = Array( _
-        "¬‚İ•às", _
-        "‘OŒXp¨•às", _
-        "ƒtƒŠ[ƒYi“Ë‘R’â~j", _
-        "•àsŠJn¢“ïiƒXƒ^[ƒg hesitationj", _
-        "“Ëi•àsiƒtƒFƒXƒeƒBƒl[ƒVƒ‡ƒ“j", _
-        "•à•Œ¸­", _
-        "è‚ÌU‚èÁ¸", _
-        "•ûŒü“]Š·¢“ï", _
-        "ƒŠƒYƒ€«Á¸" _
+        "å°åˆ»ã¿æ­©è¡Œ", _
+        "å‰å‚¾å§¿å‹¢æ­©è¡Œ", _
+        "ãƒ•ãƒªãƒ¼ã‚ºï¼ˆçªç„¶åœæ­¢ï¼‰", _
+        "æ­©è¡Œé–‹å§‹å›°é›£ï¼ˆã‚¹ã‚¿ãƒ¼ãƒˆ hesitationï¼‰", _
+        "çªé€²æ­©è¡Œï¼ˆãƒ•ã‚§ã‚¹ãƒ†ã‚£ãƒãƒ¼ã‚·ãƒ§ãƒ³ï¼‰", _
+        "æ­©å¹…æ¸›å°‘", _
+        "æ‰‹ã®æŒ¯ã‚Šæ¶ˆå¤±", _
+        "æ–¹å‘è»¢æ›å›°é›£", _
+        "ãƒªã‚ºãƒ æ€§æ¶ˆå¤±" _
     )
 
     ' ----------------------
-    ' CF®Œ`E‚—îÒ•sˆÀ’è•àsi1`10j
+    ' Cï¼šæ•´å½¢ãƒ»é«˜é½¢è€…ä¸å®‰å®šæ­©è¡Œï¼ˆ1ï½10ï¼‰
     ' ----------------------
     C_items = Array( _
-        "‚æ‚¿‚æ‚¿•àsi‹Ø—Í’á‰ºj", _
-        "•GÜ‚êiknee bucklingj", _
-        "ŒÒOA‚Ìáu’É«•às", _
-        "‘ÌŠ²¶‰E—h‚êiƒ„ƒRƒr[’¥Œó—lj", _
-        "‘O‘«•”‰×d‚ª‚µ‚É‚­‚¢", _
-        "•à•‚Ì‚Î‚ç‚Â‚«", _
-        "ŒC‚Ìˆø‚«‚¸‚è", _
-        "ñE•àsŠí‚Ö‚Ì‹­‚¢ˆË‘¶", _
-        "•Ğ‹r‰×d‰ñ”ğ", _
-        "áu’É‰ñ”ğ«‚ÌˆÙí•à—e" _
+        "ã‚ˆã¡ã‚ˆã¡æ­©è¡Œï¼ˆç­‹åŠ›ä½ä¸‹ï¼‰", _
+        "è†æŠ˜ã‚Œï¼ˆknee bucklingï¼‰", _
+        "è‚¡OAã®ç–¼ç—›æ€§æ­©è¡Œ", _
+        "ä½“å¹¹å·¦å³æºã‚Œï¼ˆãƒ¤ã‚³ãƒ“ãƒ¼å¾´å€™æ§˜ï¼‰", _
+        "å‰è¶³éƒ¨è·é‡ãŒã—ã«ãã„", _
+        "æ­©å¹…ã®ã°ã‚‰ã¤ã", _
+        "é´ã®å¼•ããšã‚Š", _
+        "æ–ãƒ»æ­©è¡Œå™¨ã¸ã®å¼·ã„ä¾å­˜", _
+        "ç‰‡è„šè·é‡å›é¿", _
+        "ç–¼ç—›å›é¿æ€§ã®ç•°å¸¸æ­©å®¹" _
     )
 
     ' ----------------------
-    ' DF‹¦’²áŠQE¸’²i1`8j
+    ' Dï¼šå”èª¿éšœå®³ãƒ»å¤±èª¿ï¼ˆ1ï½8ï¼‰
     ' ----------------------
     D_items = Array( _
-        "¸’²«•àsiƒƒCƒhƒx[ƒXj", _
-        "ç’¹‘«•às", _
-        "ƒXƒeƒbƒsƒ“ƒO•às", _
-        "‚¬‚­‚µ‚á‚­‚µ‚½•às", _
-        "•ûŒü“]Š·‚Ì‘å‚«‚È—h‚ê", _
-        "ãˆ‚Æ‚Ì‹¦’²•s—Ç", _
-        "‚Ó‚ç‚Â‚«‘å", _
-        "‘«‚ÌˆÊ’uŒˆ‚ß‚ª•s³Šm" _
+        "å¤±èª¿æ€§æ­©è¡Œï¼ˆãƒ¯ã‚¤ãƒ‰ãƒ™ãƒ¼ã‚¹ï¼‰", _
+        "åƒé³¥è¶³æ­©è¡Œ", _
+        "ã‚¹ãƒ†ãƒƒãƒ”ãƒ³ã‚°æ­©è¡Œ", _
+        "ããã—ã‚ƒãã—ãŸæ­©è¡Œ", _
+        "æ–¹å‘è»¢æ›æ™‚ã®å¤§ããªæºã‚Œ", _
+        "ä¸Šè‚¢ã¨ã®å”èª¿ä¸è‰¯", _
+        "ãµã‚‰ã¤ãå¤§", _
+        "è¶³ã®ä½ç½®æ±ºã‚ãŒä¸æ­£ç¢º" _
     )
 
-    ' --------- ‚±‚±‚©‚ç¶¬ˆ— ---------
+    ' --------- ã“ã“ã‹ã‚‰ç”Ÿæˆå‡¦ç† ---------
 
     Dim listSets As Variant
     listSets = Array(A_items, B_items, C_items, D_items)
@@ -5114,18 +5160,18 @@ Private Sub BuildWalkAbnormal_Checks()
     Dim idx As Long, arr As Variant
 
     For idx = 0 To 3
-        ' ‘ÎÛƒtƒŒ[ƒ€æ“¾
+        ' å¯¾è±¡ãƒ•ãƒ¬ãƒ¼ãƒ å–å¾—
         Set f = pg.Controls(fNames(idx))
         If f Is Nothing Then GoTo ContinueNext
         
-        ' Šù‘¶ƒ`ƒFƒbƒNíœ
+        ' æ—¢å­˜ãƒã‚§ãƒƒã‚¯å‰Šé™¤
         For Each ctl In f.Controls
             If TypeName(ctl) = "CheckBox" Then
                 f.Controls.Remove ctl.name
             End If
         Next ctl
         
-                ' ’Ç‰Á
+                ' è¿½åŠ 
         arr = listSets(idx)
         topPos = 24
 
@@ -5142,14 +5188,14 @@ Private Sub BuildWalkAbnormal_Checks()
                 .Height = 18
             End With
 
-            ' ‚±‚Ìƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚Ì‰º’[‚ğ‹L˜^
+            ' ã“ã®ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã®ä¸‹ç«¯ã‚’è¨˜éŒ²
             If chk.Top + chk.Height > maxBottom Then
                 maxBottom = chk.Top + chk.Height
             End If
 
             topPos = topPos + 20
         Next i
-        ' ’†g‚É‡‚í‚¹‚ÄƒtƒŒ[ƒ€‚‚³‚ğÅ’áŒÀ‚Ü‚ÅL‚Î‚·iƒƒO•t‚«j
+        ' ä¸­èº«ã«åˆã‚ã›ã¦ãƒ•ãƒ¬ãƒ¼ãƒ é«˜ã•ã‚’æœ€ä½é™ã¾ã§ä¼¸ã°ã™ï¼ˆãƒ­ã‚°ä»˜ãï¼‰
         If maxBottom + 12 > f.Height Then
 #If APP_DEBUG Then
             Debug.Print "[ABN-RESIZE]", f.name, _
@@ -5170,10 +5216,10 @@ ContinueNext:
 End Sub
 
 Private Sub BuildWalkUI_All()
-    ' •às ©—§“xƒ^ƒui‹——£E‰®ŠOEˆÀ’è«E‘¬“xj
+    ' æ­©è¡Œ è‡ªç«‹åº¦ã‚¿ãƒ–ï¼ˆè·é›¢ãƒ»å±‹å¤–ãƒ»å®‰å®šæ€§ãƒ»é€Ÿåº¦ï¼‰
     BuildWalkIndep_DistanceOutdoor
     
-    ' uˆÙí•àsvƒ^ƒu{’†gi4•ª—ŞƒtƒŒ[ƒ€{ƒ`ƒFƒbƒNŒQj
+    ' ã€Œç•°å¸¸æ­©è¡Œã€ã‚¿ãƒ–ï¼‹ä¸­èº«ï¼ˆ4åˆ†é¡ãƒ•ãƒ¬ãƒ¼ãƒ ï¼‹ãƒã‚§ãƒƒã‚¯ç¾¤ï¼‰
     BuildWalk_AbnormalTab
     BuildWalkAbnormal_Frames
     BuildWalkAbnormal_Checks
@@ -5186,19 +5232,19 @@ Public Sub BuildCogMentalUI_Simple()
     Dim f As MSForms.Frame
     Dim c As MSForms.Control
     Dim mp As MSForms.MultiPage
-    Dim fw As MSForms.Frame   'š •àsƒ^ƒu‚ÌƒtƒŒ[ƒ€
+    Dim fw As MSForms.Frame   'â˜… æ­©è¡Œã‚¿ãƒ–ã®ãƒ•ãƒ¬ãƒ¼ãƒ 
 
-    ' eƒtƒŒ[ƒ€i”F’m‹@”\E¸_–Êj
+    ' è¦ªãƒ•ãƒ¬ãƒ¼ãƒ ï¼ˆèªçŸ¥æ©Ÿèƒ½ãƒ»ç²¾ç¥é¢ï¼‰
     On Error Resume Next
     Set f = Me.Controls("Frame31")
     On Error GoTo 0
 
     If f Is Nothing Then
-        MsgBox "Frame31i”F’m‹@”\E¸_–Êj‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "Frame31ï¼ˆèªçŸ¥æ©Ÿèƒ½ãƒ»ç²¾ç¥é¢ï¼‰ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
 
-    ' š•àsƒ^ƒu(Frame6)‚Æ“¯‚¶ˆÊ’uEƒTƒCƒY‚É‡‚í‚¹‚é
+    ' â˜…æ­©è¡Œã‚¿ãƒ–(Frame6)ã¨åŒã˜ä½ç½®ãƒ»ã‚µã‚¤ã‚ºã«åˆã‚ã›ã‚‹
     On Error Resume Next
     Set fw = Me.Controls("Frame6")
     On Error GoTo 0
@@ -5209,16 +5255,16 @@ Public Sub BuildCogMentalUI_Simple()
         'f.Height = fw.Height
     End If
 
-    ' ‚¢‚Á‚½‚ñ’†g‚ğ‘S•”ƒNƒŠƒAiŒ³‚Ìƒ‰ƒxƒ‹^ƒRƒ“ƒ{^Šù‘¶ƒ}ƒ‹ƒ`ƒy[ƒW‚àŠÜ‚ß‚Äj
+    ' ã„ã£ãŸã‚“ä¸­èº«ã‚’å…¨éƒ¨ã‚¯ãƒªã‚¢ï¼ˆå…ƒã®ãƒ©ãƒ™ãƒ«ï¼ã‚³ãƒ³ãƒœï¼æ—¢å­˜ãƒãƒ«ãƒãƒšãƒ¼ã‚¸ã‚‚å«ã‚ã¦ï¼‰
     Do While f.Controls.Count > 0
         f.Controls.Remove f.Controls(0).name
     Loop
 
-    ' qMultiPage‚ğ’Ç‰Ái”F’m‹@”\ / ¸_–Ê ‚Ì2ƒ^ƒu‚Ì‚İj
+    ' å­MultiPageã‚’è¿½åŠ ï¼ˆèªçŸ¥æ©Ÿèƒ½ / ç²¾ç¥é¢ ã®2ã‚¿ãƒ–ã®ã¿ï¼‰
     Set mp = f.Controls.Add("Forms.MultiPage.1", "mpCogMental", True)
            With mp
         .Left = 6
-        .Top = 0          ' © ‚±‚±‚ğ 6 ¨ 0 ‚É
+        .Top = 0          ' â† ã“ã“ã‚’ 6 â†’ 0 ã«
         .Width = f.Width - 12
         .Height = f.Height - 12
         .Style = fmTabStyleTabs
@@ -5227,7 +5273,7 @@ Public Sub BuildCogMentalUI_Simple()
 
 
 
-    ' Šù‘¶ƒy[ƒW‚ğ‘S•”Á‚µ‚Ä‚©‚ç2ƒy[ƒWì¬
+    ' æ—¢å­˜ãƒšãƒ¼ã‚¸ã‚’å…¨éƒ¨æ¶ˆã—ã¦ã‹ã‚‰2ãƒšãƒ¼ã‚¸ä½œæˆ
     Do While mp.Pages.Count > 0
         mp.Pages.Remove 0
     Loop
@@ -5235,10 +5281,10 @@ Public Sub BuildCogMentalUI_Simple()
     mp.Pages.Add
     mp.Pages.Add
 
-    mp.Pages(0).caption = "”F’m‹@”\"
+    mp.Pages(0).caption = "èªçŸ¥æ©Ÿèƒ½"
     mp.Pages(0).name = "pgCognition"
 
-    mp.Pages(1).caption = "¸_–Ê"
+    mp.Pages(1).caption = "ç²¾ç¥é¢"
     mp.Pages(1).name = "pgMental"
 End Sub
 
@@ -5253,39 +5299,39 @@ Public Sub BuildCog_CognitionCore()
     Dim lbl As MSForms.label
     Dim cmb As MSForms.ComboBox
     
-    ' eƒtƒŒ[ƒ€i”F’mj
+    ' è¦ªãƒ•ãƒ¬ãƒ¼ãƒ ï¼ˆèªçŸ¥ï¼‰
     On Error Resume Next
     Set f = Me.Controls("Frame31")
     On Error GoTo 0
     If f Is Nothing Then
-        MsgBox "Frame31 ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "Frame31 ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-    ' qƒ}ƒ‹ƒ`ƒy[ƒW
+    ' å­ãƒãƒ«ãƒãƒšãƒ¼ã‚¸
     On Error Resume Next
     Set mp = f.Controls("mpCogMental")
     On Error GoTo 0
     If mp Is Nothing Then
-        MsgBox "mpCogMental ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "mpCogMental ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-    ' ”F’m‹@”\ƒy[ƒW
+    ' èªçŸ¥æ©Ÿèƒ½ãƒšãƒ¼ã‚¸
     On Error Resume Next
     Set pg = mp.Pages("pgCognition")
     On Error GoTo 0
     If pg Is Nothing Then
-        MsgBox "pgCognition ƒy[ƒW‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "pgCognition ãƒšãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-    ' Šù‘¶ƒRƒ“ƒgƒ[ƒ‹‚ğƒNƒŠƒAi‚â‚è’¼‚µ—pj
+    ' æ—¢å­˜ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ã‚¯ãƒªã‚¢ï¼ˆã‚„ã‚Šç›´ã—ç”¨ï¼‰
     Do While pg.Controls.Count > 0
         pg.Controls.Remove pg.Controls(0).name
     Loop
     
-    ' ƒŒƒCƒAƒEƒgŠî€
+    ' ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆåŸºæº–
     Dim rowTop As Single, rowGap As Single
     Dim col1Left As Single, col2Left As Single
     Dim lblW As Single, cmbW As Single
@@ -5297,17 +5343,17 @@ Public Sub BuildCog_CognitionCore()
     lblW = 60
     cmbW = 140
     
-    ' ‹¤’Ê‚Åg‚¤•]‰¿ƒŠƒXƒg
+    ' å…±é€šã§ä½¿ã†è©•ä¾¡ãƒªã‚¹ãƒˆ
     Dim i As Long
     Dim arr4()
     
-    arr4 = Array("³í", "‚â‚â’á‰º", "’á‰º", "’˜–¾‚É’á‰º")
+    arr4 = Array("æ­£å¸¸", "ã‚„ã‚„ä½ä¸‹", "ä½ä¸‹", "è‘—æ˜ã«ä½ä¸‹")
     
-    '\\ 1s–ÚF‹L‰¯^’ˆÓ \\
-    ' ‹L‰¯
+    'â€•â€• 1è¡Œç›®ï¼šè¨˜æ†¶ï¼æ³¨æ„ â€•â€•
+    ' è¨˜æ†¶
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblCogMemory", True)
     With lbl
-        .caption = "‹L‰¯"
+        .caption = "è¨˜æ†¶"
         .Left = col1Left
         .Top = rowTop
         .Width = lblW
@@ -5326,10 +5372,10 @@ Public Sub BuildCog_CognitionCore()
         Next i
     End With
     
-    ' ’ˆÓ
+    ' æ³¨æ„
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblCogAttention", True)
     With lbl
-        .caption = "’ˆÓ"
+        .caption = "æ³¨æ„"
         .Left = col2Left
         .Top = rowTop
         .Width = lblW
@@ -5348,13 +5394,13 @@ Public Sub BuildCog_CognitionCore()
         Next i
     End With
     
-    '\\ 2s–ÚFŒ©“–¯^”»’f \\
+    'â€•â€• 2è¡Œç›®ï¼šè¦‹å½“è­˜ï¼åˆ¤æ–­ â€•â€•
     rowTop = rowTop + rowGap
     
-    ' Œ©“–¯
+    ' è¦‹å½“è­˜
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblCogOrientation", True)
     With lbl
-        .caption = "Œ©“–¯"
+        .caption = "è¦‹å½“è­˜"
         .Left = col1Left
         .Top = rowTop
         .Width = lblW
@@ -5373,10 +5419,10 @@ Public Sub BuildCog_CognitionCore()
         Next i
     End With
     
-    ' ”»’f
+    ' åˆ¤æ–­
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblCogJudgement", True)
     With lbl
-        .caption = "”»’f"
+        .caption = "åˆ¤æ–­"
         .Left = col2Left
         .Top = rowTop
         .Width = lblW
@@ -5390,18 +5436,18 @@ Public Sub BuildCog_CognitionCore()
         .Width = cmbW
         .Height = 18
         .Style = fmStyleDropDownList
-        .AddItem "—ÇD"
-        .AddItem "‚â‚â•sˆÀ’è"
-        .AddItem "•sˆÀ’è"
+        .AddItem "è‰¯å¥½"
+        .AddItem "ã‚„ã‚„ä¸å®‰å®š"
+        .AddItem "ä¸å®‰å®š"
     End With
     
-    '\\ 3s–ÚF‹s^Œ¾Œê \\
+    'â€•â€• 3è¡Œç›®ï¼šé‚è¡Œï¼è¨€èª â€•â€•
     rowTop = rowTop + rowGap
     
-    ' ‹s
+    ' é‚è¡Œ
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblCogExecutive", True)
     With lbl
-        .caption = "‹s"
+        .caption = "é‚è¡Œ"
         .Left = col1Left
         .Top = rowTop
         .Width = lblW
@@ -5415,15 +5461,15 @@ Public Sub BuildCog_CognitionCore()
         .Width = cmbW
         .Height = 18
         .Style = fmStyleDropDownList
-        .AddItem "—ÇD"
-        .AddItem "‚â‚â•sˆÀ’è"
-        .AddItem "•sˆÀ’è"
+        .AddItem "è‰¯å¥½"
+        .AddItem "ã‚„ã‚„ä¸å®‰å®š"
+        .AddItem "ä¸å®‰å®š"
     End With
     
-    ' Œ¾Œê
+    ' è¨€èª
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblCogLanguage", True)
     With lbl
-        .caption = "Œ¾Œê"
+        .caption = "è¨€èª"
         .Left = col2Left
         .Top = rowTop
         .Width = lblW
@@ -5437,9 +5483,9 @@ Public Sub BuildCog_CognitionCore()
         .Width = cmbW
         .Height = 18
         .Style = fmStyleDropDownList
-        .AddItem "–â‘è‚È‚µ"
-        .AddItem "‚â‚âáŠQ"
-        .AddItem "áŠQŒ°’˜"
+        .AddItem "å•é¡Œãªã—"
+        .AddItem "ã‚„ã‚„éšœå®³"
+        .AddItem "éšœå®³é¡•è‘—"
     End With
 End Sub
 
@@ -5454,34 +5500,34 @@ Public Sub BuildCog_DementiaBlock()
     Dim cmb As MSForms.ComboBox
     Dim txt As MSForms.TextBox
     
-    ' eƒtƒŒ[ƒ€
+    ' è¦ªãƒ•ãƒ¬ãƒ¼ãƒ 
     On Error Resume Next
     Set f = Me.Controls("Frame31")
     On Error GoTo 0
     If f Is Nothing Then
-        MsgBox "Frame31 ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "Frame31 ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-    ' qƒ}ƒ‹ƒ`ƒy[ƒW
+    ' å­ãƒãƒ«ãƒãƒšãƒ¼ã‚¸
     On Error Resume Next
     Set mp = f.Controls("mpCogMental")
     On Error GoTo 0
     If mp Is Nothing Then
-        MsgBox "mpCogMental ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "mpCogMental ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-    ' ”F’m‹@”\ƒy[ƒW
+    ' èªçŸ¥æ©Ÿèƒ½ãƒšãƒ¼ã‚¸
     On Error Resume Next
     Set pg = mp.Pages("pgCognition")
     On Error GoTo 0
     If pg Is Nothing Then
-        MsgBox "pgCognition ƒy[ƒW‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "pgCognition ãƒšãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-       ' ‚¢‚Á‚½‚ñAŠù‘¶‚Ì”F’mÇƒuƒƒbƒN‚ğÁ‚·i‚â‚è’¼‚µ—pj
+       ' ã„ã£ãŸã‚“ã€æ—¢å­˜ã®èªçŸ¥ç—‡ãƒ–ãƒ­ãƒƒã‚¯ã‚’æ¶ˆã™ï¼ˆã‚„ã‚Šç›´ã—ç”¨ï¼‰
     Dim i As Long
     For i = pg.Controls.Count - 1 To 0 Step -1
         With pg.Controls(i)
@@ -5495,20 +5541,20 @@ Public Sub BuildCog_DementiaBlock()
     Next i
 
     
-    ' ã‚Ì”F’m6€–ÚƒuƒƒbƒN‚Ì‚·‚®‰º‚É”z’ui‚¾‚¢‚½‚¢3s{—]”’‚Ô‚ñ‰º‚°‚éj
-    fraTop = 18 + 3 * 24 + 18   ' 18(Å‰) + 3s*24 + —]”’
+    ' ä¸Šã®èªçŸ¥6é …ç›®ãƒ–ãƒ­ãƒƒã‚¯ã®ã™ãä¸‹ã«é…ç½®ï¼ˆã ã„ãŸã„3è¡Œï¼‹ä½™ç™½ã¶ã‚“ä¸‹ã’ã‚‹ï¼‰
+    fraTop = 18 + 3 * 24 + 18   ' 18(æœ€åˆ) + 3è¡Œ*24 + ä½™ç™½
     
-    ' Œ©o‚µƒ‰ƒxƒ‹u”F’mÇ‚Ìí—Şv
+    ' è¦‹å‡ºã—ãƒ©ãƒ™ãƒ«ã€ŒèªçŸ¥ç—‡ã®ç¨®é¡ã€
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblDementiaType", True)
     With lbl
-        .caption = "”F’mÇ‚Ìí—Ş"
+        .caption = "èªçŸ¥ç—‡ã®ç¨®é¡"
         .Left = 12
         .Top = fraTop
         .Width = 90
         .Height = 18
     End With
     
-    ' f’f–¼ƒRƒ“ƒ{
+    ' è¨ºæ–­åã‚³ãƒ³ãƒœ
     Set cmb = pg.Controls.Add("Forms.ComboBox.1", "cmbDementiaType", True)
     With cmb
         .Left = lbl.Left + lbl.Width + 6
@@ -5516,26 +5562,26 @@ Public Sub BuildCog_DementiaBlock()
         .Width = 160
         .Height = 18
         .Style = fmStyleDropDownList
-        .AddItem "‚È‚µ / •s–¾"
-        .AddItem "ƒAƒ‹ƒcƒnƒCƒ}[Œ^"
-        .AddItem "ŒŒŠÇ«"
-        .AddItem "ƒŒƒr[¬‘ÌŒ^"
-        .AddItem "‘O“ª‘¤“ªŒ^(FTD)"
-        .AddItem "¬‡Œ^"
-        .AddItem "‚»‚Ì‘¼"
+        .AddItem "ãªã— / ä¸æ˜"
+        .AddItem "ã‚¢ãƒ«ãƒ„ãƒã‚¤ãƒãƒ¼å‹"
+        .AddItem "è¡€ç®¡æ€§"
+        .AddItem "ãƒ¬ãƒ“ãƒ¼å°ä½“å‹"
+        .AddItem "å‰é ­å´é ­å‹(FTD)"
+        .AddItem "æ··åˆå‹"
+        .AddItem "ãã®ä»–"
     End With
     
-    ' ”õlƒ‰ƒxƒ‹
+    ' å‚™è€ƒãƒ©ãƒ™ãƒ«
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblDementiaNote", True)
     With lbl
-        .caption = "”õl"
+        .caption = "å‚™è€ƒ"
         .Left = cmb.Left + cmb.Width + 12
         .Top = fraTop
         .Width = 40
         .Height = 18
     End With
     
-    ' ”õlƒeƒLƒXƒg
+    ' å‚™è€ƒãƒ†ã‚­ã‚¹ãƒˆ
     Set txt = pg.Controls.Add("Forms.TextBox.1", "txtDementiaNote", True)
     With txt
         .Left = lbl.Left + lbl.Width + 6
@@ -5556,34 +5602,34 @@ Public Sub BuildCog_BPSD()
     Dim chk As MSForms.CheckBox
     Dim i As Long
     
-    ' eƒtƒŒ[ƒ€
+    ' è¦ªãƒ•ãƒ¬ãƒ¼ãƒ 
     On Error Resume Next
     Set f = Me.Controls("Frame31")
     On Error GoTo 0
     If f Is Nothing Then
-        MsgBox "Frame31 ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "Frame31 ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-    ' qƒ}ƒ‹ƒ`ƒy[ƒW
+    ' å­ãƒãƒ«ãƒãƒšãƒ¼ã‚¸
     On Error Resume Next
     Set mp = f.Controls("mpCogMental")
     On Error GoTo 0
     If mp Is Nothing Then
-        MsgBox "mpCogMental ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "mpCogMental ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-    ' ”F’m‹@”\ƒy[ƒW
+    ' èªçŸ¥æ©Ÿèƒ½ãƒšãƒ¼ã‚¸
     On Error Resume Next
     Set pg = mp.Pages("pgCognition")
     On Error GoTo 0
     If pg Is Nothing Then
-        MsgBox "pgCognition ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "pgCognition ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-    ' --- Šù‘¶BPSDƒRƒ“ƒgƒ[ƒ‹íœ ---
+    ' --- æ—¢å­˜BPSDã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«å‰Šé™¤ ---
     Dim c As MSForms.Control
     For i = pg.Controls.Count - 1 To 0 Step -1
         If TypeName(pg.Controls(i)) = "CheckBox" _
@@ -5592,14 +5638,14 @@ Public Sub BuildCog_BPSD()
         End If
     Next i
     
-    ' --- ’Ç‰ÁˆÊ’ui”F’mÇ‚Ìí—ŞƒuƒƒbƒN‚Ì‰ºj ---
-    topY = 18 + 3 * 24 + 18 + 24   '6€–ÚƒuƒƒbƒN + —]”’
-    topY = topY + 24               '”F’mÇí—Ş‚Ìs
+    ' --- è¿½åŠ ä½ç½®ï¼ˆèªçŸ¥ç—‡ã®ç¨®é¡ãƒ–ãƒ­ãƒƒã‚¯ã®ä¸‹ï¼‰ ---
+    topY = 18 + 3 * 24 + 18 + 24   '6é …ç›®ãƒ–ãƒ­ãƒƒã‚¯ + ä½™ç™½
+    topY = topY + 24               'èªçŸ¥ç—‡ç¨®é¡ã®è¡Œ
     
-    ' Œ©o‚µ
+    ' è¦‹å‡ºã—
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblBPSD_Title", True)
     With lbl
-        .caption = "”F’mÇ‚Ìü•ÓÇóiBPSDj"
+        .caption = "èªçŸ¥ç—‡ã®å‘¨è¾ºç—‡çŠ¶ï¼ˆBPSDï¼‰"
         .Left = 12
         .Top = topY
         .Width = 180
@@ -5608,10 +5654,10 @@ Public Sub BuildCog_BPSD()
     
     topY = topY + 24
     
-    ' BPSD€–Ú
+    ' BPSDé …ç›®
     Dim items
-    items = Array("—}‚¤‚Â", "•sˆÀ", "Å‘‡", "Œ¶Šo", "–Ï‘z", _
-                  "œpœj", "–\Œ¾", "–\—Í", "•s‰¸", "‡–°áŠQ", "’‹–é‹t“]")
+    items = Array("æŠ‘ã†ã¤", "ä¸å®‰", "ç„¦ç‡¥", "å¹»è¦š", "å¦„æƒ³", _
+                  "å¾˜å¾Š", "æš´è¨€", "æš´åŠ›", "ä¸ç©", "ç¡çœ éšœå®³", "æ˜¼å¤œé€†è»¢")
     
     Dim col As Long, row As Long
     col = 0: row = 0
@@ -5645,40 +5691,40 @@ Public Sub BuildCog_MentalBlock()
     Dim txt As MSForms.TextBox
     Dim topY As Single
     
-    ' eƒtƒŒ[ƒ€iFrame31j
+    ' è¦ªãƒ•ãƒ¬ãƒ¼ãƒ ï¼ˆFrame31ï¼‰
     On Error Resume Next
     Set f = Me.Controls("Frame31")
     On Error GoTo 0
     If f Is Nothing Then
-        MsgBox "Frame31 ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "Frame31 ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-    ' qƒ}ƒ‹ƒ`ƒy[ƒW mpCogMental
+    ' å­ãƒãƒ«ãƒãƒšãƒ¼ã‚¸ mpCogMental
     On Error Resume Next
     Set mp = f.Controls("mpCogMental")
     On Error GoTo 0
     If mp Is Nothing Then
-        MsgBox "mpCogMental ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "mpCogMental ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-    ' ¸_–Êƒy[ƒW
+    ' ç²¾ç¥é¢ãƒšãƒ¼ã‚¸
     On Error Resume Next
     Set pg = mp.Pages("pgMental")
     On Error GoTo 0
     If pg Is Nothing Then
-        MsgBox "pgMental ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "pgMental ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
-    ' Šù‘¶ƒNƒŠƒAi‚â‚è’¼‚µ—pj
+    ' æ—¢å­˜ã‚¯ãƒªã‚¢ï¼ˆã‚„ã‚Šç›´ã—ç”¨ï¼‰
     Dim i As Long
     For i = pg.Controls.Count - 1 To 0 Step -1
         pg.Controls.Remove pg.Controls(i).name
     Next i
     
-    ' ƒŒƒCƒAƒEƒg
+    ' ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
     Dim rowGap As Single: rowGap = 26
     Dim lblW As Single: lblW = 90
     Dim cmbW As Single: cmbW = 150
@@ -5686,10 +5732,10 @@ Public Sub BuildCog_MentalBlock()
     Dim left2 As Single: left2 = 260
     topY = 18
     
-    ' --- ‹C•ª ---
+    ' --- æ°—åˆ† ---
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblMood", True)
     With lbl
-        .caption = "‹C•ª"
+        .caption = "æ°—åˆ†"
         .Left = left1
         .Top = topY
         .Width = lblW
@@ -5701,15 +5747,15 @@ Public Sub BuildCog_MentalBlock()
         .Top = topY - 2
         .Width = cmbW
         .Style = fmStyleDropDownList
-        .AddItem "ˆÀ’è"
-        .AddItem "‚â‚â•sˆÀ’è"
-        .AddItem "•sˆÀ’è"
+        .AddItem "å®‰å®š"
+        .AddItem "ã‚„ã‚„ä¸å®‰å®š"
+        .AddItem "ä¸å®‰å®š"
     End With
     
-    ' --- ˆÓ—~ ---
+    ' --- æ„æ¬² ---
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblMotivation", True)
     With lbl
-        .caption = "ˆÓ—~"
+        .caption = "æ„æ¬²"
         .Left = left2
         .Top = topY
         .Width = lblW
@@ -5721,18 +5767,18 @@ Public Sub BuildCog_MentalBlock()
         .Top = topY - 2
         .Width = cmbW
         .Style = fmStyleDropDownList
-        .AddItem "‚‚¢"
-        .AddItem "•’Ê"
-        .AddItem "’á‚¢"
-        .AddItem "‚Ù‚Æ‚ñ‚Ç‚È‚µ"
+        .AddItem "é«˜ã„"
+        .AddItem "æ™®é€š"
+        .AddItem "ä½ã„"
+        .AddItem "ã»ã¨ã‚“ã©ãªã—"
     End With
     
-    ' --- •sˆÀ ---
+    ' --- ä¸å®‰ ---
     topY = topY + rowGap
     
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblAnxiety", True)
     With lbl
-        .caption = "•sˆÀ"
+        .caption = "ä¸å®‰"
         .Left = left1
         .Top = topY
         .Width = lblW
@@ -5744,16 +5790,16 @@ Public Sub BuildCog_MentalBlock()
         .Top = topY - 2
         .Width = cmbW
         .Style = fmStyleDropDownList
-        .AddItem "‚È‚µ"
-        .AddItem "Œy“x"
-        .AddItem "’†“™“x"
-        .AddItem "‹­‚¢"
+        .AddItem "ãªã—"
+        .AddItem "è»½åº¦"
+        .AddItem "ä¸­ç­‰åº¦"
+        .AddItem "å¼·ã„"
     End With
     
-    ' --- ‘Îl ---
+    ' --- å¯¾äºº ---
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblRelation", True)
     With lbl
-        .caption = "‘ÎlŠÖŒW"
+        .caption = "å¯¾äººé–¢ä¿‚"
         .Left = left2
         .Top = topY
         .Width = lblW
@@ -5765,18 +5811,18 @@ Public Sub BuildCog_MentalBlock()
         .Top = topY - 2
         .Width = cmbW
         .Style = fmStyleDropDownList
-        .AddItem "—ÇD"
-        .AddItem "‚¨‚¨‚Ş‚Ë—ÇD"
-        .AddItem "‚â‚â–â‘è"
-        .AddItem "–â‘è‚ ‚è"
+        .AddItem "è‰¯å¥½"
+        .AddItem "ãŠãŠã‚€ã­è‰¯å¥½"
+        .AddItem "ã‚„ã‚„å•é¡Œ"
+        .AddItem "å•é¡Œã‚ã‚Š"
     End With
     
-    ' --- ‡–° ---
+    ' --- ç¡çœ  ---
     topY = topY + rowGap
     
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblSleep", True)
     With lbl
-        .caption = "‡–°"
+        .caption = "ç¡çœ "
         .Left = left1
         .Top = topY
         .Width = lblW
@@ -5788,19 +5834,19 @@ Public Sub BuildCog_MentalBlock()
         .Top = topY - 2
         .Width = cmbW
         .Style = fmStyleDropDownList
-        .AddItem "—ÇD"
-        .AddItem "“ü–°¢“ï"
-        .AddItem "’†“rŠoÁ"
-        .AddItem "‘’©ŠoÁ"
-        .AddItem "“ú’†ŒX–°"
+        .AddItem "è‰¯å¥½"
+        .AddItem "å…¥çœ å›°é›£"
+        .AddItem "ä¸­é€”è¦šé†’"
+        .AddItem "æ—©æœè¦šé†’"
+        .AddItem "æ—¥ä¸­å‚¾çœ "
     End With
     
-    ' --- ”õl ---
+    ' --- å‚™è€ƒ ---
     topY = topY + rowGap + 8
     
     Set lbl = pg.Controls.Add("Forms.Label.1", "lblMentalNote", True)
     With lbl
-        .caption = "”õl"
+        .caption = "å‚™è€ƒ"
         .Left = left1
         .Top = topY
         .Width = lblW
@@ -5830,36 +5876,36 @@ Private Sub BuildDailyLogTab()
 
     On Error GoTo EH
 
-    '=== MultiPage1 ‚ğæ“¾ ===
+    '=== MultiPage1 ã‚’å–å¾— ===
     Set mp = Me.Controls("MultiPage1")
 
-    '=== ‚·‚Å‚Éu“úX‚Ì‹L˜^vƒ^ƒu‚ª‚ ‚é‚©Šm”Fi™p“™—pj===
+    '=== ã™ã§ã«ã€Œæ—¥ã€…ã®è¨˜éŒ²ã€ã‚¿ãƒ–ãŒã‚ã‚‹ã‹ç¢ºèªï¼ˆå†ªç­‰ç”¨ï¼‰===
     For i = 0 To mp.Pages.Count - 1
-        If mp.Pages(i).caption = "“úX‚Ì‹L˜^" Then
+        If mp.Pages(i).caption = "æ—¥ã€…ã®è¨˜éŒ²" Then
             exists = True
             Set pg = mp.Pages(i)
             Exit For
         End If
     Next i
 
-    '=== ‚È‚¯‚ê‚ÎV‚µ‚¢ƒy[ƒW‚ğ’Ç‰Á ===
+    '=== ãªã‘ã‚Œã°æ–°ã—ã„ãƒšãƒ¼ã‚¸ã‚’è¿½åŠ  ===
     If Not exists Then
         Set pg = mp.Pages.Add
-        pg.caption = "“úX‚Ì‹L˜^"
+        pg.caption = "æ—¥ã€…ã®è¨˜éŒ²"
     End If
 
-    '=== ƒtƒŒ[ƒ€‚ª–³‚¯‚ê‚Î1ŒÂ‚¾‚¯ì‚é ===
+    '=== ãƒ•ãƒ¬ãƒ¼ãƒ ãŒç„¡ã‘ã‚Œã°1å€‹ã ã‘ä½œã‚‹ ===
     On Error Resume Next
     Set fra = pg.Controls("fraDailyLog")
     On Error GoTo EH
 
     If fra Is Nothing Then
         Set fra = pg.Controls.Add("Forms.Frame.1", "fraDailyLog")
-        fra.caption = "“úX‚Ì‹L˜^"
+        fra.caption = "æ—¥ã€…ã®è¨˜éŒ²"
         fra.Left = 6
     fra.Top = 6
-    fra.Width = mp.Width - 24      ' © MultiPage ‚Ì•‚©‚ç¶‰E12pt‚¸‚Â—]”’
-    fra.Height = mp.Height - 30    ' © ã‰º‚Ìƒ^ƒu{—]”’‚Ô‚ñ‚ğ·‚µˆø‚¢‚Ä˜g‚¢‚Á‚Ï‚¢
+    fra.Width = mp.Width - 24      ' â† MultiPage ã®å¹…ã‹ã‚‰å·¦å³12ptãšã¤ä½™ç™½
+    fra.Height = mp.Height - 30    ' â† ä¸Šä¸‹ã®ã‚¿ãƒ–ï¼‹ä½™ç™½ã¶ã‚“ã‚’å·®ã—å¼•ã„ã¦æ ã„ã£ã±ã„
     End If
 
        BuildDailyLogLayout
@@ -5887,15 +5933,15 @@ Private Sub BuildDailyLogLayout()
     Dim txt As Object
     Dim i As Long
 
-        '=== “úX‚Ì‹L˜^ƒtƒŒ[ƒ€æ“¾i‹¤’Êƒwƒ‹ƒp[Œo—Rj ===
+        '=== æ—¥ã€…ã®è¨˜éŒ²ãƒ•ãƒ¬ãƒ¼ãƒ å–å¾—ï¼ˆå…±é€šãƒ˜ãƒ«ãƒ‘ãƒ¼çµŒç”±ï¼‰ ===
     Set f = GetDailyLogFrame()
     If f Is Nothing Then GoTo ExitHere
 
     '========================================
-    ' ã’iF‹L˜^“ü—Íƒ][ƒ“
+    ' ä¸Šæ®µï¼šè¨˜éŒ²å…¥åŠ›ã‚¾ãƒ¼ãƒ³
     '========================================
 
-    '=== ‹L˜^“úƒ‰ƒxƒ‹ ===
+    '=== è¨˜éŒ²æ—¥ãƒ©ãƒ™ãƒ« ===
     On Error Resume Next
     Set lbl = f.Controls("lblDailyDate")
     On Error GoTo EH
@@ -5903,14 +5949,14 @@ Private Sub BuildDailyLogLayout()
         Set lbl = f.Controls.Add("Forms.Label.1", "lblDailyDate")
     End If
     With lbl
-        .caption = "‹L˜^“ú"
+        .caption = "è¨˜éŒ²æ—¥"
         .Left = 12
         .Top = 18
         .Width = 40
         .Height = 18
     End With
 
-    '=== ‹L˜^“úƒeƒLƒXƒg ===
+    '=== è¨˜éŒ²æ—¥ãƒ†ã‚­ã‚¹ãƒˆ ===
     On Error Resume Next
     Set txt = f.Controls("txtDailyDate")
     On Error GoTo EH
@@ -5924,7 +5970,7 @@ Private Sub BuildDailyLogLayout()
         .Height = 18
     End With
 
-    '=== ‹L˜^Òƒ‰ƒxƒ‹ ===
+    '=== è¨˜éŒ²è€…ãƒ©ãƒ™ãƒ« ===
    On Error Resume Next
 
     Set lbl = f.Controls("lblDailyStaff")
@@ -5933,14 +5979,14 @@ Private Sub BuildDailyLogLayout()
         Set lbl = f.Controls.Add("Forms.Label.1", "lblDailyStaff")
     End If
     With lbl
-        .caption = "‹L˜^Ò"
+        .caption = "è¨˜éŒ²è€…"
         .Left = txt.Left + txt.Width + 24
         .Top = 18
         .Width = 40
         .Height = 18
     End With
 
-    '=== ‹L˜^ÒƒeƒLƒXƒg ===
+    '=== è¨˜éŒ²è€…ãƒ†ã‚­ã‚¹ãƒˆ ===
     On Error Resume Next
     Set txt = f.Controls("txtDailyStaff")
     On Error GoTo EH
@@ -5954,7 +6000,7 @@ Private Sub BuildDailyLogLayout()
         .Height = 18
     End With
 
-    '=== ‹L˜^“à—eƒ‰ƒxƒ‹ ===
+    '=== è¨˜éŒ²å†…å®¹ãƒ©ãƒ™ãƒ« ===
     On Error Resume Next
     Set lbl = f.Controls("lblDailyNote")
     On Error GoTo EH
@@ -5962,14 +6008,14 @@ Private Sub BuildDailyLogLayout()
         Set lbl = f.Controls.Add("Forms.Label.1", "lblDailyNote")
     End If
     With lbl
-        .caption = "‹L˜^“à—e"
+        .caption = "è¨˜éŒ²å†…å®¹"
         .Left = 12
         .Top = 48
         .Width = 60
         .Height = 18
     End With
 
-    '=== ‹L˜^“à—eƒeƒLƒXƒgiƒ}ƒ‹ƒ`ƒ‰ƒCƒ“j ===
+    '=== è¨˜éŒ²å†…å®¹ãƒ†ã‚­ã‚¹ãƒˆï¼ˆãƒãƒ«ãƒãƒ©ã‚¤ãƒ³ï¼‰ ===
     On Error Resume Next
     Set txt = f.Controls("txtDailyNote")
     On Error GoTo EH
@@ -6005,20 +6051,20 @@ Private Sub BuildDailyLog_StaffAndNote()
     Dim txt As Object
     Dim i As Long
 
-       '=== “úX‚Ì‹L˜^ƒtƒŒ[ƒ€æ“¾i‹¤’Êƒwƒ‹ƒp[Œo—Rj ===
+       '=== æ—¥ã€…ã®è¨˜éŒ²ãƒ•ãƒ¬ãƒ¼ãƒ å–å¾—ï¼ˆå…±é€šãƒ˜ãƒ«ãƒ‘ãƒ¼çµŒç”±ï¼‰ ===
     Set f = GetDailyLogFrame()
     If f Is Nothing Then GoTo ExitHere
 
     
     '----------------------------------------
-    ' ‹L˜^“úiŠù‘¶‚ª‚ ‚Á‚Ä‚àˆÊ’u‚ğ‘µ‚¦‚éj
+    ' è¨˜éŒ²æ—¥ï¼ˆæ—¢å­˜ãŒã‚ã£ã¦ã‚‚ä½ç½®ã‚’æƒãˆã‚‹ï¼‰
     '----------------------------------------
     On Error Resume Next
     Set lbl = f.Controls("lblDailyDate")
     On Error GoTo EH
     If Not lbl Is Nothing Then
         With lbl
-            .caption = "‹L˜^“ú"
+            .caption = "è¨˜éŒ²æ—¥"
             .Left = 12
             .Top = 18
             .Width = 40
@@ -6039,7 +6085,7 @@ Private Sub BuildDailyLog_StaffAndNote()
     End If
     
     '----------------------------------------
-    ' ‹L˜^Òƒ‰ƒxƒ‹
+    ' è¨˜éŒ²è€…ãƒ©ãƒ™ãƒ«
     '----------------------------------------
     Set lbl = Nothing
 
@@ -6050,7 +6096,7 @@ Private Sub BuildDailyLog_StaffAndNote()
         Set lbl = f.Controls.Add("Forms.Label.1", "lblDailyStaff")
     End If
     With lbl
-        .caption = "‹L˜^Ò"
+        .caption = "è¨˜éŒ²è€…"
         .Left = txt.Left + txt.Width + 24
         .Top = 18
         .Width = 40
@@ -6058,7 +6104,7 @@ Private Sub BuildDailyLog_StaffAndNote()
     End With
 
     '----------------------------------------
-    ' ‹L˜^ÒƒeƒLƒXƒg
+    ' è¨˜éŒ²è€…ãƒ†ã‚­ã‚¹ãƒˆ
     '----------------------------------------
     Set txt = Nothing
     
@@ -6076,7 +6122,7 @@ Private Sub BuildDailyLog_StaffAndNote()
     End With
 
     '----------------------------------------
-    ' ‹L˜^“à—eƒ‰ƒxƒ‹
+    ' è¨˜éŒ²å†…å®¹ãƒ©ãƒ™ãƒ«
     '----------------------------------------
     Set lbl = Nothing
     
@@ -6087,7 +6133,7 @@ Private Sub BuildDailyLog_StaffAndNote()
         Set lbl = f.Controls.Add("Forms.Label.1", "lblDailyNote")
     End If
     With lbl
-        .caption = "‹L˜^“à—e"
+        .caption = "è¨˜éŒ²å†…å®¹"
         .Left = 12
         .Top = 48
         .Width = 60
@@ -6095,7 +6141,7 @@ Private Sub BuildDailyLog_StaffAndNote()
     End With
 
     '----------------------------------------
-    ' ‹L˜^“à—eƒeƒLƒXƒgiƒ}ƒ‹ƒ`ƒ‰ƒCƒ“j
+    ' è¨˜éŒ²å†…å®¹ãƒ†ã‚­ã‚¹ãƒˆï¼ˆãƒãƒ«ãƒãƒ©ã‚¤ãƒ³ï¼‰
     '----------------------------------------
     Set txt = Nothing
     
@@ -6109,7 +6155,7 @@ Private Sub BuildDailyLog_StaffAndNote()
         .Left = 12
         .Top = 66
         .Width = f.Width - 24
-        .Height = f.Height - 280   ' © ‚±‚±‚ÍŒ³‚Ì‚Ü‚Ü‚É–ß‚·
+        .Height = f.Height - 280   ' â† ã“ã“ã¯å…ƒã®ã¾ã¾ã«æˆ»ã™
         .multiline = True
         .EnterKeyBehavior = True
         .ScrollBars = 2   ' fmScrollBarsVertical
@@ -6134,16 +6180,16 @@ Public Sub BuildDailyLog_HistoryList(owner As Object)
 
     margin = 12
 
-    ' fraDailyLog ‚Æ ‹L˜^“à—eƒeƒLƒXƒg‚ğæ“¾
+    ' fraDailyLog ã¨ è¨˜éŒ²å†…å®¹ãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—
     Set f = owner.Controls("fraDailyLog")
     Set txtNote = f.Controls("txtDailyNote")
 
-    ' ‚·‚Å‚Éì‚Á‚Ä‚ ‚éê‡‚Í‚¢‚Á‚½‚ñíœ‚µ‚Äì‚è’¼‚µi™p“™«Šm•Ûj
+    ' ã™ã§ã«ä½œã£ã¦ã‚ã‚‹å ´åˆã¯ã„ã£ãŸã‚“å‰Šé™¤ã—ã¦ä½œã‚Šç›´ã—ï¼ˆå†ªç­‰æ€§ç¢ºä¿ï¼‰
     On Error Resume Next
     f.Controls.Remove "lstDailyLogList"
     On Error GoTo 0
 
-'--- —š—ğƒ‰ƒxƒ‹ì¬ ---
+'--- å±¥æ­´ãƒ©ãƒ™ãƒ«ä½œæˆ ---
 Dim lbl As MSForms.label
 
 On Error Resume Next
@@ -6153,9 +6199,9 @@ On Error GoTo 0
 Set lbl = f.Controls.Add("Forms.Label.1", "lblDailyHistory", True)
 
 With lbl
-    .caption = "‚±‚ÌŒ‚Ì‹L˜^ˆê——"
+    .caption = "ã“ã®æœˆã®è¨˜éŒ²ä¸€è¦§"
     .Left = txtNote.Left
-    .Top = txtNote.Top + txtNote.Height + 15    ' © ƒŠƒXƒgBOX‚æ‚è­‚µã
+    .Top = txtNote.Top + txtNote.Height + 15    ' â† ãƒªã‚¹ãƒˆBOXã‚ˆã‚Šå°‘ã—ä¸Š
     .Width = 200
     .Height = 18
     .Font.Bold = True
@@ -6164,7 +6210,7 @@ End With
 
 
 
-    ' ListBox ’Ç‰Á
+    ' ListBox è¿½åŠ 
     Set lst = f.Controls.Add("Forms.ListBox.1", "lstDailyLogList", True)
 
    topPos = f.Controls("lblDailyHistory").Top + f.Controls("lblDailyHistory").Height + 4
@@ -6176,7 +6222,7 @@ End With
         .Top = topPos
         .Width = txtNote.Width
         .Height = f.Height - .Top - 8
-        .ColumnCount = 3          ' ‹L˜^”NŒ / –¼‘O / ‹L˜^“à—e
+        .ColumnCount = 3          ' è¨˜éŒ²å¹´æœˆ / åå‰ / è¨˜éŒ²å†…å®¹
         .ColumnHeads = False
         .IntegralHeight = False
         .ColumnWidths = "70 pt;0 pt;9999 pt"
@@ -6202,21 +6248,21 @@ Public Sub BuildDailyLog_ExtractButton(owner As Object)
 
     margin = 12
 
-    ' fraDailyLog ‚Æ ‹L˜^ÒƒeƒLƒXƒg‚ğæ“¾
+    ' fraDailyLog ã¨ è¨˜éŒ²è€…ãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—
     Set f = owner.Controls("fraDailyLog")
     Set txtStaff = f.Controls("txtDailyStaff")
-    BuildDailyLog_HistoryList owner   ' š‚±‚ê‚ğ’Ç‰ÁiListBox‚ğ•K‚¸ì‚éj
+    BuildDailyLog_HistoryList owner   ' â˜…ã“ã‚Œã‚’è¿½åŠ ï¼ˆListBoxã‚’å¿…ãšä½œã‚‹ï¼‰
 
-    ' Šù‚Éƒ{ƒ^ƒ“‚ª‚ ‚ê‚Îíœ‚µ‚Äì‚è’¼‚µi™p“™j
+    ' æ—¢ã«ãƒœã‚¿ãƒ³ãŒã‚ã‚Œã°å‰Šé™¤ã—ã¦ä½œã‚Šç›´ã—ï¼ˆå†ªç­‰ï¼‰
     On Error Resume Next
     f.Controls.Remove "cmdDailyExtract"
     On Error GoTo 0
 
-    ' ’Šoƒ{ƒ^ƒ“’Ç‰Á
+    ' æŠ½å‡ºãƒœã‚¿ãƒ³è¿½åŠ 
     Set cmd = f.Controls.Add("Forms.CommandButton.1", "cmdDailyExtract", True)
 
     With cmd
-        .caption = "‚±‚ÌŒ‚Ì‹L˜^ˆê——"
+        .caption = "ã“ã®æœˆã®è¨˜éŒ²ä¸€è¦§"
         .Width = 120
         .Height = 24
         .Top = txtStaff.Top
@@ -6237,20 +6283,20 @@ Public Sub BuildDailyLog_SaveButton(owner As Object)
 
     margin = 12
 
-    ' fraDailyLog ‚Æ ‹L˜^ÒƒeƒLƒXƒg‚ğæ“¾
+    ' fraDailyLog ã¨ è¨˜éŒ²è€…ãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—
     Set f = owner.Controls("fraDailyLog")
     Set txtStaff = f.Controls("txtDailyStaff")
 
-    ' Šù‚Éƒ{ƒ^ƒ“‚ª‚ ‚ê‚Îíœ‚µ‚Äì‚è’¼‚µi™p“™j
+    ' æ—¢ã«ãƒœã‚¿ãƒ³ãŒã‚ã‚Œã°å‰Šé™¤ã—ã¦ä½œã‚Šç›´ã—ï¼ˆå†ªç­‰ï¼‰
     On Error Resume Next
     f.Controls.Remove "cmdDailySave"
     On Error GoTo 0
 
-    ' •Û‘¶ƒ{ƒ^ƒ“’Ç‰Á
+    ' ä¿å­˜ãƒœã‚¿ãƒ³è¿½åŠ 
     Set cmd = f.Controls.Add("Forms.CommandButton.1", "cmdDailySave", True)
 
     With cmd
-        .caption = "“úX‚Ì‹L˜^‚ğ•Û‘¶"
+        .caption = "æ—¥ã€…ã®è¨˜éŒ²ã‚’ä¿å­˜"
         .Width = 110
         .Height = 24
         .Top = txtStaff.Top
@@ -6265,26 +6311,26 @@ End Sub
 
 
 Private Sub mDailyExtract_Click()
-    ' ‡@ Ş—¿•¶‚ğì‚é
+    ' â‘  ææ–™æ–‡ã‚’ä½œã‚‹
     Call Me.BuildMonthlyDraft_FromDailyLog
     
     
     Dim box As Object
       Set box = Me.Controls("fraDailyLog").Controls("txtMonthlyMonitoringDraft")
 
-        If InStr(1, box.value, "i‚±‚ÌŒ‚Ì‹L˜^‚Í‚ ‚è‚Ü‚¹‚ñj", vbTextCompare) > 0 Then
+        If InStr(1, box.value, "ï¼ˆã“ã®æœˆã®è¨˜éŒ²ã¯ã‚ã‚Šã¾ã›ã‚“ï¼‰", vbTextCompare) > 0 Then
             
-            box.value = "yŒŸƒ‚ƒjƒ^ƒŠƒ“ƒO‰º‘‚«z" & vbCrLf & _
-            "‘ÎÛF" & Me.Controls("frHeader").Controls("txtHdrName").value & vbCrLf & _
-            "ŠúŠÔF" & Format$(DateSerial(Year(CDate(Me.Controls("fraDailyLog").Controls("txtDailyDate").value)), _
+            box.value = "ã€æœˆæ¬¡ãƒ¢ãƒ‹ã‚¿ãƒªãƒ³ã‚°ä¸‹æ›¸ãã€‘" & vbCrLf & _
+            "å¯¾è±¡ï¼š" & Me.Controls("frHeader").Controls("txtHdrName").value & vbCrLf & _
+            "æœŸé–“ï¼š" & Format$(DateSerial(Year(CDate(Me.Controls("fraDailyLog").Controls("txtDailyDate").value)), _
                                       Month(CDate(Me.Controls("fraDailyLog").Controls("txtDailyDate").value)), 1), "yyyy/mm/dd") & _
             " - " & _
             Format$(DateSerial(Year(CDate(Me.Controls("fraDailyLog").Controls("txtDailyDate").value)), _
                                 Month(CDate(Me.Controls("fraDailyLog").Controls("txtDailyDate").value)) + 1, 0), "yyyy/mm/dd") & vbCrLf & vbCrLf & _
-            "¡ ‚±‚ÌŒ‚É‹L˜^‚³‚ê‚½“Á‹L–€" & vbCrLf & _
-            "‚±‚ÌŒ‚Í“Á‹L–€‚Æ‚È‚é‹L˜^‚Í‚ ‚è‚Ü‚¹‚ñ‚Å‚µ‚½B" & vbCrLf & _
-            "‘Ì’²–Ê‚É‘å‚«‚È•Ï“®‚Í‚È‚­A“úX‚ÌƒŠƒnƒrƒŠ‚É‚àˆÀ’è‚µ‚Äæ‚è‘g‚Ü‚ê‚Ä‚¢‚Ü‚µ‚½B" & vbCrLf & _
-            "¡Œã‚àŒ»İ‚Ìó‘Ô‚ğˆÛ‚Å‚«‚é‚æ‚¤Aˆø‚«‘±‚«Œo‰ß‚ğŠÏ@‚µ‚Ä‚¢‚«‚Ü‚·B"
+            "â–  ã“ã®æœˆã«è¨˜éŒ²ã•ã‚ŒãŸç‰¹è¨˜äº‹é …" & vbCrLf & _
+            "ã“ã®æœˆã¯ç‰¹è¨˜äº‹é …ã¨ãªã‚‹è¨˜éŒ²ã¯ã‚ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚" & vbCrLf & _
+            "ä½“èª¿é¢ã«å¤§ããªå¤‰å‹•ã¯ãªãã€æ—¥ã€…ã®ãƒªãƒãƒ“ãƒªã«ã‚‚å®‰å®šã—ã¦å–ã‚Šçµ„ã¾ã‚Œã¦ã„ã¾ã—ãŸã€‚" & vbCrLf & _
+            "ä»Šå¾Œã‚‚ç¾åœ¨ã®çŠ¶æ…‹ã‚’ç¶­æŒã§ãã‚‹ã‚ˆã†ã€å¼•ãç¶šãçµŒéã‚’è¦³å¯Ÿã—ã¦ã„ãã¾ã™ã€‚"
 
                       Call ExportMonitoring_ToMonthlyWorkbook( _
                 CDate(Me.Controls("fraDailyLog").Controls("txtDailyDate").value), _
@@ -6298,16 +6344,16 @@ Private Sub mDailyExtract_Click()
     
     
 
-    ' ‡A AI‚Å‰º‘‚«‚É•ÏŠ·
+    ' â‘¡ AIã§ä¸‹æ›¸ãã«å¤‰æ›
     Me.Controls("fraDailyLog").Controls("txtMonthlyMonitoringDraft").value = _
         OpenAI_BuildDraft( _
-            "yo—ÍƒtƒH[ƒ}ƒbƒgŒµçz" & vbCrLf & _
-"ˆÈ‰º‚ÌŒ©o‚µ‚ğA•\‹LE‡˜E‹L†i¡j‚ğˆêØ•Ï‚¦‚¸‚É•K‚¸o—Í‚·‚é‚±‚ÆB" & vbCrLf & _
-"Œ©o‚µ‚Ì’Ç‰ÁEíœEŒ¾‚¢Š·‚¦‹Ö~B‘•üiš/yz/”Ô†•t‚¯j‹Ö~B" & vbCrLf & _
-"•K‚¸‚±‚Ì‡˜F" & vbCrLf & _
-"¡ ‚±‚ÌŒ‚É‹L˜^‚³‚ê‚½“Á‹L–€" & vbCrLf & _
-"¡ ƒRƒƒ“ƒgEl@" & vbCrLf & vbCrLf & _
-"E–{•¶iŒo‰ßEŒn—ñj‚É‚ÍA–À‚Ì‚İ‚ğ‹LÚ‚·‚éB‹L˜^‚É‘‚©‚ê‚Ä‚¢‚È‚¢–À‚â„‘ª‚ÍA–{•¶‚É‚ÍŠÜ‚ß‚È‚¢BuƒRƒƒ“ƒgEl@v—“‚ÉŒÀ‚èA‹L˜^“à—e‚ğ“¥‚Ü‚¦‚½¡Œã‚ÌŠÏ@‹“_‚â—¯ˆÓ“_‚ğ‹LÚ‚µ‚Ä‚æ‚¢B‚»‚ÌÛ‚ÍA’f’è‚ğ”ğ‚¯Au››‚Ì‰Â”\«‚ª‚ ‚évu››‚É—¯ˆÓ‚µ‚ÄŒo‰ß‚ğŠm”F‚·‚év‚È‚Ç‚Ì•\Œ»‚ÉŒÀ’è‚·‚éBˆãŠw“I”»’fA‰ü‘PEˆ«‰»‚Ì’f’èAˆö‰ÊŠÖŒW‚Ì’f’è‚Ís‚í‚È‚¢B•¶‘Ì‚Íu‚Å‚·E‚Ü‚·’²v‚Æ‚µAŒ»ê‹L˜^‚Æ‚µ‚Ä©‘R‚Å“Ç‚İ‚â‚·‚¢_‚ç‚©‚³‚ğ‚½‚¹‚éB", _
+            "ã€å‡ºåŠ›ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆå³å®ˆã€‘" & vbCrLf & _
+"ä»¥ä¸‹ã®è¦‹å‡ºã—ã‚’ã€è¡¨è¨˜ãƒ»é †åºãƒ»è¨˜å·ï¼ˆâ– ï¼‰ã‚’ä¸€åˆ‡å¤‰ãˆãšã«å¿…ãšå‡ºåŠ›ã™ã‚‹ã“ã¨ã€‚" & vbCrLf & _
+"è¦‹å‡ºã—ã®è¿½åŠ ãƒ»å‰Šé™¤ãƒ»è¨€ã„æ›ãˆç¦æ­¢ã€‚è£…é£¾ï¼ˆâ˜…/ã€ã€‘/ç•ªå·ä»˜ã‘ï¼‰ç¦æ­¢ã€‚" & vbCrLf & _
+"å¿…ãšã“ã®é †åºï¼š" & vbCrLf & _
+"â–  ã“ã®æœˆã«è¨˜éŒ²ã•ã‚ŒãŸç‰¹è¨˜äº‹é …" & vbCrLf & _
+"â–  ã‚³ãƒ¡ãƒ³ãƒˆãƒ»è€ƒå¯Ÿ" & vbCrLf & vbCrLf & _
+"ãƒ»æœ¬æ–‡ï¼ˆçµŒéãƒ»æ™‚ç³»åˆ—ï¼‰ã«ã¯ã€äº‹å®Ÿã®ã¿ã‚’è¨˜è¼‰ã™ã‚‹ã€‚è¨˜éŒ²ã«æ›¸ã‹ã‚Œã¦ã„ãªã„äº‹å®Ÿã‚„æ¨æ¸¬ã¯ã€æœ¬æ–‡ã«ã¯å«ã‚ãªã„ã€‚ã€Œã‚³ãƒ¡ãƒ³ãƒˆãƒ»è€ƒå¯Ÿã€æ¬„ã«é™ã‚Šã€è¨˜éŒ²å†…å®¹ã‚’è¸ã¾ãˆãŸä»Šå¾Œã®è¦³å¯Ÿè¦–ç‚¹ã‚„ç•™æ„ç‚¹ã‚’è¨˜è¼‰ã—ã¦ã‚ˆã„ã€‚ãã®éš›ã¯ã€æ–­å®šã‚’é¿ã‘ã€ã€Œâ—‹â—‹ã®å¯èƒ½æ€§ãŒã‚ã‚‹ã€ã€Œâ—‹â—‹ã«ç•™æ„ã—ã¦çµŒéã‚’ç¢ºèªã™ã‚‹ã€ãªã©ã®è¡¨ç¾ã«é™å®šã™ã‚‹ã€‚åŒ»å­¦çš„åˆ¤æ–­ã€æ”¹å–„ãƒ»æ‚ªåŒ–ã®æ–­å®šã€å› æœé–¢ä¿‚ã®æ–­å®šã¯è¡Œã‚ãªã„ã€‚æ–‡ä½“ã¯ã€Œã§ã™ãƒ»ã¾ã™èª¿ã€ã¨ã—ã€ç¾å ´è¨˜éŒ²ã¨ã—ã¦è‡ªç„¶ã§èª­ã¿ã‚„ã™ã„æŸ”ã‚‰ã‹ã•ã‚’æŒãŸã›ã‚‹ã€‚", _
             Me.Controls("fraDailyLog").Controls("txtMonthlyMonitoringDraft").value _
         )
         
@@ -6324,24 +6370,24 @@ Private Sub mDailySave_Click()
     mDailyLogManual = True
     Call SaveDailyLog_Append(Me)
     mDailyLogManual = False
-    MsgBox "“úX‚Ì‹L˜^‚ğ•Û‘¶‚µ‚Ü‚µ‚½B", vbInformation
+    MsgBox "æ—¥ã€…ã®è¨˜éŒ²ã‚’ä¿å­˜ã—ã¾ã—ãŸã€‚", vbInformation
 End Sub
 
 
 
 
 
-' •]‰¿ƒtƒH[ƒ€‰º•”‚ÉuƒV[ƒg‚Ö•Û‘¶vƒ{ƒ^ƒ“‚ğ1‚Â”z’u‚·‚éi1‰ñÀs—pj
+' è©•ä¾¡ãƒ•ã‚©ãƒ¼ãƒ ä¸‹éƒ¨ã«ã€Œã‚·ãƒ¼ãƒˆã¸ä¿å­˜ã€ãƒœã‚¿ãƒ³ã‚’1ã¤é…ç½®ã™ã‚‹ï¼ˆ1å›å®Ÿè¡Œç”¨ï¼‰
 Public Sub PlaceGlobalSaveButton_Once()
 
     Dim btnClose As MSForms.CommandButton
     Dim btnSave As MSForms.CommandButton
     Dim c As MSForms.Control
 
-    ' u•Â‚¶‚évƒ{ƒ^ƒ“‚ğƒLƒƒƒvƒVƒ‡ƒ“‚Å“Á’è
+    ' ã€Œé–‰ã˜ã‚‹ã€ãƒœã‚¿ãƒ³ã‚’ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã§ç‰¹å®š
     For Each c In Me.Controls
         If TypeOf c Is MSForms.CommandButton Then
-            If c.caption = "•Â‚¶‚é" Then
+            If c.caption = "é–‰ã˜ã‚‹" Then
                 Set btnClose = c
                 Exit For
             End If
@@ -6349,22 +6395,22 @@ Public Sub PlaceGlobalSaveButton_Once()
     Next c
 
     If btnClose Is Nothing Then
-        MsgBox "•Â‚¶‚éƒ{ƒ^ƒ“‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
 
-    ' Šù‚ÉƒOƒ[ƒoƒ‹•Û‘¶ƒ{ƒ^ƒ“‚ª‚ ‚é‚©Šm”F
+    ' æ—¢ã«ã‚°ãƒ­ãƒ¼ãƒãƒ«ä¿å­˜ãƒœã‚¿ãƒ³ãŒã‚ã‚‹ã‹ç¢ºèª
     On Error Resume Next
     Set btnSave = Me.Controls("cmdSaveGlobal")
     On Error GoTo 0
 
-    ' ‚È‚¯‚ê‚ÎV‹Kì¬
+    ' ãªã‘ã‚Œã°æ–°è¦ä½œæˆ
     If btnSave Is Nothing Then
         Set btnSave = Me.Controls.Add("Forms.CommandButton.1", "cmdSaveGlobal")
-        btnSave.caption = "ƒV[ƒg‚Ö•Û‘¶"
+        btnSave.caption = "ã‚·ãƒ¼ãƒˆã¸ä¿å­˜"
     End If
 
-    ' •Â‚¶‚éƒ{ƒ^ƒ“‚Æ‚‚³EcˆÊ’u‚ğ‚»‚ë‚¦‚ÄA¶—×‚É”z’u
+    ' é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³ã¨é«˜ã•ãƒ»ç¸¦ä½ç½®ã‚’ãã‚ãˆã¦ã€å·¦éš£ã«é…ç½®
     With btnSave
         .Height = btnClose.Height
         .Top = btnClose.Top
@@ -6372,21 +6418,21 @@ Public Sub PlaceGlobalSaveButton_Once()
         .Left = btnClose.Left - .Width - 12
     End With
 
-    ' ---- ƒNƒŠƒAƒ{ƒ^ƒ“icmdClearGlobalj‚ğ”z’u ----
+    ' ---- ã‚¯ãƒªã‚¢ãƒœã‚¿ãƒ³ï¼ˆcmdClearGlobalï¼‰ã‚’é…ç½® ----
 Dim btnClear As MSForms.CommandButton
 
-' Šù‚É‘¶İ‚·‚é‚©Šm”F
+' æ—¢ã«å­˜åœ¨ã™ã‚‹ã‹ç¢ºèª
 On Error Resume Next
 Set btnClear = Me.Controls("cmdClearGlobal")
 On Error GoTo 0
 
-' ‚È‚¯‚ê‚ÎV‹Kì¬
+' ãªã‘ã‚Œã°æ–°è¦ä½œæˆ
 If btnClear Is Nothing Then
     Set btnClear = Me.Controls.Add("Forms.CommandButton.1", "cmdClearGlobal")
-    btnClear.caption = "ƒNƒŠƒA"
+    btnClear.caption = "ã‚¯ãƒªã‚¢"
 End If
 
-' •Û‘¶ƒ{ƒ^ƒ“‚Ì‰E—×‚É”z’u
+' ä¿å­˜ãƒœã‚¿ãƒ³ã®å³éš£ã«é…ç½®
 With btnClear
     .Height = btnSave.Height
     .Top = btnSave.Top
@@ -6403,15 +6449,15 @@ Set mGlobalClear.btn = btnClear
     
     
     
-    ' ---- ƒ{ƒ^ƒ“®—ñi•Û‘¶ ¨ ƒNƒŠƒA ¨ •Â‚¶‚éj ----
+    ' ---- ãƒœã‚¿ãƒ³æ•´åˆ—ï¼ˆä¿å­˜ â†’ ã‚¯ãƒªã‚¢ â†’ é–‰ã˜ã‚‹ï¼‰ ----
 
-' •Â‚¶‚éƒ{ƒ^ƒ“‚ğŠî€‚Æ‚µ‚Äˆê”Ô‰E’[‚ÉŒÅ’è
+' é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³ã‚’åŸºæº–ã¨ã—ã¦ä¸€ç•ªå³ç«¯ã«å›ºå®š
 btnClose.Left = btnClose.Left
 
-' •Û‘¶ƒ{ƒ^ƒ“‚ğ•Â‚¶‚é‚Ì¶‚É
+' ä¿å­˜ãƒœã‚¿ãƒ³ã‚’é–‰ã˜ã‚‹ã®å·¦ã«
 btnSave.Left = btnClose.Left - btnSave.Width - 12
 
-' ƒNƒŠƒAƒ{ƒ^ƒ“icmdClearGlobalj‚ğ•Û‘¶‚Ì¶‚É
+' ã‚¯ãƒªã‚¢ãƒœã‚¿ãƒ³ï¼ˆcmdClearGlobalï¼‰ã‚’ä¿å­˜ã®å·¦ã«
 btnClear.Left = btnSave.Left - btnClear.Width - 12
 
 
@@ -6439,25 +6485,25 @@ Private Sub mGlobalClear_Clicked()
     Dim c As MSForms.Control
 
     For Each c In Me.Controls
-        ' ƒeƒLƒXƒgƒ{ƒbƒNƒX‚Í‹ó‚É
+        ' ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã¯ç©ºã«
         If TypeOf c Is MSForms.TextBox Then
-            ' •]‰¿“ú(txtEDate)‚Æ“úX‹L˜^‚Ì“ú•t(txtDailyDate)‚ÍƒNƒŠƒA‚µ‚È‚¢
+            ' è©•ä¾¡æ—¥(txtEDate)ã¨æ—¥ã€…è¨˜éŒ²ã®æ—¥ä»˜(txtDailyDate)ã¯ã‚¯ãƒªã‚¢ã—ãªã„
             If c.name <> "txtEDate" And c.name <> "txtDailyDate" Then
                 c.value = ""
             End If
         End If
 
-        ' ƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Í‘I‘ğ‰ğœ
+        ' ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã¯é¸æŠè§£é™¤
         If TypeOf c Is MSForms.ComboBox Then
             c.value = ""
         End If
 
-        ' ƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ÍƒIƒt
+        ' ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã¯ã‚ªãƒ•
         If TypeOf c Is MSForms.CheckBox Then
             c.value = False
         End If
 
-        ' ƒŠƒXƒgƒ{ƒbƒNƒX‚Í‘I‘ğ‚¾‚¯‰ğœi€–Ú‚Íc‚·j
+        ' ãƒªã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã¯é¸æŠã ã‘è§£é™¤ï¼ˆé …ç›®ã¯æ®‹ã™ï¼‰
         If TypeOf c Is MSForms.ListBox Then
             Dim lb As MSForms.ListBox
             Dim i As Long
@@ -6479,10 +6525,10 @@ Private Sub mDailyList_DblClicked()
     Dim r As Long, c As Long
     Dim buf As String
     
-    ' ‘ÎÛ‚Ìˆê——ListBox‚ğæ“¾
+    ' å¯¾è±¡ã®ä¸€è¦§ListBoxã‚’å–å¾—
     Set lb = Me.Controls("lstDailyLogList")
     
-    ' ‘SsE‘S—ñ‚ğƒ^ƒu‹æØ‚è{‰üs‚Å˜AŒ‹
+    ' å…¨è¡Œãƒ»å…¨åˆ—ã‚’ã‚¿ãƒ–åŒºåˆ‡ã‚Šï¼‹æ”¹è¡Œã§é€£çµ
     For r = 0 To lb.ListCount - 1
         For c = 0 To lb.ColumnCount - 1
             If c > 0 Then buf = buf & vbTab
@@ -6491,19 +6537,19 @@ Private Sub mDailyList_DblClicked()
         buf = buf & vbCrLf
     Next r
     
-    ' ƒNƒŠƒbƒvƒ{[ƒh‚ÖƒRƒs[
+    ' ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã¸ã‚³ãƒ”ãƒ¼
     Dim dobj As New MSForms.DataObject
     dobj.SetText buf
     dobj.PutInClipboard
     
-    MsgBox "‚±‚ÌŒ‚Ì‹L˜^ˆê——‚ğƒNƒŠƒbƒvƒ{[ƒh‚ÉƒRƒs[‚µ‚Ü‚µ‚½B" & vbCrLf & _
-           "ƒƒ‚’ ‚âWord‚É Ctrl+V ‚Å“\‚è•t‚¯‚Å‚«‚Ü‚·B", vbInformation
+    MsgBox "ã“ã®æœˆã®è¨˜éŒ²ä¸€è¦§ã‚’ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«ã‚³ãƒ”ãƒ¼ã—ã¾ã—ãŸã€‚" & vbCrLf & _
+           "ãƒ¡ãƒ¢å¸³ã‚„Wordã« Ctrl+V ã§è²¼ã‚Šä»˜ã‘ã§ãã¾ã™ã€‚", vbInformation
 End Sub
 
 
 
 Public Sub HookDailyLogList(lb As MSForms.ListBox)
-    ' “úX‚Ì‹L˜^ˆê—— ListBox —p‚ÌƒCƒxƒ“ƒgƒtƒbƒN
+    ' æ—¥ã€…ã®è¨˜éŒ²ä¸€è¦§ ListBox ç”¨ã®ã‚¤ãƒ™ãƒ³ãƒˆãƒ•ãƒƒã‚¯
     If mDailyList Is Nothing Then
         Set mDailyList = New clsDailyLogList
     End If
@@ -6512,7 +6558,7 @@ End Sub
 
 
 
-'=== “úX‚Ì‹L˜^ƒtƒŒ[ƒ€æ“¾ƒwƒ‹ƒp[i‹¤’Ê‰»—pj ===
+'=== æ—¥ã€…ã®è¨˜éŒ²ãƒ•ãƒ¬ãƒ¼ãƒ å–å¾—ãƒ˜ãƒ«ãƒ‘ãƒ¼ï¼ˆå…±é€šåŒ–ç”¨ï¼‰ ===
 Private Function GetDailyLogFrame() As MSForms.Frame
     Dim mp As Object
     Dim pg As Object
@@ -6526,9 +6572,9 @@ Private Function GetDailyLogFrame() As MSForms.Frame
         Exit Function
     End If
 
-    ' u“úX‚Ì‹L˜^vƒy[ƒW‚ğ’T‚·
+    ' ã€Œæ—¥ã€…ã®è¨˜éŒ²ã€ãƒšãƒ¼ã‚¸ã‚’æ¢ã™
     For i = 0 To mp.Pages.Count - 1
-        If mp.Pages(i).caption = "“úX‚Ì‹L˜^" Then
+        If mp.Pages(i).caption = "æ—¥ã€…ã®è¨˜éŒ²" Then
             Set pg = mp.Pages(i)
             Exit For
         End If
@@ -6537,7 +6583,7 @@ Private Function GetDailyLogFrame() As MSForms.Frame
         Exit Function
     End If
 
-    ' ƒtƒŒ[ƒ€ fraDailyLog ‚ğæ“¾
+    ' ãƒ•ãƒ¬ãƒ¼ãƒ  fraDailyLog ã‚’å–å¾—
     Set f = pg.Controls("fraDailyLog")
     If f Is Nothing Then
         Exit Function
@@ -6555,14 +6601,14 @@ End Function
 
 
 
-'=== •às•]‰¿ƒtƒŒ[ƒ€æ“¾ƒwƒ‹ƒp[iFrame6 ŒÅ’èj ===
+'=== æ­©è¡Œè©•ä¾¡ãƒ•ãƒ¬ãƒ¼ãƒ å–å¾—ãƒ˜ãƒ«ãƒ‘ãƒ¼ï¼ˆFrame6 å›ºå®šï¼‰ ===
 Private Function GetWalkFrame() As MSForms.Frame
     On Error Resume Next
 
-    ' –¼‘O‚Å’¼Úæ“¾i–½–¼‘O’ñFFrame6j
+    ' åå‰ã§ç›´æ¥å–å¾—ï¼ˆå‘½åå‰æï¼šFrame6ï¼‰
     Set GetWalkFrame = Me.Controls("Frame6")
 
-    ' ‚à‚µŒ©‚Â‚©‚ç‚È‚¯‚ê‚Î‰½‚à•Ô‚³‚È‚¢iNothingj
+    ' ã‚‚ã—è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°ä½•ã‚‚è¿”ã•ãªã„ï¼ˆNothingï¼‰
 End Function
 
 
@@ -6580,14 +6626,14 @@ Private Sub FixWalkRootFrameHeight()
     Set f = GetWalkFrame()
     If f Is Nothing Then Exit Sub
 
-    ' qƒRƒ“ƒgƒ[ƒ‹‚Ìˆê”Ô‰º‚ÌˆÊ’u‚ğ’²‚×‚é
+    ' å­ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®ä¸€ç•ªä¸‹ã®ä½ç½®ã‚’èª¿ã¹ã‚‹
     For Each c In f.Controls
         If c.Top + c.Height > maxBottom Then
             maxBottom = c.Top + c.Height
         End If
     Next c
 
-    ' •K—v‚È‚ç‚‚³‚ğL‚Î‚·
+    ' å¿…è¦ãªã‚‰é«˜ã•ã‚’ä¼¸ã°ã™
     If maxBottom + 6 > f.Height Then
 #If APP_DEBUG Then
         Debug.Print "[WALK-ROOT-RESIZE]", _
@@ -6612,18 +6658,18 @@ Debug.Print "[CALL] Debug_FixOverflowFrames @ " & Format$(Now, "yyyy-mm-dd hh:nn
 
     On Error Resume Next
 
-    ' p¨•]‰¿ƒ^ƒu
+    ' å§¿å‹¢è©•ä¾¡ã‚¿ãƒ–
     FitFrameHeightToChildren Me.Controls("Frame2")
 
-    ' g‘Ì‹@”\•]‰¿ƒ^ƒuie‚¾‚¯’²®BqFrame12‚É‚ÍG‚ç‚È‚¢j
+    ' èº«ä½“æ©Ÿèƒ½è©•ä¾¡ã‚¿ãƒ–ï¼ˆè¦ªã ã‘èª¿æ•´ã€‚å­Frame12ã«ã¯è§¦ã‚‰ãªã„ï¼‰
     FitFrameHeightToChildren Me.Controls("Frame12")
     FitFrameHeightToChildren Me.Controls("Frame3")
     ' FitFrameHeightToChildren Me.Controls("Frame14")
 
-    ' •às•]‰¿ƒ^ƒui‘å˜gj
+    ' æ­©è¡Œè©•ä¾¡ã‚¿ãƒ–ï¼ˆå¤§æ ï¼‰
     FitFrameHeightToChildren Me.Controls("Frame6")
 
-    ' ”F’mE¸_ƒ^ƒuieFrame7‚¾‚¯‚ğ’²®j
+    ' èªçŸ¥ãƒ»ç²¾ç¥ã‚¿ãƒ–ï¼ˆè¦ªFrame7ã ã‘ã‚’èª¿æ•´ï¼‰
     FitFrameHeightToChildren Me.Controls("Frame7")
 
     On Error GoTo 0
@@ -6647,7 +6693,7 @@ Private Sub GetPageUsableArea( _
 
     Dim mp As MSForms.MultiPage
 
-    x = 0: Y = 0: w = 0: h = 0   ' ƒfƒtƒHƒ‹ƒgƒNƒŠƒA
+    x = 0: Y = 0: w = 0: h = 0   ' ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚¯ãƒªã‚¢
 
     Set mp = GetMainMultiPage()
     If mp Is Nothing Then Exit Sub
@@ -6655,8 +6701,8 @@ Private Sub GetPageUsableArea( _
     If pageIndex < 0 Then Exit Sub
     If pageIndex > mp.Pages.Count - 1 Then Exit Sub
 
-    ' ¡‚Í MultiPage ‘S‘Ì‚ğuƒy[ƒW‚Ì—˜—p‰Â”\—Ìˆæv‚Æ‚µ‚Ä•Ô‚·
-    ' i—]”’‚âƒ^ƒu•ª‚Ìƒ}ƒCƒiƒX‚ÍAŒã‚Å AlignRootFrame ‘¤‚Å’²®‚·‚éj
+    ' ä»Šã¯ MultiPage å…¨ä½“ã‚’ã€Œãƒšãƒ¼ã‚¸ã®åˆ©ç”¨å¯èƒ½é ˜åŸŸã€ã¨ã—ã¦è¿”ã™
+    ' ï¼ˆä½™ç™½ã‚„ã‚¿ãƒ–åˆ†ã®ãƒã‚¤ãƒŠã‚¹ã¯ã€å¾Œã§ AlignRootFrame å´ã§èª¿æ•´ã™ã‚‹ï¼‰
     x = 0
     Y = 0
     w = mp.Width
@@ -6678,15 +6724,15 @@ Private Sub AlignRootFrameToPage(ByVal pageIndex As Long, root As MSForms.Frame)
 
     Set pg = mp.Pages(pageIndex)
 
-    '=== ƒy[ƒW‚ÌƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæiƒ^ƒu‚ğœ‚¢‚½’†g•”•ªj‚ğZo ===
-    ' ‚±‚±‚Í PREVIEW ‚Åo‚Ä‚¢‚½’l‚Æ“¯‚¶ƒƒWƒbƒN‚É‘µ‚¦‚é‘O’ñ‚ÅA
-    ' ƒVƒ“ƒvƒ‹‚É MultiPage ‚Ì“à‘¤‚ğg‚¤
+    '=== ãƒšãƒ¼ã‚¸ã®ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸï¼ˆã‚¿ãƒ–ã‚’é™¤ã„ãŸä¸­èº«éƒ¨åˆ†ï¼‰ã‚’ç®—å‡º ===
+    ' ã“ã“ã¯ PREVIEW ã§å‡ºã¦ã„ãŸå€¤ã¨åŒã˜ãƒ­ã‚¸ãƒƒã‚¯ã«æƒãˆã‚‹å‰æã§ã€
+    ' ã‚·ãƒ³ãƒ—ãƒ«ã« MultiPage ã®å†…å´ã‚’ä½¿ã†
     pageLeft = 0
     pageTop = 0
-    pageWidth = mp.Width          ' ƒ^ƒu¶‰E‚Ì—]”’‚Í‚Ù‚Ú 0 ˆµ‚¢
-    pageHeight = mp.Height - 40   ' ‰º‘¤ƒ{ƒ^ƒ“‚Ô‚ñ­‚µ‚¾‚¯T‚¦‚ß
+    pageWidth = mp.Width          ' ã‚¿ãƒ–å·¦å³ã®ä½™ç™½ã¯ã»ã¼ 0 æ‰±ã„
+    pageHeight = mp.Height - 40   ' ä¸‹å´ãƒœã‚¿ãƒ³ã¶ã‚“å°‘ã—ã ã‘æ§ãˆã‚
 
-    '=== ƒ‹[ƒgƒtƒŒ[ƒ€‚ğƒy[ƒWˆê”t‚ÉƒtƒBƒbƒg ===
+    '=== ãƒ«ãƒ¼ãƒˆãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ãƒšãƒ¼ã‚¸ä¸€æ¯ã«ãƒ•ã‚£ãƒƒãƒˆ ===
     With root
         .Left = pageLeft
         .Top = pageTop
@@ -6713,20 +6759,20 @@ Private Sub PreviewOnePage(ByVal idx As Long, ByVal mp As MSForms.MultiPage)
         Exit Sub
     End If
 
-    ' Œ»İ’l
+    ' ç¾åœ¨å€¤
     Debug.Print "  Current:", _
                 "L=" & root.Left, _
                 "T=" & root.Top, _
                 "W=" & root.Width, _
                 "H=" & root.Height
 
-    ' AlignRootFrameToPage ‚ªg‚¤ƒy[ƒW—Ìˆæ
+    ' AlignRootFrameToPage ãŒä½¿ã†ãƒšãƒ¼ã‚¸é ˜åŸŸ
     GetPageUsableArea idx, x, Y, w, h
     Debug.Print "  PageArea:", _
                 "X=" & x, "Y=" & Y, _
                 "W=" & w, "H=" & h
 
-    ' ‚à‚µ AlignRootFrameToPage ‚ğŒÄ‚ñ‚¾‚ç‚±‚¤‚È‚éi¦ÀÛ‚É‚Í‘‚«Š·‚¦‚È‚¢j
+    ' ã‚‚ã— AlignRootFrameToPage ã‚’å‘¼ã‚“ã ã‚‰ã“ã†ãªã‚‹ï¼ˆâ€»å®Ÿéš›ã«ã¯æ›¸ãæ›ãˆãªã„ï¼‰
     Debug.Print "  WouldAlignTo:", _
                 "L=" & (x), _
                 "T=" & (Y), _
@@ -6750,7 +6796,7 @@ Private Function GetPageRootFrame(ByVal pageIndex As Long) As MSForms.Frame
     If pageIndex < 0 Or pageIndex > mp.Pages.Count - 1 Then Exit Function
 
     Set pg = mp.Pages(pageIndex)
-    If pg.caption = "”F’mE¸_" Then
+    If pg.caption = "èªçŸ¥ãƒ»ç²¾ç¥" Then
 #If APP_DEBUG Then
     Debug.Print "[HIT] GetPageRootFrame COG -> Frame31"
 #End If
@@ -6758,7 +6804,7 @@ Private Function GetPageRootFrame(ByVal pageIndex As Long) As MSForms.Frame
     Exit Function
 End If
 
-    ' ‚»‚Ìƒy[ƒW“à‚Ìuˆê”Ô‘å‚«‚È Frame = ƒ‹[ƒgƒtƒŒ[ƒ€v‚Æ‚İ‚È‚·
+    ' ãã®ãƒšãƒ¼ã‚¸å†…ã®ã€Œä¸€ç•ªå¤§ããª Frame = ãƒ«ãƒ¼ãƒˆãƒ•ãƒ¬ãƒ¼ãƒ ã€ã¨ã¿ãªã™
     For Each c In pg.Controls
         If TypeName(c) = "Frame" And TypeName(c.parent) = "Page" Then
             Set f = c
@@ -6797,7 +6843,7 @@ Public Sub TidyBaseLayout_Once()
     If mBaseLayoutDone Then Exit Sub
     mBaseLayoutDone = True
 
-    'š Šî–{ƒŒƒCƒAƒEƒgiƒy[ƒW‹¤’Êj‚Í‚±‚±‚¾‚¯‚Å‚â‚é
+    'â˜… åŸºæœ¬ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆï¼ˆãƒšãƒ¼ã‚¸å…±é€šï¼‰ã¯ã“ã“ã ã‘ã§ã‚„ã‚‹
     Apply_AlignRoot_All
 
 
@@ -6822,7 +6868,7 @@ Public Sub AdjustBottomButtons()
 
     Dim yBtn As Single
 
-    ' ƒ{ƒ^ƒ“‚ª‚Ü‚¾–³‚¢ƒ^ƒCƒ~ƒ“ƒO‚Å‚Í‰½‚à‚µ‚È‚¢
+    ' ãƒœã‚¿ãƒ³ãŒã¾ã ç„¡ã„ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ã¯ä½•ã‚‚ã—ãªã„
     If Not ControlExists(Me, "btnCloseCtl") Then Exit Sub
     If Not ControlExists(Me, "cmdSaveGlobal") Then Exit Sub
     If Not ControlExists(Me, "cmdClearGlobal") Then Exit Sub
@@ -6834,7 +6880,7 @@ Public Sub AdjustBottomButtons()
     Me.Controls("cmdClearGlobal").Top = yBtn
     
     
-     ' š‚±‚±i‘O–Ê‚Öj
+     ' â˜…ã“ã“ï¼ˆå‰é¢ã¸ï¼‰
     Me.Controls("btnCloseCtl").ZOrder 0
     Me.Controls("cmdSaveGlobal").ZOrder 0
     Me.Controls("cmdClearGlobal").ZOrder 0
@@ -6861,12 +6907,12 @@ Dim minH As Single
 Dim maxH As Single
 
 
-minH = 620   ' © •]‰¿ƒtƒH[ƒ€‚Æ‚µ‚ÄÅ’áŒÀ—~‚µ‚¢‚‚³i’²®‰Âj
+minH = 620   ' â† è©•ä¾¡ãƒ•ã‚©ãƒ¼ãƒ ã¨ã—ã¦æœ€ä½é™æ¬²ã—ã„é«˜ã•ï¼ˆèª¿æ•´å¯ï¼‰
 
 maxH = Application.UsableHeight - (Me.Height - Me.InsideHeight) - 6
 
 If maxH < minH Then
-    ' ‰æ–Ê‚ª¬‚³‚·‚¬‚éê‡‚ÍAÅ’áƒTƒCƒY‚ğ—Dæ
+    ' ç”»é¢ãŒå°ã•ã™ãã‚‹å ´åˆã¯ã€æœ€ä½ã‚µã‚¤ã‚ºã‚’å„ªå…ˆ
     Me.Height = minH
 Else
     Me.Height = maxH
@@ -6879,7 +6925,7 @@ End If
     Dim frViewport As MSForms.Frame
     Dim mp As MSForms.MultiPage
 
-    '--- Headeri‘€ìƒo[FŒÅ’èE”ñƒXƒNƒ[ƒ‹j---
+    '--- Headerï¼ˆæ“ä½œãƒãƒ¼ï¼šå›ºå®šãƒ»éã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ï¼‰---
     On Error Resume Next
     Set frHeader = Me.Controls("frHeader")
     On Error GoTo 0
@@ -6898,7 +6944,7 @@ End If
         .Visible = True
     End With
 
-    '--- Šù‘¶‚ÌƒƒCƒ“ MultiPagei’T‚·‚¾‚¯Bì‚ç‚È‚¢j---
+    '--- æ—¢å­˜ã®ãƒ¡ã‚¤ãƒ³ MultiPageï¼ˆæ¢ã™ã ã‘ã€‚ä½œã‚‰ãªã„ï¼‰---
     Set mp = FindMainMultiPage()
 
     If Not mp Is Nothing Then
@@ -6907,10 +6953,10 @@ End If
         mp.Width = Me.InsideWidth - PAD_SIDE * 2
        mp.Height = Application.Max(120, (maxH - (Me.Height - Me.InsideHeight)) - mp.Top - PAD_SIDE)
 
-        ' ‚‚³‚ÍŒã’i‚ÌViewport‚ÅŒˆ‚ß‚é
+        ' é«˜ã•ã¯å¾Œæ®µã®Viewportã§æ±ºã‚ã‚‹
     End If
 
-    '--- Viewporti•]‰¿ƒRƒ“ƒeƒ“ƒcê—pF•K—v‚È‚çƒXƒNƒ[ƒ‹j---
+    '--- Viewportï¼ˆè©•ä¾¡ã‚³ãƒ³ãƒ†ãƒ³ãƒ„å°‚ç”¨ï¼šå¿…è¦ãªã‚‰ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ï¼‰---
     On Error Resume Next
     Set frViewport = Me.Controls("frViewport")
     On Error GoTo 0
@@ -6999,18 +7045,18 @@ Public Sub CreateHeaderButtons_Once()
     Dim f As MSForms.Frame
     Set f = Me.Controls("frHeader")
 
-    ' Šù‘¶ƒ{ƒ^ƒ“iˆ—‚Ì–{‘Ìj
+    ' æ—¢å­˜ãƒœã‚¿ãƒ³ï¼ˆå‡¦ç†ã®æœ¬ä½“ï¼‰
     Dim bClear As MSForms.Control, bSave As MSForms.Control, bClose As MSForms.Control
     Set bClear = Me.Controls("cmdClearGlobal")
     Set bSave = Me.Controls("cmdSaveGlobal")
     Set bClose = Me.Controls("btnCloseCtl")
 
-    ' Šù‘¶‚ÍŒ©‚¦‚È‚­‚·‚éiˆÊ’u‚ÍG‚ç‚È‚¢j
+    ' æ—¢å­˜ã¯è¦‹ãˆãªãã™ã‚‹ï¼ˆä½ç½®ã¯è§¦ã‚‰ãªã„ï¼‰
     bClear.Visible = False
     bSave.Visible = False
     bClose.Visible = False
 
-    ' ƒwƒbƒ_[—p‚ÌVƒ{ƒ^ƒ“‚ğì‚éi–¼‘OŒÅ’èj
+    ' ãƒ˜ãƒƒãƒ€ãƒ¼ç”¨ã®æ–°ãƒœã‚¿ãƒ³ã‚’ä½œã‚‹ï¼ˆåå‰å›ºå®šï¼‰
     Dim hClear As MSForms.CommandButton
     Dim hSave  As MSForms.CommandButton
     Dim hClose As MSForms.CommandButton
@@ -7019,12 +7065,12 @@ Public Sub CreateHeaderButtons_Once()
     Set hSave = f.Controls.Add("Forms.CommandButton.1", "cmdSaveHeader", True)
     Set hClose = f.Controls.Add("Forms.CommandButton.1", "cmdCloseHeader", True)
 
-    ' Œ©‚½–Ú‚ÍŠù‘¶‚ğ“¥P
+    ' è¦‹ãŸç›®ã¯æ—¢å­˜ã‚’è¸è¥²
     hClear.caption = bClear.caption: hClear.Width = bClear.Width: hClear.Height = bClear.Height
     hSave.caption = bSave.caption:   hSave.Width = bSave.Width:   hSave.Height = bSave.Height
     hClose.caption = bClose.caption: hClose.Width = bClose.Width: hClose.Height = bClose.Height
 
-    ' ‰EŠñ‚¹”z’u
+    ' å³å¯„ã›é…ç½®
     Const pad As Single = 8, gap As Single = 10
     hClose.Top = (f.Height - hClose.Height) / 2
     hSave.Top = hClose.Top
@@ -7089,13 +7135,13 @@ Private Sub ApplyScroll_MP1_Page3_7_Once()
     Dim mp As Object
     Set mp = Me.Controls("MultiPage1")
 
-    'Page3: Frame3iScrollHeight = 578.35 + 24 = 602.35j
+    'Page3: Frame3ï¼ˆScrollHeight = 578.35 + 24 = 602.35ï¼‰
     With mp.Pages(2).Controls("Frame3")
         .ScrollBars = fmScrollBarsVertical
         .ScrollHeight = 900
     End With
 
-    'Page7: Frame7i•K—v‚Ì‚İƒo[•\¦j
+    'Page7: Frame7ï¼ˆå¿…è¦æ™‚ã®ã¿ãƒãƒ¼è¡¨ç¤ºï¼‰
 With mp.Pages(6).Controls("Frame7")
     .ScrollHeight = 584.35
     If .ScrollHeight > .Height Then
@@ -7107,7 +7153,7 @@ End With
 
 
 
-'Page2: Frame2ip¨•]‰¿‚Ì‰ºŒ©Ø‚ê‘Îôj
+'Page2: Frame2ï¼ˆå§¿å‹¢è©•ä¾¡ã®ä¸‹è¦‹åˆ‡ã‚Œå¯¾ç­–ï¼‰
 With mp.Pages(1).Controls("Frame2")
     .Height = mp.Height
     .ScrollBars = fmScrollBarsVertical
@@ -7117,11 +7163,11 @@ End With
 
 
 
-'Page1: Frame1i¬‰æ–Ê‚Å‰º‚ªŒ©Ø‚ê‚é‘Îôj
+'Page1: Frame1ï¼ˆå°ç”»é¢ã§ä¸‹ãŒè¦‹åˆ‡ã‚Œã‚‹å¯¾ç­–ï¼‰
 With mp.Pages(0).Controls("Frame1")
     .Height = mp.Height
     .ScrollBars = fmScrollBarsVertical
-    .ScrollHeight = 420   '©‚¢‚Á‚½‚ñˆÀ‘S’liŒã‚Å’²®‰Âj
+    .ScrollHeight = 420   'â†ã„ã£ãŸã‚“å®‰å…¨å€¤ï¼ˆå¾Œã§èª¿æ•´å¯ï¼‰
 End With
 
 
@@ -7141,16 +7187,16 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
 
     
 
-    '‰Eã‚Ì¬‚³‚¢~FƒtƒH[ƒ€‚¾‚¯•Â‚¶‚éiExcel‚Í•Â‚¶‚È‚¢j
+    'å³ä¸Šã®å°ã•ã„Ã—ï¼šãƒ•ã‚©ãƒ¼ãƒ ã ã‘é–‰ã˜ã‚‹ï¼ˆExcelã¯é–‰ã˜ãªã„ï¼‰
     If CloseMode = vbFormControlMenu Then
         mQuitMode = qmNone
         Exit Sub
     End If
 
-    '•Â‚¶‚éƒ{ƒ^ƒ“Œo—R‚Ì‚İF•Û‘¶Šm”F ¨ ExcelI—¹
+    'é–‰ã˜ã‚‹ãƒœã‚¿ãƒ³çµŒç”±ã®ã¿ï¼šä¿å­˜ç¢ºèª â†’ Excelçµ‚äº†
     If mQuitMode = qmAsk Then
         Dim ans As VbMsgBoxResult
-        ans = MsgBox("•Û‘¶‚µ‚Ü‚·‚©H", vbYesNoCancel + vbQuestion, "I—¹Šm”F")
+        ans = MsgBox("ä¿å­˜ã—ã¾ã™ã‹ï¼Ÿ", vbYesNoCancel + vbQuestion, "çµ‚äº†ç¢ºèª")
 
         If ans = vbCancel Then
             Cancel = True
@@ -7164,7 +7210,7 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
         If ans = vbYes Then
             ThisWorkbook.Save
         Else
-            '•Û‘¶‚¹‚¸I—¹FExcel‚Ì•Û‘¶Šm”F‚ğo‚³‚È‚¢
+            'ä¿å­˜ã›ãšçµ‚äº†ï¼šExcelã®ä¿å­˜ç¢ºèªã‚’å‡ºã•ãªã„
             ThisWorkbook.Saved = True
         End If
 
@@ -7202,7 +7248,7 @@ Public Sub AddPrintButton_TestEval()
     If btn Is Nothing Then
         Set btn = f.Controls.Add("Forms.CommandButton.1", "cmdPrintTestEval", True)
         With btn
-            .caption = "ƒOƒ‰ƒtˆóü"
+            .caption = "ã‚°ãƒ©ãƒ•å°åˆ·"
             btn.Width = 120
 btn.Height = 28
 btn.Left = f.InsideWidth - btn.Width - 28.35
@@ -7215,7 +7261,7 @@ btn.Top = f.Controls("txtTUG").Top
 btn.Left = f.InsideWidth - btn.Width - 28.35
 
 
-    ' © š‚±‚±ši‚±‚Ì2s‚¾‚¯’Ç‰Áj
+    ' â† â˜…ã“ã“â˜…ï¼ˆã“ã®2è¡Œã ã‘è¿½åŠ ï¼‰
     Set mPrintBtnHook = New clsPrintBtnHook
     Set mPrintBtnHook.btn = btn
     
@@ -7238,19 +7284,19 @@ Public Sub BuildMonthlyDraft_FromDailyLog()
 
     Set f = Me.Controls("fraDailyLog")
 
-    ' ‘ÎÛŒ‹L˜^“úitxtDailyDatej‚ÌŒ
+    ' å¯¾è±¡æœˆï¼è¨˜éŒ²æ—¥ï¼ˆtxtDailyDateï¼‰ã®æœˆ
     v = f.Controls("txtDailyDate").value
     If Not IsDate(v) Then
-        MsgBox "‹L˜^“ú‚Ì—“‚É³‚µ‚¢“ú•t‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", vbExclamation
+        MsgBox "è¨˜éŒ²æ—¥ã®æ¬„ã«æ­£ã—ã„æ—¥ä»˜ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", vbExclamation
         Exit Sub
     End If
     dFrom = DateSerial(Year(CDate(v)), Month(CDate(v)), 1)
     dTo = DateSerial(Year(CDate(v)), Month(CDate(v)) + 1, 0)
 
-    ' ‘ÎÛÒƒtƒH[ƒ€–¼iDailyLog‚ÌB—ñ‚Æˆê’vj
+    ' å¯¾è±¡è€…ï¼ãƒ•ã‚©ãƒ¼ãƒ æ°åï¼ˆDailyLogã®Båˆ—ã¨ä¸€è‡´ï¼‰
     nm = Trim$(Me.Controls("frHeader").Controls("txtHdrName").value)
     If nm = "" Then
-        MsgBox "–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", vbExclamation
+        MsgBox "æ°åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", vbExclamation
         Exit Sub
     End If
     
@@ -7264,10 +7310,10 @@ Public Sub BuildMonthlyDraft_FromDailyLog()
     cntSameName = Application.WorksheetFunction.CountIf(ws.Range("B:B"), nm)
 
 
-    s = "yŒŸƒ‚ƒjƒ^ƒŠƒ“ƒO‰º‘‚«z" & vbCrLf _
-      & "‘ÎÛF" & nm & vbCrLf _
-      & "ŠúŠÔF" & Format$(dFrom, "yyyy/mm/dd") & " - " & Format$(dTo, "yyyy/mm/dd") & vbCrLf & vbCrLf _
-      & "¡ ‚±‚ÌŒ‚É‹L˜^‚³‚ê‚½“Á‹L–€iŒn—ñj" & vbCrLf
+    s = "ã€æœˆæ¬¡ãƒ¢ãƒ‹ã‚¿ãƒªãƒ³ã‚°ä¸‹æ›¸ãã€‘" & vbCrLf _
+      & "å¯¾è±¡ï¼š" & nm & vbCrLf _
+      & "æœŸé–“ï¼š" & Format$(dFrom, "yyyy/mm/dd") & " - " & Format$(dTo, "yyyy/mm/dd") & vbCrLf & vbCrLf _
+      & "â–  ã“ã®æœˆã«è¨˜éŒ²ã•ã‚ŒãŸç‰¹è¨˜äº‹é …ï¼ˆæ™‚ç³»åˆ—ï¼‰" & vbCrLf
 
     hit = 0
     For r = 2 To lastRow
@@ -7278,7 +7324,7 @@ Public Sub BuildMonthlyDraft_FromDailyLog()
                     note = CStr(ws.Cells(r, 5).value)
                     If Len(Trim$(note)) > 0 Then
                         staff = CStr(ws.Cells(r, 4).value)
-                        s = s & "E" & Format$(d, "m/d") & "i" & staff & "j " & note & vbCrLf
+                        s = s & "ãƒ»" & Format$(d, "m/d") & "ï¼ˆ" & staff & "ï¼‰ " & note & vbCrLf
                         hit = hit + 1
                     End If
                 End If
@@ -7287,10 +7333,10 @@ Public Sub BuildMonthlyDraft_FromDailyLog()
     Next r
 
     If hit = 0 Then
-        s = s & "Ei‚±‚ÌŒ‚Ì‹L˜^‚Í‚ ‚è‚Ü‚¹‚ñj" & vbCrLf
+        s = s & "ãƒ»ï¼ˆã“ã®æœˆã®è¨˜éŒ²ã¯ã‚ã‚Šã¾ã›ã‚“ï¼‰" & vbCrLf
     End If
 
-    ' o—Íæi‹N“®‚ÉŠm•ÛÏ‚İ‚¾‚ª”O‚Ì‚½‚ßj
+    ' å‡ºåŠ›å…ˆï¼ˆèµ·å‹•æ™‚ã«ç¢ºä¿æ¸ˆã¿ã ãŒå¿µã®ãŸã‚ï¼‰
     Call Ensure_MonthlyDraftBox_UnderFraDailyLog
     Me.Controls("fraDailyLog").Controls("txtMonthlyMonitoringDraft").value = s
 End Sub
@@ -7320,8 +7366,8 @@ Public Sub EnsureNameSuggestList()
     With lb
         .Left = Me.Controls("frHeader").Left + tb.Left
         .Top = Me.Controls("frHeader").Top + tb.Top + tb.Height + 4
-        .Width = 200     ' ‰¡‚ğƒRƒ“ƒpƒNƒg‚É
-        .Height = 60     ' 3Œ‚­‚ç‚¢Œ©‚¦‚é‚‚³
+        .Width = 200     ' æ¨ªã‚’ã‚³ãƒ³ãƒ‘ã‚¯ãƒˆã«
+        .Height = 60     ' 3ä»¶ãã‚‰ã„è¦‹ãˆã‚‹é«˜ã•
 
         .Visible = False
     End With
@@ -7334,10 +7380,10 @@ End Sub
 
 
 Private Sub txtHdrName_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
-    ' ƒwƒbƒ_“ü—Í ¨ — Œû‚Ö“¯ŠúiŠù‘¶ƒƒWƒbƒN‹ì“®‚Ì‚½‚ßj
+    ' ãƒ˜ãƒƒãƒ€å…¥åŠ› â†’ è£å£ã¸åŒæœŸï¼ˆæ—¢å­˜ãƒ­ã‚¸ãƒƒã‚¯é§†å‹•ã®ãŸã‚ï¼‰
     Me.Controls("txtName").Text = Me.Controls("frHeader").Controls("txtHdrName").Text
 
-    ' Œó•âBOXŠm•Û ¨ XV
+    ' å€™è£œBOXç¢ºä¿ â†’ æ›´æ–°
     EnsureNameSuggestList
     Me.UpdateNameSuggest
 End Sub
@@ -7351,10 +7397,10 @@ Private Sub lstNameSuggest_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 
     If lb.ListIndex < 0 Then Exit Sub
 
-    ' ƒwƒbƒ_‚Ì–¼‚¾‚¯”½‰f
+    ' ãƒ˜ãƒƒãƒ€ã®æ°åã ã‘åæ˜ 
     Me.Controls("frHeader").Controls("txtHdrName").Text = lb.List(lb.ListIndex, 0)
 
-    ' — Œû“¯ŠúiŠù‘¶ƒƒWƒbƒN—pj
+    ' è£å£åŒæœŸï¼ˆæ—¢å­˜ãƒ­ã‚¸ãƒƒã‚¯ç”¨ï¼‰
     Me.Controls("txtName").Text = Me.Controls("frHeader").Controls("txtHdrName").Text
 
     lb.Visible = False
