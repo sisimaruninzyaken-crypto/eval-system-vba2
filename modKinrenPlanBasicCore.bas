@@ -15,6 +15,7 @@ Public Function BuildBasicPlanStructure(ByVal mainCause As String, _
     Set result = CreateObject("Scripting.Dictionary")
     result("Activity_Long") = PickActivityLong(needSelf, needFamily, needByDifficulty)
     
+    Set mmtMap = FilterMMTMap(mmtMap, result("Activity_Long"))
     
     Select Case result("Activity_Long")
           Case "屋内歩行"
@@ -57,21 +58,81 @@ Public Function BuildBasicPlanStructure(ByVal mainCause As String, _
             result("Function_Long") = fxCore & "立脚期安定性向上を図る。"
         
         Case "トイレ", "トイレ動作"
-            result("Function_Long") = fxCore & "移乗時支持性向上を図る。"
+            result("Function_Long") = fxCore & "便座移乗時の麻痺側支持性向上を図る。"
         
         Case "屋外歩行"
             result("Function_Long") = fxCore & "段差昇降時の安定性向上を図る。"
+        
+        Case "入浴一連動作"
+            result("Function_Long") = fxCore & "浴槽またぎ動作時の麻痺側支持性向上を図る。"
+
+        Case "移乗"
+            result("Function_Long") = fxCore & "移乗時の麻痺側支持性向上を図る。"
+
+        Case "起居一連動作"
+            result("Function_Long") = fxCore & "起き上がり時の麻痺側支持性向上を図る。"
+        
+        
         
         Case Else
             result("Function_Long") = mmtTargetMuscle & "の筋力改善を図る。"
             
     End Select
 
+    Case "疼痛"
 
-       Case "疼痛"
-        result("Function_Long") = "疼痛の軽減を図る。"
-       Case "困難度"
-        result("Function_Long") = "下肢機能の全体的向上を図る。"
+    Select Case result("Activity_Long")
+
+        Case "屋内歩行"
+            result("Function_Long") = "歩行時の疼痛軽減を図る。"
+
+        Case "屋外歩行"
+            result("Function_Long") = "屋外歩行時の疼痛軽減を図る。"
+
+        Case "トイレ動作"
+            result("Function_Long") = "立ち上がり時の疼痛軽減を図る。"
+
+        Case "入浴一連動作"
+            result("Function_Long") = "入浴動作時の疼痛軽減を図る。"
+
+        Case "移乗"
+            result("Function_Long") = "移乗動作時の疼痛軽減を図る。"
+
+        Case "起居一連動作"
+            result("Function_Long") = "起居動作時の疼痛軽減を図る。"
+
+        Case Else
+            result("Function_Long") = "疼痛の軽減を図る。"
+
+    End Select
+       
+    Case "困難度"
+
+    Select Case result("Activity_Long")
+
+        Case "屋内歩行"
+            result("Function_Long") = "方向転換時の安定性向上を図る。"
+
+        Case "屋外歩行"
+            result("Function_Long") = "段差昇降時の安定性向上を図る。"
+
+        Case "トイレ動作"
+            result("Function_Long") = "方向転換動作の安定化を図る。"
+
+        Case "入浴一連動作"
+            result("Function_Long") = "浴室内方向転換の安定性向上を図る。"
+
+        Case "移乗"
+            result("Function_Long") = "側方移動時の安定性向上を図る。"
+
+        Case "起居一連動作"
+            result("Function_Long") = "起き上がり動作の安定化を図る。"
+
+        Case Else
+            result("Function_Long") = "下肢機能の全体的向上を図る。"
+
+    End Select
+    
        Case Else
         result("Function_Long") = ""
     End Select
@@ -124,6 +185,59 @@ End Select
     
 End Function
 
+Public Function FilterMMTMap(ByVal mmtMap As Object, ByVal activityLong As String) As Object
+    Dim candidateCsv As String
+    Dim muscles() As String
+    Dim filtered As Object
+    Dim i As Long
+    Dim keyName As String
+
+    candidateCsv = GetCandidateMuscles(activityLong)
+
+    If Len(Trim$(candidateCsv)) = 0 Then
+        Set FilterMMTMap = mmtMap
+        Exit Function
+    End If
+
+    Set filtered = CreateObject("Scripting.Dictionary")
+    muscles = Split(candidateCsv, ",")
+
+    For i = LBound(muscles) To UBound(muscles)
+        keyName = Trim$(muscles(i))
+        If Len(keyName) > 0 Then
+            If mmtMap.exists(keyName) Then
+                filtered(keyName) = mmtMap(keyName)
+            End If
+        End If
+    Next i
+
+    If filtered.Count = 0 Then
+        Set FilterMMTMap = mmtMap
+    Else
+        Set FilterMMTMap = filtered
+    End If
+End Function
+
+Public Function GetCandidateMuscles(ByVal activityLong As String) As String
+    Select Case activityLong
+        Case "屋内歩行"
+            GetCandidateMuscles = "股外転,背屈,膝伸展"
+        Case "屋外歩行"
+            GetCandidateMuscles = "背屈,股外転,膝伸展"
+        Case "トイレ動作"
+            GetCandidateMuscles = "股外転,膝伸展,背屈"
+        Case "立ち上がり"
+            GetCandidateMuscles = "膝伸展,股伸展,股外転"
+        Case "移乗"
+            GetCandidateMuscles = "股外転,膝伸展"
+        Case "入浴一連動作"
+            GetCandidateMuscles = "股外転,膝伸展,背屈"
+        Case "起居一連動作"
+            GetCandidateMuscles = "股外転,膝伸展"
+        Case Else
+            GetCandidateMuscles = ""
+    End Select
+End Function
 
 Public Function PickActivityLong(ByVal needSelf As String, _
                                  ByVal needFamily As String, _
@@ -455,8 +569,36 @@ Public Function PickMMTTarget_WithPriority(ByVal mmtMap As Object, ByVal priorit
     Next k
 End Function
 
+Public Sub Test_FilterMMTMap_OutdoorWalking()
+    Dim src As Object
+    Dim filtered As Object
 
+    Set src = CreateObject("Scripting.Dictionary")
+    src.Add "股屈曲", 1
+    src.Add "膝伸展", 3
+    src.Add "股外転", 2
+    src.Add "背屈", 4
 
+    Set filtered = FilterMMTMap(src, "屋外歩行")
+
+    Debug.Print "Outdoor Count=" & filtered.Count
+    Debug.Print "Has 股屈曲=" & filtered.exists("股屈曲")
+    Debug.Print "Target=" & PickMMTTarget_WithPriority(filtered, "背屈,股外転,膝伸展")
+End Sub
+
+Public Sub Test_FilterMMTMap_Fallback()
+    Dim src As Object
+    Dim filtered As Object
+
+    Set src = CreateObject("Scripting.Dictionary")
+    src.Add "股屈曲", 1
+    src.Add "膝伸展", 3
+
+    Set filtered = FilterMMTMap(src, "未定義活動")
+
+    Debug.Print "Fallback same ref=" & (ObjPtr(filtered) = ObjPtr(src))
+    Debug.Print "Fallback Count=" & filtered.Count
+End Sub
 
 Public Sub Test_PickMMTTarget_WithPriority_Tie()
     Set M = CreateObject("Scripting.Dictionary")
