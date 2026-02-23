@@ -78,7 +78,7 @@ Private mBaseLayoutDone As Boolean
 Private mLayoutBuilt As Boolean
 Private Const PAD_SIDE As Single = 8
 Private Const GAP_V As Single = 8
-Private Const HEADER_H As Single = 44
+Private Const HEADER_H As Single = 62
 Private mHdr1 As clsHeaderBtnEvents
 Private mHdr2 As clsHeaderBtnEvents
 Private mHdr3 As clsHeaderBtnEvents
@@ -7072,7 +7072,10 @@ Public Sub CreateHeaderButtons_Once()
 
     ' 右寄せ配置
     Const pad As Single = 8, gap As Single = 10
-    hClose.Top = (f.Height - hClose.Height) / 2
+    Dim hdrBtnTop As Single
+    hdrBtnTop = (44 - hClose.Height) / 2
+
+    hClose.Top = hdrBtnTop
     hSave.Top = hClose.Top
     hClear.Top = hClose.Top
 
