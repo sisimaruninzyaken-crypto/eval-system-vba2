@@ -76,6 +76,58 @@ End Sub
 
 
 '--- 「筋力」「MMT」を含むページを取得 ---
+Public Function GetMMTHost(ByVal pg As Object) As Object
+    Dim host As Object
+
+    On Error Resume Next
+    Set host = pg.Controls("fraMMTHost")
+    On Error GoTo 0
+
+    If host Is Nothing Then
+        On Error Resume Next
+        Set host = pg.Controls("Frame9")
+        On Error GoTo 0
+        If Not host Is Nothing Then
+            On Error Resume Next
+            host.Name = "fraMMTHost"
+            On Error GoTo 0
+        End If
+    End If
+
+    Set GetMMTHost = host
+End Function
+
+Public Function GetMMTChildTabs(ByVal pg As Object, Optional ByVal host As Object = Nothing) As Object
+    Dim mp As Object
+
+    If host Is Nothing Then Set host = GetMMTHost(pg)
+    If host Is Nothing Then Exit Function
+
+    On Error Resume Next
+    Set mp = host.Controls("mpMMTChild")
+    On Error GoTo 0
+
+    If mp Is Nothing Then
+        Set mp = host.Controls.Add("Forms.MultiPage.1", "mpMMTChild", True)
+        mp.Left = 0
+        mp.Top = 0
+        mp.Style = 0
+        mp.Pages.Clear
+        mp.Pages.Add.Caption = ChrW(&H4E0A) & ChrW(&H80A2)
+        mp.Pages.Add.Caption = ChrW(&H4E0B) & ChrW(&H80A2)
+    End If
+
+    If mp.Pages.Count < 2 Then
+        Do While mp.Pages.Count < 2
+            mp.Pages.Add
+        Loop
+    End If
+    mp.Pages(0).Caption = ChrW(&H4E0A) & ChrW(&H80A2)
+    mp.Pages(1).Caption = ChrW(&H4E0B) & ChrW(&H80A2)
+
+    Set GetMMTChildTabs = mp
+End Function
+
 Public Function GetMMTPage() As Object
     Dim c As Object, mp As Object, i As Long
     For Each c In frmEval.Controls
@@ -185,7 +237,7 @@ Private Function MMT_SaveToString() As String
     If pg Is Nothing Then Exit Function
 
     On Error Resume Next
-    Set mp = pg.Controls("mpMMTChild")
+    Set mp = GetMMTChildTabs(pg)
     On Error GoTo 0
     If mp Is Nothing Then Exit Function
 
@@ -241,12 +293,12 @@ Public Sub LoadMMTFromSheet(ws As Worksheet, r As Long, owner As Object)
 
     ' 子タブの存在確認 → 無ければ作る
     On Error Resume Next
-    Set mp = pg.Controls("mpMMTChild")
+    Set mp = GetMMTChildTabs(pg)
     On Error GoTo 0
     If mp Is Nothing Then
         MMT_BuildChildTabs_Direct          ' ★ここが肝
         On Error Resume Next
-        Set mp = pg.Controls("mpMMTChild")
+        Set mp = GetMMTChildTabs(pg)
         On Error GoTo 0
         If mp Is Nothing Then Exit Sub      ' それでも無ければ諦める
     End If
@@ -280,7 +332,7 @@ Private Sub MMT_LoadFromString_Core(ByVal s As String)
     End If
 
     On Error Resume Next
-    Set mp = pg.Controls("mpMMTChild")
+    Set mp = GetMMTChildTabs(pg)
     On Error GoTo 0
     If mp Is Nothing Then
         MsgBox "子タブ(mpMMTChild)が見つかりません。", vbExclamation

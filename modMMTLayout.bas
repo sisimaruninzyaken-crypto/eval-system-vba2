@@ -11,8 +11,9 @@ Public Sub Resize_MMTChildHost_ToPage()
     DoEvents
 
     Set pg = mp.Pages(1)
-    Set host = pg.Controls("fraMMTHost")
-    Set child = host.Controls("mpMMTChild")
+    Set host = GetMMTHost(pg)
+    Set child = GetMMTChildTabs(pg, host)
+    If host Is Nothing Or child Is Nothing Then Exit Sub
 
     host.Width = pg.InsideWidth - 12
     host.Height = pg.InsideHeight - 12
