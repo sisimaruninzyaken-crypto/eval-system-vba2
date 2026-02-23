@@ -3023,6 +3023,8 @@ Call Ensure_MonthlyDraftBox_UnderFraDailyLog
 Set mHdrNameSink = New cHdrNameSink
 mHdrNameSink.Hook Me.Controls("frHeader").Controls("txtHdrName")
 
+Call Align_LoadPrevButton_NextToHdrKana(Me)
+
 
     
 End Sub
