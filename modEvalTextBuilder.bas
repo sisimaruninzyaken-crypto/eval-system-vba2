@@ -18,6 +18,9 @@ Public Sub Preview_NameToHeader()
     Dim txt As MSForms.TextBox
     Dim lblKana As MSForms.label
     Dim txtKana As MSForms.TextBox
+    Dim btnLoadPrev As MSForms.CommandButton
+    Dim i As Long
+    Dim hostCtl As Object
 
     '--- create or get header label ---
     On Error Resume Next
@@ -86,6 +89,29 @@ End If
     txtKana.Top = 36
     lblKana.Top = txtKana.Top + (txtKana.Height - lblKana.Height) / 2
     lblKana.Left = txtKana.Left - gap - lblKana.Width
+
+    '--- move/load button to header and place next to kana textbox ---
+    On Error Resume Next
+    Set btnLoadPrev = f.Controls("btnLoadPrevCtl")
+    On Error GoTo 0
+
+    If btnLoadPrev Is Nothing Then
+        For i = 0 To f.Controls.Count - 1
+            Set hostCtl = f.Controls(i)
+            If TypeName(hostCtl) = "Frame" Then
+                On Error Resume Next
+                Set btnLoadPrev = hostCtl.Controls("btnLoadPrevCtl")
+                On Error GoTo 0
+                If Not btnLoadPrev Is Nothing Then Exit For
+            End If
+        Next i
+    End If
+
+    If Not btnLoadPrev Is Nothing Then
+        Set btnLoadPrev.Parent = hdr
+        btnLoadPrev.Left = txtKana.Left + txtKana.Width + 12
+        btnLoadPrev.Top = txtKana.Top
+    End If
 
 
         '--- create or get header PID label/textbox ---
