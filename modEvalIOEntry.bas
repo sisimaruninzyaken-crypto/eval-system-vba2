@@ -1840,7 +1840,7 @@ If Not cLvl Is Nothing Then vLevel = Trim$(cLvl.value)
     vSpeed = Trim$(owner.Controls("cmbWalkSpeed").value)
     On Error GoTo 0
 
-    ' 安定性チェック（chkWalkStab_～ を全部拾う）
+    ' 安定性チェック（chkWalkStab_〜 を全部拾う）
     Set hits = New Collection
     For Each c In owner.Controls
         If TypeName(c) = "CheckBox" Then
@@ -1953,7 +1953,7 @@ Public Function Build_WalkRLA_IO(owner As Object) As String
         probsStr = ""
         level = ""
 
-        ' --- チェック（RLA_<phase>_～）を拾う ---
+        ' --- チェック（RLA_<phase>_〜）を拾う ---
         For Each c In owner.Controls
             If TypeName(c) = "CheckBox" Then
                 nm = CStr(c.name)
