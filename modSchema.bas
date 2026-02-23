@@ -1,157 +1,157 @@
 Attribute VB_Name = "modSchema"
 Option Explicit
 
-' ====== ŒöŠJƒGƒ“ƒgƒŠƒ|ƒCƒ“ƒg ======
-' dryRun:=True ‚ÅƒƒO‚Ì‚İBFalse ‚ÅÀÛ‚ÉƒŠƒl[ƒ€E’Ç‰ÁE•À‚Ñ‘Ö‚¦‚ğÀsB
+' ====== å…¬é–‹ã‚¨ãƒ³ãƒˆãƒªãƒã‚¤ãƒ³ãƒˆ ======
+' dryRun:=True ã§ãƒ­ã‚°ã®ã¿ã€‚False ã§å®Ÿéš›ã«ãƒªãƒãƒ¼ãƒ ãƒ»è¿½åŠ ãƒ»ä¸¦ã³æ›¿ãˆã‚’å®Ÿè¡Œã€‚
 Public Sub EnsureEvalDataSchema(Optional ByVal dryRun As Boolean = True)
     Dim ws As Worksheet
     Set ws = GetEvalDataSheet()
 
     Debug.Print "[SCHEMA] Start EvalData schema ensure. dryRun=" & dryRun
 
-    ' 1) p¨‚Ì•W€—ñƒZƒbƒg‚ğ’è‹`
+    ' 1) å§¿å‹¢ã®æ¨™æº–åˆ—ã‚»ãƒƒãƒˆã‚’å®šç¾©
     Dim desiredPosture As Collection
     Set desiredPosture = PostureDesiredHeaders()
 
-    ' 2) Šù‘¶¨•W€–¼‚Ö‚ÌƒGƒCƒŠƒAƒX«‘
+    ' 2) æ—¢å­˜â†’æ¨™æº–åã¸ã®ã‚¨ã‚¤ãƒªã‚¢ã‚¹è¾æ›¸
     Dim dictAlias As Object
     Set dictAlias = BuildPostureAliasDict()
 
-    ' 3) Šù‘¶—ñ‚ğ‘–¸‚µAŠY“–‚·‚é‚à‚Ì‚ğ•W€–¼‚Ö‰ü–¼
+    ' 3) æ—¢å­˜åˆ—ã‚’èµ°æŸ»ã—ã€è©²å½“ã™ã‚‹ã‚‚ã®ã‚’æ¨™æº–åã¸æ”¹å
     ApplyHeaderAliases ws, dictAlias, dryRun
 
-    ' 4) Œ‡‘¹—ñ‚ğ•âŠ®i––”ö‚É’Ç‰Áj
+    ' 4) æ¬ æåˆ—ã‚’è£œå®Œï¼ˆæœ«å°¾ã«è¿½åŠ ï¼‰
     EnsureHeaders ws, desiredPosture, dryRun
 
-    ' 5) gp¨hƒuƒƒbƒN“à‚Ì•À‚Ñ‡‚ğw’è‡‚ÖiƒV[ƒg‘S‘Ì‚Ì‡˜‚ÍŒã’iŠg’£j
+    ' 5) â€œå§¿å‹¢â€ãƒ–ãƒ­ãƒƒã‚¯å†…ã®ä¸¦ã³é †ã‚’æŒ‡å®šé †ã¸ï¼ˆã‚·ãƒ¼ãƒˆå…¨ä½“ã®é †åºã¯å¾Œæ®µæ‹¡å¼µï¼‰
     ReorderPostureBlock ws, desiredPosture, dryRun
 
     Debug.Print "[SCHEMA] Done."
 End Sub
 
-' ====== ƒV[ƒgæ“¾ ======
+' ====== ã‚·ãƒ¼ãƒˆå–å¾— ======
 Public Function GetEvalDataSheet() As Worksheet
     Dim ws As Worksheet
     On Error Resume Next
     Set ws = ThisWorkbook.Worksheets("EvalData")
     On Error GoTo 0
-    If ws Is Nothing Then Err.Raise 5, , "EvalData ƒV[ƒg‚ª‚ ‚è‚Ü‚¹‚ñB"
+    If ws Is Nothing Then Err.Raise 5, , "EvalData ã‚·ãƒ¼ãƒˆãŒã‚ã‚Šã¾ã›ã‚“ã€‚"
     Set GetEvalDataSheet = ws
 End Function
 
-' ====== p¨F•W€—ñ’è‹` ======
+' ====== å§¿å‹¢ï¼šæ¨™æº–åˆ—å®šç¾© ======
 Private Function PostureDesiredHeaders() As Collection
     Dim c As New Collection
 
-    ' •]‰¿iƒ`ƒFƒbƒN/ƒRƒ“ƒ{/”õlj
-    c.Add "p¨_•]‰¿_“ª•”‘O•û“Ëo"
-    c.Add "p¨_•]‰¿_‰~”w"
-    c.Add "p¨_•]‰¿_‘¤œ^"
-    c.Add "p¨_•]‰¿_‘ÌŠ²‰ñù"
-    c.Add "p¨_•]‰¿_”½’£•G"
-    c.Add "p¨_•]‰¿_œ”ÕŒXÎ"
-    c.Add "p¨_•]‰¿_”õl"
+    ' è©•ä¾¡ï¼ˆãƒã‚§ãƒƒã‚¯/ã‚³ãƒ³ãƒœ/å‚™è€ƒï¼‰
+    c.Add "å§¿å‹¢_è©•ä¾¡_é ­éƒ¨å‰æ–¹çªå‡º"
+    c.Add "å§¿å‹¢_è©•ä¾¡_å††èƒŒ"
+    c.Add "å§¿å‹¢_è©•ä¾¡_å´å¼¯"
+    c.Add "å§¿å‹¢_è©•ä¾¡_ä½“å¹¹å›æ—‹"
+    c.Add "å§¿å‹¢_è©•ä¾¡_åå¼µè†"
+    c.Add "å§¿å‹¢_è©•ä¾¡_éª¨ç›¤å‚¾æ–œ"
+    c.Add "å§¿å‹¢_è©•ä¾¡_å‚™è€ƒ"
 
-    ' Ski’PŠÖß¨¶‰Ej
-    c.Add "p¨_Sk_èò•”"
-    c.Add "p¨_Sk_Œ¨ŠÖß_R": c.Add "p¨_Sk_Œ¨ŠÖß_L"
-    c.Add "p¨_Sk_•IŠÖß_R": c.Add "p¨_Sk_•IŠÖß_L"
-    c.Add "p¨_Sk_èŠÖß_R": c.Add "p¨_Sk_èŠÖß_L"
-    c.Add "p¨_Sk_ŒÒŠÖß_R": c.Add "p¨_Sk_ŒÒŠÖß_L"
-    c.Add "p¨_Sk_•GŠÖß_R": c.Add "p¨_Sk_•GŠÖß_L"
-    c.Add "p¨_Sk_‘«ŠÖß_R": c.Add "p¨_Sk_‘«ŠÖß_L"
-    c.Add "p¨_Sk_”õl"
+    ' æ‹˜ç¸®ï¼ˆå˜é–¢ç¯€â†’å·¦å³ï¼‰
+    c.Add "å§¿å‹¢_æ‹˜ç¸®_é ¸éƒ¨"
+    c.Add "å§¿å‹¢_æ‹˜ç¸®_è‚©é–¢ç¯€_R": c.Add "å§¿å‹¢_æ‹˜ç¸®_è‚©é–¢ç¯€_L"
+    c.Add "å§¿å‹¢_æ‹˜ç¸®_è‚˜é–¢ç¯€_R": c.Add "å§¿å‹¢_æ‹˜ç¸®_è‚˜é–¢ç¯€_L"
+    c.Add "å§¿å‹¢_æ‹˜ç¸®_æ‰‹é–¢ç¯€_R": c.Add "å§¿å‹¢_æ‹˜ç¸®_æ‰‹é–¢ç¯€_L"
+    c.Add "å§¿å‹¢_æ‹˜ç¸®_è‚¡é–¢ç¯€_R": c.Add "å§¿å‹¢_æ‹˜ç¸®_è‚¡é–¢ç¯€_L"
+    c.Add "å§¿å‹¢_æ‹˜ç¸®_è†é–¢ç¯€_R": c.Add "å§¿å‹¢_æ‹˜ç¸®_è†é–¢ç¯€_L"
+    c.Add "å§¿å‹¢_æ‹˜ç¸®_è¶³é–¢ç¯€_R": c.Add "å§¿å‹¢_æ‹˜ç¸®_è¶³é–¢ç¯€_L"
+    c.Add "å§¿å‹¢_æ‹˜ç¸®_å‚™è€ƒ"
 
     Set PostureDesiredHeaders = c
 End Function
 
-' ====== ƒGƒCƒŠƒAƒX«‘\’zi•\‹L—h‚ê¨•W€–¼j ======
-' ‚±‚±‚ÉŒ©‚Â‚©‚Á‚½—h‚ê‚ğ‚Ç‚ñ‚Ç‚ñ‘«‚µ‚Ä‚¢‚¯‚ÎOK
+' ====== ã‚¨ã‚¤ãƒªã‚¢ã‚¹è¾æ›¸æ§‹ç¯‰ï¼ˆè¡¨è¨˜æºã‚Œâ†’æ¨™æº–åï¼‰ ======
+' ã“ã“ã«è¦‹ã¤ã‹ã£ãŸæºã‚Œã‚’ã©ã‚“ã©ã‚“è¶³ã—ã¦ã„ã‘ã°OK
 Private Function BuildPostureAliasDict() As Object
     Dim d As Object: Set d = CreateObject("Scripting.Dictionary")
     d.CompareMode = 1 ' TextCompare
 
-    ' --- •]‰¿ ---
-    d("p¨_‰~”w") = "p¨_•]‰¿_‰~”w"
-    d("‰~”w") = "p¨_•]‰¿_‰~”w"
-    d("p¨_“ª•”‘O•û“Ëo") = "p¨_•]‰¿_“ª•”‘O•û“Ëo"
-    d("“ª•”‘O•û“Ëo") = "p¨_•]‰¿_“ª•”‘O•û“Ëo"
-    d("p¨_‘¤œ^") = "p¨_•]‰¿_‘¤œ^"
-    d("‘¤œ^") = "p¨_•]‰¿_‘¤œ^"
-    d("p¨_‘ÌŠ²‰ñù") = "p¨_•]‰¿_‘ÌŠ²‰ñù"
-    d("‘ÌŠ²‰ñù") = "p¨_•]‰¿_‘ÌŠ²‰ñù"
-    d("”½’£•G") = "p¨_•]‰¿_”½’£•G"
-    d("p¨_”½’£•G") = "p¨_•]‰¿_”½’£•G"
-    d("œ”ÕŒXÎ") = "p¨_•]‰¿_œ”ÕŒXÎ"
-    d("p¨_œ”ÕŒXÎ") = "p¨_•]‰¿_œ”ÕŒXÎ"
+    ' --- è©•ä¾¡ ---
+    d("å§¿å‹¢_å††èƒŒ") = "å§¿å‹¢_è©•ä¾¡_å††èƒŒ"
+    d("å††èƒŒ") = "å§¿å‹¢_è©•ä¾¡_å††èƒŒ"
+    d("å§¿å‹¢_é ­éƒ¨å‰æ–¹çªå‡º") = "å§¿å‹¢_è©•ä¾¡_é ­éƒ¨å‰æ–¹çªå‡º"
+    d("é ­éƒ¨å‰æ–¹çªå‡º") = "å§¿å‹¢_è©•ä¾¡_é ­éƒ¨å‰æ–¹çªå‡º"
+    d("å§¿å‹¢_å´å¼¯") = "å§¿å‹¢_è©•ä¾¡_å´å¼¯"
+    d("å´å¼¯") = "å§¿å‹¢_è©•ä¾¡_å´å¼¯"
+    d("å§¿å‹¢_ä½“å¹¹å›æ—‹") = "å§¿å‹¢_è©•ä¾¡_ä½“å¹¹å›æ—‹"
+    d("ä½“å¹¹å›æ—‹") = "å§¿å‹¢_è©•ä¾¡_ä½“å¹¹å›æ—‹"
+    d("åå¼µè†") = "å§¿å‹¢_è©•ä¾¡_åå¼µè†"
+    d("å§¿å‹¢_åå¼µè†") = "å§¿å‹¢_è©•ä¾¡_åå¼µè†"
+    d("éª¨ç›¤å‚¾æ–œ") = "å§¿å‹¢_è©•ä¾¡_éª¨ç›¤å‚¾æ–œ"
+    d("å§¿å‹¢_éª¨ç›¤å‚¾æ–œ") = "å§¿å‹¢_è©•ä¾¡_éª¨ç›¤å‚¾æ–œ"
 
-    ' ”õliã’ij
-    d("p¨_”õl") = "p¨_•]‰¿_”õl"
-    d("p¨_•]‰¿_”õliã’ij") = "p¨_•]‰¿_”õl"
-    d("p¨•]‰¿_”õl") = "p¨_•]‰¿_”õl"
+    ' å‚™è€ƒï¼ˆä¸Šæ®µï¼‰
+    d("å§¿å‹¢_å‚™è€ƒ") = "å§¿å‹¢_è©•ä¾¡_å‚™è€ƒ"
+    d("å§¿å‹¢_è©•ä¾¡_å‚™è€ƒï¼ˆä¸Šæ®µï¼‰") = "å§¿å‹¢_è©•ä¾¡_å‚™è€ƒ"
+    d("å§¿å‹¢è©•ä¾¡_å‚™è€ƒ") = "å§¿å‹¢_è©•ä¾¡_å‚™è€ƒ"
 
-    ' --- Sk ---
-    d("ŠÖßSk_èò•”") = "p¨_Sk_èò•”"
-    d("Sk_èò•”") = "p¨_Sk_èò•”"
+    ' --- æ‹˜ç¸® ---
+    d("é–¢ç¯€æ‹˜ç¸®_é ¸éƒ¨") = "å§¿å‹¢_æ‹˜ç¸®_é ¸éƒ¨"
+    d("æ‹˜ç¸®_é ¸éƒ¨") = "å§¿å‹¢_æ‹˜ç¸®_é ¸éƒ¨"
 
-    ' ‘¤•t‚«–¼Ì‚Ì‚ä‚êi‘SŠpEƒJƒbƒR“™j
-    d("ŠÖßSk_Œ¨ŠÖßi‰Ej") = "p¨_Sk_Œ¨ŠÖß_R"
-    d("ŠÖßSk_Œ¨ŠÖßi¶j") = "p¨_Sk_Œ¨ŠÖß_L"
-    d("ŠÖßSk_•IŠÖßi‰Ej") = "p¨_Sk_•IŠÖß_R"
-    d("ŠÖßSk_•IŠÖßi¶j") = "p¨_Sk_•IŠÖß_L"
-    d("ŠÖßSk_èŠÖßi‰Ej") = "p¨_Sk_èŠÖß_R"
-    d("ŠÖßSk_èŠÖßi¶j") = "p¨_Sk_èŠÖß_L"
-    d("ŠÖßSk_ŒÒŠÖßi‰Ej") = "p¨_Sk_ŒÒŠÖß_R"
-    d("ŠÖßSk_ŒÒŠÖßi¶j") = "p¨_Sk_ŒÒŠÖß_L"
-    d("ŠÖßSk_•GŠÖßi‰Ej") = "p¨_Sk_•GŠÖß_R"
-    d("ŠÖßSk_•GŠÖßi¶j") = "p¨_Sk_•GŠÖß_L"
-    d("ŠÖßSk_‘«ŠÖßi‰Ej") = "p¨_Sk_‘«ŠÖß_R"
-    d("ŠÖßSk_‘«ŠÖßi¶j") = "p¨_Sk_‘«ŠÖß_L"
+    ' å´ä»˜ãåç§°ã®ã‚†ã‚Œï¼ˆå…¨è§’ãƒ»ã‚«ãƒƒã‚³ç­‰ï¼‰
+    d("é–¢ç¯€æ‹˜ç¸®_è‚©é–¢ç¯€ï¼ˆå³ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_è‚©é–¢ç¯€_R"
+    d("é–¢ç¯€æ‹˜ç¸®_è‚©é–¢ç¯€ï¼ˆå·¦ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_è‚©é–¢ç¯€_L"
+    d("é–¢ç¯€æ‹˜ç¸®_è‚˜é–¢ç¯€ï¼ˆå³ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_è‚˜é–¢ç¯€_R"
+    d("é–¢ç¯€æ‹˜ç¸®_è‚˜é–¢ç¯€ï¼ˆå·¦ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_è‚˜é–¢ç¯€_L"
+    d("é–¢ç¯€æ‹˜ç¸®_æ‰‹é–¢ç¯€ï¼ˆå³ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_æ‰‹é–¢ç¯€_R"
+    d("é–¢ç¯€æ‹˜ç¸®_æ‰‹é–¢ç¯€ï¼ˆå·¦ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_æ‰‹é–¢ç¯€_L"
+    d("é–¢ç¯€æ‹˜ç¸®_è‚¡é–¢ç¯€ï¼ˆå³ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_è‚¡é–¢ç¯€_R"
+    d("é–¢ç¯€æ‹˜ç¸®_è‚¡é–¢ç¯€ï¼ˆå·¦ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_è‚¡é–¢ç¯€_L"
+    d("é–¢ç¯€æ‹˜ç¸®_è†é–¢ç¯€ï¼ˆå³ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_è†é–¢ç¯€_R"
+    d("é–¢ç¯€æ‹˜ç¸®_è†é–¢ç¯€ï¼ˆå·¦ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_è†é–¢ç¯€_L"
+    d("é–¢ç¯€æ‹˜ç¸®_è¶³é–¢ç¯€ï¼ˆå³ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_è¶³é–¢ç¯€_R"
+    d("é–¢ç¯€æ‹˜ç¸®_è¶³é–¢ç¯€ï¼ˆå·¦ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_è¶³é–¢ç¯€_L"
 
-    ' ”õli‰º’ij
-    d("ŠÖßSk_”õl") = "p¨_Sk_”õl"
-    d("p¨_ŠÖßSk_”õl") = "p¨_Sk_”õl"
+    ' å‚™è€ƒï¼ˆä¸‹æ®µï¼‰
+    d("é–¢ç¯€æ‹˜ç¸®_å‚™è€ƒ") = "å§¿å‹¢_æ‹˜ç¸®_å‚™è€ƒ"
+    d("å§¿å‹¢_é–¢ç¯€æ‹˜ç¸®_å‚™è€ƒ") = "å§¿å‹¢_æ‹˜ç¸®_å‚™è€ƒ"
 
 
-    ' --- ‰E/¶ ¨ R/L •ÏŠ·Œni‰ºü‹æØ‚èj---
-    AddKoushukuSideAliases d, "Œ¨ŠÖß"
-    AddKoushukuSideAliases d, "•IŠÖß"
-    AddKoushukuSideAliases d, "èŠÖß"
-    AddKoushukuSideAliases d, "ŒÒŠÖß"
-    AddKoushukuSideAliases d, "•GŠÖß"
-    AddKoushukuSideAliases d, "‘«ŠÖß"
+    ' --- å³/å·¦ â†’ R/L å¤‰æ›ç³»ï¼ˆä¸‹ç·šåŒºåˆ‡ã‚Šï¼‰---
+    AddKoushukuSideAliases d, "è‚©é–¢ç¯€"
+    AddKoushukuSideAliases d, "è‚˜é–¢ç¯€"
+    AddKoushukuSideAliases d, "æ‰‹é–¢ç¯€"
+    AddKoushukuSideAliases d, "è‚¡é–¢ç¯€"
+    AddKoushukuSideAliases d, "è†é–¢ç¯€"
+    AddKoushukuSideAliases d, "è¶³é–¢ç¯€"
     
-        ' --- uŠÖßv‚ğÈ‚¢‚½’Zk•\‹L‚Ì‹zûiŒ¨/•I/è/ŒÒ/•G/‘«j ---
-    AddKoushukuSideAliasesShort d, "Œ¨", "Œ¨ŠÖß"
-    AddKoushukuSideAliasesShort d, "•I", "•IŠÖß"
-    AddKoushukuSideAliasesShort d, "è", "èŠÖß"
-    AddKoushukuSideAliasesShort d, "ŒÒ", "ŒÒŠÖß"
-    AddKoushukuSideAliasesShort d, "•G", "•GŠÖß"
-    AddKoushukuSideAliasesShort d, "‘«", "‘«ŠÖß"
+        ' --- ã€Œé–¢ç¯€ã€ã‚’çœã„ãŸçŸ­ç¸®è¡¨è¨˜ã®å¸åï¼ˆè‚©/è‚˜/æ‰‹/è‚¡/è†/è¶³ï¼‰ ---
+    AddKoushukuSideAliasesShort d, "è‚©", "è‚©é–¢ç¯€"
+    AddKoushukuSideAliasesShort d, "è‚˜", "è‚˜é–¢ç¯€"
+    AddKoushukuSideAliasesShort d, "æ‰‹", "æ‰‹é–¢ç¯€"
+    AddKoushukuSideAliasesShort d, "è‚¡", "è‚¡é–¢ç¯€"
+    AddKoushukuSideAliasesShort d, "è†", "è†é–¢ç¯€"
+    AddKoushukuSideAliasesShort d, "è¶³", "è¶³é–¢ç¯€"
 
     
     Set BuildPostureAliasDict = d
 End Function
     
     
-    ' —áFp¨_Sk_Œ¨ŠÖß_‰E ¨ p¨_Sk_Œ¨ŠÖß_R
-'     p¨_Sk_Œ¨ŠÖß_¶ ¨ p¨_Sk_Œ¨ŠÖß_L
+    ' ä¾‹ï¼šå§¿å‹¢_æ‹˜ç¸®_è‚©é–¢ç¯€_å³ â†’ å§¿å‹¢_æ‹˜ç¸®_è‚©é–¢ç¯€_R
+'     å§¿å‹¢_æ‹˜ç¸®_è‚©é–¢ç¯€_å·¦ â†’ å§¿å‹¢_æ‹˜ç¸®_è‚©é–¢ç¯€_L
 Private Sub AddKoushukuSideAliases(ByVal d As Object, ByVal joint As String)
-    d("p¨_Sk_" & joint & "_‰E") = "p¨_Sk_" & joint & "_R"
-    d("p¨_Sk_" & joint & "_¶") = "p¨_Sk_" & joint & "_L"
-    ' ”O‚Ì‚½‚ß‘SŠpƒJƒbƒR”Å‚ªc‚Á‚Ä‚¢‚½ê‡‚É‚à‘Î‰iŠù‚Éˆê•”‚Í“o˜^Ï‚İ‚¾‚ªd•¡OKj
-    d("ŠÖßSk_" & joint & "i‰Ej") = "p¨_Sk_" & joint & "_R"
-    d("ŠÖßSk_" & joint & "i¶j") = "p¨_Sk_" & joint & "_L"
+    d("å§¿å‹¢_æ‹˜ç¸®_" & joint & "_å³") = "å§¿å‹¢_æ‹˜ç¸®_" & joint & "_R"
+    d("å§¿å‹¢_æ‹˜ç¸®_" & joint & "_å·¦") = "å§¿å‹¢_æ‹˜ç¸®_" & joint & "_L"
+    ' å¿µã®ãŸã‚å…¨è§’ã‚«ãƒƒã‚³ç‰ˆãŒæ®‹ã£ã¦ã„ãŸå ´åˆã«ã‚‚å¯¾å¿œï¼ˆæ—¢ã«ä¸€éƒ¨ã¯ç™»éŒ²æ¸ˆã¿ã ãŒé‡è¤‡OKï¼‰
+    d("é–¢ç¯€æ‹˜ç¸®_" & joint & "ï¼ˆå³ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_" & joint & "_R"
+    d("é–¢ç¯€æ‹˜ç¸®_" & joint & "ï¼ˆå·¦ï¼‰") = "å§¿å‹¢_æ‹˜ç¸®_" & joint & "_L"
 End Sub
 
 
 
-' ====== Šù‘¶ƒwƒbƒ_‚ÉƒGƒCƒŠƒAƒX“K—pi‰ü–¼j ======
-' ====== Šù‘¶ƒwƒbƒ_‚ÉƒGƒCƒŠƒAƒX“K—pi‰ü–¼^ƒ}[ƒW‘Î‰j ======
+' ====== æ—¢å­˜ãƒ˜ãƒƒãƒ€ã«ã‚¨ã‚¤ãƒªã‚¢ã‚¹é©ç”¨ï¼ˆæ”¹åï¼‰ ======
+' ====== æ—¢å­˜ãƒ˜ãƒƒãƒ€ã«ã‚¨ã‚¤ãƒªã‚¢ã‚¹é©ç”¨ï¼ˆæ”¹åï¼ãƒãƒ¼ã‚¸å¯¾å¿œï¼‰ ======
 Private Sub ApplyHeaderAliases(ByVal ws As Worksheet, ByVal dictAlias As Object, ByVal dryRun As Boolean)
     Dim lastCol As Long: lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
     Dim j As Long
-    For j = lastCol To 1 Step -1      ' ‰E¨¶‚É‘–¸FŒã‚ë‚©‚ç‚Ì•û‚ª—ñíœ‚É‹­‚¢
+    For j = lastCol To 1 Step -1      ' å³â†’å·¦ã«èµ°æŸ»ï¼šå¾Œã‚ã‹ã‚‰ã®æ–¹ãŒåˆ—å‰Šé™¤ã«å¼·ã„
         Dim srcHdr As String: srcHdr = Trim$(CStr(ws.Cells(1, j).value))
         If Len(srcHdr) = 0 Then GoTo ContinueLoop
 
@@ -162,7 +162,7 @@ Private Sub ApplyHeaderAliases(ByVal ws As Worksheet, ByVal dictAlias As Object,
             If Not dryRun Then
                 Dim dstCol As Long: dstCol = FindColByHeaderExact(ws, dstHdr)
                 If dstCol > 0 And dstCol <> j Then
-                    ' Šù‚Éƒ^[ƒQƒbƒg—ñ‚ª‘¶İF‹ó—“‚ğ–„‚ß‚éŒ`‚Åƒ}[ƒW‚µA‹Œ—ñ‚ğíœ
+                    ' æ—¢ã«ã‚¿ãƒ¼ã‚²ãƒƒãƒˆåˆ—ãŒå­˜åœ¨ï¼šç©ºæ¬„ã‚’åŸ‹ã‚ã‚‹å½¢ã§ãƒãƒ¼ã‚¸ã—ã€æ—§åˆ—ã‚’å‰Šé™¤
                     Dim lastRow As Long: lastRow = ws.Cells(ws.rows.Count, j).End(xlUp).row
                     Dim r As Long
                     For r = 2 To lastRow
@@ -172,7 +172,7 @@ Private Sub ApplyHeaderAliases(ByVal ws As Worksheet, ByVal dictAlias As Object,
                     Next r
                     ws.Columns(j).Delete
                 Else
-                    ' ƒ^[ƒQƒbƒg—ñ‚ª–³‚¢F‚»‚Ì‚Ü‚Ü‰ü–¼
+                    ' ã‚¿ãƒ¼ã‚²ãƒƒãƒˆåˆ—ãŒç„¡ã„ï¼šãã®ã¾ã¾æ”¹å
                     ws.Cells(1, j).value = dstHdr
                 End If
             End If
@@ -181,7 +181,7 @@ ContinueLoop:
     Next j
 End Sub
 
-' Š®‘Sˆê’v‚ÅŒ©o‚µ—ñ”Ô†‚ğ•Ô‚·i–³‚¯‚ê‚Î0j
+' å®Œå…¨ä¸€è‡´ã§è¦‹å‡ºã—åˆ—ç•ªå·ã‚’è¿”ã™ï¼ˆç„¡ã‘ã‚Œã°0ï¼‰
 Public Function FindColByHeaderExact(ByVal ws As Worksheet, ByVal headerName As String) As Long
     Dim lastCol As Long: lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
     Dim c As Long
@@ -195,7 +195,7 @@ Public Function FindColByHeaderExact(ByVal ws As Worksheet, ByVal headerName As 
 End Function
 
 
-' ====== Œ‡‘¹ƒwƒbƒ_‚Ì•âŠ®i––”ö’Ç‰Áj ======
+' ====== æ¬ æãƒ˜ãƒƒãƒ€ã®è£œå®Œï¼ˆæœ«å°¾è¿½åŠ ï¼‰ ======
 Private Sub EnsureHeaders(ByVal ws As Worksheet, ByVal desired As Collection, ByVal dryRun As Boolean)
     Dim have As Object: Set have = CurrentHeaderSet(ws)
     Dim nm As Variant
@@ -211,7 +211,7 @@ Private Sub EnsureHeaders(ByVal ws As Worksheet, ByVal desired As Collection, By
     Next nm
 End Sub
 
-' Œ»İ‚Ìƒwƒbƒ_W‡iTextComparej
+' ç¾åœ¨ã®ãƒ˜ãƒƒãƒ€é›†åˆï¼ˆTextCompareï¼‰
 Private Function CurrentHeaderSet(ByVal ws As Worksheet) As Object
     Dim d As Object: Set d = CreateObject("Scripting.Dictionary")
     d.CompareMode = 1
@@ -224,12 +224,12 @@ Private Function CurrentHeaderSet(ByVal ws As Worksheet) As Object
     Set CurrentHeaderSet = d
 End Function
 
-' ====== p¨ƒuƒƒbƒN‚Ì•À‚×‘Ö‚¦ ======
-' Šù‘¶‚Ì gp¨_*h —ñŒQ‚ğAdesired‚Ì‡‚É¶‹l‚ß‚ÅÄ”z’ui‘¼ƒZƒNƒVƒ‡ƒ“—ñ‚Í‘Š‘Î‡‚ğ•Ûj
+' ====== å§¿å‹¢ãƒ–ãƒ­ãƒƒã‚¯ã®ä¸¦ã¹æ›¿ãˆ ======
+' æ—¢å­˜ã® â€œå§¿å‹¢_*â€ åˆ—ç¾¤ã‚’ã€desiredã®é †ã«å·¦è©°ã‚ã§å†é…ç½®ï¼ˆä»–ã‚»ã‚¯ã‚·ãƒ§ãƒ³åˆ—ã¯ç›¸å¯¾é †ã‚’ä¿æŒï¼‰
 Private Sub ReorderPostureBlock(ByVal ws As Worksheet, ByVal desired As Collection, ByVal dryRun As Boolean)
     Dim hdrIdx As Object: Set hdrIdx = CurrentHeaderSet(ws)
 
-    ' ‘ÎÛ—ñ‚ÌƒCƒ“ƒfƒbƒNƒXûWi‘¶İ‚·‚é‚à‚Ì‚Ì‚İj
+    ' å¯¾è±¡åˆ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹åé›†ï¼ˆå­˜åœ¨ã™ã‚‹ã‚‚ã®ã®ã¿ï¼‰
     Dim targetCols As Collection: Set targetCols = New Collection
     Dim nm As Variant
     For Each nm In desired
@@ -238,11 +238,11 @@ Private Sub ReorderPostureBlock(ByVal ws As Worksheet, ByVal desired As Collecti
         End If
     Next nm
     If targetCols.Count = 0 Then
-        Debug.Print "[SCHEMA][ORDER] p¨_* ‚ÌŠù‘¶—ñ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB"
+        Debug.Print "[SCHEMA][ORDER] å§¿å‹¢_* ã®æ—¢å­˜åˆ—ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚"
         Exit Sub
     End If
 
-    ' p¨ƒuƒƒbƒN‚ÌŒ»İ‚ÌÅ¬EÅ‘åˆÊ’u
+    ' å§¿å‹¢ãƒ–ãƒ­ãƒƒã‚¯ã®ç¾åœ¨ã®æœ€å°ãƒ»æœ€å¤§ä½ç½®
     Dim minC As Long, maxC As Long, i As Long
     minC = Columns.Count: maxC = 0
     For i = 1 To targetCols.Count
@@ -250,8 +250,8 @@ Private Sub ReorderPostureBlock(ByVal ws As Worksheet, ByVal desired As Collecti
         maxC = IIf(targetCols(i) > maxC, targetCols(i), maxC)
     Next i
 
-    ' •À‚Ñ‘Ö‚¦æ‚ÌŠJn—ñiŒ»ƒuƒƒbƒN‚Ìæ“ªˆÊ’uj‚ÉAdesired‡‚ÅÄ”z’u
-    ' Œã‚ë‚©‚ç Cut¨Insert ‚ÅƒCƒ“ƒfƒbƒNƒX‚¸‚ê‚ğ‰ñ”ğ
+    ' ä¸¦ã³æ›¿ãˆå…ˆã®é–‹å§‹åˆ—ï¼ˆï¼ç¾ãƒ–ãƒ­ãƒƒã‚¯ã®å…ˆé ­ä½ç½®ï¼‰ã«ã€desiredé †ã§å†é…ç½®
+    ' å¾Œã‚ã‹ã‚‰ Cutâ†’Insert ã§ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãšã‚Œã‚’å›é¿
     Dim desiredExisting As Collection: Set desiredExisting = New Collection
     For Each nm In desired
         If hdrIdx.exists(CStr(nm)) Then desiredExisting.Add CStr(nm)
@@ -260,7 +260,7 @@ Private Sub ReorderPostureBlock(ByVal ws As Worksheet, ByVal desired As Collecti
     Dim curPos As Long: curPos = minC
     Dim nameToCol As Object
 
-    Set nameToCol = CurrentHeaderSet(ws) ' ÅV‰»
+    Set nameToCol = CurrentHeaderSet(ws) ' æœ€æ–°åŒ–
     Dim k As Long
     For k = desiredExisting.Count To 1 Step -1
         Dim hName As String: hName = desiredExisting(k)
@@ -271,7 +271,7 @@ Private Sub ReorderPostureBlock(ByVal ws As Worksheet, ByVal desired As Collecti
                 ws.Columns(fromCol).Cut
                 ws.Columns(curPos).Insert Shift:=xlToRight
             End If
-            ' ÄƒXƒLƒƒƒ“
+            ' å†ã‚¹ã‚­ãƒ£ãƒ³
             Set nameToCol = CurrentHeaderSet(ws)
         Else
             Debug.Print "[SCHEMA][KEEP] " & hName & " at Col " & curPos
@@ -279,14 +279,14 @@ Private Sub ReorderPostureBlock(ByVal ws As Worksheet, ByVal desired As Collecti
         curPos = curPos + 1
     Next k
 
-    Debug.Print "[SCHEMA][ORDER] p¨ƒuƒƒbƒN•À‚Ñ‘Ö‚¦Š®—¹B"
+    Debug.Print "[SCHEMA][ORDER] å§¿å‹¢ãƒ–ãƒ­ãƒƒã‚¯ä¸¦ã³æ›¿ãˆå®Œäº†ã€‚"
 End Sub
 
 
-' —áFp¨_Sk_Œ¨_‰E ¨ p¨_Sk_Œ¨ŠÖß_R
+' ä¾‹ï¼šå§¿å‹¢_æ‹˜ç¸®_è‚©_å³ â†’ å§¿å‹¢_æ‹˜ç¸®_è‚©é–¢ç¯€_R
 Private Sub AddKoushukuSideAliasesShort(ByVal d As Object, ByVal shortJoint As String, ByVal fullJoint As String)
-    d("p¨_Sk_" & shortJoint & "_‰E") = "p¨_Sk_" & fullJoint & "_R"
-    d("p¨_Sk_" & shortJoint & "_¶") = "p¨_Sk_" & fullJoint & "_L"
+    d("å§¿å‹¢_æ‹˜ç¸®_" & shortJoint & "_å³") = "å§¿å‹¢_æ‹˜ç¸®_" & fullJoint & "_R"
+    d("å§¿å‹¢_æ‹˜ç¸®_" & shortJoint & "_å·¦") = "å§¿å‹¢_æ‹˜ç¸®_" & fullJoint & "_L"
 End Sub
 
 
@@ -309,14 +309,14 @@ Public Sub ListUnknownPostureHeaders()
     For j = 1 To lastCol
         h = Trim$(CStr(ws.Cells(1, j).value))
         If Len(h) > 0 Then
-            If Left$(h, 3) = "p¨_" Then
+            If Left$(h, 3) = "å§¿å‹¢_" Then
                 If Not allow.exists(h) Then unknown(h) = j
             End If
         End If
     Next j
 
     If unknown.Count = 0 Then
-        Debug.Print "[SCHEMA][CHECK] p¨_* ‚Ì–¢’m—ñ‚Í‚ ‚è‚Ü‚¹‚ñB"
+        Debug.Print "[SCHEMA][CHECK] å§¿å‹¢_* ã®æœªçŸ¥åˆ—ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚"
     Else
         Dim k: For Each k In unknown.keys
             Debug.Print "[SCHEMA][CHECK][UNKNOWN] "; k; "  Col "; unknown(k)

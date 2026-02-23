@@ -1,5 +1,5 @@
 Attribute VB_Name = "modHeaderLookup"
-'=== ƒwƒbƒ_ŒŸõEì¬ ==================
+'=== ãƒ˜ãƒƒãƒ€æ¤œç´¢ãƒ»ä½œæˆ ==================
 Public Function BuildHeaderLookup(ws As Worksheet) As Object
     Dim dict As Object: Set dict = CreateObject("Scripting.Dictionary")
     Dim lastCol As Long: lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column

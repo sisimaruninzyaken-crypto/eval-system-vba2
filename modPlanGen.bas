@@ -3,12 +3,12 @@ Attribute VB_Name = "modPlanGen"
 
 Option Explicit
 
-' [•K{] BASIC_KEYS_V1 ‚ÌŠù‘¶i‚ ‚È‚½‚ÌŒ»s‚Ì‚Ü‚Üj
+' [å¿…é ˆ] BASIC_KEYS_V1 ã®æ—¢å­˜ï¼ˆã‚ãªãŸã®ç¾è¡Œã®ã¾ã¾ï¼‰
 Public Function BasicKeysV1() As Variant
  BasicKeysV1 = Split("care_level_band|primary_condition_cat|comorbidity_cat_list|history_flags|living_type|support_availability|bi_total|bi_low_items|iadl_limits|bed_mobility_band|rom_limit_tags|strength_band|pain_band|pain_site_tags|needs_patient|needs_family", "|")
 End Function
 
-' [•K{] BuildBasicInputV1ibed_mobility_band ‚ğ’Ç‰ÁÏ‚İj
+' [å¿…é ˆ] BuildBasicInputV1ï¼ˆbed_mobility_band ã‚’è¿½åŠ æ¸ˆã¿ï¼‰
 Public Function BuildBasicInputV1() As String
     Dim keys As Variant
     Dim values() As String
@@ -39,13 +39,13 @@ Public Function BuildBasicInputV1() As String
     biLowItems = GetBILowItems()
     romLimitTags = GetRomLimitTags()
 
-    ' š’Ç‰ÁFbed_mobility_band ‚Í1‰ñ‚¾‚¯ŒvZ
+    ' â˜…è¿½åŠ ï¼šbed_mobility_band ã¯1å›ã ã‘è¨ˆç®—
     bedMobilityBand = GetBedMobilityBand()
     painBand = GetPainBand()
     painSiteTags = GetPainSiteTags()
     strengthBand = GetStrengthBand()
-    needsPatient = GetLatestBasicTextByHeader("Š³ÒNeeds")
-    needsFamily = GetLatestBasicTextByHeader("‰Æ‘°Needs")
+    needsPatient = GetLatestBasicTextByHeader("æ‚£è€…Needs")
+    needsFamily = GetLatestBasicTextByHeader("å®¶æ—Needs")
 
 
     For i = LBound(keys) To UBound(keys)
@@ -67,7 +67,7 @@ Public Function BuildBasicInputV1() As String
                 values(i) = biLowItems
 
 
-            ' š’Ç‰ÁFbed_mobility_band
+            ' â˜…è¿½åŠ ï¼šbed_mobility_band
             Case "bed_mobility_band"
                 values(i) = bedMobilityBand
             Case "pain_band"
@@ -131,7 +131,7 @@ Private Function GetPrimaryConditionCat() As String
     rLatest = FindLatestRowByName(ws, nm)
     If rLatest <= 0 Then Exit Function
 
-    GetPrimaryConditionCat = Trim$(ReadStr_Compat("åf’f", rLatest, ws))
+    GetPrimaryConditionCat = Trim$(ReadStr_Compat("ä¸»è¨ºæ–­", rLatest, ws))
 End Function
 
 Private Function GetStrengthBand() As String
@@ -176,13 +176,13 @@ Public Function ComputeStrengthBandFromMMTIO(ByVal mmtIO As String) As String
 
     Set targetItems = CreateObject("Scripting.Dictionary")
     targetItems.CompareMode = vbTextCompare
-    targetItems("ŒÒ‹ü‹È") = True
-    targetItems("ŒÒL“W") = True
-    targetItems("ŒÒŠO“]]") = True
-    targetItems("•GL“W") = True
-    targetItems("‘«ŠÖß”w‹üw") = True
-    targetItems("‘«ŠÖß’ê‹ü") = True
-    targetItems("•êæäL“W") = True
+    targetItems("è‚¡å±ˆæ›²") = True
+    targetItems("è‚¡ä¼¸å±•") = True
+    targetItems("è‚¡å¤–è»¢]") = True
+    targetItems("è†ä¼¸å±•") = True
+    targetItems("è¶³é–¢ç¯€èƒŒå±ˆw") = True
+    targetItems("è¶³é–¢ç¯€åº•å±ˆ") = True
+    targetItems("æ¯è¶¾ä¼¸å±•") = True
 
     Set itemScores = CreateObject("Scripting.Dictionary")
     itemScores.CompareMode = vbTextCompare
@@ -456,13 +456,13 @@ Private Function GetPainBand() As String
 
     Select Case vas
         Case 0
-            GetPainBand = "‚È‚µ"
+            GetPainBand = "ãªã—"
         Case 1 To 30
-            GetPainBand = "Œy“x"
+            GetPainBand = "è»½åº¦"
         Case 31 To 60
-            GetPainBand = "’†“™“x"
+            GetPainBand = "ä¸­ç­‰åº¦"
         Case Else
-            GetPainBand = "d“x"
+            GetPainBand = "é‡åº¦"
     End Select
 End Function
 
@@ -496,7 +496,7 @@ Private Function GetIADLLimits() As String
    For i = 0 To 8
     v = Trim$(IO_GetVal(io, "IADL_" & CStr(i)))
     If LenB(v) > 0 Then
-        If StrComp(v, "©—§", vbTextCompare) = 0 Then GoTo NextI
+        If StrComp(v, "è‡ªç«‹", vbTextCompare) = 0 Then GoTo NextI
         n = n + 1
         parts(n) = "IADL_" & CStr(i) & "=" & v
     End If
@@ -573,7 +573,7 @@ NextI:
     GetBILowItems = Join(arr, ", ")
 End Function
 
-' š’uŠ·FIO_ADLiKyo_*j‚©‚ç band ¶¬iÅd“x—Dæj
+' â˜…ç½®æ›ï¼šIO_ADLï¼ˆKyo_*ï¼‰ã‹ã‚‰ band ç”Ÿæˆï¼ˆæœ€é‡åº¦å„ªå…ˆï¼‰
 Private Function GetBedMobilityBand() As String
     Dim ws As Worksheet
     Dim nm As String
@@ -586,11 +586,11 @@ Private Function GetBedMobilityBand() As String
     nm = Trim$(frmEval.Controls("txtName").Text)
     If LenB(nm) = 0 Then Exit Function
 
-    ' ¦‚ ‚È‚½‚ÌŠù‘¶ FindLatestRowByName ‚ğg‚¤‘O’ñiNormalizeNameŠÜ‚Ş”Å‚ÅOKj
+    ' â€»ã‚ãªãŸã®æ—¢å­˜ FindLatestRowByName ã‚’ä½¿ã†å‰æï¼ˆNormalizeNameå«ã‚€ç‰ˆã§OKï¼‰
     r = FindLatestRowByName(ws, nm)
     If r <= 1 Then Exit Function
 
-    ' ¦Šù‘¶‚Ì ReadStr_Compat / IO_GetVal ‚ğg—p
+    ' â€»æ—¢å­˜ã® ReadStr_Compat / IO_GetVal ã‚’ä½¿ç”¨
     raw = ReadStr_Compat("IO_ADL", r, ws)
     If LenB(raw) = 0 Then Exit Function
 
@@ -600,18 +600,18 @@ Private Function GetBedMobilityBand() As String
         IO_GetVal(raw, "Kyo_StandUp") & "|" & _
         IO_GetVal(raw, "Kyo_StandHold")
 
-    If InStr(v, "‘S‰î•") > 0 Then
-        GetBedMobilityBand = "‘S‰î•"
-    ElseIf InStr(v, "ˆê•”‰î•") > 0 Then
-        GetBedMobilityBand = "ˆê•”‰î•"
-    ElseIf InStr(v, "Œ©ç‚è") > 0 Then
-        GetBedMobilityBand = "Œ©ç‚è"
+    If InStr(v, "å…¨ä»‹åŠ©") > 0 Then
+        GetBedMobilityBand = "å…¨ä»‹åŠ©"
+    ElseIf InStr(v, "ä¸€éƒ¨ä»‹åŠ©") > 0 Then
+        GetBedMobilityBand = "ä¸€éƒ¨ä»‹åŠ©"
+    ElseIf InStr(v, "è¦‹å®ˆã‚Š") > 0 Then
+        GetBedMobilityBand = "è¦‹å®ˆã‚Š"
     ElseIf Len(Replace$(v, "|", vbNullString)) > 0 Then
-        GetBedMobilityBand = "©—§"
+        GetBedMobilityBand = "è‡ªç«‹"
     End If
 End Function
 
-' --- ˆÈ‰º‚ÍŠù‘¶‚Ì‚Ü‚Üi‚ ‚È‚½‚ÌŒ»sƒR[ƒh‚ğˆÛj ---
+' --- ä»¥ä¸‹ã¯æ—¢å­˜ã®ã¾ã¾ï¼ˆã‚ãªãŸã®ç¾è¡Œã‚³ãƒ¼ãƒ‰ã‚’ç¶­æŒï¼‰ ---
 
 Private Function GetFrmEvalControlText(ByVal controlName As String) As String
     Dim target As Object
@@ -640,11 +640,11 @@ Public Function FindControlRecursive(ByVal container As Object, ByVal targetName
     On Error GoTo 0
     If Not FindControlRecursive Is Nothing Then Exit Function
 
-    ' ¦‚±‚±ˆÈ~‚à‚ ‚È‚½‚ÌŠù‘¶À‘•‚Ì‚Ü‚Ü
-    ' iHasChildControls ‚ğg‚¤”Å‚È‚ç‚»‚Ì‚Ü‚ÜˆÛ‚ÅOKj
+    ' â€»ã“ã“ä»¥é™ã‚‚ã‚ãªãŸã®æ—¢å­˜å®Ÿè£…ã®ã¾ã¾
+    ' ï¼ˆHasChildControls ã‚’ä½¿ã†ç‰ˆãªã‚‰ãã®ã¾ã¾ç¶­æŒã§OKï¼‰
     ' ...
 End Function
 
-' UniqueLinesInOrder / FindLatestRowByName / ReadStr_Compat / IO_GetVal ‚È‚Ç‚àŠù‘¶‚Ì‚Ü‚Ü
+' UniqueLinesInOrder / FindLatestRowByName / ReadStr_Compat / IO_GetVal ãªã©ã‚‚æ—¢å­˜ã®ã¾ã¾
 
 

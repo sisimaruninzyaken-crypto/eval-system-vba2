@@ -2,11 +2,11 @@ Attribute VB_Name = "modOpenAIResponses"
 
 
 
-'=== modOpenAIResponses (•W€ƒ‚ƒWƒ…[ƒ‹) ‚É“\‚é ===
+'=== modOpenAIResponses (æ¨™æº–ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«) ã«è²¼ã‚‹ ===
 Option Explicit
 
 Private Const OPENAI_ENDPOINT As String = "https://api.openai.com/v1/responses"
-Private Const OPENAI_MODEL As String = "gpt-4.1-mini" '•K—v‚È‚ç gpt-5.2 “™‚É•ÏX‰Â :contentReference[oaicite:1]{index=1}
+Private Const OPENAI_MODEL As String = "gpt-4.1-mini" 'å¿…è¦ãªã‚‰ gpt-5.2 ç­‰ã«å¤‰æ›´å¯ :contentReference[oaicite:1]{index=1}
 
 Public Function OpenAI_BuildDraft(ByVal systemInstructions As String, ByVal userInput As String) As String
     On Error GoTo EH
@@ -30,7 +30,7 @@ Public Function OpenAI_BuildDraft(ByVal systemInstructions As String, ByVal user
         Err.Raise vbObjectError + 513, "OpenAI_BuildDraft", "HTTP " & http.Status & ": " & Left$(http.ResponseText, 500)
     End If
 
-    OpenAI_BuildDraft = JsonGetOutputText(http.ResponseText) ' response.output_text ‘Š“–‚ğ”²‚­ :contentReference[oaicite:2]{index=2}
+    OpenAI_BuildDraft = JsonGetOutputText(http.ResponseText) ' response.output_text ç›¸å½“ã‚’æŠœã :contentReference[oaicite:2]{index=2}
     Exit Function
 
 EH:
@@ -38,14 +38,14 @@ EH:
 End Function
 
 Private Function GetOpenAIApiKey() As String
-    ' –¼‘O’è‹` OPENAI_API_KEY ‚ÌƒZƒ‹‚ÉƒL[•¶š—ñ‚ğ“ü‚ê‚Ä‚¢‚é‘O’ñi‘O‚Éì‚Á‚½‚â‚Âj
+    ' åå‰å®šç¾© OPENAI_API_KEY ã®ã‚»ãƒ«ã«ã‚­ãƒ¼æ–‡å­—åˆ—ã‚’å…¥ã‚Œã¦ã„ã‚‹å‰æï¼ˆå‰ã«ä½œã£ãŸã‚„ã¤ï¼‰
     GetOpenAIApiKey = CStr(ThisWorkbook.Names("OPENAI_API_KEY").RefersToRange.value)
     GetOpenAIApiKey = Trim$(GetOpenAIApiKey)
-    If Len(GetOpenAIApiKey) = 0 Then Err.Raise vbObjectError + 514, "GetOpenAIApiKey", "OPENAI_API_KEY ‚ª‹ó‚Å‚·"
+    If Len(GetOpenAIApiKey) = 0 Then Err.Raise vbObjectError + 514, "GetOpenAIApiKey", "OPENAI_API_KEY ãŒç©ºã§ã™"
 End Function
 
 Private Function JsonEsc(ByVal s As String) As String
-    ' JSON•¶š—ñ—p‚ÌÅ¬ƒGƒXƒP[ƒv
+    ' JSONæ–‡å­—åˆ—ç”¨ã®æœ€å°ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—
     s = Replace(s, "\", "\\")
     s = Replace(s, """", "\""")
     s = Replace(s, vbCrLf, "\n")
@@ -55,10 +55,10 @@ Private Function JsonEsc(ByVal s As String) As String
 End Function
 
 Private Function JsonGetOutputText(ByVal json As String) As String
-    ' Responses API: output[] -> message -> content[] -> output_text -> text ‚ğ”²‚­iÅ¬À‘•j
+    ' Responses API: output[] -> message -> content[] -> output_text -> text ã‚’æŠœãï¼ˆæœ€å°å®Ÿè£…ï¼‰
     Dim p As Long, q As Long, k As String
 
-    ' ‚Ü‚¸ output_text ƒuƒƒbƒN‚ğ’T‚·
+    ' ã¾ãš output_text ãƒ–ãƒ­ãƒƒã‚¯ã‚’æ¢ã™
     p = InStr(1, json, """type"": ""output_text""", vbTextCompare)
     If p = 0 Then p = InStr(1, json, """type"":""output_text""", vbTextCompare)
     If p = 0 Then
@@ -66,7 +66,7 @@ Private Function JsonGetOutputText(ByVal json As String) As String
         Exit Function
     End If
 
-    ' ‚»‚Ì‹ß‚­‚Ì "text":"...." ‚ğ’T‚·
+    ' ãã®è¿‘ãã® "text":"...." ã‚’æ¢ã™
     k = """text"": """
     q = InStr(p, json, k, vbTextCompare)
     If q = 0 Then
@@ -79,7 +79,7 @@ Private Function JsonGetOutputText(ByVal json As String) As String
     End If
     q = q + Len(k)
 
-    ' I’[‚Ì " ‚ğ’T‚·i’Pƒ”ÅFƒGƒXƒP[ƒv–¢‘Î‰A‚Ü‚¸‚Í‘a’ÊŠm”F—pj
+    ' çµ‚ç«¯ã® " ã‚’æ¢ã™ï¼ˆå˜ç´”ç‰ˆï¼šã‚¨ã‚¹ã‚±ãƒ¼ãƒ—æœªå¯¾å¿œã€ã¾ãšã¯ç–é€šç¢ºèªç”¨ï¼‰
     p = InStr(q, json, """", vbBinaryCompare)
     If p = 0 Then
         JsonGetOutputText = ""

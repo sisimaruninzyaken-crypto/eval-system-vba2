@@ -1,14 +1,14 @@
 Attribute VB_Name = "modHeaderMap"
 
-'=== Legacy/New Header Resolver (“Ç‚İ‚İŒİŠ·ƒ}ƒbƒv) ===
+'=== Legacy/New Header Resolver (èª­ã¿è¾¼ã¿äº’æ›ãƒãƒƒãƒ—) ===
 Public Function ResolveLegacyHeader(ByVal wantName As String) As String
-    ' “Ç‚İ‚İ‘¤‚ª’T‚·V–¼ ¨ Œ»s•Û‘¶‚Ì‹Œ–¼ ‚Öƒ}ƒbƒv
-    ' Œ©‚Â‚©‚ç‚È‚¯‚ê‚Î‚»‚Ì‚Ü‚Ü•Ô‚·i“¯–¼•Û‘¶‚É‘Î‰j
+    ' èª­ã¿è¾¼ã¿å´ãŒæ¢ã™æ–°å â†’ ç¾è¡Œä¿å­˜ã®æ—§å ã¸ãƒãƒƒãƒ—
+    ' è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°ãã®ã¾ã¾è¿”ã™ï¼ˆåŒåä¿å­˜ã«å¯¾å¿œï¼‰
     Select Case LCase$(wantName)
         Case "io_sensory":   ResolveLegacyHeader = "IO_Sensory"
         Case "io_testeval": ResolveLegacyHeader = "IO_TestEval"
         Case "io_mmt":       ResolveLegacyHeader = "MMT_IO"
-        Case "io_rom":       ResolveLegacyHeader = "ROM_*"      '¦•¡”—ñBŒã‘±‚ÅƒƒCƒ‹ƒhƒJ[ƒh“WŠJ
+        Case "io_rom":       ResolveLegacyHeader = "ROM_*"      'â€»è¤‡æ•°åˆ—ã€‚å¾Œç¶šã§ãƒ¯ã‚¤ãƒ«ãƒ‰ã‚«ãƒ¼ãƒ‰å±•é–‹
         Case "io_adl":       ResolveLegacyHeader = "IO_ADL"
         Case "io_tone":      ResolveLegacyHeader = "TONE_IO"
         Case Else:           ResolveLegacyHeader = wantName
@@ -18,7 +18,7 @@ End Function
 
 
 
-'=== Header Column Resolver (V‹Œƒwƒbƒ_–¼‚ğ‹zû‚µ‚Ä—ñ”Ô†‚ğ•Ô‚·) ===
+'=== Header Column Resolver (æ–°æ—§ãƒ˜ãƒƒãƒ€åã‚’å¸åã—ã¦åˆ—ç•ªå·ã‚’è¿”ã™) ===
 Public Function HeaderCol(ByVal wantName As String, Optional ByVal ws As Worksheet) As Long
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim h As String: h = ResolveLegacyHeader(wantName)
@@ -29,7 +29,7 @@ End Function
 
 
 
-'=== Read String by Header (V‹Œƒwƒbƒ_‘Î‰‚ÅƒZƒ‹•¶š—ñæ“¾) ===
+'=== Read String by Header (æ–°æ—§ãƒ˜ãƒƒãƒ€å¯¾å¿œã§ã‚»ãƒ«æ–‡å­—åˆ—å–å¾—) ===
 Public Function ReadStr(ByVal wantName As String, ByVal r As Long, Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim c As Long: c = HeaderCol(wantName, ws)
@@ -38,7 +38,7 @@ End Function
 
 
 
-'=== Sensory IO accessor (•Û‘¶’l‚Ìæ“¾FV‹Œƒwƒbƒ_‹zûÏ) ===
+'=== Sensory IO accessor (ä¿å­˜å€¤ã®å–å¾—ï¼šæ–°æ—§ãƒ˜ãƒƒãƒ€å¸åæ¸ˆ) ===
 Public Function GetSavedSensoryIO(ByVal r As Long, Optional ByVal ws As Worksheet) As String
     GetSavedSensoryIO = ReadStr("IO_Sensory", r, ws)
 End Function
@@ -46,7 +46,7 @@ End Function
 
 
 
-'=== ROM IO accessor (•Û‘¶’l‚Ìæ“¾FŒ©o‚µ "ROM_*" ‚ğ‰¡’f) ===
+'=== ROM IO accessor (ä¿å­˜å€¤ã®å–å¾—ï¼šè¦‹å‡ºã— "ROM_*" ã‚’æ¨ªæ–­) ===
 Public Function GetSavedROMIO(ByVal r As Long, Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
 
@@ -55,7 +55,7 @@ Public Function GetSavedROMIO(ByVal r As Long, Optional ByVal ws As Worksheet) A
     Dim c As Long
     Dim h As String, v As String
 
-    ' 1) IO_ROM —ñ‚ª‚ ‚ê‚ÎA‚»‚ê‚ğÅ—Dæ‚Åg‚¤
+    ' 1) IO_ROM åˆ—ãŒã‚ã‚Œã°ã€ãã‚Œã‚’æœ€å„ªå…ˆã§ä½¿ã†
     M = Application.Match("IO_ROM", ws.rows(1), 0)
     If Not IsError(M) Then
         buf = CStr(ws.Cells(r, CLng(M)).value)
@@ -65,8 +65,8 @@ Public Function GetSavedROMIO(ByVal r As Long, Optional ByVal ws As Worksheet) A
         End If
     End If
 
-    ' 2) ƒŒƒKƒV[ŒİŠ·FROM_* —ñ‚©‚ç‘g‚İ—§‚Äi”ÍˆÍ‚ğ 160?213 ‚ÉŒÀ’èj
-    '    ¦ 214ˆÈ~‚Ìd•¡ROM—ñ‚Í–³‹‚µ‚Ä–\‘–˜AŒ‹‚ğ–h‚®
+    ' 2) ãƒ¬ã‚¬ã‚·ãƒ¼äº’æ›ï¼šROM_* åˆ—ã‹ã‚‰çµ„ã¿ç«‹ã¦ï¼ˆç¯„å›²ã‚’ 160?213 ã«é™å®šï¼‰
+    '    â€» 214ä»¥é™ã®é‡è¤‡ROMåˆ—ã¯ç„¡è¦–ã—ã¦æš´èµ°é€£çµã‚’é˜²ã
     For c = 160 To 213
         h = CStr(ws.Cells(1, c).value)
         If LCase$(Left$(h, 4)) = "rom_" Then
@@ -78,20 +78,20 @@ Public Function GetSavedROMIO(ByVal r As Long, Optional ByVal ws As Worksheet) A
         End If
     Next c
 
-    GetSavedROMIO = buf   ' ‘ÎÛ‚ª–³‚¯‚ê‚Î‹ó•¶š
+    GetSavedROMIO = buf   ' å¯¾è±¡ãŒç„¡ã‘ã‚Œã°ç©ºæ–‡å­—
 End Function
 
 
 
 
-'=== ADL IO accessor (•Û‘¶’l‚Ìæ“¾FV‹Œƒwƒbƒ_‹zûÏ) ===
+'=== ADL IO accessor (ä¿å­˜å€¤ã®å–å¾—ï¼šæ–°æ—§ãƒ˜ãƒƒãƒ€å¸åæ¸ˆ) ===
 Public Function GetSavedADLIO(ByVal r As Long, Optional ByVal ws As Worksheet) As String
     GetSavedADLIO = ReadStr("IO_ADL", r, ws)
 End Function
 
 
 
-'=== Latest row resolver (w’èƒwƒbƒ_‚ÌÅIs‚ğ•Ô‚·) ===
+'=== Latest row resolver (æŒ‡å®šãƒ˜ãƒƒãƒ€ã®æœ€çµ‚è¡Œã‚’è¿”ã™) ===
 Public Function LatestRowByHeader(ByVal wantName As String, Optional ByVal ws As Worksheet) As Long
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim c As Long: c = HeaderCol(wantName, ws)
@@ -101,7 +101,7 @@ End Function
 
 
 
-'=== ADL loader (Raw)FÅVs‚ÌIO_ADL•¶š—ñ‚ğ•Ô‚· ===
+'=== ADL loader (Raw)ï¼šæœ€æ–°è¡Œã®IO_ADLæ–‡å­—åˆ—ã‚’è¿”ã™ ===
 Public Function LoadLatestADLNow_Raw(Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim r As Long: r = LatestRowByHeader("IO_ADL", ws)
@@ -110,24 +110,24 @@ Public Function LoadLatestADLNow_Raw(Optional ByVal ws As Worksheet) As String
 End Function
 
 
-'=== ADL loader (Get by Key)FÅVIO_ADL‚©‚ç key ‚Ì’l‚ğ•Ô‚· ===
+'=== ADL loader (Get by Key)ï¼šæœ€æ–°IO_ADLã‹ã‚‰ key ã®å€¤ã‚’è¿”ã™ ===
 Public Function ADL_Get(ByVal key As String, Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim raw As String: raw = LoadLatestADLNow_Raw(ws)
     If Len(raw) = 0 Then Exit Function
     Dim parts() As String, i As Long, klen As Long
     parts = Split(raw, "|")
-    klen = Len(key) + 1 ' "key=" ‚Ì’·‚³
+    klen = Len(key) + 1 ' "key=" ã®é•·ã•
     For i = LBound(parts) To UBound(parts)
         If Left$(parts(i), klen) = key & "=" Then
-            ADL_Get = Mid$(parts(i), klen + 1) ' "="‚ÌŸ‚Ì•¶š‚©‚ç––”ö
+            ADL_Get = Mid$(parts(i), klen + 1) ' "="ã®æ¬¡ã®æ–‡å­—ã‹ã‚‰æœ«å°¾
             Exit Function
         End If
     Next i
 End Function
 
 
-'=== Sensory loader (Raw)FÅVs‚ÌSENSE_IO•¶š—ñ‚ğ•Ô‚· ===
+'=== Sensory loader (Raw)ï¼šæœ€æ–°è¡Œã®SENSE_IOæ–‡å­—åˆ—ã‚’è¿”ã™ ===
 Public Function LoadLatestSensoryNow_Raw(Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim r As Long: r = LatestRowByHeader("IO_Sensory", ws)
@@ -137,7 +137,7 @@ End Function
 
 
 
-'=== Sensory loader (Get by Key)FSENSE_IO‚©‚ç key ‚Éˆê’v‚·‚é•”•ª‚ğ•Ô‚· ===
+'=== Sensory loader (Get by Key)ï¼šSENSE_IOã‹ã‚‰ key ã«ä¸€è‡´ã™ã‚‹éƒ¨åˆ†ã‚’è¿”ã™ ===
 Public Function Sensory_Get(ByVal key As String, Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim raw As String: raw = LoadLatestSensoryNow_Raw(ws)
@@ -154,7 +154,7 @@ End Function
 
 
 
-'=== ROM loader (Raw)FÅVs‚ÌROM_*ŒQ‚ğ‚Ü‚Æ‚ß‚Ä•Ô‚· ===
+'=== ROM loader (Raw)ï¼šæœ€æ–°è¡Œã®ROM_*ç¾¤ã‚’ã¾ã¨ã‚ã¦è¿”ã™ ===
 Public Function LoadLatestROMNow_Raw(Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim r As Long: r = LatestRowByHeader("ROM_Upper_Shoulder_Flex_R", ws)
@@ -164,7 +164,7 @@ End Function
 
 
 
-'=== ROM loader (Get by Key)FROM_*ŒQ‚©‚ç key ‚Ì’l‚ğ•Ô‚· ===
+'=== ROM loader (Get by Key)ï¼šROM_*ç¾¤ã‹ã‚‰ key ã®å€¤ã‚’è¿”ã™ ===
 Public Function ROM_Get(ByVal key As String, Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim raw As String: raw = LoadLatestROMNow_Raw(ws)
@@ -182,7 +182,7 @@ End Function
 
 
 
-'=== MMT loader (Raw)FÅVs‚ÌMMT_IO‚ğ•Ô‚· ===
+'=== MMT loader (Raw)ï¼šæœ€æ–°è¡Œã®MMT_IOã‚’è¿”ã™ ===
 Public Function LoadLatestMMTNow_Raw(Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim r As Long: r = LatestRowByHeader("IO_MMT", ws)
@@ -190,7 +190,7 @@ Public Function LoadLatestMMTNow_Raw(Optional ByVal ws As Worksheet) As String
     LoadLatestMMTNow_Raw = ReadStr("IO_MMT", r, ws)
 End Function
 
-'=== MMT loader (Get by Key)FIO_MMT•¶š—ñ‚©‚ç key ‚Ì’l‚ğ•Ô‚· ===
+'=== MMT loader (Get by Key)ï¼šIO_MMTæ–‡å­—åˆ—ã‹ã‚‰ key ã®å€¤ã‚’è¿”ã™ ===
 Public Function MMT_Get(ByVal key As String, Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim raw As String: raw = LoadLatestMMTNow_Raw(ws)
@@ -206,7 +206,7 @@ Public Function MMT_Get(ByVal key As String, Optional ByVal ws As Worksheet) As 
     Next i
 End Function
 
-'=== Tone loader (Raw)FÅVs‚ÌTONE_IO‚ğ•Ô‚· ===
+'=== Tone loader (Raw)ï¼šæœ€æ–°è¡Œã®TONE_IOã‚’è¿”ã™ ===
 Public Function LoadLatestToneNow_Raw(Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim r As Long: r = LatestRowByHeader("IO_Tone", ws)
@@ -214,7 +214,7 @@ Public Function LoadLatestToneNow_Raw(Optional ByVal ws As Worksheet) As String
     LoadLatestToneNow_Raw = ReadStr("IO_Tone", r, ws)
 End Function
 
-'=== Tone loader (Get by Key)FIO_Tone•¶š—ñ‚©‚ç key ‚Ì’l‚ğ•Ô‚· ===
+'=== Tone loader (Get by Key)ï¼šIO_Toneæ–‡å­—åˆ—ã‹ã‚‰ key ã®å€¤ã‚’è¿”ã™ ===
 Public Function Tone_Get(ByVal key As String, Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim raw As String: raw = LoadLatestToneNow_Raw(ws)
@@ -235,7 +235,7 @@ End Function
 
 
 
-'=== Recent rows by IDFw’èID‚Ì’¼‹ßNŒ‚Ìs”Ô†‚ğV¨‹Œ‚Ì‡‚Å•Ô‚· ===
+'=== Recent rows by IDï¼šæŒ‡å®šIDã®ç›´è¿‘Nä»¶ã®è¡Œç•ªå·ã‚’æ–°â†’æ—§ã®é †ã§è¿”ã™ ===
 Public Function RecentRowsByID(ByVal targetID As Variant, Optional ByVal n As Long = 5, Optional ByVal ws As Worksheet) As Variant
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim cID As Long: cID = HeaderCol("ID", ws)
@@ -259,13 +259,13 @@ End Function
 
 
 
-'=== Preview: w’èID‚Ì’¼‹ßNŒ‚ğˆÀ‘S‚Éˆê——o—ÍiUI‘O‚ÌÅIŠm”Fj ===
+'=== Preview: æŒ‡å®šIDã®ç›´è¿‘Nä»¶ã‚’å®‰å…¨ã«ä¸€è¦§å‡ºåŠ›ï¼ˆUIå‰ã®æœ€çµ‚ç¢ºèªï¼‰ ===
 Public Sub Preview_RecentEvalRows(ByVal targetID As Variant, ByVal n As Long, Optional ByVal ws As Worksheet)
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim arr As Variant, i As Long, r As Long
     arr = RecentRowsByID(targetID, n, ws)
 
-    ' ‹ó”z—ñ‚ÉˆÀ‘S‘Î‰
+    ' ç©ºé…åˆ—ã«å®‰å…¨å¯¾å¿œ
     On Error Resume Next
     i = UBound(arr)
     If Err.Number <> 0 Then
@@ -291,7 +291,7 @@ End Sub
 
 
 
-'=== Unified dispatcher: ‘I‘ğs‚Ì•]‰¿ƒf[ƒ^‚ğˆêŠ‡“Ç ===
+'=== Unified dispatcher: é¸æŠè¡Œã®è©•ä¾¡ãƒ‡ãƒ¼ã‚¿ã‚’ä¸€æ‹¬èª­è¾¼ ===
 Public Sub LoadSelectedEvalRow(ByVal r As Long, Optional ByVal ws As Worksheet)
     If ws Is Nothing Then Set ws = ActiveSheet
 
@@ -299,11 +299,11 @@ End Sub
 
 
 
-'=== Latest row by IDFw’èID‚ÌÅVs(1Œ)‚ğ•Ô‚·B–³‚¯‚ê‚Î0 ===
+'=== Latest row by IDï¼šæŒ‡å®šIDã®æœ€æ–°è¡Œ(1ä»¶)ã‚’è¿”ã™ã€‚ç„¡ã‘ã‚Œã°0 ===
 Public Function LatestRowByID(ByVal targetID As Variant, Optional ByVal ws As Worksheet) As Long
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim arr As Variant, ub As Long
-    arr = RecentRowsByID(targetID, 1, ws)  ' V¨‹Œ‚Ì‡‚ÅÅ‘å1Œ
+    arr = RecentRowsByID(targetID, 1, ws)  ' æ–°â†’æ—§ã®é †ã§æœ€å¤§1ä»¶
     On Error Resume Next
     ub = UBound(arr)
     If Err.Number <> 0 Then
@@ -316,13 +316,13 @@ Public Function LatestRowByID(ByVal targetID As Variant, Optional ByVal ws As Wo
 End Function
 
 
-'=== Select & Load Recent by IDiUI‘O‚ÌˆÀ‘SƒZƒŒƒNƒ^j===
+'=== Select & Load Recent by IDï¼ˆUIå‰ã®å®‰å…¨ã‚»ãƒ¬ã‚¯ã‚¿ï¼‰===
 Public Sub SelectAndLoadRecentByID(ByVal targetID As Variant, Optional ByVal n As Long = 5, Optional ByVal ws As Worksheet)
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim rowsArr As Variant, i As Long, ub As Long, pick As Variant, idx As Long
     rowsArr = RecentRowsByID(targetID, n, ws)
 
-    ' ‹ó”z—ñ‘Î‰
+    ' ç©ºé…åˆ—å¯¾å¿œ
     On Error Resume Next
     ub = UBound(rowsArr)
     If Err.Number <> 0 Then
@@ -332,7 +332,7 @@ Public Sub SelectAndLoadRecentByID(ByVal targetID As Variant, Optional ByVal n A
     End If
     On Error GoTo 0
 
-    ' ”Ô†•t‚«‚Åˆê——•\¦iImmediatej
+    ' ç•ªå·ä»˜ãã§ä¸€è¦§è¡¨ç¤ºï¼ˆImmediateï¼‰
     Debug.Print "=== [Recent5] ID=" & targetID & " ==="
     For i = LBound(rowsArr) To UBound(rowsArr)
         Debug.Print (i - LBound(rowsArr) + 1) & ":" & rowsArr(i) & _
@@ -345,25 +345,25 @@ Public Sub SelectAndLoadRecentByID(ByVal targetID As Variant, Optional ByVal n A
     Next i
     Debug.Print "=== /Recent5 ==="
 
-    ' ”Ô†“ü—Íi1?Œ”j
-    'pick = Application.InputBox(Prompt:="“Ç‚İ‚Ş”Ô†‚ğ“ü—Íi1`" & (UBound(rowsArr) - LBound(rowsArr) + 1) & "j", Type:=1)
+    ' ç•ªå·å…¥åŠ›ï¼ˆ1?ä»¶æ•°ï¼‰
+    'pick = Application.InputBox(Prompt:="èª­ã¿è¾¼ã‚€ç•ªå·ã‚’å…¥åŠ›ï¼ˆ1ã€œ" & (UBound(rowsArr) - LBound(rowsArr) + 1) & "ï¼‰", Type:=1)
     If VarType(pick) = vbBoolean And pick = False Then Exit Sub 'Cancel
     idx = CLng(pick)
 
-    ' ”ÍˆÍƒ`ƒFƒbƒN
+    ' ç¯„å›²ãƒã‚§ãƒƒã‚¯
     If idx < 1 Or idx > (UBound(rowsArr) - LBound(rowsArr) + 1) Then
-        Debug.Print "[SelectRecent] ”ÍˆÍŠO: " & idx
+        Debug.Print "[SelectRecent] ç¯„å›²å¤–: " & idx
         Exit Sub
     End If
 
-    ' Às
+    ' å®Ÿè¡Œ
     LoadSelectedEvalRow rowsArr(UBound(rowsArr)), ws
 
 End Sub
 
 
 
-'=== UI hookFƒAƒNƒeƒBƒus‚ÌID‚Å’¼‹ßNŒƒZƒŒƒNƒg¨ˆêŠ‡“Ç ===
+'=== UI hookï¼šã‚¢ã‚¯ãƒ†ã‚£ãƒ–è¡Œã®IDã§ç›´è¿‘Nä»¶ã‚»ãƒ¬ã‚¯ãƒˆâ†’ä¸€æ‹¬èª­è¾¼ ===
 Public Sub Run_LoadRecentForActiveID(Optional ByVal n As Long = 5, Optional ByVal ws As Worksheet)
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim cID As Long: cID = HeaderCol("ID", ws)
@@ -376,8 +376,8 @@ Public Sub Run_LoadRecentForActiveID(Optional ByVal n As Long = 5, Optional ByVa
 End Sub
 
 
-' LEGACY: –{”Ô‹Ö~
-'=== Pick only: ’¼‹ßNŒ‚©‚ç”Ô†‘I‘ğ¨s”Ô†‚ğ•Ô‚·iUI‚ÍG‚ç‚È‚¢j ===
+' LEGACY: æœ¬ç•ªç¦æ­¢
+'=== Pick only: ç›´è¿‘Nä»¶ã‹ã‚‰ç•ªå·é¸æŠâ†’è¡Œç•ªå·ã‚’è¿”ã™ï¼ˆUIã¯è§¦ã‚‰ãªã„ï¼‰ ===
 Public Function PickRecentRowByID(ByVal targetID As Variant, Optional ByVal n As Long = 5, Optional ByVal ws As Worksheet) As Long
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim rowsArr As Variant, i As Long, ub As Long, pick As Variant, idx As Long
@@ -392,14 +392,14 @@ Public Function PickRecentRowByID(ByVal targetID As Variant, Optional ByVal n As
     End If
     On Error GoTo 0
     
-    ' ˆê——iImmediatej
+    ' ä¸€è¦§ï¼ˆImmediateï¼‰
     Debug.Print "=== [Recent5] ID=" & targetID & " ==="
     For i = LBound(rowsArr) To UBound(rowsArr)
         Debug.Print (i - LBound(rowsArr) + 1) & ":" & rowsArr(i)
     Next i
     Debug.Print "=== /Recent5 ==="
     
-    'pick = Application.InputBox(Prompt:="“Ç‚İ‚Ş”Ô†‚ğ“ü—Íi1`" & (UBound(rowsArr) - LBound(rowsArr) + 1) & "j", Type:=1)
+    'pick = Application.InputBox(Prompt:="èª­ã¿è¾¼ã‚€ç•ªå·ã‚’å…¥åŠ›ï¼ˆ1ã€œ" & (UBound(rowsArr) - LBound(rowsArr) + 1) & "ï¼‰", Type:=1)
     If VarType(pick) = vbBoolean And pick = False Then Exit Function 'Cancel
     idx = CLng(pick)
     If idx < 1 Or idx > (UBound(rowsArr) - LBound(rowsArr) + 1) Then Exit Function
@@ -414,7 +414,7 @@ End Function
 
 
 
-'=== ResolveLegacyColFResolveLegacyHeader‚ğg‚Á‚Ä—ñ”Ô†‚ğ•Ô‚· ===
+'=== ResolveLegacyColï¼šResolveLegacyHeaderã‚’ä½¿ã£ã¦åˆ—ç•ªå·ã‚’è¿”ã™ ===
 Public Function ResolveLegacyCol(ByVal wantName As String, Optional ByVal ws As Worksheet) As Long
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim colName As String
@@ -423,32 +423,32 @@ Public Function ResolveLegacyCol(ByVal wantName As String, Optional ByVal ws As 
 End Function
 
 
-'=== HeaderCol_CompatFV‹Œƒwƒbƒ_–¼‚ğ‹zû‚µ‚Ä—ñ”Ô†‚ğ•Ô‚· ===
+'=== HeaderCol_Compatï¼šæ–°æ—§ãƒ˜ãƒƒãƒ€åã‚’å¸åã—ã¦åˆ—ç•ªå·ã‚’è¿”ã™ ===
 Public Function HeaderCol_Compat(ByVal wantName As String, Optional ByVal ws As Worksheet) As Long
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim mapped As String
-    mapped = ResolveLegacyHeader(wantName) ' —á: "IO_Sensory"¨"SENSE_IO"
+    mapped = ResolveLegacyHeader(wantName) ' ä¾‹: "IO_Sensory"â†’"SENSE_IO"
     HeaderCol_Compat = HeaderCol(mapped, ws)
 End Function
 
 
-'=== ReadStr_CompatFV‹Œƒwƒbƒ_–¼‚ğ‹zû‚µ‚Ä r s‚Ì’l‚ğ•Ô‚·iROM‚Í“Á•Êˆµ‚¢j ===
+'=== ReadStr_Compatï¼šæ–°æ—§ãƒ˜ãƒƒãƒ€åã‚’å¸åã—ã¦ r è¡Œã®å€¤ã‚’è¿”ã™ï¼ˆROMã¯ç‰¹åˆ¥æ‰±ã„ï¼‰ ===
 Public Function ReadStr_Compat(ByVal wantName As String, ByVal r As Long, Optional ByVal ws As Worksheet) As String
     If ws Is Nothing Then Set ws = ActiveSheet
 
-    ' s”Ô†‚ª•s³‚È‚ç‘¦‹ó•Ô‚µiPickRecentRowByID ‚ª 0 ‚Ìê‡‚È‚Çj
+    ' è¡Œç•ªå·ãŒä¸æ­£ãªã‚‰å³ç©ºè¿”ã—ï¼ˆPickRecentRowByID ãŒ 0 ã®å ´åˆãªã©ï¼‰
     If r <= 0 Then
         ReadStr_Compat = vbNullString
         Exit Function
     End If
 
-    ' ROM ‚Í•¡”—ñiROM_*j‚È‚Ì‚Å“Á•Êƒ‹[ƒg‚Å˜AŒ‹æ“¾
+    ' ROM ã¯è¤‡æ•°åˆ—ï¼ˆROM_*ï¼‰ãªã®ã§ç‰¹åˆ¥ãƒ«ãƒ¼ãƒˆã§é€£çµå–å¾—
     If StrComp(wantName, "IO_ROM", vbTextCompare) = 0 Then
         ReadStr_Compat = GetSavedROMIO(r, ws)
         Exit Function
     End If
 
-    ' ‚»‚êˆÈŠO‚Íƒwƒbƒ_ŒİŠ·‚Å’PˆêƒZƒ‹“Çæ
+    ' ãã‚Œä»¥å¤–ã¯ãƒ˜ãƒƒãƒ€äº’æ›ã§å˜ä¸€ã‚»ãƒ«èª­å–
     Dim c As Long: c = HeaderCol_Compat(wantName, ws)
     If c > 0 Then
         ReadStr_Compat = CStr(ws.Cells(r, c).value)

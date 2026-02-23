@@ -14,7 +14,7 @@ Attribute btn.VB_VarHelpID = -1
 Public Event Clicked()
 
 Private Sub Btn_Click()
-    ' ‰º’i‚Ì•Û‘¶ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚çA©•ª‚ÌƒCƒxƒ“ƒg‚ğ”­‰Î‚³‚¹‚é‚¾‚¯
+    ' ä¸‹æ®µã®ä¿å­˜ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‚‰ã€è‡ªåˆ†ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™ºç«ã•ã›ã‚‹ã ã‘
     RaiseEvent Clicked
 End Sub
 

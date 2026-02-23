@@ -1,17 +1,17 @@
 Attribute VB_Name = "modEvalEntry"
-' QÆİ’èFMicrosoft Visual Basic for Applications Extensibility 5.3i•K—v‚È‚çj
-' ƒtƒ@ƒCƒ‹¨ƒIƒvƒVƒ‡ƒ“¨ƒ}ƒNƒ‚Ìİ’è‚ÅuVBAƒvƒƒWƒFƒNƒg ƒIƒuƒWƒFƒNƒgƒ‚ƒfƒ‹‚Ö‚ÌM—Š‚ğ‹–‰Âv‚Éƒ`ƒFƒbƒN
+' å‚ç…§è¨­å®šï¼šMicrosoft Visual Basic for Applications Extensibility 5.3ï¼ˆå¿…è¦ãªã‚‰ï¼‰
+' ãƒ•ã‚¡ã‚¤ãƒ«â†’ã‚ªãƒ—ã‚·ãƒ§ãƒ³â†’ãƒã‚¯ãƒ­ã®è¨­å®šã§ã€ŒVBAãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ¢ãƒ‡ãƒ«ã¸ã®ä¿¡é ¼ã‚’è¨±å¯ã€ã«ãƒã‚§ãƒƒã‚¯
 
 Option Explicit
 
 
-' •K{‚Ì’è‹`iƒvƒƒWƒFƒNƒg‚É‡‚í‚¹‚Ä’²®j
+' å¿…é ˆã®å®šç¾©ï¼ˆãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«åˆã‚ã›ã¦èª¿æ•´ï¼‰
 Public Const FORM_MAIN As String = "frmEval"
-Public Const HOST_MOVE_NAME As String = "hostMove"   ' “úí¶Šˆ“®ì‚ÌƒRƒ“ƒeƒiFrame‚ÌName
+Public Const HOST_MOVE_NAME As String = "hostMove"   ' æ—¥å¸¸ç”Ÿæ´»å‹•ä½œã®ã‚³ãƒ³ãƒ†ãƒŠFrameã®Name
 Public Const MP_ADL_NAME As String = "mpADL"
-Public Const CAP_BI As String = "ƒo[ƒTƒ‹ƒCƒ“ƒfƒbƒNƒX"
+Public Const CAP_BI As String = "ãƒãƒ¼ã‚µãƒ«ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹"
 Public Const CAP_IADL As String = "IADL"
-Public Const CAP_KYO As String = "‹N‹“®ì"
+Public Const CAP_KYO As String = "èµ·å±…å‹•ä½œ"
 
 
 
@@ -35,7 +35,7 @@ Dim ws As Worksheet
         ws.Cells(r, 2).value = comp.name
         r = r + 1
 
-        'UserForm‚È‚çƒRƒ“ƒgƒ[ƒ‹‚ğ—ñ‹“iƒfƒUƒCƒ“j
+        'UserFormãªã‚‰ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’åˆ—æŒ™ï¼ˆãƒ‡ã‚¶ã‚¤ãƒ³æ™‚ï¼‰
         If comp.Type = 3 Then ' vbext_ct_MSForm
             On Error Resume Next
             Dim d As Object, i As Long
@@ -58,7 +58,7 @@ Dim ws As Worksheet
     Next
 
     ws.Columns.AutoFit
-    MsgBox "PROJECT_MAP ƒV[ƒg‚ğì¬‚µ‚Ü‚µ‚½B", vbInformation
+    MsgBox "PROJECT_MAP ã‚·ãƒ¼ãƒˆã‚’ä½œæˆã—ã¾ã—ãŸã€‚", vbInformation
 End Sub
 
 
@@ -68,22 +68,22 @@ End Sub
 
 
 
-' •W€ƒ‚ƒWƒ…[ƒ‹iOption Explicit ‚Ì‚Ü‚Ü‚ÅOKj
+' æ¨™æº–ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ï¼ˆOption Explicit ã®ã¾ã¾ã§OKï¼‰
 
 Public Sub Validate_App()
     Dim ok As Boolean: ok = True
 
-    ' 1) ƒtƒH[ƒ€‚ğˆê¶¬
+    ' 1) ãƒ•ã‚©ãƒ¼ãƒ ã‚’ä¸€æ™‚ç”Ÿæˆ
     Dim frm As Object
     On Error Resume Next
     Set frm = VBA.UserForms.Add(FORM_MAIN)
     On Error GoTo 0
     If frm Is Nothing Then
-        MsgBox "UserForm '" & FORM_MAIN & "' ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ", vbCritical
+        MsgBox "UserForm '" & FORM_MAIN & "' ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“", vbCritical
         Exit Sub
     End If
 
-    ' 2) hostMove ‚ğæ“¾iFramej
+    ' 2) hostMove ã‚’å–å¾—ï¼ˆFrameï¼‰
     Dim c As Object
     Dim hostMove As Object: Set hostMove = Nothing
     For Each c In frm.Controls
@@ -95,11 +95,11 @@ Public Sub Validate_App()
         End If
     Next
     If hostMove Is Nothing Then
-        MsgBox "Frame '" & HOST_MOVE_NAME & "' ‚ª " & FORM_MAIN & " ‚ÉŒ©‚Â‚©‚è‚Ü‚¹‚ñ", vbCritical
+        MsgBox "Frame '" & HOST_MOVE_NAME & "' ãŒ " & FORM_MAIN & " ã«è¦‹ã¤ã‹ã‚Šã¾ã›ã‚“", vbCritical
         Unload frm: Exit Sub
     End If
 
-    ' 3) mpADL ‚ğæ“¾iMultiPagej
+    ' 3) mpADL ã‚’å–å¾—ï¼ˆMultiPageï¼‰
     Dim mp As Object: Set mp = Nothing
     For Each c In hostMove.Controls
         If TypeName(c) = "MultiPage" Then
@@ -110,19 +110,19 @@ Public Sub Validate_App()
         End If
     Next
 
-    ' 4) ƒ`ƒFƒbƒN
+    ' 4) ãƒã‚§ãƒƒã‚¯
     If mp Is Nothing Then
         ok = False
-        Debug.Print "[NG] mpADL ‚ª‚ ‚è‚Ü‚¹‚ñ"
+        Debug.Print "[NG] mpADL ãŒã‚ã‚Šã¾ã›ã‚“"
     Else
         If mp.Pages.Count < 3 Then ok = False: Debug.Print "[NG] mpADL Pages.Count < 3"
-        If mp.Pages.Count >= 1 Then If mp.Pages(0).caption <> CAP_BI Then ok = False: Debug.Print "[NG] Page0 Caption‚" & CAP_BI
-        If mp.Pages.Count >= 2 Then If mp.Pages(1).caption <> CAP_IADL Then ok = False: Debug.Print "[NG] Page1 Caption‚" & CAP_IADL
-        If mp.Pages.Count >= 3 Then If mp.Pages(2).caption <> CAP_KYO Then ok = False: Debug.Print "[NG] Page2 Caption‚" & CAP_KYO
+        If mp.Pages.Count >= 1 Then If mp.Pages(0).caption <> CAP_BI Then ok = False: Debug.Print "[NG] Page0 Captionâ‰ " & CAP_BI
+        If mp.Pages.Count >= 2 Then If mp.Pages(1).caption <> CAP_IADL Then ok = False: Debug.Print "[NG] Page1 Captionâ‰ " & CAP_IADL
+        If mp.Pages.Count >= 3 Then If mp.Pages(2).caption <> CAP_KYO Then ok = False: Debug.Print "[NG] Page2 Captionâ‰ " & CAP_KYO
     End If
 
-    MsgBox IIf(ok, "Validate OKF\¬‚Í‘z’è‚Ç‚¨‚è‚Å‚·B", _
-                    "Validate NGFImmediate ƒEƒBƒ“ƒhƒEiCtrl+Gj‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B"), _
+    MsgBox IIf(ok, "Validate OKï¼šæ§‹æˆã¯æƒ³å®šã©ãŠã‚Šã§ã™ã€‚", _
+                    "Validate NGï¼šImmediate ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ï¼ˆCtrl+Gï¼‰ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚"), _
           IIf(ok, vbInformation, vbExclamation)
 
     Unload frm

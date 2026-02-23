@@ -1,25 +1,25 @@
 Attribute VB_Name = "modEvalIOEntry"
-'=== modEvalIOEntry : •]‰¿ƒtƒH[ƒ€ IO ƒnƒu ============================
-' –ğŠ„F
-'   - frmEval ‚©‚ç EvalData ƒV[ƒg‚Ö‚Ì•Û‘¶^“Ç‚Ìƒnƒu
-'   - ŠeƒZƒNƒVƒ‡ƒ“ IO ƒ‚ƒWƒ…[ƒ‹iROM / p¨ / MMT / Š´ŠoE‹Ø‹Ù’£Eáu’É /
-'     ADL / ”F’mE¸_ / ƒeƒXƒg•]‰¿ / “úX‚Ì‹L˜^j‚ğ‚±‚±‚©‚çŒÄ‚Ño‚·
-'   - EvalData ‚ÌsŒˆ’èiV‹Ks / Šù‘¶sj‚ÆAID / BasicInfo ‚ÌŠÇ—
+'=== modEvalIOEntry : è©•ä¾¡ãƒ•ã‚©ãƒ¼ãƒ  IO ãƒãƒ– ============================
+' å½¹å‰²ï¼š
+'   - frmEval ã‹ã‚‰ EvalData ã‚·ãƒ¼ãƒˆã¸ã®ä¿å­˜ï¼èª­è¾¼ã®ãƒãƒ–
+'   - å„ã‚»ã‚¯ã‚·ãƒ§ãƒ³ IO ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ï¼ˆROM / å§¿å‹¢ / MMT / æ„Ÿè¦šãƒ»ç­‹ç·Šå¼µãƒ»ç–¼ç—› /
+'     ADL / èªçŸ¥ãƒ»ç²¾ç¥ / ãƒ†ã‚¹ãƒˆè©•ä¾¡ / æ—¥ã€…ã®è¨˜éŒ²ï¼‰ã‚’ã“ã“ã‹ã‚‰å‘¼ã³å‡ºã™
+'   - EvalData ã®è¡Œæ±ºå®šï¼ˆæ–°è¦è¡Œ / æ—¢å­˜è¡Œï¼‰ã¨ã€ID / BasicInfo ã®ç®¡ç†
 '
-' ‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ªu’m‚Á‚Ä‚æ‚¢v‚±‚ÆF
-'   - EvalData ‚Ìƒwƒbƒ_–¼E—ñ”Ô†iHeaderCol_Compat / Module2 / modHeaderMap Œo—Rj
-'   - frmEval ‚ğ owner As Object ‚Æ‚µ‚Äˆµ‚¤‚±‚Æi‚½‚¾‚µƒŒƒCƒAƒEƒgÚ×‚Í’m‚ç‚È‚¢j
+' ã“ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ãŒã€ŒçŸ¥ã£ã¦ã‚ˆã„ã€ã“ã¨ï¼š
+'   - EvalData ã®ãƒ˜ãƒƒãƒ€åãƒ»åˆ—ç•ªå·ï¼ˆHeaderCol_Compat / Module2 / modHeaderMap çµŒç”±ï¼‰
+'   - frmEval ã‚’ owner As Object ã¨ã—ã¦æ‰±ã†ã“ã¨ï¼ˆãŸã ã—ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè©³ç´°ã¯çŸ¥ã‚‰ãªã„ï¼‰
 '
-' ‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ªu‚â‚Á‚Ä‚Í‚¢‚¯‚È‚¢v‚±‚ÆF
-'   - ƒtƒH[ƒ€‚ÌƒŒƒCƒAƒEƒg•ÏXiLeft/Top/Width/Height ‚Ì‘‚«Š·‚¦j
-'   - ƒ^ƒu\‘¢‚Ì¶¬E”j‰óiMultiPage.Pages.Add ‚È‚Çj
-'   - ƒRƒ“ƒgƒ[ƒ‹‚ÌV‹Kì¬‚âíœ
-'   - EvalData ˆÈŠO‚ÌƒV[ƒg IOi‘¼ƒV[ƒg‚Ì‘‚«Š·‚¦j
+' ã“ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ãŒã€Œã‚„ã£ã¦ã¯ã„ã‘ãªã„ã€ã“ã¨ï¼š
+'   - ãƒ•ã‚©ãƒ¼ãƒ ã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆå¤‰æ›´ï¼ˆLeft/Top/Width/Height ã®æ›¸ãæ›ãˆï¼‰
+'   - ã‚¿ãƒ–æ§‹é€ ã®ç”Ÿæˆãƒ»ç ´å£Šï¼ˆMultiPage.Pages.Add ãªã©ï¼‰
+'   - ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®æ–°è¦ä½œæˆã‚„å‰Šé™¤
+'   - EvalData ä»¥å¤–ã®ã‚·ãƒ¼ãƒˆ IOï¼ˆä»–ã‚·ãƒ¼ãƒˆã®æ›¸ãæ›ãˆï¼‰
 '
-' ¡Œã‚ÌƒŠƒtƒ@ƒNƒ^•ûjF
-'   - Save/Load ‚Ì“üŒû‚ÍŒ´‘¥‚±‚±‚ÉW–ñ‚·‚é
-'   - FromSheet Œn‚Í modEvalIOEntry ‚¨‚æ‚Ñê—p IO ƒ‚ƒWƒ…[ƒ‹‚©‚ç‚Ì‚İŒÄ‚Ño‚·
-'   - UI ƒŒƒCƒAƒEƒgŒn‚Ìˆ—‚Íê—p Layout ƒ‚ƒWƒ…[ƒ‹‚Ö™X‚É‘Ş”ğ‚µ‚Ä‚¢‚­
+' ä»Šå¾Œã®ãƒªãƒ•ã‚¡ã‚¯ã‚¿æ–¹é‡ï¼š
+'   - Save/Load ã®å…¥å£ã¯åŸå‰‡ã“ã“ã«é›†ç´„ã™ã‚‹
+'   - FromSheet ç³»ã¯ modEvalIOEntry ãŠã‚ˆã³å°‚ç”¨ IO ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹ã‚‰ã®ã¿å‘¼ã³å‡ºã™
+'   - UI ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆç³»ã®å‡¦ç†ã¯å°‚ç”¨ Layout ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã¸å¾ã€…ã«é€€é¿ã—ã¦ã„ã
 '====================================================================
 
 
@@ -28,11 +28,11 @@ Attribute VB_Name = "modEvalIOEntry"
 Option Explicit
 
 Public Const EVAL_SHEET_NAME As String = "EvalData"
-Public mDailyLogManual As Boolean    ' “úX‚Ì‹L˜^‚Ìè“®•Û‘¶ƒtƒ‰ƒO
+Public mDailyLogManual As Boolean    ' æ—¥ã€…ã®è¨˜éŒ²ã®æ‰‹å‹•ä¿å­˜ãƒ•ãƒ©ã‚°
 
 
 
-' === •â•‹ï/ƒŠƒXƒN ƒtƒŒ[ƒ€–¼iŒÅ’è—pj ===
+' === è£œåŠ©å…·/ãƒªã‚¹ã‚¯ ãƒ•ãƒ¬ãƒ¼ãƒ åï¼ˆå›ºå®šç”¨ï¼‰ ===
 Private Const FRM_AIDS As String = "Frame33"
 Private Const FRM_RISK As String = "Frame34"
 Private Const IO_TRACE As Boolean = False
@@ -40,10 +40,10 @@ Private Const IO_TRACE As Boolean = False
 
 
 Public Sub LoadEvaluation_CurrentRow()
-    MsgBox "‚±‚Ì“üŒû‚Í”p~‚µ‚Ü‚µ‚½B“Ç‚İ‚İ‚Íu–¼‘O¨’¼‹ßŒó•â‚©‚ç‘I‘ğv‚É“ˆê‚µ‚Ä‚¢‚Ü‚·B", vbInformation
+    MsgBox "ã“ã®å…¥å£ã¯å»ƒæ­¢ã—ã¾ã—ãŸã€‚èª­ã¿è¾¼ã¿ã¯ã€Œåå‰â†’ç›´è¿‘å€™è£œã‹ã‚‰é¸æŠã€ã«çµ±ä¸€ã—ã¦ã„ã¾ã™ã€‚", vbInformation
 End Sub
 
-' š‚±‚±‚ğ‘Ş”ğ–¼‚É‚µ‚Ä•K‚¸•Â‚¶‚é
+' â˜…ã“ã“ã‚’é€€é¿åã«ã—ã¦å¿…ãšé–‰ã˜ã‚‹
 Private Sub LoadEvaluation_fromLastRow_OBSOLETE()
 End Sub
 
@@ -99,24 +99,24 @@ End Sub
 
 
 
-' šCompatF‹Œ“üŒûB“à•”“I‚É‚Í SaveEvaluation_Append_From ‚ÉˆÏ÷‚·‚éB
-' @‚Ç‚±‚©‚Ìƒ{ƒ^ƒ“‚âŒÃ‚¢ƒ}ƒNƒ‚ª‚Ü‚¾ SaveEvaluation_Append ‚ğw‚µ‚Ä‚¢‚Ä‚àA
-' @ÅI“I‚È•Û‘¶ƒ‹[ƒg‚Í SaveEvaluation_Append_From ‚Éˆê–{‰»‚³‚ê‚éB
+' â˜…Compatï¼šæ—§å…¥å£ã€‚å†…éƒ¨çš„ã«ã¯ SaveEvaluation_Append_From ã«å§”è­²ã™ã‚‹ã€‚
+' ã€€ã©ã“ã‹ã®ãƒœã‚¿ãƒ³ã‚„å¤ã„ãƒã‚¯ãƒ­ãŒã¾ã  SaveEvaluation_Append ã‚’æŒ‡ã—ã¦ã„ã¦ã‚‚ã€
+' ã€€æœ€çµ‚çš„ãªä¿å­˜ãƒ«ãƒ¼ãƒˆã¯ SaveEvaluation_Append_From ã«ä¸€æœ¬åŒ–ã•ã‚Œã‚‹ã€‚
 Public Sub SaveEvaluation_Append()
-    EnsureFormLoaded                ' frmEval ‚ªƒ[ƒh‚³‚ê‚Ä‚¢‚È‚¯‚ê‚Îƒ[ƒh
+    EnsureFormLoaded                ' frmEval ãŒãƒ­ãƒ¼ãƒ‰ã•ã‚Œã¦ã„ãªã‘ã‚Œã°ãƒ­ãƒ¼ãƒ‰
     SaveEvaluation_Append_From frmEval
 End Sub
 
 
-' š[OBSOLETE] ’¼ÚŒÄ‚Î‚È‚¢B“Ç‚İ‚İ‚Í LoadEvaluation_ByName_From ‚Éˆê–{‰»B
+' â˜…[OBSOLETE] ç›´æ¥å‘¼ã°ãªã„ã€‚èª­ã¿è¾¼ã¿ã¯ LoadEvaluation_ByName_From ã«ä¸€æœ¬åŒ–ã€‚
 Private Sub LoadEvaluation_LastRow_OBSOLETE(owner As Object)
 
-    MsgBox "‚±‚Ì“üŒû‚Í”p~‚µ‚Ü‚µ‚½B“Ç‚İ‚İ‚Íw–¼‘O¨’¼‹ßŒó•â‚©‚ç‘I‘ğx‚É“ˆê‚µ‚Ä‚¢‚Ü‚·B", vbInformation
+    MsgBox "ã“ã®å…¥å£ã¯å»ƒæ­¢ã—ã¾ã—ãŸã€‚èª­ã¿è¾¼ã¿ã¯ã€åå‰â†’ç›´è¿‘å€™è£œã‹ã‚‰é¸æŠã€ã«çµ±ä¸€ã—ã¦ã„ã¾ã™ã€‚", vbInformation
 End Sub
 
 
 Private Sub SaveEvaluation_CurrentRow_OBSOLETE()
-    MsgBox "‚±‚Ì“üŒû‚Í”p~‚µ‚Ü‚µ‚½B•Û‘¶‚Íw’Ç‰Á•Û‘¶iAppendjx‚É“ˆê‚µ‚Ä‚¢‚Ü‚·B", vbInformation
+    MsgBox "ã“ã®å…¥å£ã¯å»ƒæ­¢ã—ã¾ã—ãŸã€‚ä¿å­˜ã¯ã€è¿½åŠ ä¿å­˜ï¼ˆAppendï¼‰ã€ã«çµ±ä¸€ã—ã¦ã„ã¾ã™ã€‚", vbInformation
 End Sub
 Private Sub LoadEvaluation_CurrentRow_OBSOLETE()
     ' OBSOLETE: this procedure must not be used.
@@ -124,49 +124,49 @@ Private Sub LoadEvaluation_CurrentRow_OBSOLETE()
     Exit Sub
 End Sub
 
-'======================== À‘ÌF‘S•”‚Ü‚Æ‚ß‚ÄŒÄ‚Ô ========================
+'======================== å®Ÿä½“ï¼šå…¨éƒ¨ã¾ã¨ã‚ã¦å‘¼ã¶ ========================
 
-' ===== ‚·‚×‚Ä•Û‘¶ =====
+' ===== ã™ã¹ã¦ä¿å­˜ =====
 Public Sub SaveAllSectionsToSheet(ws As Worksheet, r As Long, owner As Object)
 
 
-   ' •Û‘¶ƒnƒuFEvalData 1 s•ª‚É‚Ü‚Æ‚ß‚Ä‘‚«‚Ş
-' •Û‘¶‡‚ÌƒCƒ[ƒWF
-'   1) Šî–{î•ñiBasicj
-'   2) –ƒáƒ / ROM / p¨
-'   3) MMT / Š´Šo / ƒg[ƒ“E”½Ë
-'   4) áu’ÉiPain IOj
-'   5) ƒeƒXƒgE•]‰¿i10m / TUG / ˆ¬—Í / 5‰ñ—§‚¿ / ƒZƒ~ƒ^ƒ“ƒfƒ€j
-'   6) •â•‹ï / ƒŠƒXƒNiƒ`ƒFƒbƒNŒQj
-'   7) ADLiIO_ADLj
+   ' ä¿å­˜ãƒãƒ–ï¼šEvalData 1 è¡Œåˆ†ã«ã¾ã¨ã‚ã¦æ›¸ãè¾¼ã‚€
+' ä¿å­˜é †ã®ã‚¤ãƒ¡ãƒ¼ã‚¸ï¼š
+'   1) åŸºæœ¬æƒ…å ±ï¼ˆBasicï¼‰
+'   2) éº»ç—º / ROM / å§¿å‹¢
+'   3) MMT / æ„Ÿè¦š / ãƒˆãƒ¼ãƒ³ãƒ»åå°„
+'   4) ç–¼ç—›ï¼ˆPain IOï¼‰
+'   5) ãƒ†ã‚¹ãƒˆãƒ»è©•ä¾¡ï¼ˆ10m / TUG / æ¡åŠ› / 5å›ç«‹ã¡ / ã‚»ãƒŸã‚¿ãƒ³ãƒ‡ãƒ ï¼‰
+'   6) è£œåŠ©å…· / ãƒªã‚¹ã‚¯ï¼ˆãƒã‚§ãƒƒã‚¯ç¾¤ï¼‰
+'   7) ADLï¼ˆIO_ADLï¼‰
 
    
    
 
-    ' Šî–{î•ñi‚±‚Ìƒ‚ƒWƒ…[ƒ‹“à‚ÌÀ‘•j
+    ' åŸºæœ¬æƒ…å ±ï¼ˆã“ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«å†…ã®å®Ÿè£…ï¼‰
     Call SaveBasicInfoToSheet_FromMe(ws, r, owner)
 
 
 
-    ' –ƒáƒ / ROMiŠù‚ÉOKj
+    ' éº»ç—º / ROMï¼ˆæ—¢ã«OKï¼‰
     IO_SafeRunSave "SaveParalysisToSheet", ws, r, owner
     IO_SafeRunSave "SaveROMToSheet", ws, r, owner
     IO_SafeRunSave "SavePostureToSheet", ws, r, owner
     
 
 
-    ' •K—v‚É‚È‚Á‚½‚ç‡ŸON
+    ' å¿…è¦ã«ãªã£ãŸã‚‰é †æ¬¡ON
     IO_SafeRunSave "SaveMMTToSheet", ws, r, owner
     IO_SafeRunSave "SaveSensoryToSheet", ws, r, owner
-     'Call Mirror_SensoryIO(ws, r)    'LegacyŒİŠ·FŒ»sd—l‚Å‚Í–¢g—p‚Ì‚½‚ß’â~
+     'Call Mirror_SensoryIO(ws, r)    'Legacyäº’æ›ï¼šç¾è¡Œä»•æ§˜ã§ã¯æœªä½¿ç”¨ã®ãŸã‚åœæ­¢
     IO_SafeRunSave "modToneReflexIO.SaveToneReflexToSheet", ws, r, owner
   
 
     Call SavePainToSheet(ws, r, owner)
      Call Save_TestEvalToSheet(ws, r, owner)
-     Call Save_WalkIndepToSheet(ws, r, owner)  'š•às©—§“x IO_WalkIndep •Û‘¶
-     Call Save_WalkAbnToSheet(ws, r, owner)    'šˆÙí•às IO_WalkAbn •Û‘¶
-     Call Save_WalkRLAToSheet(ws, r, owner)    'šRLA IO_WalkRLA •Û‘¶
+     Call Save_WalkIndepToSheet(ws, r, owner)  'â˜…æ­©è¡Œè‡ªç«‹åº¦ IO_WalkIndep ä¿å­˜
+     Call Save_WalkAbnToSheet(ws, r, owner)    'â˜…ç•°å¸¸æ­©è¡Œ IO_WalkAbn ä¿å­˜
+     Call Save_WalkRLAToSheet(ws, r, owner)    'â˜…RLA IO_WalkRLA ä¿å­˜
 
 
 
@@ -177,35 +177,35 @@ Call Save_ADL_AtRow(ws, r)
 
 End Sub
 
-' ===== ‚·‚×‚Ä“Ç =====
+' ===== ã™ã¹ã¦èª­è¾¼ =====
 '====================================================================
-' [HUB] •]‰¿“Ç‚İ‚İƒnƒu
-'  - ŒÄ‚Ño‚µŒ³FLoadEvaluation_ByName_Fromi³‹K“üŒûj‚È‚Ç
-'  - –ğŠ„F
-'       1) –¼‘O‚©‚çuÅVsv‚É r ‚ğ·‚µ‘Ö‚¦‚éiFindLatestRowByNamej
-'       2) BasicInfo / ROM / p¨ / MMT / Š´ŠoEƒg[ƒ“ / áu’É /
-'          ƒeƒXƒg•]‰¿ / •às / ”F’mE¸_ ‚È‚ÇŠeƒZƒNƒVƒ‡ƒ“‚Ì
-'          Load*FromSheet ‚ğ‚Ü‚Æ‚ß‚ÄŒÄ‚Ño‚·
-'  - ’ˆÓF
-'       * ‘¼ƒ‚ƒWƒ…[ƒ‹‚©‚ç‚±‚±‚ğ’¼ÚŒÄ‚Ô‚Ì‚Í‹É—Í”ğ‚¯‚é
-'         i“Ç‚İ‚İd—l‚ÌˆêŒ³ŠÇ—‚Ì‚½‚ßj
-'       * ŠeƒZƒNƒVƒ‡ƒ“‚Ì UI ƒŒƒCƒAƒEƒg’²®‚Í‚±‚±‚Å‚Ís‚í‚È‚¢
+' [HUB] è©•ä¾¡èª­ã¿è¾¼ã¿ãƒãƒ–
+'  - å‘¼ã³å‡ºã—å…ƒï¼šLoadEvaluation_ByName_Fromï¼ˆæ­£è¦å…¥å£ï¼‰ãªã©
+'  - å½¹å‰²ï¼š
+'       1) åå‰ã‹ã‚‰ã€Œæœ€æ–°è¡Œã€ã« r ã‚’å·®ã—æ›¿ãˆã‚‹ï¼ˆFindLatestRowByNameï¼‰
+'       2) BasicInfo / ROM / å§¿å‹¢ / MMT / æ„Ÿè¦šãƒ»ãƒˆãƒ¼ãƒ³ / ç–¼ç—› /
+'          ãƒ†ã‚¹ãƒˆè©•ä¾¡ / æ­©è¡Œ / èªçŸ¥ãƒ»ç²¾ç¥ ãªã©å„ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã®
+'          Load*FromSheet ã‚’ã¾ã¨ã‚ã¦å‘¼ã³å‡ºã™
+'  - æ³¨æ„ï¼š
+'       * ä»–ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹ã‚‰ã“ã“ã‚’ç›´æ¥å‘¼ã¶ã®ã¯æ¥µåŠ›é¿ã‘ã‚‹
+'         ï¼ˆèª­ã¿è¾¼ã¿ä»•æ§˜ã®ä¸€å…ƒç®¡ç†ã®ãŸã‚ï¼‰
+'       * å„ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã® UI ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆèª¿æ•´ã¯ã“ã“ã§ã¯è¡Œã‚ãªã„
 '====================================================================
 Public Sub LoadAllSectionsFromSheet(ws As Worksheet, r As Long, owner As Object)
 
     Dim nm As String
     Dim rLatest As Long
 
-    ' š“¯‚¶–¼‘O‚È‚çA‚»‚Ìl‚ÌuÅVsv‚É“Ç‚İ‚İs‚ğ·‚µ‘Ö‚¦‚é
+    ' â˜…åŒã˜åå‰ãªã‚‰ã€ãã®äººã®ã€Œæœ€æ–°è¡Œã€ã«èª­ã¿è¾¼ã¿è¡Œã‚’å·®ã—æ›¿ãˆã‚‹
          nm = Trim$(owner.txtName.Text)
 
-    ' šƒtƒH[ƒ€‘¤‚ª‹ó‚È‚çAƒV[ƒg‚Ì–¼ƒZƒ‹‚©‚çE‚¤
+    ' â˜…ãƒ•ã‚©ãƒ¼ãƒ å´ãŒç©ºãªã‚‰ã€ã‚·ãƒ¼ãƒˆã®æ°åã‚»ãƒ«ã‹ã‚‰æ‹¾ã†
     If Len(nm) = 0 Then
         Dim cName As Long
         cName = FindHeaderCol(ws, "Basic.Name")
-        If cName = 0 Then cName = FindHeaderCol(ws, "–¼")
-        If cName = 0 Then cName = FindHeaderCol(ws, "—˜—pÒ–¼")
-        If cName = 0 Then cName = FindHeaderCol(ws, "–¼‘O")
+        If cName = 0 Then cName = FindHeaderCol(ws, "æ°å")
+        If cName = 0 Then cName = FindHeaderCol(ws, "åˆ©ç”¨è€…å")
+        If cName = 0 Then cName = FindHeaderCol(ws, "åå‰")
 
 
         If cName > 0 Then
@@ -215,7 +215,7 @@ Public Sub LoadAllSectionsFromSheet(ws As Worksheet, r As Long, owner As Object)
     
     
 
-    ' š“üŒû‚Å r ‚ªw’è‚³‚ê‚Ä‚¢‚éê‡‚Í‘¸d‚·‚éi‚±‚±‚Åã‘‚«‚µ‚È‚¢j
+    ' â˜…å…¥å£ã§ r ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã¯å°Šé‡ã™ã‚‹ï¼ˆã“ã“ã§ä¸Šæ›¸ãã—ãªã„ï¼‰
 If r < 2 And Len(nm) > 0 Then
     rLatest = FindLatestRowByName(ws, nm)
     If rLatest > 0 Then r = rLatest
@@ -224,8 +224,8 @@ End If
 
 
 
-   ' –ƒáƒ / ROM / p¨‚Ì“Ç‚Í LoadBasicInfoFromSheet_FromMe “à‚Å
-    ' chkLoadParalysis / chkLoadROM / chkLoadPosture ‚É‰‚¶‚ÄÀ{
+   ' éº»ç—º / ROM / å§¿å‹¢ã®èª­è¾¼ã¯ LoadBasicInfoFromSheet_FromMe å†…ã§
+    ' chkLoadParalysis / chkLoadROM / chkLoadPosture ã«å¿œã˜ã¦å®Ÿæ–½
     Call LoadBasicInfoFromSheet_FromMe(ws, r, owner)
     IO_SafeRunLoad "Load_ADL_FromRow", ws, r, owner
    
@@ -241,7 +241,7 @@ End If
     Call Load_TestEvalFromSheet(ws, r, owner)
     Call Load_WalkIndepFromSheet(ws, r, owner)
     Call Load_WalkAbnFromSheet(ws, r, owner)
-    Call Load_WalkRLAFromSheet(ws, r, owner)   'šRLA“Ç‚İ‚İ
+    Call Load_WalkRLAFromSheet(ws, r, owner)   'â˜…RLAèª­ã¿è¾¼ã¿
 
     'Call MMT.LoadMMTFromSheet(ws, r, owner)
     Call modToneReflexIO.LoadToneReflexFromSheet(ws, r, owner)
@@ -251,18 +251,18 @@ End If
 
     IO_SafeRunLoad "LoadPainFromSheet", ws, r, owner
     
-    ' •â•‹ï
+    ' è£œåŠ©å…·
 Dim cA As Long
-cA = FindHeaderCol(ws, "•â•‹ï")
+cA = FindHeaderCol(ws, "è£œåŠ©å…·")
 If cA > 0 Then
-    DeserializeChecks owner, "Frame33", CStr(ws.Cells(r, cA).value), True   ' •â•‹ï
+    DeserializeChecks owner, "Frame33", CStr(ws.Cells(r, cA).value), True   ' è£œåŠ©å…·
 End If
 
-' ƒŠƒXƒN
+' ãƒªã‚¹ã‚¯
 Dim cR As Long
-cR = FindHeaderCol(ws, "ƒŠƒXƒN")
+cR = FindHeaderCol(ws, "ãƒªã‚¹ã‚¯")
 If r <= 0 And Len(nm) > 0 Then
-    DeserializeChecks owner, "Frame34", CStr(ws.Cells(r, cR).value), False  ' ƒŠƒXƒN
+    DeserializeChecks owner, "Frame34", CStr(ws.Cells(r, cR).value), False  ' ãƒªã‚¹ã‚¯
 End If
     
         Call Load_CognitionMental_FromRow(ws, r, owner)
@@ -272,12 +272,12 @@ End Sub
 
 
 '====================================================================
-' [ENTRY] •]‰¿“Ç‚İ‚İ‚Ì³‹K“üŒû
-'  - UI ‘¤ifrmEval ‚â‘¼ƒtƒH[ƒ€j‚ÍŒ´‘¥‚±‚±‚¾‚¯‚ğŒÄ‚Ño‚·
-'  - –¼‘OitxtNamej‚©‚ç EvalData ã‚ÌÅVs‚ğ“Á’è‚µA
-'    LoadAllSectionsFromSheet ‚ÉˆÏ÷‚·‚é
-'  - LoadAllSectionsFromSheet / ŠeƒZƒNƒVƒ‡ƒ“‚Ì Load*FromSheet ‚Í
-'    ‘¼ƒ‚ƒWƒ…[ƒ‹‚©‚ç’¼ÚŒÄ‚Î‚È‚¢‚±‚Æi“Ç‚İ‚İd—l‚Ì•ª—ô–h~j
+' [ENTRY] è©•ä¾¡èª­ã¿è¾¼ã¿ã®æ­£è¦å…¥å£
+'  - UI å´ï¼ˆfrmEval ã‚„ä»–ãƒ•ã‚©ãƒ¼ãƒ ï¼‰ã¯åŸå‰‡ã“ã“ã ã‘ã‚’å‘¼ã³å‡ºã™
+'  - åå‰ï¼ˆtxtNameï¼‰ã‹ã‚‰ EvalData ä¸Šã®æœ€æ–°è¡Œã‚’ç‰¹å®šã—ã€
+'    LoadAllSectionsFromSheet ã«å§”è­²ã™ã‚‹
+'  - LoadAllSectionsFromSheet / å„ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã® Load*FromSheet ã¯
+'    ä»–ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹ã‚‰ç›´æ¥å‘¼ã°ãªã„ã“ã¨ï¼ˆèª­ã¿è¾¼ã¿ä»•æ§˜ã®åˆ†è£‚é˜²æ­¢ï¼‰
 '====================================================================
 Public Sub LoadEvaluation_ByName_From(owner As Object)
 
@@ -288,18 +288,18 @@ Public Sub LoadEvaluation_ByName_From(owner As Object)
     Dim r2 As Long
 
     If Len(nm) = 0 Then
-        MsgBox "–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", vbExclamation
+        MsgBox "æ°åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", vbExclamation
         Exit Sub
     End If
     
     
-    r = FindLatestRowByName(ws, nm)   ' š‚±‚Ì1s‚ğ’Ç‰Á
+    r = FindLatestRowByName(ws, nm)   ' â˜…ã“ã®1è¡Œã‚’è¿½åŠ 
     
     Debug.Print "r=" & r
 
     
 
-    ' --- “¯©“¯–¼‰ñ”ğFID‚ª“ü‚Á‚Ä‚¢‚ÄA“¯–¼‚ª•¡”‚ ‚é‚¾‚¯ ID ‚ğg‚¤ ---
+    ' --- åŒå§“åŒåå›é¿ï¼šIDãŒå…¥ã£ã¦ã„ã¦ã€åŒåãŒè¤‡æ•°ã‚ã‚‹æ™‚ã ã‘ ID ã‚’ä½¿ã† ---
 Dim idVal As String
 idVal = Trim$(GetID_FromBasicInfo(owner))
 
@@ -312,38 +312,38 @@ End If
 
 
 
-    ' š‚±‚±‚É’Ç‰ÁiŒë“ÇƒK[ƒhj
+    ' â˜…ã“ã“ã«è¿½åŠ ï¼ˆèª¤èª­è¾¼ã‚¬ãƒ¼ãƒ‰ï¼‰
     Dim cName As Long
-    cName = FindColByHeaderExact(ws, "–¼")
-    If cName = 0 Then cName = FindColByHeaderExact(ws, "—˜—pÒ–¼")
-    If cName = 0 Then cName = FindColByHeaderExact(ws, "–¼‘O")
+    cName = FindColByHeaderExact(ws, "æ°å")
+    If cName = 0 Then cName = FindColByHeaderExact(ws, "åˆ©ç”¨è€…å")
+    If cName = 0 Then cName = FindColByHeaderExact(ws, "åå‰")
     If cName = 0 Then
-        MsgBox "–¼—ñ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "æ°ååˆ—ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     If StrComp(NormalizeName(CStr(ws.Cells(r, cName).value)), NormalizeName(nm), vbTextCompare) <> 0 Then
-        MsgBox "‘I‘ğs‚Ì–¼‚ª“ü—Í–¼‚Æˆê’v‚µ‚Ü‚¹‚ñB“Ç‚İ‚İ‚ğ’†~‚µ‚Ü‚·B", vbExclamation
+        MsgBox "é¸æŠè¡Œã®æ°åãŒå…¥åŠ›åã¨ä¸€è‡´ã—ã¾ã›ã‚“ã€‚èª­ã¿è¾¼ã¿ã‚’ä¸­æ­¢ã—ã¾ã™ã€‚", vbExclamation
         Exit Sub
     End If
-    ' š‚±‚±‚Ü‚Å
+    ' â˜…ã“ã“ã¾ã§
 
     t "[ENTRY] Load by NAME", ws.name, "row", r
     LoadAllSectionsFromSheet ws, r, owner
 End Sub
 
 
-' ‰º‚©‚ç‘k‚Á‚Ä–¼ˆê’v‚ÌÅVs‚ğ•Ô‚·iŒ©o‚µ‚Íu–¼vu—˜—pÒ–¼vu–¼‘Ov‚ğ‡‚É’T‚·j
+' ä¸‹ã‹ã‚‰é¡ã£ã¦æ°åä¸€è‡´ã®æœ€æ–°è¡Œã‚’è¿”ã™ï¼ˆè¦‹å‡ºã—ã¯ã€Œæ°åã€ã€Œåˆ©ç”¨è€…åã€ã€Œåå‰ã€ã‚’é †ã«æ¢ã™ï¼‰
 Public Function FindLatestRowByName(ws As Worksheet, nameText As String) As Long
 
     Dim c As Long
-    c = FindHeaderCol(ws, "–¼")
-    If c = 0 Then c = FindHeaderCol(ws, "—˜—pÒ–¼")
-    If c = 0 Then c = FindHeaderCol(ws, "–¼‘O")
+    c = FindHeaderCol(ws, "æ°å")
+    If c = 0 Then c = FindHeaderCol(ws, "åˆ©ç”¨è€…å")
+    If c = 0 Then c = FindHeaderCol(ws, "åå‰")
     If c = 0 Then Exit Function
 
     Dim lastRow As Long: lastRow = ws.Cells(ws.rows.Count, c).End(xlUp).row
     Dim r As Long
-    For r = lastRow To 2 Step -1      ' 1s–Ú‚ÍŒ©o‚µ‘z’è
+    For r = lastRow To 2 Step -1      ' 1è¡Œç›®ã¯è¦‹å‡ºã—æƒ³å®š
         If NormalizeName(CStr(ws.Cells(r, c).value)) = NormalizeName(nameText) Then
             FindLatestRowByName = r
             Exit Function
@@ -355,9 +355,9 @@ End Function
 
 Public Function CountRowsByName(ws As Worksheet, nameText As String) As Long
     Dim c As Long
-    c = FindHeaderCol(ws, "–¼")
-    If c = 0 Then c = FindHeaderCol(ws, "—˜—pÒ–¼")
-    If c = 0 Then c = FindHeaderCol(ws, "–¼‘O")
+    c = FindHeaderCol(ws, "æ°å")
+    If c = 0 Then c = FindHeaderCol(ws, "åˆ©ç”¨è€…å")
+    If c = 0 Then c = FindHeaderCol(ws, "åå‰")
     If c = 0 Then Exit Function
 
     Dim lastRow As Long, r As Long
@@ -378,9 +378,9 @@ Public Function FindLatestRowByNameAndID( _
         idVal As String) As Long
 
     Dim cName As Long, cID As Long
-    cName = FindHeaderCol(ws, "–¼")
-    If cName = 0 Then cName = FindHeaderCol(ws, "—˜—pÒ–¼")
-    If cName = 0 Then cName = FindHeaderCol(ws, "–¼‘O")
+    cName = FindHeaderCol(ws, "æ°å")
+    If cName = 0 Then cName = FindHeaderCol(ws, "åˆ©ç”¨è€…å")
+    If cName = 0 Then cName = FindHeaderCol(ws, "åå‰")
     If cName = 0 Then Exit Function
 
     cID = FindColByHeaderExact(ws, "Basic.ID")
@@ -390,7 +390,7 @@ Public Function FindLatestRowByNameAndID( _
     Dim lastRow As Long, r As Long
     lastRow = ws.Cells(ws.rows.Count, cName).End(xlUp).row
 
-    ' ‰º‚©‚ç’T‚·ÅV—Dæ
+    ' ä¸‹ã‹ã‚‰æ¢ã™ï¼æœ€æ–°å„ªå…ˆ
     For r = lastRow To 2 Step -1
         If StrComp(CStr(ws.Cells(r, cName).value), nameText, vbTextCompare) = 0 Then
             If StrComp(CStr(ws.Cells(r, cID).value), idVal, vbTextCompare) = 0 Then
@@ -404,14 +404,14 @@ End Function
 
 
 
-'======================== •â•FƒtƒH[ƒ€^ƒV[ƒg^s ========================
+'======================== è£œåŠ©ï¼šãƒ•ã‚©ãƒ¼ãƒ ï¼ã‚·ãƒ¼ãƒˆï¼è¡Œ ========================
 
 Private Sub EnsureFormLoaded()
     On Error Resume Next
-    Dim t$: t = frmEval.caption            ' QÆ‚Å‚«‚ê‚Îƒ[ƒhÏ‚İ
+    Dim t$: t = frmEval.caption            ' å‚ç…§ã§ãã‚Œã°ãƒ­ãƒ¼ãƒ‰æ¸ˆã¿
     If Err.Number <> 0 Then Load frmEval
     On Error GoTo 0
-    If frmEval.Visible = False Then frmEval.Show vbModeless   ' ƒ‚ƒfƒ‹ƒŒƒX‚Å‘€ì‰Â
+    If frmEval.Visible = False Then frmEval.Show vbModeless   ' ãƒ¢ãƒ‡ãƒ«ãƒ¬ã‚¹ã§æ“ä½œå¯
 End Sub
 
 Private Function EnsureEvalSheet(sheetName As String) As Worksheet
@@ -421,7 +421,7 @@ Private Function EnsureEvalSheet(sheetName As String) As Worksheet
     If EnsureEvalSheet Is Nothing Then
         Set EnsureEvalSheet = ThisWorkbook.Worksheets.Add(After:=Sheets(Sheets.Count))
         On Error Resume Next
-        EnsureEvalSheet.name = sheetName   ' Šù‘¶–¼‚È‚çExcel‚ª©“®ƒŠƒl[ƒ€
+        EnsureEvalSheet.name = sheetName   ' æ—¢å­˜åãªã‚‰ExcelãŒè‡ªå‹•ãƒªãƒãƒ¼ãƒ 
         On Error GoTo 0
     End If
 End Function
@@ -442,11 +442,11 @@ Private Function NextAppendRow(ws As Worksheet) As Long
 End Function
 
 '====================================================================
-' [ENTRY] •]‰¿•Û‘¶‚Ì³‹K“üŒû
-'  - UI ‘¤ifrmEval ‚â‘¼ƒtƒH[ƒ€j‚ÍŒ´‘¥‚±‚±‚¾‚¯‚ğŒÄ‚Ño‚·
-'  - s‚ÌŒˆ’èiAppend sj‚Í‚±‚Ì’†‚Å NextAppendRow ‚É‚æ‚èˆêŒ³ŠÇ—
-'  - SaveAllSectionsToSheet / SaveBasicInfoToSheet_FromMe “™‚Ì‰ºˆÊŠÖ”‚ğ
-'    ’¼Ú‘¼ƒ‚ƒWƒ…[ƒ‹‚©‚çŒÄ‚Î‚È‚¢‚±‚ÆiƒXƒL[ƒ}•ÏX‚Ì˜R‚ê–h~j
+' [ENTRY] è©•ä¾¡ä¿å­˜ã®æ­£è¦å…¥å£
+'  - UI å´ï¼ˆfrmEval ã‚„ä»–ãƒ•ã‚©ãƒ¼ãƒ ï¼‰ã¯åŸå‰‡ã“ã“ã ã‘ã‚’å‘¼ã³å‡ºã™
+'  - è¡Œã®æ±ºå®šï¼ˆAppend è¡Œï¼‰ã¯ã“ã®ä¸­ã§ NextAppendRow ã«ã‚ˆã‚Šä¸€å…ƒç®¡ç†
+'  - SaveAllSectionsToSheet / SaveBasicInfoToSheet_FromMe ç­‰ã®ä¸‹ä½é–¢æ•°ã‚’
+'    ç›´æ¥ä»–ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹ã‚‰å‘¼ã°ãªã„ã“ã¨ï¼ˆã‚¹ã‚­ãƒ¼ãƒå¤‰æ›´æ™‚ã®æ¼ã‚Œé˜²æ­¢ï¼‰
 '====================================================================
 
 
@@ -458,13 +458,13 @@ Public Sub SaveEvaluation_Append_From(owner As Object)
 
 
     t "[ENTRY] Save to", ws.name, "row", r
-    ' š•ÏX“_‚Ì‚İ•Û‘¶ichkDiffOnly=ON‚È‚ç‘O‰ñ’l‚ğ–‘OƒRƒs[j
+    ' â˜…å¤‰æ›´ç‚¹ã®ã¿ä¿å­˜ï¼ˆchkDiffOnly=ONãªã‚‰å‰å›å€¤ã‚’äº‹å‰ã‚³ãƒ”ãƒ¼ï¼‰
 Dim nm As String: nm = Trim$(owner.txtName.Text)
-If Len(nm) = 0 Then MsgBox "–¼‚ğ“ü—Í‚µ‚Ä‚©‚ç•Û‘¶‚µ‚Ä‚­‚¾‚³‚¢B", vbExclamation: Exit Sub
+If Len(nm) = 0 Then MsgBox "æ°åã‚’å…¥åŠ›ã—ã¦ã‹ã‚‰ä¿å­˜ã—ã¦ãã ã•ã„ã€‚", vbExclamation: Exit Sub
 
 Dim diffOnly As Boolean
 On Error Resume Next
-diffOnly = CBool(owner.Controls("chkDiffOnly").value)  ' –³‚¯‚ê‚Î False ‚Ì‚Ü‚Ü
+diffOnly = CBool(owner.Controls("chkDiffOnly").value)  ' ç„¡ã‘ã‚Œã° False ã®ã¾ã¾
 On Error GoTo 0
 
 If False Then ' diffOnly And Len(nm) > 0 Then
@@ -477,9 +477,9 @@ If False Then ' diffOnly And Len(nm) > 0 Then
     End If
 End If
 
-   ' š–¼ƒZƒ‹‚ğ•K‚¸Œ»İ“ü—Í‚Åã‘‚«i‘O‰ñƒRƒs[‚Ìæ‚èˆá‚¢–h~j
+   ' â˜…æ°åã‚»ãƒ«ã‚’å¿…ãšç¾åœ¨å…¥åŠ›ã§ä¸Šæ›¸ãï¼ˆå‰å›ã‚³ãƒ”ãƒ¼ã®å–ã‚Šé•ã„é˜²æ­¢ï¼‰
 Dim cName As Long
-cName = FindColByHeaderExact(ws, "–¼"): If cName = 0 Then cName = FindColByHeaderExact(ws, "—˜—pÒ–¼"): If cName = 0 Then cName = FindColByHeaderExact(ws, "–¼‘O")
+cName = FindColByHeaderExact(ws, "æ°å"): If cName = 0 Then cName = FindColByHeaderExact(ws, "åˆ©ç”¨è€…å"): If cName = 0 Then cName = FindColByHeaderExact(ws, "åå‰")
 If cName > 0 Then ws.Cells(r, cName).value = nm
 
  ws.Cells(r, 1).value = r
@@ -497,15 +497,15 @@ If cName > 0 Then ws.Cells(r, cName).value = nm
 End Sub
 
 Private Sub LoadEvaluation_LastRow_From_OBSOLETE(owner As Object)
-    MsgBox "‚±‚Ì“üŒû‚Í”p~‚µ‚Ü‚µ‚½B“Ç‚İ‚İ‚Íw–¼‘O¨’¼‹ßŒó•â‚©‚ç‘I‘ğx‚É“ˆê‚µ‚Ä‚¢‚Ü‚·B", vbInformation
+    MsgBox "ã“ã®å…¥å£ã¯å»ƒæ­¢ã—ã¾ã—ãŸã€‚èª­ã¿è¾¼ã¿ã¯ã€åå‰â†’ç›´è¿‘å€™è£œã‹ã‚‰é¸æŠã€ã«çµ±ä¸€ã—ã¦ã„ã¾ã™ã€‚", vbInformation
 End Sub
 
 
 
 
-' ====== Šî–{î•ñ‚Ì•Û‘¶/“Çi‚±‚Ìƒ‚ƒWƒ…[ƒ‹“àj ======
+' ====== åŸºæœ¬æƒ…å ±ã®ä¿å­˜/èª­è¾¼ï¼ˆã“ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«å†…ï¼‰ ======
 
-' Œ©o‚µ‚Ì—ñ‚ğæ“¾i–³‚¯‚ê‚ÎV‹Kì¬j
+' è¦‹å‡ºã—ã®åˆ—ã‚’å–å¾—ï¼ˆç„¡ã‘ã‚Œã°æ–°è¦ä½œæˆï¼‰
 Private Function EnsureHeaderCol(ws As Worksheet, header As String) As Long
     Dim f As Range
     Set f = ws.rows(1).Find(What:=header, LookAt:=xlWhole)
@@ -518,14 +518,14 @@ Private Function EnsureHeaderCol(ws As Worksheet, header As String) As Long
     End If
 End Function
 
-' Œ©o‚µ‚Ì—ñ‚ğ’T‚·i–³‚¯‚ê‚Î 0j
+' è¦‹å‡ºã—ã®åˆ—ã‚’æ¢ã™ï¼ˆç„¡ã‘ã‚Œã° 0ï¼‰
 Private Function FindHeaderCol(ws As Worksheet, header As String) As Long
     Dim f As Range
     Set f = ws.rows(1).Find(What:=header, LookAt:=xlWhole)
     If f Is Nothing Then FindHeaderCol = 0 Else FindHeaderCol = f.Column
 End Function
 
-' ”Ä—pFƒeƒLƒXƒg’l‚ğæ“¾iTextBox/ComboBox/Label‚È‚Ç‚É‘Î‰j
+' æ±ç”¨ï¼šãƒ†ã‚­ã‚¹ãƒˆå€¤ã‚’å–å¾—ï¼ˆTextBox/ComboBox/Labelãªã©ã«å¯¾å¿œï¼‰
 Private Function GetCtlTextGeneric(owner As Object, ctlName As String) As String
     Dim c As Object
     Set c = FindCtlDeep(owner, ctlName)
@@ -535,7 +535,7 @@ Private Function GetCtlTextGeneric(owner As Object, ctlName As String) As String
     GetCtlTextGeneric = CStr(c.value)
 End Function
 
-' ”Ä—pFƒRƒ“ƒ{‚ğˆÀ‘S‚ÉƒZƒbƒgiƒŠƒXƒg‚É‚ ‚é‚¾‚¯‘I‘ğj
+' æ±ç”¨ï¼šã‚³ãƒ³ãƒœã‚’å®‰å…¨ã«ã‚»ãƒƒãƒˆï¼ˆãƒªã‚¹ãƒˆã«ã‚ã‚‹æ™‚ã ã‘é¸æŠï¼‰
 Private Sub SetComboSafe_Basic(owner As Object, ctlName As String, ByVal v As Variant)
     Dim cB As MSForms.ComboBox
     Dim s As String, i As Long, hit As Long
@@ -550,43 +550,43 @@ Private Sub SetComboSafe_Basic(owner As Object, ctlName As String, ByVal v As Va
 End Sub
 
 '====================================================================
-' BasicInfo IO ƒZƒNƒVƒ‡ƒ“i•]‰¿“úE–¼E”N—îENeeds “™j
-'  - EvalData ã‚Ì Basic.* Œnƒwƒbƒ_‚Æ‚Ì‘Î‰‚ğˆêŒ³ŠÇ—‚·‚é‘‹Œû
-'  - V‚µ‚¢ Basic €–Ú‚ğ’Ç‰Á‚·‚éê‡‚ÍAŒ´‘¥‚±‚±‚Éƒ}ƒbƒsƒ“ƒO‚ğ‘«‚·
-'  - —ñ‚Ì•Ê–¼“‡‚âƒXƒL[ƒ}“ˆê‚Í EnsureHeaderCol_BasicInfo ‘¤‚Ås‚¤
-'  - ‘¼‚Ìƒ‚ƒWƒ…[ƒ‹‚©‚ç‚ÍABasic.* ‚Ì•¨——ñ‚ğ’¼ÚG‚ç‚¸A
-'    •K—v‚È‚ç GetID_FromBasicInfo / GetBasicInfoFrame ‚È‚Ç‚Ìƒwƒ‹ƒp‚ğŒo—R‚·‚é
+' BasicInfo IO ã‚»ã‚¯ã‚·ãƒ§ãƒ³ï¼ˆè©•ä¾¡æ—¥ãƒ»æ°åãƒ»å¹´é½¢ãƒ»Needs ç­‰ï¼‰
+'  - EvalData ä¸Šã® Basic.* ç³»ãƒ˜ãƒƒãƒ€ã¨ã®å¯¾å¿œã‚’ä¸€å…ƒç®¡ç†ã™ã‚‹çª“å£
+'  - æ–°ã—ã„ Basic é …ç›®ã‚’è¿½åŠ ã™ã‚‹å ´åˆã¯ã€åŸå‰‡ã“ã“ã«ãƒãƒƒãƒ”ãƒ³ã‚°ã‚’è¶³ã™
+'  - åˆ—ã®åˆ¥åçµ±åˆã‚„ã‚¹ã‚­ãƒ¼ãƒçµ±ä¸€ã¯ EnsureHeaderCol_BasicInfo å´ã§è¡Œã†
+'  - ä»–ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã‹ã‚‰ã¯ã€Basic.* ã®ç‰©ç†åˆ—ã‚’ç›´æ¥è§¦ã‚‰ãšã€
+'    å¿…è¦ãªã‚‰ GetID_FromBasicInfo / GetBasicInfoFrame ãªã©ã®ãƒ˜ãƒ«ãƒ‘ã‚’çµŒç”±ã™ã‚‹
 '====================================================================
 
 
 
 
-' --- •Û‘¶ ---
+' --- ä¿å­˜ ---
 Public Sub SaveBasicInfoToSheet_FromMe(ws As Worksheet, r As Long, owner As Object)
     
     Debug.Print "[Basic] Enter_SaveBasicInfo | ws=" & ws.name & " | r=" & r
 
     
-    '--- ’Pˆê’l‚Ìƒ}ƒbƒsƒ“ƒOiÅŒã‚Ì—v‘f‚É _ ‚ğ•t‚¯‚È‚¢j ---
+    '--- å˜ä¸€å€¤ã®ãƒãƒƒãƒ”ãƒ³ã‚°ï¼ˆæœ€å¾Œã®è¦ç´ ã« _ ã‚’ä»˜ã‘ãªã„ï¼‰ ---
     Dim map As Variant
 map = Array( _
-    Array("•]‰¿“ú", "txtEDate"), _
-    Array("”N—î", "txtAge"), _
-    Array("«•Ê", "cboSex"), _
+    Array("è©•ä¾¡æ—¥", "txtEDate"), _
+    Array("å¹´é½¢", "txtAge"), _
+    Array("æ€§åˆ¥", "cboSex"), _
     Array("Basic.Name", "txtName"), _
-    Array("•]‰¿Ò", "txtEvaluator"), _
-    Array("”­Ç“ú", "txtOnset"), _
-    Array("Š³ÒNeeds", "txtNeedsPt"), _
-    Array("‰Æ‘°Needs", "txtNeedsFam"), _
-    Array("¶Šˆó‹µ", "txtLiving"), _
-    Array("åf’f", "txtDx"), _
-    Array("—v‰îŒì“x", "cboCare"), _
-    Array("áŠQ‚—îÒ‚Ì“úí¶Šˆ©—§“x", "cboElder"), _
-    Array("”F’mÇ‚—îÒ‚Ì“úí¶Šˆ©—§“x", "cboDementia") _
+    Array("è©•ä¾¡è€…", "txtEvaluator"), _
+    Array("ç™ºç—‡æ—¥", "txtOnset"), _
+    Array("æ‚£è€…Needs", "txtNeedsPt"), _
+    Array("å®¶æ—Needs", "txtNeedsFam"), _
+    Array("ç”Ÿæ´»çŠ¶æ³", "txtLiving"), _
+    Array("ä¸»è¨ºæ–­", "txtDx"), _
+    Array("è¦ä»‹è­·åº¦", "cboCare"), _
+    Array("éšœå®³é«˜é½¢è€…ã®æ—¥å¸¸ç”Ÿæ´»è‡ªç«‹åº¦", "cboElder"), _
+    Array("èªçŸ¥ç—‡é«˜é½¢è€…ã®æ—¥å¸¸ç”Ÿæ´»è‡ªç«‹åº¦", "cboDementia") _
     )
 
 
-    '--- Šù‘¶‚Ìƒ‹[ƒvF’Pˆê’l‚ğ‘‚«‚İ ---
+    '--- æ—¢å­˜ã®ãƒ«ãƒ¼ãƒ—ï¼šå˜ä¸€å€¤ã‚’æ›¸ãè¾¼ã¿ ---
     Dim i As Long, head As String, ctl As String, c As Long, v As String
     For i = LBound(map) To UBound(map)
         head = CStr(map(i)(0)):  ctl = CStr(map(i)(1))
@@ -602,16 +602,16 @@ map = Array( _
     If Len(idVal) > 0 Then ws.Cells(r, EnsureHeader(ws, "Basic.ID")).value = idVal
 
 
-    '--- ‚±‚±‚©‚ç’Ç‹LFƒ`ƒFƒbƒNŒQ‚ÌCSV•Û‘¶i•â•‹ï^ƒŠƒXƒNj¦ƒ‹[ƒv‚ÌgŒã‚ëh ---
+    '--- ã“ã“ã‹ã‚‰è¿½è¨˜ï¼šãƒã‚§ãƒƒã‚¯ç¾¤ã®CSVä¿å­˜ï¼ˆè£œåŠ©å…·ï¼ãƒªã‚¹ã‚¯ï¼‰â€»ãƒ«ãƒ¼ãƒ—ã®â€œå¾Œã‚â€ ---
     Dim s As String
-    c = EnsureHeader(ws, "•â•‹ï")
+    c = EnsureHeader(ws, "è£œåŠ©å…·")
 s = SerializeChecks(owner, "Frame33", True)
-Debug.Print "[BASIC][SAVE] •â•‹ï ->", s, " @col=", c
+Debug.Print "[BASIC][SAVE] è£œåŠ©å…· ->", s, " @col=", c
 ws.Cells(r, c).value = s
 
-   c = EnsureHeader(ws, "ƒŠƒXƒN")
+   c = EnsureHeader(ws, "ãƒªã‚¹ã‚¯")
 s = SerializeChecks(owner, "Frame34", False)
-Debug.Print "[BASIC][SAVE] ƒŠƒXƒN ->", s, " @col=", c
+Debug.Print "[BASIC][SAVE] ãƒªã‚¹ã‚¯ ->", s, " @col=", c
 ws.Cells(r, c).value = s
 
 
@@ -624,30 +624,30 @@ End Sub
 
 
 
-' --- “Ç ---
+' --- èª­è¾¼ ---
 Public Sub LoadBasicInfoFromSheet_FromMe(ws As Worksheet, ByVal r As Long, owner As Object)
 
 
 
-    '--- ’Pˆê’l‚Ìƒ}ƒbƒsƒ“ƒO ---
+    '--- å˜ä¸€å€¤ã®ãƒãƒƒãƒ”ãƒ³ã‚° ---
     Dim map As Variant
     map = Array( _
-        Array("•]‰¿“ú", "txtEDate"), _
-        Array("”N—î", "txtAge"), _
-        Array("«•Ê", "cboSex"), _
-        Array("–¼", "txtName"), _
-        Array("•]‰¿Ò", "txtEvaluator"), _
-        Array("”­Ç“ú", "txtOnset"), _
-        Array("Š³ÒNeeds", "txtNeedsPt"), _
-        Array("‰Æ‘°Needs", "txtNeedsFam"), _
-        Array("¶Šˆó‹µ", "txtLiving"), _
-        Array("åf’f", "txtDx"), _
-        Array("—v‰îŒì“x", "cboCare"), _
-        Array("áŠQ‚—îÒ‚Ì“úí¶Šˆ©—§“x", "cboElder"), _
-        Array("”F’mÇ‚—îÒ‚Ì“úí¶Šˆ©—§“x", "cboDementia") _
+        Array("è©•ä¾¡æ—¥", "txtEDate"), _
+        Array("å¹´é½¢", "txtAge"), _
+        Array("æ€§åˆ¥", "cboSex"), _
+        Array("æ°å", "txtName"), _
+        Array("è©•ä¾¡è€…", "txtEvaluator"), _
+        Array("ç™ºç—‡æ—¥", "txtOnset"), _
+        Array("æ‚£è€…Needs", "txtNeedsPt"), _
+        Array("å®¶æ—Needs", "txtNeedsFam"), _
+        Array("ç”Ÿæ´»çŠ¶æ³", "txtLiving"), _
+        Array("ä¸»è¨ºæ–­", "txtDx"), _
+        Array("è¦ä»‹è­·åº¦", "cboCare"), _
+        Array("éšœå®³é«˜é½¢è€…ã®æ—¥å¸¸ç”Ÿæ´»è‡ªç«‹åº¦", "cboElder"), _
+        Array("èªçŸ¥ç—‡é«˜é½¢è€…ã®æ—¥å¸¸ç”Ÿæ´»è‡ªç«‹åº¦", "cboDementia") _
     )
 
-    '--- ’Pˆê’l‚ğƒtƒH[ƒ€‚Ö“Ç ---
+    '--- å˜ä¸€å€¤ã‚’ãƒ•ã‚©ãƒ¼ãƒ ã¸èª­è¾¼ ---
     Dim i As Long, head As String, ctl As String, c As Long, v As Variant
     For i = LBound(map) To UBound(map)
         head = CStr(map(i)(0))
@@ -666,18 +666,18 @@ Public Sub LoadBasicInfoFromSheet_FromMe(ws As Worksheet, ByVal r As Long, owner
         End If
     Next i
 
-    '--- ƒ`ƒFƒbƒNŒQ‚Ì•œŒ³i•â•‹ï^ƒŠƒXƒNj ---
+    '--- ãƒã‚§ãƒƒã‚¯ç¾¤ã®å¾©å…ƒï¼ˆè£œåŠ©å…·ï¼ãƒªã‚¹ã‚¯ï¼‰ ---
     Dim csv As String
 
-    ' •â•‹ï
-c = FindHeaderCol(ws, "•â•‹ï")
+    ' è£œåŠ©å…·
+c = FindHeaderCol(ws, "è£œåŠ©å…·")
 If c > 0 Then
     csv = CStr(ws.Cells(r, c).value)
     DeserializeChecks owner, "Frame33", csv, True
 End If
 
-' ƒŠƒXƒN
-c = FindHeaderCol(ws, "ƒŠƒXƒN")
+' ãƒªã‚¹ã‚¯
+c = FindHeaderCol(ws, "ãƒªã‚¹ã‚¯")
 If c > 0 Then
     csv = CStr(ws.Cells(r, c).value)
     DeserializeChecks owner, "Frame34", csv, False
@@ -695,17 +695,17 @@ Call MMT.LoadMMTFromSheet(ws, r, owner)
 End Sub
 
 
-' EvalDataƒV[ƒgæ“¾
+' EvalDataã‚·ãƒ¼ãƒˆå–å¾—
 Public Function GetEvalDataSheet() As Worksheet
     Dim ws As Worksheet
     On Error Resume Next
     Set ws = ThisWorkbook.Worksheets("EvalData")
     On Error GoTo 0
-    If ws Is Nothing Then Err.Raise 5, , "EvalData ƒV[ƒg‚ª‚ ‚è‚Ü‚¹‚ñB"
+    If ws Is Nothing Then Err.Raise 5, , "EvalData ã‚·ãƒ¼ãƒˆãŒã‚ã‚Šã¾ã›ã‚“ã€‚"
     Set GetEvalDataSheet = ws
 End Function
 
-' Œ©o‚µ‚©‚ç—ñ”Ô†iŠ®‘Sˆê’vj
+' è¦‹å‡ºã—ã‹ã‚‰åˆ—ç•ªå·ï¼ˆå®Œå…¨ä¸€è‡´ï¼‰
 Public Function FindColByHeaderExact(ByVal ws As Worksheet, ByVal headerName As String) As Long
     Dim lastCol As Long: lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
     Dim c As Long
@@ -717,15 +717,15 @@ Public Function FindColByHeaderExact(ByVal ws As Worksheet, ByVal headerName As 
     Next c
 End Function
 
-' IDs‚ğŒŸõi–³‚¯‚ê‚Î––”ö‚Éì¬‚µ‚ÄID‚ğ“ü‚ê‚éj
+' IDè¡Œã‚’æ¤œç´¢ï¼ˆç„¡ã‘ã‚Œã°æœ«å°¾ã«ä½œæˆã—ã¦IDã‚’å…¥ã‚Œã‚‹ï¼‰
 Public Function GetOrCreateRowByID(ByVal ws As Worksheet, ByVal idVal As String) As Long
     Dim idCol As Long: idCol = FindColByHeaderExact(ws, "Basic.ID")
     If idCol = 0 Then
-        ' ‹Œ—ˆ‚Ì–½–¼‚È‚ç‚±‚±‚Åì‚é
+        ' æ—§æ¥ã®å‘½åãªã‚‰ã“ã“ã§ä½œã‚‹
         idCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column + 1
         ws.Cells(1, idCol).value = "Basic.ID"
     End If
-    If Len(idVal) = 0 Then Err.Raise 5, , "ID‚ª‹ó‚Å‚·B"
+    If Len(idVal) = 0 Then Err.Raise 5, , "IDãŒç©ºã§ã™ã€‚"
 
     Dim lastRow As Long: lastRow = ws.Cells(ws.rows.Count, idCol).End(xlUp).row
     Dim r As Long
@@ -735,7 +735,7 @@ Public Function GetOrCreateRowByID(ByVal ws As Worksheet, ByVal idVal As String)
             Exit Function
         End If
     Next r
-    ' –³‚¯‚ê‚ÎV‹Ks
+    ' ç„¡ã‘ã‚Œã°æ–°è¦è¡Œ
     r = lastRow + 1
     ws.Cells(r, idCol).value = idVal
     GetOrCreateRowByID = r
@@ -745,7 +745,7 @@ End Function
 
 
 
-' ƒ‰ƒxƒ‹uIDv‚Ì‰E‚É‚ ‚é TextBox ‚©‚ç’l‚ğæ“¾iƒRƒ“ƒgƒ[ƒ‹–¼‚ÉˆË‘¶‚µ‚È‚¢j
+' ãƒ©ãƒ™ãƒ«ã€ŒIDã€ã®å³ã«ã‚ã‚‹ TextBox ã‹ã‚‰å€¤ã‚’å–å¾—ï¼ˆã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«åã«ä¾å­˜ã—ãªã„ï¼‰
 Public Function GetID_FromBasicInfo(ByVal owner As Object) As String
     On Error Resume Next
     GetID_FromBasicInfo = Trim$(CStr(owner.Controls("frHeader").Controls("txtHdrPID").value))
@@ -753,20 +753,20 @@ Public Function GetID_FromBasicInfo(ByVal owner As Object) As String
 End Function
 
 
-'================ Basicî•ñ‚Ì‹¤’Êƒwƒ‹ƒp ==================
+'================ Basicæƒ…å ±ã®å…±é€šãƒ˜ãƒ«ãƒ‘ ==================
 
 Public Function GetBasicInfoFrame(ByVal owner As Object) As Object
     Dim f As MSForms.Frame
-    Set f = FindFrameByCaptionDeep_(owner, "Šî–{î•ñ")
+    Set f = FindFrameByCaptionDeep_(owner, "åŸºæœ¬æƒ…å ±")
     If Not f Is Nothing Then
         Set GetBasicInfoFrame = f
     Else
-        Set GetBasicInfoFrame = owner   ' ƒtƒH[ƒ‹ƒoƒbƒNF’¼ÚƒI[ƒi[‚ğ“n‚¹‚é‚æ‚¤‚É
+        Set GetBasicInfoFrame = owner   ' ãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯ï¼šç›´æ¥ã‚ªãƒ¼ãƒŠãƒ¼ã‚’æ¸¡ã›ã‚‹ã‚ˆã†ã«
     End If
 End Function
 
 Public Function GetTextByLabelInFrame(ByVal frm As Object, ByVal labelCaption As String) As String
-    ' null / ”ñFrame ‚Å‚àˆÀ‘S‚É”²‚¯‚é
+    ' null / éFrame ã§ã‚‚å®‰å…¨ã«æŠœã‘ã‚‹
     If frm Is Nothing Then Exit Function
     On Error Resume Next
     Dim HasControls As Boolean
@@ -774,7 +774,7 @@ Public Function GetTextByLabelInFrame(ByVal frm As Object, ByVal labelCaption As
     On Error GoTo 0
     If Not HasControls Then Exit Function
 
-    ' --- ˆÈ‰º‚Í¡‚ÌƒƒWƒbƒN‚»‚Ì‚Ü‚Ü ---
+    ' --- ä»¥ä¸‹ã¯ä»Šã®ãƒ­ã‚¸ãƒƒã‚¯ãã®ã¾ã¾ ---
     Dim lb As Object, ctl As Object
     For Each ctl In frm.Controls
         If TypeName(ctl) = "Label" Then
@@ -803,7 +803,7 @@ Public Function GetTextByLabelInFrame(ByVal frm As Object, ByVal labelCaption As
 End Function
 
 
-' Frame ‚ğ Caption •”•ªˆê’v‚Å[‚³—Dæ’TõiUserForm / Frame / MultiPage ‘Î‰j
+' Frame ã‚’ Caption éƒ¨åˆ†ä¸€è‡´ã§æ·±ã•å„ªå…ˆæ¢ç´¢ï¼ˆUserForm / Frame / MultiPage å¯¾å¿œï¼‰
 Public Function FindFrameByCaptionDeep_(ByVal owner As Object, ByVal captionLike As String) As MSForms.Frame
     Set FindFrameByCaptionDeep_ = FindFrameByCaptionDeep_Walk(owner, captionLike)
 End Function
@@ -848,7 +848,7 @@ Private Function FindFrameByCaptionDeep_Walk(ByVal container As Object, ByVal ca
         End Select
     Next ctl
 End Function
-'================ ‚±‚±‚Ü‚Å“\‚é ==================
+'================ ã“ã“ã¾ã§è²¼ã‚‹ ==================
 
 
 
@@ -858,51 +858,51 @@ End Function
 
 
 
-' ==== BasicInfo ‚Ì—ñ–¼‚ğ Basic.* ‚É“ˆê‚µA•s‘«‚Íì‚éiˆÀ‘Sƒ}[ƒW•t‚«j ====
+' ==== BasicInfo ã®åˆ—åã‚’ Basic.* ã«çµ±ä¸€ã—ã€ä¸è¶³ã¯ä½œã‚‹ï¼ˆå®‰å…¨ãƒãƒ¼ã‚¸ä»˜ãï¼‰ ====
 Public Sub EnsureHeaderCol_BasicInfo(ByVal ws As Worksheet)
     Dim d As Object: Set d = CreateObject("Scripting.Dictionary")
     d.CompareMode = 1 ' TextCompare
 
-    ' --- ’P€–Úiå‚ÉƒeƒLƒXƒg/ƒRƒ“ƒ{j ---
+    ' --- å˜é …ç›®ï¼ˆä¸»ã«ãƒ†ã‚­ã‚¹ãƒˆ/ã‚³ãƒ³ãƒœï¼‰ ---
     d("BasicInfo_ID") = "Basic.ID":                  d("ID") = "Basic.ID": d("Pid") = "Basic.ID"
-    d("BasicInfo_–¼") = "Basic.Name":              d("–¼") = "Basic.Name": d("Name") = "Basic.Name"
-    d("BasicInfo_•]‰¿“ú") = "Basic.EvalDate":        d("•]‰¿“ú") = "Basic.EvalDate": d("EvalDate") = "Basic.EvalDate"
-    d("BasicInfo_•]‰¿Ò") = "Basic.Evaluator":       d("•]‰¿Ò") = "Basic.Evaluator"
-    d("BasicInfo_”N—î") = "Basic.Age":               d("”N—î") = "Basic.Age": d("Age") = "Basic.Age"
-    d("BasicInfo_«•Ê") = "Basic.Sex":               d("«•Ê") = "Basic.Sex": d("Sex") = "Basic.Sex"
-    d("BasicInfo_åf’f") = "Basic.PrimaryDx":       d("åf’f") = "Basic.PrimaryDx": d("å•a–¼") = "Basic.PrimaryDx"
-    d("BasicInfo_”­Ç“ú") = "Basic.OnsetDate":       d("”­Ç“ú") = "Basic.OnsetDate"
-    d("BasicInfo_—v‰îŒì“x") = "Basic.CareLevel":     d("—v‰îŒì“x") = "Basic.CareLevel"
-    d("BasicInfo_”F’mÇ©—§“x") = "Basic.DementiaADL"
-    d("BasicInfo_”F’mÇ‚—îÒ‚Ì“úí¶Šˆ©—§“x") = "Basic.DementiaADL"
-    d("”F’mÇ‚—îÒ‚Ì“úí¶Šˆ©—§“x") = "Basic.DementiaADL"
-    d("BasicInfo_¶Šˆó‹µ") = "Basic.LifeStatus":    d("¶Šˆó‹µ") = "Basic.LifeStatus"
-    d("BasicInfo_Š³ÒNeeds") = "Basic.Needs.Patient": d("Š³ÒNeeds") = "Basic.Needs.Patient"
-    d("BasicInfo_‰Æ‘°Needs") = "Basic.Needs.Family":  d("‰Æ‘°Needs") = "Basic.Needs.Family"
+    d("BasicInfo_æ°å") = "Basic.Name":              d("æ°å") = "Basic.Name": d("Name") = "Basic.Name"
+    d("BasicInfo_è©•ä¾¡æ—¥") = "Basic.EvalDate":        d("è©•ä¾¡æ—¥") = "Basic.EvalDate": d("EvalDate") = "Basic.EvalDate"
+    d("BasicInfo_è©•ä¾¡è€…") = "Basic.Evaluator":       d("è©•ä¾¡è€…") = "Basic.Evaluator"
+    d("BasicInfo_å¹´é½¢") = "Basic.Age":               d("å¹´é½¢") = "Basic.Age": d("Age") = "Basic.Age"
+    d("BasicInfo_æ€§åˆ¥") = "Basic.Sex":               d("æ€§åˆ¥") = "Basic.Sex": d("Sex") = "Basic.Sex"
+    d("BasicInfo_ä¸»è¨ºæ–­") = "Basic.PrimaryDx":       d("ä¸»è¨ºæ–­") = "Basic.PrimaryDx": d("ä¸»ç—…å") = "Basic.PrimaryDx"
+    d("BasicInfo_ç™ºç—‡æ—¥") = "Basic.OnsetDate":       d("ç™ºç—‡æ—¥") = "Basic.OnsetDate"
+    d("BasicInfo_è¦ä»‹è­·åº¦") = "Basic.CareLevel":     d("è¦ä»‹è­·åº¦") = "Basic.CareLevel"
+    d("BasicInfo_èªçŸ¥ç—‡è‡ªç«‹åº¦") = "Basic.DementiaADL"
+    d("BasicInfo_èªçŸ¥ç—‡é«˜é½¢è€…ã®æ—¥å¸¸ç”Ÿæ´»è‡ªç«‹åº¦") = "Basic.DementiaADL"
+    d("èªçŸ¥ç—‡é«˜é½¢è€…ã®æ—¥å¸¸ç”Ÿæ´»è‡ªç«‹åº¦") = "Basic.DementiaADL"
+    d("BasicInfo_ç”Ÿæ´»çŠ¶æ³") = "Basic.LifeStatus":    d("ç”Ÿæ´»çŠ¶æ³") = "Basic.LifeStatus"
+    d("BasicInfo_æ‚£è€…Needs") = "Basic.Needs.Patient": d("æ‚£è€…Needs") = "Basic.Needs.Patient"
+    d("BasicInfo_å®¶æ—Needs") = "Basic.Needs.Family":  d("å®¶æ—Needs") = "Basic.Needs.Family"
 
-    ' --- •â•‹ïiƒ`ƒFƒbƒNj¨ Basic.Aids.* ‚Ö ---
-    AddAlias d, "BasicInfo_•â•‹ï_ñ", "Basic.Aids.ñ"
-    AddAlias d, "BasicInfo_•â•‹ï_•àsŠí", "Basic.Aids.•àsŠí"
-    AddAlias d, "BasicInfo_•â•‹ï_’Z‰ºˆ‘•‹ï", "Basic.Aids.’Z‰ºˆ‘•‹ï"
-    AddAlias d, "BasicInfo_•â•‹ï_è‚·‚è", "Basic.Aids.è‚·‚è"
-    AddAlias d, "BasicInfo_•â•‹ï_ƒVƒ‹ƒo[ƒJ[", "Basic.Aids.ƒVƒ‹ƒo[ƒJ["
-    AddAlias d, "BasicInfo_•â•‹ï_Ô‚¢‚·", "Basic.Aids.Ô‚¢‚·": AddAlias d, "BasicInfo_•â•‹ï_ÔˆÖq", "Basic.Aids.Ô‚¢‚·"
-    AddAlias d, "BasicInfo_•â•‹ï_‰î•ƒxƒ‹ƒg", "Basic.Aids.‰î•ƒxƒ‹ƒg"
-    AddAlias d, "BasicInfo_•â•‹ï_ƒXƒ[ƒv", "Basic.Aids.ƒXƒ[ƒv"
+    ' --- è£œåŠ©å…·ï¼ˆãƒã‚§ãƒƒã‚¯ï¼‰â†’ Basic.Aids.* ã¸ ---
+    AddAlias d, "BasicInfo_è£œåŠ©å…·_æ–", "Basic.Aids.æ–"
+    AddAlias d, "BasicInfo_è£œåŠ©å…·_æ­©è¡Œå™¨", "Basic.Aids.æ­©è¡Œå™¨"
+    AddAlias d, "BasicInfo_è£œåŠ©å…·_çŸ­ä¸‹è‚¢è£…å…·", "Basic.Aids.çŸ­ä¸‹è‚¢è£…å…·"
+    AddAlias d, "BasicInfo_è£œåŠ©å…·_æ‰‹ã™ã‚Š", "Basic.Aids.æ‰‹ã™ã‚Š"
+    AddAlias d, "BasicInfo_è£œåŠ©å…·_ã‚·ãƒ«ãƒãƒ¼ã‚«ãƒ¼", "Basic.Aids.ã‚·ãƒ«ãƒãƒ¼ã‚«ãƒ¼"
+    AddAlias d, "BasicInfo_è£œåŠ©å…·_è»Šã„ã™", "Basic.Aids.è»Šã„ã™": AddAlias d, "BasicInfo_è£œåŠ©å…·_è»Šæ¤…å­", "Basic.Aids.è»Šã„ã™"
+    AddAlias d, "BasicInfo_è£œåŠ©å…·_ä»‹åŠ©ãƒ™ãƒ«ãƒˆ", "Basic.Aids.ä»‹åŠ©ãƒ™ãƒ«ãƒˆ"
+    AddAlias d, "BasicInfo_è£œåŠ©å…·_ã‚¹ãƒ­ãƒ¼ãƒ—", "Basic.Aids.ã‚¹ãƒ­ãƒ¼ãƒ—"
 
-    ' --- ƒŠƒXƒNiƒ`ƒFƒbƒNj¨ Basic.Risk.* ‚Ö ---
-    AddAlias d, "BasicInfo_ƒŠƒXƒN_“]“|", "Basic.Risk.“]“|"
-    AddAlias d, "BasicInfo_ƒŠƒXƒN_’‚‘§", "Basic.Risk.’‚‘§"
-    AddAlias d, "BasicInfo_ƒŠƒXƒN_’á‰h—{", "Basic.Risk.’á‰h—{"
-    AddAlias d, "BasicInfo_ƒŠƒXƒN_‚¹‚ñ–Ï", "Basic.Risk.‚¹‚ñ–Ï"
-    AddAlias d, "BasicInfo_ƒŠƒXƒN_Œëš‹", "Basic.Risk.Œëš‹"
-    AddAlias d, "BasicInfo_ƒŠƒXƒN_åñáŒ", "Basic.Risk.åñáŒ"
-    AddAlias d, "BasicInfo_ƒŠƒXƒN_ADL’á‰º", "Basic.Risk.ADL’á‰º"
+    ' --- ãƒªã‚¹ã‚¯ï¼ˆãƒã‚§ãƒƒã‚¯ï¼‰â†’ Basic.Risk.* ã¸ ---
+    AddAlias d, "BasicInfo_ãƒªã‚¹ã‚¯_è»¢å€’", "Basic.Risk.è»¢å€’"
+    AddAlias d, "BasicInfo_ãƒªã‚¹ã‚¯_çª’æ¯", "Basic.Risk.çª’æ¯"
+    AddAlias d, "BasicInfo_ãƒªã‚¹ã‚¯_ä½æ „é¤Š", "Basic.Risk.ä½æ „é¤Š"
+    AddAlias d, "BasicInfo_ãƒªã‚¹ã‚¯_ã›ã‚“å¦„", "Basic.Risk.ã›ã‚“å¦„"
+    AddAlias d, "BasicInfo_ãƒªã‚¹ã‚¯_èª¤åš¥", "Basic.Risk.èª¤åš¥"
+    AddAlias d, "BasicInfo_ãƒªã‚¹ã‚¯_è¤¥ç˜¡", "Basic.Risk.è¤¥ç˜¡"
+    AddAlias d, "BasicInfo_ãƒªã‚¹ã‚¯_ADLä½ä¸‹", "Basic.Risk.ADLä½ä¸‹"
 
-    ' 1) Šù‘¶ƒwƒbƒ_‚ğƒ}[ƒW‰ü–¼
+    ' 1) æ—¢å­˜ãƒ˜ãƒƒãƒ€ã‚’ãƒãƒ¼ã‚¸æ”¹å
     ApplyAliasesMerge_Basic ws, d
 
-    ' 2) Å’áŒÀ•K—v‚È—ñ‚ª‚È‚¯‚ê‚Î’Ç‰ÁiSave/Load‚Ì‘ÎÛ‚ğ˜R‚ê‚È‚­j
+    ' 2) æœ€ä½é™å¿…è¦ãªåˆ—ãŒãªã‘ã‚Œã°è¿½åŠ ï¼ˆSave/Loadã®å¯¾è±¡ã‚’æ¼ã‚Œãªãï¼‰
     Dim need As Variant, mustHave As Variant
     mustHave = Array( _
         "Basic.ID", "Basic.Name", "Basic.EvalDate", "Basic.Evaluator", _
@@ -915,12 +915,12 @@ Public Sub EnsureHeaderCol_BasicInfo(ByVal ws As Worksheet)
     Next need
 End Sub
 
-' === ƒwƒ‹ƒp[ ===
+' === ãƒ˜ãƒ«ãƒ‘ãƒ¼ ===
 Private Sub AddAlias(ByVal d As Object, ByVal src As String, ByVal dst As String)
     d(src) = dst
 End Sub
 
-' ƒGƒCƒŠƒAƒX‰ü–¼iÕ“Ë‚Íƒ}[ƒW‚µ‚Ä‹Œ—ñ‚ğíœj
+' ã‚¨ã‚¤ãƒªã‚¢ã‚¹æ”¹åï¼ˆè¡çªæ™‚ã¯ãƒãƒ¼ã‚¸ã—ã¦æ—§åˆ—ã‚’å‰Šé™¤ï¼‰
 Private Sub ApplyAliasesMerge_Basic(ByVal ws As Worksheet, ByVal d As Object)
     Dim lastCol As Long: lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
     Dim j As Long
@@ -931,7 +931,7 @@ Private Sub ApplyAliasesMerge_Basic(ByVal ws As Worksheet, ByVal d As Object)
             Dim dst As String: dst = CStr(d(h))
             Dim dstCol As Long: dstCol = modSchema.FindColByHeaderExact(ws, dst)
             If dstCol > 0 And dstCol <> j Then
-                ' ƒ}[ƒWi‹ó—“‚¾‚¯–„‚ß‚éj
+                ' ãƒãƒ¼ã‚¸ï¼ˆç©ºæ¬„ã ã‘åŸ‹ã‚ã‚‹ï¼‰
                 Dim lastRow As Long: lastRow = ws.Cells(ws.rows.Count, j).End(xlUp).row
                 Dim r As Long
                 For r = 2 To lastRow
@@ -964,16 +964,16 @@ End Sub
 
 
 
-' EvalData‚ÌIDs‚ğŒ©‚Â‚¯‚éi–³‚¯‚ê‚Îì‚éj
-' Šù‘¶ƒXƒL[ƒ}‚Ì‚Ç‚¿‚ç‚É‚à‘Î‰FBasic.ID / BasicInfo_ID
+' EvalDataã®IDè¡Œã‚’è¦‹ã¤ã‘ã‚‹ï¼ˆç„¡ã‘ã‚Œã°ä½œã‚‹ï¼‰
+' æ—¢å­˜ã‚¹ã‚­ãƒ¼ãƒã®ã©ã¡ã‚‰ã«ã‚‚å¯¾å¿œï¼šBasic.ID / BasicInfo_ID
 Public Function GetOrCreateRowByID_Basic(ByVal ws As Worksheet, ByVal idVal As String) As Long
-    If Len(idVal) = 0 Then Err.Raise 5, , "ID‚ª‹ó‚Å‚·B"
+    If Len(idVal) = 0 Then Err.Raise 5, , "IDãŒç©ºã§ã™ã€‚"
 
     Dim idCol As Long
     idCol = FindColByHeaderExact(ws, "Basic.ID")
     If idCol = 0 Then idCol = FindColByHeaderExact(ws, "BasicInfo_ID")
     If idCol = 0 Then
-        ' –³‚¯‚ê‚Î Basic.ID ‚ğì‚éiŠù‘¶‚É‡‚í‚¹‚ÄOKEŒã‚ÅƒXƒL[ƒ}“ˆê‰Âj
+        ' ç„¡ã‘ã‚Œã° Basic.ID ã‚’ä½œã‚‹ï¼ˆæ—¢å­˜ã«åˆã‚ã›ã¦OKãƒ»å¾Œã§ã‚¹ã‚­ãƒ¼ãƒçµ±ä¸€å¯ï¼‰
         idCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column + 1
         ws.Cells(1, idCol).value = "Basic.ID"
     End If
@@ -999,9 +999,9 @@ End Function
 
 
 
-'--- ƒRƒ“ƒ{ƒ{ƒbƒNƒX‚ÉˆÀ‘S‚É’l‚ğ”½‰fiˆê——‚É–³‚¢’l‚È‚ç–¢‘I‘ğ‚É‚·‚éj ---
+'--- ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã«å®‰å…¨ã«å€¤ã‚’åæ˜ ï¼ˆä¸€è¦§ã«ç„¡ã„å€¤ãªã‚‰æœªé¸æŠã«ã™ã‚‹ï¼‰ ---
 Private Sub SetComboSafely(owner As Object, ctlName As String, ByVal v As Variant)
-    Dim cB As Object  ' MSForms.ComboBox ‚ğ late binding ‚Åˆµ‚¤
+    Dim cB As Object  ' MSForms.ComboBox ã‚’ late binding ã§æ‰±ã†
     Dim i As Long, hit As Long
     Dim s As String
 
@@ -1020,10 +1020,10 @@ Private Sub SetComboSafely(owner As Object, ctlName As String, ByVal v As Varian
     Next
 
     If hit >= 0 Then
-        cB.ListIndex = hit               ' ˆê’v‚ªŒ©‚Â‚©‚Á‚½‚ç‘I‘ğ
+        cB.ListIndex = hit               ' ä¸€è‡´ãŒè¦‹ã¤ã‹ã£ãŸã‚‰é¸æŠ
     Else
-        cB.ListIndex = -1                ' Œ©‚Â‚©‚ç‚È‚¯‚ê‚Î–¢‘I‘ğ‚ÉiDropDownList‚Å‚àˆÀ‘Sj
-        ' ¦DropDownList‚Ìê‡Acb.Text ‚É‚Í“ü‚ê‚Ü‚¹‚ñ
+        cB.ListIndex = -1                ' è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°æœªé¸æŠã«ï¼ˆDropDownListã§ã‚‚å®‰å…¨ï¼‰
+        ' â€»DropDownListã®å ´åˆã€cb.Text ã«ã¯å…¥ã‚Œã¾ã›ã‚“
     End If
 End Sub
 
@@ -1040,14 +1040,14 @@ End Sub
 Private Function FindControlDeep(ByVal parent As Object, ByVal targetName As String) As Object
     Dim c As Object, hit As Object
 
-    ' 1) ©•ª©g‚ªˆê’v‚È‚ç‘¦•Ô‚·
+    ' 1) è‡ªåˆ†è‡ªèº«ãŒä¸€è‡´ãªã‚‰å³è¿”ã™
     On Error Resume Next
     If Not parent Is Nothing Then
         If parent.name = targetName Then Set FindControlDeep = parent: Exit Function
     End If
     On Error GoTo 0
 
-    ' 2) MultiPage ‚Í Pages ‚ğ‘–¸
+    ' 2) MultiPage ã¯ Pages ã‚’èµ°æŸ»
     If TypeName(parent) = "MultiPage" Then
         Dim pg As Object
         For Each pg In parent.Pages
@@ -1057,13 +1057,13 @@ Private Function FindControlDeep(ByVal parent As Object, ByVal targetName As Str
         Exit Function
     End If
 
-    ' 3) ’¼‰º‚É“¯–¼‚ª‚ ‚ê‚Îæ“¾i‘¶İ‚µ‚È‚¢Œ^‚Å‚à—áŠO‚É‚µ‚È‚¢j
+    ' 3) ç›´ä¸‹ã«åŒåãŒã‚ã‚Œã°å–å¾—ï¼ˆå­˜åœ¨ã—ãªã„å‹ã§ã‚‚ä¾‹å¤–ã«ã—ãªã„ï¼‰
     On Error Resume Next
     Set hit = parent.Controls(targetName)
     On Error GoTo 0
     If Not hit Is Nothing Then Set FindControlDeep = hit: Exit Function
 
-    ' 4) qƒRƒ“ƒgƒ[ƒ‹‚ğÄ‹A‘–¸iControls ‚ğ‚½‚È‚¢Œ^‚ÍƒXƒLƒbƒvj
+    ' 4) å­ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’å†å¸°èµ°æŸ»ï¼ˆControls ã‚’æŒãŸãªã„å‹ã¯ã‚¹ã‚­ãƒƒãƒ—ï¼‰
     On Error Resume Next
     For Each c In parent.Controls
         Err.Clear
@@ -1074,12 +1074,12 @@ Private Function FindControlDeep(ByVal parent As Object, ByVal targetName As Str
 End Function
 
 
-' ‘ã•\ƒLƒƒƒvƒVƒ‡ƒ“‚©‚çeƒtƒŒ[ƒ€‚ğ„’è
+' ä»£è¡¨ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã‹ã‚‰è¦ªãƒ•ãƒ¬ãƒ¼ãƒ ã‚’æ¨å®š
 Private Function FindGroupByAnyCaption(frm As Object, captions As Variant) As Object
     Dim cont As Object, c As Object, cap As Variant
     For Each cont In frm.Controls
         On Error Resume Next
-        ' ƒRƒ“ƒeƒiiFrame/Page‚È‚Çj‚¾‚¯’²‚×‚é
+        ' ã‚³ãƒ³ãƒ†ãƒŠï¼ˆFrame/Pageãªã©ï¼‰ã ã‘èª¿ã¹ã‚‹
         If Not cont.Controls Is Nothing Then
             For Each c In cont.Controls
                 If TypeName(c) = "CheckBox" Then
@@ -1095,23 +1095,23 @@ Private Function FindGroupByAnyCaption(frm As Object, captions As Variant) As Ob
     Next
 End Function
 
-' –¼‘O¨–³‚¯‚ê‚Î‘ã•\ƒLƒƒƒvƒVƒ‡ƒ“‚Å•â•‹ï/ƒŠƒXƒN‚ÌƒtƒŒ[ƒ€‚ğæ“¾
+' åå‰â†’ç„¡ã‘ã‚Œã°ä»£è¡¨ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã§è£œåŠ©å…·/ãƒªã‚¹ã‚¯ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å–å¾—
 Private Function ResolveGroup(frm As Object, targetName As String, isAids As Boolean) As Object
-    ' 1) –¼‘O‚Å’T‚·i©‘O‚ÌFindControlDeep‚ğg‚¤j
+    ' 1) åå‰ã§æ¢ã™ï¼ˆè‡ªå‰ã®FindControlDeepã‚’ä½¿ã†ï¼‰
     Set ResolveGroup = frm.Controls(targetName)
     If Not ResolveGroup Is Nothing Then Exit Function
 
-    ' 2) ƒLƒƒƒvƒVƒ‡ƒ“‚©‚ç„’è
+    ' 2) ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã‹ã‚‰æ¨å®š
     Dim seeds As Variant
     If isAids Then
-        seeds = Array("ñ", "•àsŠí", "ƒVƒ‹ƒo[ƒJ[", "Ô‚¢‚·", "‰î•ƒxƒ‹ƒg", "ƒXƒ[ƒv", "Œo‰ºˆ‘•‹ï", "è‚·‚è")
+        seeds = Array("æ–", "æ­©è¡Œå™¨", "ã‚·ãƒ«ãƒãƒ¼ã‚«ãƒ¼", "è»Šã„ã™", "ä»‹åŠ©ãƒ™ãƒ«ãƒˆ", "ã‚¹ãƒ­ãƒ¼ãƒ—", "çµŒä¸‹è‚¢è£…å…·", "æ‰‹ã™ã‚Š")
     Else
-        seeds = Array("“]“|", "Œëš‹", "åñáŒ", "¸‹Ö", "’á‰h—{", "‚¹‚ñ–Ï", "œpœj", "ADL’á‰º")
+        seeds = Array("è»¢å€’", "èª¤åš¥", "è¤¥ç˜¡", "å¤±ç¦", "ä½æ „é¤Š", "ã›ã‚“å¦„", "å¾˜å¾Š", "ADLä½ä¸‹")
     End If
     Set ResolveGroup = FindGroupByAnyCaption(frm, seeds)
 End Function
 
-' CSV‰»iCaption‚ğƒL[jFtargetName‚ª–³‚­‚Ä‚à‘ã•\ƒLƒƒƒvƒVƒ‡ƒ“‚ÅŒŸo
+' CSVåŒ–ï¼ˆCaptionã‚’ã‚­ãƒ¼ï¼‰ï¼štargetNameãŒç„¡ãã¦ã‚‚ä»£è¡¨ã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã§æ¤œå‡º
 Public Function SerializeChecks(frm As Object, targetName As String, Optional isAids As Boolean = True) As String
     Dim grp As Object: Set grp = ResolveGroup(frm, targetName, isAids)
     If grp Is Nothing Then Exit Function
@@ -1128,7 +1128,7 @@ Public Function SerializeChecks(frm As Object, targetName As String, Optional is
     SerializeChecks = s
 End Function
 
-' CSV ¨ ƒ`ƒFƒbƒN•œŒ³
+' CSV â†’ ãƒã‚§ãƒƒã‚¯å¾©å…ƒ
 Public Sub DeserializeChecks(frm As Object, targetName As String, ByVal csv As String, Optional isAids As Boolean = True)
     Dim grp As Object: Set grp = ResolveGroup(frm, targetName, isAids)
     If grp Is Nothing Then Exit Sub
@@ -1149,7 +1149,7 @@ Public Sub DeserializeChecks(frm As Object, targetName As String, ByVal csv As S
     Next
 End Sub
 
-' ID‚ÌÅ‘å’l+1
+' IDã®æœ€å¤§å€¤+1
 Public Function NextID(ws As Worksheet, ByVal cID As Long) As Long
     Dim last As Long: last = ws.Cells(ws.rows.Count, cID).End(xlUp).row
     If last < 2 Then NextID = 1: Exit Function
@@ -1170,13 +1170,13 @@ End Function
 
 
 
-'=== Compat: SENSE_IO ‚ğ IO_Sensory ‚Éƒ~ƒ‰[is r ‚Ì‚İj ===
+'=== Compat: SENSE_IO ã‚’ IO_Sensory ã«ãƒŸãƒ©ãƒ¼ï¼ˆè¡Œ r ã®ã¿ï¼‰ ===
 Private Sub Mirror_SensoryIO(ws As Worksheet, ByVal r As Long)
     Dim cSrc As Variant, cDst As Long
     cSrc = Application.Match("SENSE_IO", ws.rows(1), 0)
     If IsError(cSrc) Then Exit Sub
 
-    ' ˆ¶æƒwƒbƒ_ IO_Sensory ‚ğŠm•Û
+    ' å®›å…ˆãƒ˜ãƒƒãƒ€ IO_Sensory ã‚’ç¢ºä¿
     Dim M As Variant, lastCol As Long
     M = Application.Match("IO_Sensory", ws.rows(1), 0)
     If IsError(M) Then
@@ -1193,10 +1193,10 @@ End Sub
 
 
 '====================================================================
-' Debug / Probe ƒZƒNƒVƒ‡ƒ“iEvalData ‚ÌƒXƒiƒbƒvƒVƒ‡ƒbƒgEROMƒwƒbƒ_“™j
-'  - –{”Ôˆ—i•Û‘¶E“Çj‚©‚ç‚Í’¼ÚŒÄ‚Î‚È‚¢
-'  - •K—v‚È‚Æ‚«‚¾‚¯AImmediate ‚âê—pƒeƒXƒgƒ}ƒNƒ‚©‚çè“®‚ÅŒÄ‚Ño‚·
-'  - «—ˆ“I‚É‚Í modEvalIODebug ‚È‚Ç•Êƒ‚ƒWƒ…[ƒ‹‚ÖØ‚èo‚·Œó•â
+' Debug / Probe ã‚»ã‚¯ã‚·ãƒ§ãƒ³ï¼ˆEvalData ã®ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆãƒ»ROMãƒ˜ãƒƒãƒ€ç­‰ï¼‰
+'  - æœ¬ç•ªå‡¦ç†ï¼ˆä¿å­˜ãƒ»èª­è¾¼ï¼‰ã‹ã‚‰ã¯ç›´æ¥å‘¼ã°ãªã„
+'  - å¿…è¦ãªã¨ãã ã‘ã€Immediate ã‚„å°‚ç”¨ãƒ†ã‚¹ãƒˆãƒã‚¯ãƒ­ã‹ã‚‰æ‰‹å‹•ã§å‘¼ã³å‡ºã™
+'  - å°†æ¥çš„ã«ã¯ modEvalIODebug ãªã©åˆ¥ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã¸åˆ‡ã‚Šå‡ºã™å€™è£œ
 '====================================================================
 
 
@@ -1249,9 +1249,9 @@ Public Sub Debug_Sensory_ADL_Raw(ByVal ws As Worksheet, ByVal r As Long)
         Debug.Print "IO_Sensory: <no header>"
     End If
 
-    ' ‹ß–TŠm”Fi\‘¢Œ©‚é—pj
-    Debug.Print "SENSE‹ß–T(146-155)=", Join(Application.Transpose(Application.Transpose(ws.Range(ws.Cells(r, 146), ws.Cells(r, 155)).value)), " | ")
-    Debug.Print "ADL‹ß–T  (156-165)=", Join(Application.Transpose(Application.Transpose(ws.Range(ws.Cells(r, 156), ws.Cells(r, 165)).value)), " | ")
+    ' è¿‘å‚ç¢ºèªï¼ˆæ§‹é€ è¦‹ã‚‹ç”¨ï¼‰
+    Debug.Print "SENSEè¿‘å‚(146-155)=", Join(Application.Transpose(Application.Transpose(ws.Range(ws.Cells(r, 146), ws.Cells(r, 155)).value)), " | ")
+    Debug.Print "ADLè¿‘å‚  (156-165)=", Join(Application.Transpose(Application.Transpose(ws.Range(ws.Cells(r, 156), ws.Cells(r, 165)).value)), " | ")
 
     Debug.Print "=== [/RAW SENSE/ADL] ==="
 End Sub
@@ -1307,7 +1307,7 @@ Public Sub Debug_ListROMHeaders()
 
     Set ws = ThisWorkbook.Worksheets("EvalData")
 
-    ' ROMŒn‚ª•À‚ñ‚Å‚¢‚é‘z’èƒŒƒ“ƒW‚¾‚¯‚ğŒ©‚éi•K—v‚È‚çŒã‚Å”÷’²®j
+    ' ROMç³»ãŒä¸¦ã‚“ã§ã„ã‚‹æƒ³å®šãƒ¬ãƒ³ã‚¸ã ã‘ã‚’è¦‹ã‚‹ï¼ˆå¿…è¦ãªã‚‰å¾Œã§å¾®èª¿æ•´ï¼‰
     firstCol = 150
     lastCol = 260
 
@@ -1340,7 +1340,7 @@ Public Sub Debug_ROMRow_Values(ByVal r As Long)
             If Len(v) > 0 Then
                 Debug.Print c, h, v
                 hit = hit + 1
-                If hit >= 40 Then Exit For   ' ƒƒO–\”­–h~
+                If hit >= 40 Then Exit For   ' ãƒ­ã‚°æš´ç™ºé˜²æ­¢
             End If
         End If
     Next c
@@ -1412,7 +1412,7 @@ Public Sub Cleanup_ExtraROMColumns()
     Set ws = ThisWorkbook.Worksheets("EvalData")
     lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
 
-    ' –{—ˆg‚¤ROMƒuƒƒbƒN‚æ‚è‰E‘¤‚¾‚¯‚ğƒSƒ~Œó•â‚Æ‚·‚éi‚Æ‚è‚ ‚¦‚¸300—ñˆÈ~j
+    ' æœ¬æ¥ä½¿ã†ROMãƒ–ãƒ­ãƒƒã‚¯ã‚ˆã‚Šå³å´ã ã‘ã‚’ã‚´ãƒŸå€™è£œã¨ã™ã‚‹ï¼ˆã¨ã‚Šã‚ãˆãš300åˆ—ä»¥é™ï¼‰
     For c = lastCol To 261 Step -1
         h = CStr(ws.Cells(1, c).value)
         If LCase$(Left$(h, 4)) = "rom_" Then
@@ -1436,7 +1436,7 @@ Public Function Build_TestEval_IO(owner As Object) As String
     With owner
         v10 = Trim$(.txtTenMWalk.value)
         vTUG = Trim$(.txtTUG.value)
-        v5x = Trim$(.txtFiveSts.value)   ' ¦ƒRƒ“ƒgƒ[ƒ‹–¼‚ªˆá‚¤ê‡‚Í‚±‚±‚¾‚¯’²®
+        v5x = Trim$(.txtFiveSts.value)   ' â€»ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«åãŒé•ã†å ´åˆã¯ã“ã“ã ã‘èª¿æ•´
         vSemi = Trim$(.txtSemi.value)
         vGripR = Trim$(.txtGripR.value)
         vGripL = Trim$(.txtGripL.value)
@@ -1463,13 +1463,13 @@ Public Sub Save_TestEvalToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal ow
     If ws Is Nothing Then Exit Sub
     If r < 2 Then r = 2
 
-    ' IO_TestEval —p‚Ì—ñ‚ğŠm•Û
+    ' IO_TestEval ç”¨ã®åˆ—ã‚’ç¢ºä¿
     c = EnsureHeader(ws, "IO_TestEval")
 
-    ' ƒtƒH[ƒ€ã‚Ì’l‚©‚ç IO •¶š—ñ‚ğ¶¬i¡‚Í‹ó‚Ì‚Ü‚Ü‚Å‚àOKj
+    ' ãƒ•ã‚©ãƒ¼ãƒ ä¸Šã®å€¤ã‹ã‚‰ IO æ–‡å­—åˆ—ã‚’ç”Ÿæˆï¼ˆä»Šã¯ç©ºã®ã¾ã¾ã§ã‚‚OKï¼‰
     s = Build_TestEval_IO(owner)
 
-        ' w’ès‚Éã‘‚«•Û‘¶
+        ' æŒ‡å®šè¡Œã«ä¸Šæ›¸ãä¿å­˜
     ws.Cells(r, c).Value2 = CStr(s)
     ws.Cells(r, 181).value = val(owner.txtTUG.value)
 
@@ -1493,10 +1493,10 @@ Public Sub Load_TestEvalFromSheet(ws As Worksheet, ByVal r As Long, ByVal owner 
     owner.txtGripL.value = IO_GetVal(s, "Test_Grip_L_kg")
     owner.txtSemi.value = IO_GetVal(s, "Test_SemiTandem_sec")
 
-    ' TODO: ‚±‚±‚©‚ç‰º‚ÍŒã‚ÅÀ‘•i¡‚ÍG‚ç‚È‚¢j
-    ' IO_TestEval ‚ğ•ª‰ğ‚µ‚Ä
-    ' ownerifrmEvalj‚Ì txtTenMWalk / txtTUG / txtFiveSts /
-    ' txtGripR / txtGripL / txtSemi ‚É—¬‚µ‚Ş
+    ' TODO: ã“ã“ã‹ã‚‰ä¸‹ã¯å¾Œã§å®Ÿè£…ï¼ˆä»Šã¯è§¦ã‚‰ãªã„ï¼‰
+    ' IO_TestEval ã‚’åˆ†è§£ã—ã¦
+    ' ownerï¼ˆfrmEvalï¼‰ã® txtTenMWalk / txtTUG / txtFiveSts /
+    ' txtGripR / txtGripL / txtSemi ã«æµã—è¾¼ã‚€
     
     
     ws.Cells(r, 181).value = val(owner.txtTUG.value)
@@ -1513,22 +1513,22 @@ Public Sub Load_WalkIndepFromSheet(ws As Worksheet, ByVal r As Long, ByVal owner
     Dim parts() As String
     Dim i As Long
     Dim nm As String
-    Dim vLevel As String       'š ’Ç‰ÁF©—§“x
-    Dim cLvl As Object         'š ’Ç‰ÁF©—§“xƒRƒ“ƒ{—p
+    Dim vLevel As String       'â˜… è¿½åŠ ï¼šè‡ªç«‹åº¦
+    Dim cLvl As Object         'â˜… è¿½åŠ ï¼šè‡ªç«‹åº¦ã‚³ãƒ³ãƒœç”¨
 
 
-       ' IO_WalkIndep ‚Ì•¶š—ñ‚ğæ“¾
+       ' IO_WalkIndep ã®æ–‡å­—åˆ—ã‚’å–å¾—
     s = ReadStr_Compat("IO_WalkIndep", r, ws)
 
     If Len(s) = 0 Then Exit Sub
 
-    ' TestEval ‚Æ“¯‚¶ƒpƒ^[ƒ“‚É‡‚í‚¹‚Ä "Key=Val" ¨ "Key: Val" ‚É•ÏŒ`
+    ' TestEval ã¨åŒã˜ãƒ‘ã‚¿ãƒ¼ãƒ³ã«åˆã‚ã›ã¦ "Key=Val" â†’ "Key: Val" ã«å¤‰å½¢
     s = Replace(s, "=", ": ")
 
-    ' --- ©—§“xiWalk_IndepLevelj ---
+    ' --- è‡ªç«‹åº¦ï¼ˆWalk_IndepLevelï¼‰ ---
     vLevel = IO_GetVal(s, "Walk_IndepLevel")
     If Len(vLevel) > 0 Then
-        ' Tag="WalkIndepLevel" ‚ÌƒRƒ“ƒ{‚ğ’T‚µ‚Ä’l‚ğ–ß‚·
+        ' Tag="WalkIndepLevel" ã®ã‚³ãƒ³ãƒœã‚’æ¢ã—ã¦å€¤ã‚’æˆ»ã™
         Set cLvl = Nothing
         For Each c In owner.Controls
             If TypeName(c) = "ComboBox" Then
@@ -1543,22 +1543,22 @@ Public Sub Load_WalkIndepFromSheet(ws As Worksheet, ByVal r As Long, ByVal owner
         End If
     End If
 
-    ' --- ‹——£ ---
+    ' --- è·é›¢ ---
     v = IO_GetVal(s, "Walk_Distance")
     Set cmb = FindControlRecursive(owner, "cmbWalkDistance")
     If Not cmb Is Nothing Then cmb.value = v
 
-    ' --- ‰®ŠO ---
+    ' --- å±‹å¤– ---
     v = IO_GetVal(s, "Walk_Outdoor")
     Set cmb = FindControlRecursive(owner, "cmbWalkOutdoor")
     If Not cmb Is Nothing Then cmb.value = v
 
-    ' --- ‘¬“x ---
+    ' --- é€Ÿåº¦ ---
     v = IO_GetVal(s, "Walk_Speed")
     Set cmb = FindControlRecursive(owner, "cmbWalkSpeed")
     If Not cmb Is Nothing Then cmb.value = v
 
-    ' --- ˆÀ’è«ƒ`ƒFƒbƒNichkWalkStab_*j‚ğˆê“x‘S•”OFF ---
+    ' --- å®‰å®šæ€§ãƒã‚§ãƒƒã‚¯ï¼ˆchkWalkStab_*ï¼‰ã‚’ä¸€åº¦å…¨éƒ¨OFF ---
     For Each c In owner.Controls
         If TypeName(c) = "CheckBox" Then
             nm = CStr(c.name)
@@ -1568,8 +1568,8 @@ Public Sub Load_WalkIndepFromSheet(ws As Worksheet, ByVal r As Long, ByVal owner
         End If
     Next c
 
-    ' --- ˆÀ’è«‚Ì•Û‘¶•¶š—ñ‚ğ“WŠJ‚µ‚ÄAŠY“–ƒ`ƒFƒbƒN‚ğON ---
-    v = IO_GetVal(s, "Walk_Stab")   ' —áF "chkWalkStab_Furatsuki/chkWalkStab_FallRisk"
+    ' --- å®‰å®šæ€§ã®ä¿å­˜æ–‡å­—åˆ—ã‚’å±•é–‹ã—ã¦ã€è©²å½“ãƒã‚§ãƒƒã‚¯ã‚’ON ---
+    v = IO_GetVal(s, "Walk_Stab")   ' ä¾‹ï¼š "chkWalkStab_Furatsuki/chkWalkStab_FallRisk"
     If Len(v) > 0 Then
         parts = Split(v, "/")
         For i = LBound(parts) To UBound(parts)
@@ -1595,12 +1595,12 @@ Public Sub Load_WalkRLAFromSheet(ws As Worksheet, ByVal r As Long, ByVal owner A
     Dim c As Object
     Dim nm As String
 
-    ' IO_WalkRLA ‚Ì•¶š—ñ‚ğæ“¾
+    ' IO_WalkRLA ã®æ–‡å­—åˆ—ã‚’å–å¾—
     s = ReadStr_Compat("IO_WalkRLA", r, ws)
 
     If Len(s) = 0 Then Exit Sub
 
-    ' ‚Ü‚¸ARLA ŠÖ˜A‚Ìƒ`ƒFƒbƒNEƒŒƒxƒ‹‚ğ‘S•”ƒŠƒZƒbƒg
+    ' ã¾ãšã€RLA é–¢é€£ã®ãƒã‚§ãƒƒã‚¯ãƒ»ãƒ¬ãƒ™ãƒ«ã‚’å…¨éƒ¨ãƒªã‚»ãƒƒãƒˆ
     For Each c In owner.Controls
         If TypeName(c) = "CheckBox" Then
             nm = CStr(c.name)
@@ -1621,18 +1621,18 @@ Public Sub Load_WalkRLAFromSheet(ws As Worksheet, ByVal r As Long, ByVal owner A
         End If
     Next c
 
-    ' TestEval ‚Æ“¯‚¶ƒpƒ^[ƒ“‚É‡‚í‚¹‚Ä "Key=Val" ¨ "Key: Val"
+    ' TestEval ã¨åŒã˜ãƒ‘ã‚¿ãƒ¼ãƒ³ã«åˆã‚ã›ã¦ "Key=Val" â†’ "Key: Val"
     s = Replace(s, "=", ": ")
 
-    ' —§‹rŠú{—V‹rŠú‚ÌƒL[
+    ' ç«‹è„šæœŸï¼‹éŠè„šæœŸã®ã‚­ãƒ¼
     phases = Array("IC", "LR", "MSt", "TSt", "PSw", "ISw", "MSw", "TSw")
 
     For Each phase In phases
-        ' Problems ‚Æ Level ‚ğæ‚èo‚µ
+        ' Problems ã¨ Level ã‚’å–ã‚Šå‡ºã—
         probs = IO_GetVal(s, "RLA_" & CStr(phase) & "_Problems")
         level = IO_GetVal(s, "RLA_" & CStr(phase) & "_Level")
 
-        ' --- –â‘èiCheckBoxFCaptionˆê’v‚ÅONj ---
+        ' --- å•é¡Œï¼ˆCheckBoxï¼šCaptionä¸€è‡´ã§ONï¼‰ ---
         If Len(probs) > 0 Then
             parts = Split(probs, "/")
             For i = LBound(parts) To UBound(parts)
@@ -1653,7 +1653,7 @@ Public Sub Load_WalkRLAFromSheet(ws As Worksheet, ByVal r As Long, ByVal owner A
             Next i
         End If
 
-        ' --- ƒŒƒxƒ‹iOptionButtonFGroupName=phase & Captionˆê’v‚ÅONj ---
+        ' --- ãƒ¬ãƒ™ãƒ«ï¼ˆOptionButtonï¼šGroupName=phase & Captionä¸€è‡´ã§ONï¼‰ ---
         If Len(level) > 0 Then
             For Each c In owner.Controls
                 If TypeName(c) = "OptionButton" Then
@@ -1678,12 +1678,12 @@ Public Sub Load_WalkAbnFromSheet(ws As Worksheet, ByVal r As Long, ByVal owner A
     Dim nm As String
     Dim c As Object
 
-    ' IO_WalkAbn ‚Ì•¶š—ñæ“¾
+    ' IO_WalkAbn ã®æ–‡å­—åˆ—å–å¾—
     s = ReadStr_Compat("IO_WalkAbn", r, ws)
 
     If Len(s) = 0 Then Exit Sub
 
-    ' ˆê’UAfraWalkAbn_* ‚Ì‘Sƒ`ƒFƒbƒN‚ğOFF‚É‚·‚é
+    ' ä¸€æ—¦ã€fraWalkAbn_* ã®å…¨ãƒã‚§ãƒƒã‚¯ã‚’OFFã«ã™ã‚‹
     For Each c In owner.Controls
         If TypeName(c) = "CheckBox" Then
             nm = CStr(c.name)
@@ -1693,7 +1693,7 @@ Public Sub Load_WalkAbnFromSheet(ws As Worksheet, ByVal r As Long, ByVal owner A
         End If
     Next c
 
-    ' s ‚Ì’†gi—áF "fraWalkAbn_A_chk0|fraWalkAbn_C_chk3"j‚ğ“WŠJ
+    ' s ã®ä¸­èº«ï¼ˆä¾‹ï¼š "fraWalkAbn_A_chk0|fraWalkAbn_C_chk3"ï¼‰ã‚’å±•é–‹
     parts = Split(s, "|")
     For i = LBound(parts) To UBound(parts)
         nm = Trim$(parts(i))
@@ -1719,13 +1719,13 @@ Public Sub Save_WalkIndepToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal o
     If ws Is Nothing Then Exit Sub
     If r < 2 Then r = 2
 
-    ' IO_WalkIndep —p‚Ì—ñ‚ğŠm•Û
+    ' IO_WalkIndep ç”¨ã®åˆ—ã‚’ç¢ºä¿
     c = EnsureHeader(ws, "IO_WalkIndep")
 
-    ' ƒtƒH[ƒ€ã‚Ì’l‚©‚ç IO •¶š—ñ‚ğ¶¬
+    ' ãƒ•ã‚©ãƒ¼ãƒ ä¸Šã®å€¤ã‹ã‚‰ IO æ–‡å­—åˆ—ã‚’ç”Ÿæˆ
     s = Build_WalkIndep_IO(owner)
 
-    ' w’ès‚Éã‘‚«•Û‘¶
+    ' æŒ‡å®šè¡Œã«ä¸Šæ›¸ãä¿å­˜
     ws.Cells(r, c).Value2 = CStr(s)
 
 End Sub
@@ -1738,7 +1738,7 @@ Private Function FindControlRecursive(parent As Object, name As String) As Objec
             Set FindControlRecursive = ctl
             Exit Function
         End If
-        ' Frame ‚â MultiPage ‚Ìê‡‚ÍÄ‹AŒŸõ
+        ' Frame ã‚„ MultiPage ã®å ´åˆã¯å†å¸°æ¤œç´¢
         On Error Resume Next
         If ctl.Controls.Count > 0 Then
             Dim subCtl As Object
@@ -1763,14 +1763,14 @@ Public Function Build_WalkIndep_IO(owner As Object) As String
     Dim nm As String
     Dim stab As String
     Dim i As Long
-    Dim vLevel As String   'š ©—§“x
+    Dim vLevel As String   'â˜… è‡ªç«‹åº¦
 
 
 
    Dim cLvl As Object
 Set cLvl = FindControlRecursive(owner, "cmbWalkIndep")
 If cLvl Is Nothing Then
-    ' ƒ^ƒO‚ÅŒŸõ‚·‚éi¡‰ñ‚Ì³®ƒ‹[ƒgj
+    ' ã‚¿ã‚°ã§æ¤œç´¢ã™ã‚‹ï¼ˆä»Šå›ã®æ­£å¼ãƒ«ãƒ¼ãƒˆï¼‰
     For Each c In owner.Controls
         If TypeName(c) = "ComboBox" Then
             If c.Tag = "WalkIndepLevel" Then
@@ -1784,34 +1784,34 @@ If Not cLvl Is Nothing Then vLevel = Trim$(cLvl.value)
 
 
 
-    ' ‹——£E‰®ŠOE‘¬“x
+    ' è·é›¢ãƒ»å±‹å¤–ãƒ»é€Ÿåº¦
     On Error Resume Next
     vDist = Trim$(owner.Controls("cmbWalkDistance").value)
     vOut = Trim$(owner.Controls("cmbWalkOutdoor").value)
     vSpeed = Trim$(owner.Controls("cmbWalkSpeed").value)
     On Error GoTo 0
 
-    ' ˆÀ’è«ƒ`ƒFƒbƒNichkWalkStab_` ‚ğ‘S•”E‚¤j
+    ' å®‰å®šæ€§ãƒã‚§ãƒƒã‚¯ï¼ˆchkWalkStab_ã€œ ã‚’å…¨éƒ¨æ‹¾ã†ï¼‰
     Set hits = New Collection
     For Each c In owner.Controls
         If TypeName(c) = "CheckBox" Then
             nm = CStr(c.name)
             If StrComp(Left$(nm, 12), "chkWalkStab_", vbTextCompare) = 0 Then
                 If c.value = True Then
-                    ' –¼‘O‚»‚Ì‚à‚Ì‚©A––”ö‚¾‚¯‚É‚·‚é‚©‚Í‚ ‚Æ‚Å’²®‰Â
+                    ' åå‰ãã®ã‚‚ã®ã‹ã€æœ«å°¾ã ã‘ã«ã™ã‚‹ã‹ã¯ã‚ã¨ã§èª¿æ•´å¯
                     hits.Add nm
                 End If
             End If
         End If
     Next c
 
-    ' ˆÀ’è«‚Ìƒ`ƒFƒbƒN–¼‚ğu/v‹æØ‚è‚Å1–{‚Ì•¶š—ñ‚É‚Ü‚Æ‚ß‚é
+    ' å®‰å®šæ€§ã®ãƒã‚§ãƒƒã‚¯åã‚’ã€Œ/ã€åŒºåˆ‡ã‚Šã§1æœ¬ã®æ–‡å­—åˆ—ã«ã¾ã¨ã‚ã‚‹
     For i = 1 To hits.Count
         If i > 1 Then stab = stab & "/"
         stab = stab & hits(i)
     Next i
 
-        ' IO •¶š—ñ‘g‚İ—§‚Ä
+        ' IO æ–‡å­—åˆ—çµ„ã¿ç«‹ã¦
     s = "Walk_IndepLevel=" & vLevel
     s = s & "|Walk_Distance=" & vDist
     s = s & "|Walk_Outdoor=" & vOut
@@ -1834,7 +1834,7 @@ Public Function Build_WalkAbn_IO(owner As Object) As String
     Set hits = New Collection
     
     For Each c In owner.Controls
-        ' fraWalkAbn_?_chk? ‚Æ‚¢‚¤–¼‘O‚Ì CheckBox ‚¾‚¯E‚¤
+        ' fraWalkAbn_?_chk? ã¨ã„ã†åå‰ã® CheckBox ã ã‘æ‹¾ã†
         If TypeName(c) = "CheckBox" Then
             nm = CStr(c.name)
             If InStr(1, nm, "fraWalkAbn_", vbTextCompare) = 1 Then
@@ -1845,13 +1845,13 @@ Public Function Build_WalkAbn_IO(owner As Object) As String
         End If
     Next c
     
-    ' 1‚Â‚àƒ`ƒFƒbƒN‚ª–³‚¯‚ê‚Î‹ó•¶š‚ğ•Ô‚·
+    ' 1ã¤ã‚‚ãƒã‚§ãƒƒã‚¯ãŒç„¡ã‘ã‚Œã°ç©ºæ–‡å­—ã‚’è¿”ã™
     If hits.Count = 0 Then
         Build_WalkAbn_IO = ""
         Exit Function
     End If
     
-    ' fraWalkAbn_A_chk0|fraWalkAbn_A_chk3|c ‚Æ‚¢‚¤Œ`‚Å˜AŒ‹
+    ' fraWalkAbn_A_chk0|fraWalkAbn_A_chk3|â€¦ ã¨ã„ã†å½¢ã§é€£çµ
     Dim i As Long
     For i = 1 To hits.Count
         If i > 1 Then s = s & "|"
@@ -1869,13 +1869,13 @@ Public Sub Save_WalkAbnToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal own
     If ws Is Nothing Then Exit Sub
     If r < 2 Then r = 2
 
-    ' IO_WalkAbn —p‚Ì—ñ‚ğŠm•Û
+    ' IO_WalkAbn ç”¨ã®åˆ—ã‚’ç¢ºä¿
     c = EnsureHeader(ws, "IO_WalkAbn")
 
-    ' ƒtƒH[ƒ€‚Ìƒ`ƒFƒbƒNó‘Ô‚©‚ç IO •¶š—ñ‚ğ¶¬
+    ' ãƒ•ã‚©ãƒ¼ãƒ ã®ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹ã‹ã‚‰ IO æ–‡å­—åˆ—ã‚’ç”Ÿæˆ
     s = Build_WalkAbn_IO(owner)
 
-    ' w’ès‚Éã‘‚«•Û‘¶
+    ' æŒ‡å®šè¡Œã«ä¸Šæ›¸ãä¿å­˜
     ws.Cells(r, c).Value2 = CStr(s)
 
 End Sub
@@ -1895,7 +1895,7 @@ Public Function Build_WalkRLA_IO(owner As Object) As String
     Dim i As Long
     Dim nm As String
 
-    ' —§‹rŠú{—V‹rŠú‚ÌƒL[iBuild_RLA_ChecksPart ‚Æ“¯‚¶j
+    ' ç«‹è„šæœŸï¼‹éŠè„šæœŸã®ã‚­ãƒ¼ï¼ˆBuild_RLA_ChecksPart ã¨åŒã˜ï¼‰
     phases = Array("IC", "LR", "MSt", "TSt", "PSw", "ISw", "MSw", "TSw")
     first = True
 
@@ -1904,19 +1904,19 @@ Public Function Build_WalkRLA_IO(owner As Object) As String
         probsStr = ""
         level = ""
 
-        ' --- ƒ`ƒFƒbƒNiRLA_<phase>_`j‚ğE‚¤ ---
+        ' --- ãƒã‚§ãƒƒã‚¯ï¼ˆRLA_<phase>_ã€œï¼‰ã‚’æ‹¾ã† ---
         For Each c In owner.Controls
             If TypeName(c) = "CheckBox" Then
                 nm = CStr(c.name)
                 If InStr(1, nm, "RLA_" & CStr(phase) & "_", vbTextCompare) = 1 Then
                     If c.value = True Then
-                        probs.Add c.caption   ' —áj‰Â“®ˆæ•s‘« / ‹Ø—Í’á‰º ‚È‚Ç
+                        probs.Add c.caption   ' ä¾‹ï¼‰å¯å‹•åŸŸä¸è¶³ / ç­‹åŠ›ä½ä¸‹ ãªã©
                     End If
                 End If
             End If
         Next c
 
-        ' –â‘èƒŠƒXƒg‚ğ "/" ‹æØ‚è‚Å 1 –{‚É‚·‚é
+        ' å•é¡Œãƒªã‚¹ãƒˆã‚’ "/" åŒºåˆ‡ã‚Šã§ 1 æœ¬ã«ã™ã‚‹
         If probs.Count > 0 Then
             For i = 1 To probs.Count
                 If i > 1 Then probsStr = probsStr & "/"
@@ -1924,19 +1924,19 @@ Public Function Build_WalkRLA_IO(owner As Object) As String
             Next i
         End If
 
-        ' --- ƒŒƒxƒ‹iOptionButton, GroupName=phasej‚ğE‚¤ ---
+        ' --- ãƒ¬ãƒ™ãƒ«ï¼ˆOptionButton, GroupName=phaseï¼‰ã‚’æ‹¾ã† ---
         For Each c In owner.Controls
             If TypeName(c) = "OptionButton" Then
                 If StrComp(c.groupName, CStr(phase), vbTextCompare) = 0 Then
                     If c.value = True Then
-                        level = CStr(c.caption)   ' Œy“x / ’†“™“x / ‚“x
+                        level = CStr(c.caption)   ' è»½åº¦ / ä¸­ç­‰åº¦ / é«˜åº¦
                         Exit For
                     End If
                 End If
             End If
         Next c
 
-        ' --- IO ƒZƒOƒƒ“ƒg‘g‚İ—§‚Ä ---
+        ' --- IO ã‚»ã‚°ãƒ¡ãƒ³ãƒˆçµ„ã¿ç«‹ã¦ ---
         Dim seg As String
         seg = "RLA_" & CStr(phase) & "_Problems=" & probsStr & _
               "|RLA_" & CStr(phase) & "_Level=" & level
@@ -1961,13 +1961,13 @@ Public Sub Save_WalkRLAToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal own
     If ws Is Nothing Then Exit Sub
     If r < 2 Then r = 2
 
-    ' IO_WalkRLA —p‚Ì—ñ‚ğŠm•Ûi—ñ4‚Éƒwƒbƒ_ IO_WalkRLA ‚ª‚ ‚é‘O’ñj
+    ' IO_WalkRLA ç”¨ã®åˆ—ã‚’ç¢ºä¿ï¼ˆåˆ—4ã«ãƒ˜ãƒƒãƒ€ IO_WalkRLA ãŒã‚ã‚‹å‰æï¼‰
     c = EnsureHeader(ws, "IO_WalkRLA")
 
-    ' ƒtƒH[ƒ€ã‚ÌRLAƒ`ƒFƒbƒNEƒŒƒxƒ‹‚©‚çIO•¶š—ñ‚ğ¶¬
+    ' ãƒ•ã‚©ãƒ¼ãƒ ä¸Šã®RLAãƒã‚§ãƒƒã‚¯ãƒ»ãƒ¬ãƒ™ãƒ«ã‹ã‚‰IOæ–‡å­—åˆ—ã‚’ç”Ÿæˆ
     s = Build_WalkRLA_IO(owner)
 
-    ' w’ès‚Éã‘‚«•Û‘¶
+    ' æŒ‡å®šè¡Œã«ä¸Šæ›¸ãä¿å­˜
     ws.Cells(r, c).Value2 = CStr(s)
 
 End Sub
@@ -1983,11 +1983,11 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
     Dim c As MSForms.Control
     Dim bpsd As String
     
-    Set frm = owner   ' frmEval ‚ğó‚¯æ‚é‘z’è
+    Set frm = owner   ' frmEval ã‚’å—ã‘å–ã‚‹æƒ³å®š
     
-    '=== ”F’mF’†Šj6€–Ú =====================================
+    '=== èªçŸ¥ï¼šä¸­æ ¸6é …ç›® =====================================
     
-    ' ‹L‰¯
+    ' è¨˜æ†¶
     col = HeaderCol_Compat("IO_Cog_Memory", ws)
     If col > 0 Then
         v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -1997,7 +1997,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-    ' ’ˆÓ
+    ' æ³¨æ„
     col = HeaderCol_Compat("IO_Cog_Attention", ws)
     If col > 0 Then
         v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -2007,7 +2007,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-    ' Œ©“–¯
+    ' è¦‹å½“è­˜
     col = HeaderCol_Compat("IO_Cog_Orientation", ws)
     If col > 0 Then
             v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -2017,7 +2017,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-    ' ”»’f
+    ' åˆ¤æ–­
     col = HeaderCol_Compat("IO_Cog_Judgement", ws)
     If col > 0 Then
             v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -2027,7 +2027,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-    ' ‹s‹@”\
+    ' é‚è¡Œæ©Ÿèƒ½
     col = HeaderCol_Compat("IO_Cog_Executive", ws)
     If col > 0 Then
             v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -2037,7 +2037,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-    ' Œ¾Œê
+    ' è¨€èª
     col = HeaderCol_Compat("IO_Cog_Language", ws)
     If col > 0 Then
             v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -2047,7 +2047,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-    '=== ”F’mF”F’mÇ‚Ìí—Ş{”õl ==============================
+    '=== èªçŸ¥ï¼šèªçŸ¥ç—‡ã®ç¨®é¡ï¼‹å‚™è€ƒ ==============================
     
     col = HeaderCol_Compat("IO_Cog_DementiaType", ws)
     If col > 0 Then
@@ -2067,7 +2067,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-        '=== ”F’mFBPSDiƒ`ƒFƒbƒN‚ª“ü‚Á‚Ä‚¢‚é€–Ú‚ğ | ‹æØ‚è‚Å•Û‘¶j ===
+        '=== èªçŸ¥ï¼šBPSDï¼ˆãƒã‚§ãƒƒã‚¯ãŒå…¥ã£ã¦ã„ã‚‹é …ç›®ã‚’ | åŒºåˆ‡ã‚Šã§ä¿å­˜ï¼‰ ===
     
     bpsd = ""
     With frm.Controls("Frame31").Controls("mpCogMental").Pages("pgCognition")
@@ -2087,9 +2087,9 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
     End If
 
     
-    '=== ¸_–Êƒ^ƒu ============================================
+    '=== ç²¾ç¥é¢ã‚¿ãƒ– ============================================
     
-    ' ‹C•ª
+    ' æ°—åˆ†
     col = HeaderCol_Compat("IO_Mental_Mood", ws)
     If col > 0 Then
             v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -2099,7 +2099,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-    ' ˆÓ—~
+    ' æ„æ¬²
     col = HeaderCol_Compat("IO_Mental_Motivation", ws)
     If col > 0 Then
             v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -2109,7 +2109,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-    ' •sˆÀ
+    ' ä¸å®‰
     col = HeaderCol_Compat("IO_Mental_Anxiety", ws)
     If col > 0 Then
             v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -2119,7 +2119,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-    ' ‘ÎlŠÖŒW
+    ' å¯¾äººé–¢ä¿‚
     col = HeaderCol_Compat("IO_Mental_Relation", ws)
     If col > 0 Then
             v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -2129,7 +2129,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-    ' ‡–°
+    ' ç¡çœ 
     col = HeaderCol_Compat("IO_Mental_Sleep", ws)
     If col > 0 Then
             v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -2139,7 +2139,7 @@ Public Sub Save_CognitionMental_AtRow(ws As Worksheet, r As Long, owner As Objec
         ws.Cells(r, col).value = v
     End If
     
-    ' ¸_–ÊE”õl
+    ' ç²¾ç¥é¢ãƒ»å‚™è€ƒ
     col = HeaderCol_Compat("IO_Mental_Note", ws)
     If col > 0 Then
            v = frm.Controls("Frame31").Controls("mpCogMental") _
@@ -2182,13 +2182,13 @@ Public Sub Load_CognitionMental_FromRow(ws As Worksheet, ByVal r As Long, owner 
     Dim i As Long, j As Long
     Dim chk As MSForms.CheckBox
 
-    '=== UI ƒ‹[ƒgæ“¾iâ‘Î–¼‚ğ‘O’ñj===
+    '=== UI ãƒ«ãƒ¼ãƒˆå–å¾—ï¼ˆçµ¶å¯¾åã‚’å‰æï¼‰===
     Set f = owner.Frame31
     Set mp = f.Controls("mpCogMental")
     Set pgCog = mp.Pages("pgCognition")
     Set pgMental = mp.Pages("pgMental")
 
-    '=== ”F’m‘¤ combobox ŒQ ===
+    '=== èªçŸ¥å´ combobox ç¾¤ ===
     v = ws.Cells(r, COL_COG_MEMORY).value
     If IsNull(v) Then v = ""
     pgCog.Controls("cmbCogMemory").value = v
@@ -2221,14 +2221,14 @@ Public Sub Load_CognitionMental_FromRow(ws As Worksheet, ByVal r As Long, owner 
     If IsNull(v) Then v = ""
     pgCog.Controls("txtDementiaNote").Text = v
 
-    '=== BPSDichkBPSD0?10j===
-    ' 1) ‘S•”ˆê“xƒNƒŠƒA
+    '=== BPSDï¼ˆchkBPSD0?10ï¼‰===
+    ' 1) å…¨éƒ¨ä¸€åº¦ã‚¯ãƒªã‚¢
     For i = 0 To 10
         Set chk = pgCog.Controls("chkBPSD" & CStr(i))
         chk.value = False
     Next i
 
-    ' 2) ƒZƒ‹•¶š—ñ‚ğ | ‚Å•ª‰ğ‚µACaption ‚Æˆê’v‚·‚éƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ğON
+    ' 2) ã‚»ãƒ«æ–‡å­—åˆ—ã‚’ | ã§åˆ†è§£ã—ã€Caption ã¨ä¸€è‡´ã™ã‚‹ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã‚’ON
     s = ws.Cells(r, COL_COG_BPSD).value & ""
     If Len(s) > 0 Then
         arr = Split(s, "|")
@@ -2243,7 +2243,7 @@ Public Sub Load_CognitionMental_FromRow(ws As Worksheet, ByVal r As Long, owner 
         Next i
     End If
 
-    '=== ¸_–Ê combobox / note ===
+    '=== ç²¾ç¥é¢ combobox / note ===
     v = ws.Cells(r, COL_MENTAL_MOOD).value
     If IsNull(v) Then v = ""
     pgMental.Controls("cmbMood").value = v
@@ -2284,7 +2284,7 @@ Public Sub Save_DailyLog_FromForm(owner As Object)
 
     Set wb = ThisWorkbook
 
-    '--- DailyLog ƒV[ƒgæ“¾ or ì¬ ---
+    '--- DailyLog ã‚·ãƒ¼ãƒˆå–å¾— or ä½œæˆ ---
     For Each sh In wb.Worksheets
         If sh.name = "DailyLog" Then
             Set ws = sh
@@ -2295,43 +2295,43 @@ Public Sub Save_DailyLog_FromForm(owner As Object)
     If ws Is Nothing Then
         Set ws = wb.Worksheets.Add(After:=wb.Worksheets(wb.Worksheets.Count))
         ws.name = "DailyLog"
-        ws.Range("A1").value = "‹L˜^“ú"
-        ws.Range("B1").value = "—˜—pÒ–¼"
-        ws.Range("C1").value = "‹L˜^Ò"
-        ws.Range("D1").value = "‹L˜^“à—e"
+        ws.Range("A1").value = "è¨˜éŒ²æ—¥"
+        ws.Range("B1").value = "åˆ©ç”¨è€…å"
+        ws.Range("C1").value = "è¨˜éŒ²è€…"
+        ws.Range("D1").value = "è¨˜éŒ²å†…å®¹"
     End If
 
-    ' Šù‘¶ƒV[ƒg‚Å‚àƒwƒbƒ_‚ª‹ó‚È‚çƒwƒbƒ_‚ğ•â³
+    ' æ—¢å­˜ã‚·ãƒ¼ãƒˆã§ã‚‚ãƒ˜ãƒƒãƒ€ãŒç©ºãªã‚‰ãƒ˜ãƒƒãƒ€ã‚’è£œæ­£
     If ws.Cells(1, 1).value = "" And _
        ws.Cells(1, 2).value = "" And _
        ws.Cells(1, 3).value = "" And _
        ws.Cells(1, 4).value = "" Then
 
-        ws.Range("A1").value = "‹L˜^“ú"
-        ws.Range("B1").value = "—˜—pÒ–¼"
-        ws.Range("C1").value = "‹L˜^Ò"
-        ws.Range("D1").value = "‹L˜^“à—e"
+        ws.Range("A1").value = "è¨˜éŒ²æ—¥"
+        ws.Range("B1").value = "åˆ©ç”¨è€…å"
+        ws.Range("C1").value = "è¨˜éŒ²è€…"
+        ws.Range("D1").value = "è¨˜éŒ²å†…å®¹"
     End If
 
-    '--- ‘‚«‚İs‚ğŒˆ’èiÅIs‚ÌŸj ---
+    '--- æ›¸ãè¾¼ã¿è¡Œã‚’æ±ºå®šï¼ˆæœ€çµ‚è¡Œã®æ¬¡ï¼‰ ---
     lastRow = ws.Cells(ws.rows.Count, 1).End(xlUp).row
     If lastRow < 1 Then lastRow = 1
     r = lastRow + 1
 
-    '--- ƒtƒH[ƒ€ã‚ÌƒRƒ“ƒgƒ[ƒ‹æ“¾ ---
-    Set txtName = owner.Controls("txtName")          ' —˜—pÒ–¼ifrmEval ‹¤’Êj
-    Set f = owner.Controls("fraDailyLog")            ' ƒ‚ƒjƒ^ƒŠƒ“ƒO—pƒtƒŒ[ƒ€
+    '--- ãƒ•ã‚©ãƒ¼ãƒ ä¸Šã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«å–å¾— ---
+    Set txtName = owner.Controls("txtName")          ' åˆ©ç”¨è€…åï¼ˆfrmEval å…±é€šï¼‰
+    Set f = owner.Controls("fraDailyLog")            ' ãƒ¢ãƒ‹ã‚¿ãƒªãƒ³ã‚°ç”¨ãƒ•ãƒ¬ãƒ¼ãƒ 
 
-    Set txtDate = f.Controls("txtDailyDate")         ' ‹L˜^“ú
-    Set txtStaff = f.Controls("txtDailyStaff")       ' ‹L˜^Ò
-    Set txtNote = f.Controls("txtDailyNote")         ' ‹L˜^“à—e
+    Set txtDate = f.Controls("txtDailyDate")         ' è¨˜éŒ²æ—¥
+    Set txtStaff = f.Controls("txtDailyStaff")       ' è¨˜éŒ²è€…
+    Set txtNote = f.Controls("txtDailyNote")         ' è¨˜éŒ²å†…å®¹
 
-    '--- DailyLog ƒV[ƒg‚Ö•Û‘¶ ---
+    '--- DailyLog ã‚·ãƒ¼ãƒˆã¸ä¿å­˜ ---
     ws.Cells(r, 1).value = CStr(txtDate.value)
     ws.Cells(r, 2).value = CStr(txtName.value)
     ws.Cells(r, 3).value = CStr(txtStaff.value)
     ws.Cells(r, 4).value = CStr(txtNote.value)
-    ws.Cells(r, 1).NumberFormatLocal = "yyyy/mm/dd"   ' ©‚±‚ê‚ğ’Ç‰Á
+    ws.Cells(r, 1).NumberFormatLocal = "yyyy/mm/dd"   ' â†ã“ã‚Œã‚’è¿½åŠ 
     
 
 
@@ -2356,7 +2356,7 @@ Public Sub Load_DailyLog_Latest_FromForm(owner As Object)
 
     Set wb = ThisWorkbook
 
-    '--- DailyLog ƒV[ƒgæ“¾i–³‚¯‚ê‚Î‰½‚à‚µ‚È‚¢j ---
+    '--- DailyLog ã‚·ãƒ¼ãƒˆå–å¾—ï¼ˆç„¡ã‘ã‚Œã°ä½•ã‚‚ã—ãªã„ï¼‰ ---
     For Each sh In wb.Worksheets
         If sh.name = "DailyLog" Then
             Set ws = sh
@@ -2369,7 +2369,7 @@ Public Sub Load_DailyLog_Latest_FromForm(owner As Object)
         Exit Sub
     End If
 
-    '--- ƒtƒH[ƒ€ã‚ÌƒRƒ“ƒgƒ[ƒ‹æ“¾ ---
+    '--- ãƒ•ã‚©ãƒ¼ãƒ ä¸Šã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«å–å¾— ---
     Set txtName = owner.Controls("txtName")
     Set f = owner.Controls("fraDailyLog")
     Set txtDate = f.Controls("txtDailyDate")
@@ -2382,8 +2382,8 @@ Public Sub Load_DailyLog_Latest_FromForm(owner As Object)
         Exit Sub
     End If
 
-    '--- ŠY“–—˜—pÒ‚ÌuÅVi‚¢‚¿‚Î‚ñ‰ºjv‚Ìs‚ğ’T‚· ---
-    lastRow = ws.Cells(ws.rows.Count, 2).End(xlUp).row   ' B—ñ—˜—pÒ–¼
+    '--- è©²å½“åˆ©ç”¨è€…ã®ã€Œæœ€æ–°ï¼ˆã„ã¡ã°ã‚“ä¸‹ï¼‰ã€ã®è¡Œã‚’æ¢ã™ ---
+    lastRow = ws.Cells(ws.rows.Count, 2).End(xlUp).row   ' Båˆ—ï¼åˆ©ç”¨è€…å
     If lastRow < 2 Then
 
         Exit Sub
@@ -2402,10 +2402,10 @@ Public Sub Load_DailyLog_Latest_FromForm(owner As Object)
         Exit Sub
     End If
 
-    '--- Œ©‚Â‚©‚Á‚½s‚ğƒtƒH[ƒ€‚Ö”½‰f ---
-    txtDate.value = ws.Cells(r, 1).value     ' ‹L˜^“ú
-    txtStaff.value = ws.Cells(r, 3).value    ' ‹L˜^Ò
-    txtNote.value = ws.Cells(r, 4).value     ' ‹L˜^“à—e
+    '--- è¦‹ã¤ã‹ã£ãŸè¡Œã‚’ãƒ•ã‚©ãƒ¼ãƒ ã¸åæ˜  ---
+    txtDate.value = ws.Cells(r, 1).value     ' è¨˜éŒ²æ—¥
+    txtStaff.value = ws.Cells(r, 3).value    ' è¨˜éŒ²è€…
+    txtNote.value = ws.Cells(r, 4).value     ' è¨˜éŒ²å†…å®¹
 
 
 End Sub
@@ -2424,7 +2424,7 @@ Public Sub SaveDailyLog_Append(owner As Object)
 
 
     
-    ' ê—pƒ{ƒ^ƒ“‚©‚ç‚ÌŒÄ‚Ño‚µˆÈŠO‚Å‚Í‰½‚à‚µ‚È‚¢
+    ' å°‚ç”¨ãƒœã‚¿ãƒ³ã‹ã‚‰ã®å‘¼ã³å‡ºã—ä»¥å¤–ã§ã¯ä½•ã‚‚ã—ãªã„
     If Not mDailyLogManual Then Exit Sub
 
     Dim wb As Workbook
@@ -2437,46 +2437,46 @@ Public Sub SaveDailyLog_Append(owner As Object)
     Dim note As String
 
     Set wb = ThisWorkbook
-    Set ws = wb.Worksheets("DailyLog")  ' š “úX‚Ì‹L˜^ƒV[ƒg–¼i•Ï‚¦‚é‚È‚ç‚±‚±j
+    Set ws = wb.Worksheets("DailyLog")  ' â˜… æ—¥ã€…ã®è¨˜éŒ²ã‚·ãƒ¼ãƒˆåï¼ˆå¤‰ãˆã‚‹ãªã‚‰ã“ã“ï¼‰
     Set f = owner.Controls("fraDailyLog")
 
-    '--- “ü—Í’læ“¾ ---
+    '--- å…¥åŠ›å€¤å–å¾— ---
     dt = f.Controls("txtDailyDate").value
     nm = Trim$(owner.Controls("frHeader").Controls("txtHdrName").value)
     staff = Trim$(f.Controls("txtDailyStaff").value)
     note = f.Controls("txtDailyNote").value
 
-    '--- “ü—Íƒ`ƒFƒbƒN ---
+    '--- å…¥åŠ›ãƒã‚§ãƒƒã‚¯ ---
     If nm = "" Then
-        MsgBox "–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", vbExclamation
+        MsgBox "æ°åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", vbExclamation
         Exit Sub
     End If
 
     If Not IsDate(dt) Then
-        MsgBox "‹L˜^“ú‚Ì—“‚É³‚µ‚¢“ú•t‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", vbExclamation
+        MsgBox "è¨˜éŒ²æ—¥ã®æ¬„ã«æ­£ã—ã„æ—¥ä»˜ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", vbExclamation
         Exit Sub
     End If
 
     If note = "" Then
-        If MsgBox("‹L˜^“à—e‚ª‹ó‚Å‚·‚ª•Û‘¶‚µ‚Ü‚·‚©H", vbQuestion + vbOKCancel) = vbCancel Then Exit Sub
+        If MsgBox("è¨˜éŒ²å†…å®¹ãŒç©ºã§ã™ãŒä¿å­˜ã—ã¾ã™ã‹ï¼Ÿ", vbQuestion + vbOKCancel) = vbCancel Then Exit Sub
     End If
 
-    '--- ’Ç‹Ls‚ğŒˆ‚ß‚éi1s–Ú‚ÉŒ©o‚µ‚ª‚ ‚é‘O’ñj---
+    '--- è¿½è¨˜è¡Œã‚’æ±ºã‚ã‚‹ï¼ˆ1è¡Œç›®ã«è¦‹å‡ºã—ãŒã‚ã‚‹å‰æï¼‰---
     r = ws.Cells(ws.rows.Count, 1).End(xlUp).row + 1
 
-    '--- ‘‚«‚İ ---
-    ws.Cells(r, 1).value = CDate(dt)   ' ‹L˜^“ú
-    ws.Cells(r, 2).value = nm          ' —˜—pÒ–¼
-    ws.Cells(r, 3).value = Trim$(owner.Controls("frHeader").Controls("txtHdrPID").value) ' šID
-    ws.Cells(r, 4).value = staff       ' ‹L˜^Ò
-    ws.Cells(r, 5).value = note        ' ‹L˜^“à—e
+    '--- æ›¸ãè¾¼ã¿ ---
+    ws.Cells(r, 1).value = CDate(dt)   ' è¨˜éŒ²æ—¥
+    ws.Cells(r, 2).value = nm          ' åˆ©ç”¨è€…å
+    ws.Cells(r, 3).value = Trim$(owner.Controls("frHeader").Controls("txtHdrPID").value) ' â˜…ID
+    ws.Cells(r, 4).value = staff       ' è¨˜éŒ²è€…
+    ws.Cells(r, 5).value = note        ' è¨˜éŒ²å†…å®¹
 
 End Sub
 
 
 
 
-'=== Basic.* ‚Æ“ú–{Œêƒwƒbƒ_—ñ‚ğƒ~ƒ‰[‚·‚é”Ä—pƒwƒ‹ƒp[ =====================
+'=== Basic.* ã¨æ—¥æœ¬èªãƒ˜ãƒƒãƒ€åˆ—ã‚’ãƒŸãƒ©ãƒ¼ã™ã‚‹æ±ç”¨ãƒ˜ãƒ«ãƒ‘ãƒ¼ =====================
 
 Private Sub MirrorBasicPair( _
         ByVal ws As Worksheet, ByVal rowNum As Long, _
@@ -2489,7 +2489,7 @@ Private Sub MirrorBasicPair( _
     vBasic = ws.Cells(rowNum, colBasic).value
     vJp = ws.Cells(rowNum, colJp).value
 
-    ' ‚Ç‚¿‚ç‚©•Ğ•û‚¾‚¯“ü‚Á‚Ä‚¢‚éê‡A‚à‚¤•Ğ•û‚ÖƒRƒs[
+    ' ã©ã¡ã‚‰ã‹ç‰‡æ–¹ã ã‘å…¥ã£ã¦ã„ã‚‹å ´åˆã€ã‚‚ã†ç‰‡æ–¹ã¸ã‚³ãƒ”ãƒ¼
     If Len(vBasic) = 0 And Len(vJp) > 0 Then
         ws.Cells(rowNum, colBasic).value = vJp
     ElseIf Len(vJp) = 0 And Len(vBasic) > 0 Then
@@ -2497,47 +2497,47 @@ Private Sub MirrorBasicPair( _
     End If
 End Sub
 
-'=== Šî–{î•ñ‚ÌV‹Œ—ñ‚ğƒ~ƒ‰[‚·‚é =====================================
-'  EBasic.* ‚Æ “ú–{Œêƒwƒbƒ_ ‚Ì—¼•û‚ğu‹ó‚¢‚Ä‚¢‚é•û‚ÖvƒRƒs[‚·‚é
-'  E‚Ç‚¿‚ç‚©•Ğ•û‚É‚µ‚©’l‚ª‚È‚¯‚ê‚ÎA‚»‚Ì’l‚ğ‚à‚¤•Ğ•û‚ÖÊ‚·‚¾‚¯
-'  E—¼•û‚É’l‚ª‚ ‚éê‡‚Í‰½‚à‚µ‚È‚¢iÕ“Ë‰ñ”ğj
+'=== åŸºæœ¬æƒ…å ±ã®æ–°æ—§åˆ—ã‚’ãƒŸãƒ©ãƒ¼ã™ã‚‹ =====================================
+'  ãƒ»Basic.* ã¨ æ—¥æœ¬èªãƒ˜ãƒƒãƒ€ ã®ä¸¡æ–¹ã‚’ã€Œç©ºã„ã¦ã„ã‚‹æ–¹ã¸ã€ã‚³ãƒ”ãƒ¼ã™ã‚‹
+'  ãƒ»ã©ã¡ã‚‰ã‹ç‰‡æ–¹ã«ã—ã‹å€¤ãŒãªã‘ã‚Œã°ã€ãã®å€¤ã‚’ã‚‚ã†ç‰‡æ–¹ã¸å†™ã™ã ã‘
+'  ãƒ»ä¸¡æ–¹ã«å€¤ãŒã‚ã‚‹å ´åˆã¯ä½•ã‚‚ã—ãªã„ï¼ˆè¡çªå›é¿ï¼‰
 Public Sub MirrorBasicRow(ByVal ws As Worksheet, ByVal rowNum As Long)
     On Error GoTo ErrHandler
 
     ' ID
     MirrorBasicPair ws, rowNum, "Basic.ID", "ID"
-    ' –¼
-    MirrorBasicPair ws, rowNum, "Basic.Name", "–¼"
-    ' •]‰¿“ú
-    MirrorBasicPair ws, rowNum, "Basic.EvalDate", "•]‰¿“ú"
-    ' ”N—î
-    MirrorBasicPair ws, rowNum, "Basic.Age", "”N—î"
-    ' «•Ê
-    MirrorBasicPair ws, rowNum, "Basic.Sex", "«•Ê"
-    ' •]‰¿Ò
-    MirrorBasicPair ws, rowNum, "Basic.Evaluator", "•]‰¿Ò"
-    ' ”­Ç“ú
-    MirrorBasicPair ws, rowNum, "Basic.OnsetDate", "”­Ç“ú"
-    ' Š³ÒNeeds
-    MirrorBasicPair ws, rowNum, "Basic.Needs.Patient", "Š³ÒNeeds"
-    ' ‰Æ‘°Needs
-    MirrorBasicPair ws, rowNum, "Basic.Needs.Family", "‰Æ‘°Needs"
-    ' ¶Šˆó‹µ
-    MirrorBasicPair ws, rowNum, "Basic.LifeStatus", "¶Šˆó‹µ"
-    ' åf’f
-    MirrorBasicPair ws, rowNum, "Basic.PrimaryDx", "åf’f"
-    ' —v‰îŒì“x
-    MirrorBasicPair ws, rowNum, "Basic.CareLevel", "—v‰îŒì“x"
+    ' æ°å
+    MirrorBasicPair ws, rowNum, "Basic.Name", "æ°å"
+    ' è©•ä¾¡æ—¥
+    MirrorBasicPair ws, rowNum, "Basic.EvalDate", "è©•ä¾¡æ—¥"
+    ' å¹´é½¢
+    MirrorBasicPair ws, rowNum, "Basic.Age", "å¹´é½¢"
+    ' æ€§åˆ¥
+    MirrorBasicPair ws, rowNum, "Basic.Sex", "æ€§åˆ¥"
+    ' è©•ä¾¡è€…
+    MirrorBasicPair ws, rowNum, "Basic.Evaluator", "è©•ä¾¡è€…"
+    ' ç™ºç—‡æ—¥
+    MirrorBasicPair ws, rowNum, "Basic.OnsetDate", "ç™ºç—‡æ—¥"
+    ' æ‚£è€…Needs
+    MirrorBasicPair ws, rowNum, "Basic.Needs.Patient", "æ‚£è€…Needs"
+    ' å®¶æ—Needs
+    MirrorBasicPair ws, rowNum, "Basic.Needs.Family", "å®¶æ—Needs"
+    ' ç”Ÿæ´»çŠ¶æ³
+    MirrorBasicPair ws, rowNum, "Basic.LifeStatus", "ç”Ÿæ´»çŠ¶æ³"
+    ' ä¸»è¨ºæ–­
+    MirrorBasicPair ws, rowNum, "Basic.PrimaryDx", "ä¸»è¨ºæ–­"
+    ' è¦ä»‹è­·åº¦
+    MirrorBasicPair ws, rowNum, "Basic.CareLevel", "è¦ä»‹è­·åº¦"
 
     Exit Sub
 
 ErrHandler:
     
 End Sub
-'=== Šî–{î•ñ‚ÌV‹Œ—ñ‚ğƒ~ƒ‰[‚·‚é =====================================
-'  EBasic.* ‚Æ “ú–{Œêƒwƒbƒ_ ‚Ì—¼•û‚ğu‹ó‚¢‚Ä‚¢‚é•û‚ÖvƒRƒs[‚·‚é
-'  E‚Ç‚¿‚ç‚©•Ğ•û‚É‚µ‚©’l‚ª‚È‚¯‚ê‚ÎA‚»‚Ì’l‚ğ‚à‚¤•Ğ•û‚ÖÊ‚·‚¾‚¯
-'  E—¼•û‚É’l‚ª‚ ‚éê‡‚Í‰½‚à‚µ‚È‚¢iÕ“Ë‰ñ”ğj
+'=== åŸºæœ¬æƒ…å ±ã®æ–°æ—§åˆ—ã‚’ãƒŸãƒ©ãƒ¼ã™ã‚‹ =====================================
+'  ãƒ»Basic.* ã¨ æ—¥æœ¬èªãƒ˜ãƒƒãƒ€ ã®ä¸¡æ–¹ã‚’ã€Œç©ºã„ã¦ã„ã‚‹æ–¹ã¸ã€ã‚³ãƒ”ãƒ¼ã™ã‚‹
+'  ãƒ»ã©ã¡ã‚‰ã‹ç‰‡æ–¹ã«ã—ã‹å€¤ãŒãªã‘ã‚Œã°ã€ãã®å€¤ã‚’ã‚‚ã†ç‰‡æ–¹ã¸å†™ã™ã ã‘
+'  ãƒ»ä¸¡æ–¹ã«å€¤ãŒã‚ã‚‹å ´åˆã¯ä½•ã‚‚ã—ãªã„ï¼ˆè¡çªå›é¿ï¼‰
 Public Sub MirrorBasicRow_Eval(ByVal ws As Worksheet, ByVal rowNum As Long)
     On Error GoTo ErrHandler
 
@@ -2548,27 +2548,27 @@ Public Sub MirrorBasicRow_Eval(ByVal ws As Worksheet, ByVal rowNum As Long)
     Dim vNew As Variant, vOld As Variant
     Dim sNew As String, sOld As String
 
-    ' ‘ÎÛƒyƒAˆê——i¶‚ª Basic.*A‰E‚ª“ú–{Œêƒwƒbƒ_j
+    ' å¯¾è±¡ãƒšã‚¢ä¸€è¦§ï¼ˆå·¦ãŒ Basic.*ã€å³ãŒæ—¥æœ¬èªãƒ˜ãƒƒãƒ€ï¼‰
     pairs = Array( _
         Array("Basic.ID", "ID"), _
-        Array("Basic.Name", "–¼"), _
-        Array("Basic.EvalDate", "•]‰¿“ú"), _
-        Array("Basic.Age", "”N—î"), _
-        Array("Basic.Sex", "«•Ê"), _
-        Array("Basic.Evaluator", "•]‰¿Ò"), _
-        Array("Basic.OnsetDate", "”­Ç“ú"), _
-        Array("Basic.Needs.Patient", "Š³ÒNeeds"), _
-        Array("Basic.Needs.Family", "‰Æ‘°Needs"), _
-        Array("Basic.LifeStatus", "¶Šˆó‹µ"), _
-        Array("Basic.PrimaryDx", "åf’f"), _
-        Array("Basic.CareLevel", "—v‰îŒì“x") _
+        Array("Basic.Name", "æ°å"), _
+        Array("Basic.EvalDate", "è©•ä¾¡æ—¥"), _
+        Array("Basic.Age", "å¹´é½¢"), _
+        Array("Basic.Sex", "æ€§åˆ¥"), _
+        Array("Basic.Evaluator", "è©•ä¾¡è€…"), _
+        Array("Basic.OnsetDate", "ç™ºç—‡æ—¥"), _
+        Array("Basic.Needs.Patient", "æ‚£è€…Needs"), _
+        Array("Basic.Needs.Family", "å®¶æ—Needs"), _
+        Array("Basic.LifeStatus", "ç”Ÿæ´»çŠ¶æ³"), _
+        Array("Basic.PrimaryDx", "ä¸»è¨ºæ–­"), _
+        Array("Basic.CareLevel", "è¦ä»‹è­·åº¦") _
     )
 
     For i = LBound(pairs) To UBound(pairs)
         headerNew = pairs(i)(0)
         headerOld = pairs(i)(1)
 
-        ' Œ©o‚µ—ñ‚ğæ“¾i‚Ç‚¿‚ç‚©–³‚¯‚ê‚ÎƒXƒLƒbƒvj
+        ' è¦‹å‡ºã—åˆ—ã‚’å–å¾—ï¼ˆã©ã¡ã‚‰ã‹ç„¡ã‘ã‚Œã°ã‚¹ã‚­ãƒƒãƒ—ï¼‰
         cNew = FindColByHeaderExact(ws, headerNew)
         cOld = FindColByHeaderExact(ws, headerOld)
         If cNew = 0 Or cOld = 0 Then GoTo NextPair
@@ -2579,7 +2579,7 @@ Public Sub MirrorBasicRow_Eval(ByVal ws As Worksheet, ByVal rowNum As Long)
         sNew = Trim$(CStr(vNew))
         sOld = Trim$(CStr(vOld))
 
-        ' ‚Ç‚¿‚ç‚©‚¾‚¯–„‚Ü‚Á‚Ä‚¢‚éê‡A‹ó‚¢‚Ä‚¢‚é•û‚ÖƒRƒs[
+        ' ã©ã¡ã‚‰ã‹ã ã‘åŸ‹ã¾ã£ã¦ã„ã‚‹å ´åˆã€ç©ºã„ã¦ã„ã‚‹æ–¹ã¸ã‚³ãƒ”ãƒ¼
         If sNew = "" And sOld <> "" Then
             ws.Cells(rowNum, cNew).value = vOld
         ElseIf sOld = "" And sNew <> "" Then

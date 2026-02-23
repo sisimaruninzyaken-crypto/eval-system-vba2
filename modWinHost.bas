@@ -1,14 +1,14 @@
 Attribute VB_Name = "modWinHost"
-'=== modWinHost (32/64 —¼‘Î‰) ===
+'=== modWinHost (32/64 ä¸¡å¯¾å¿œ) ===
 #If VBA7 Then
-    ' --- 32/64 ‚ğ•ªŠò‚µ‚Ä Ptr Œn API ‚ğƒGƒCƒŠƒAƒX ---
+    ' --- 32/64 ã‚’åˆ†å²ã—ã¦ Ptr ç³» API ã‚’ã‚¨ã‚¤ãƒªã‚¢ã‚¹ ---
     #If Win64 Then
         Private Declare PtrSafe Function GetWindowLongPtr Lib "user32" Alias "GetWindowLongPtrA" _
             (ByVal hwnd As LongPtr, ByVal nIndex As Long) As LongPtr
         Private Declare PtrSafe Function SetWindowLongPtr Lib "user32" Alias "SetWindowLongPtrA" _
             (ByVal hwnd As LongPtr, ByVal nIndex As Long, ByVal dwNewLong As LongPtr) As LongPtr
     #Else
-        ' 32bit Office ‚Å‚Í *Ptr ‚ª–³‚¢‚Ì‚Å Get/SetWindowLongA ‚ÉƒGƒCƒŠƒAƒX
+        ' 32bit Office ã§ã¯ *Ptr ãŒç„¡ã„ã®ã§ Get/SetWindowLongA ã«ã‚¨ã‚¤ãƒªã‚¢ã‚¹
         Private Declare PtrSafe Function GetWindowLongPtr Lib "user32" Alias "GetWindowLongA" _
             (ByVal hwnd As LongPtr, ByVal nIndex As Long) As LongPtr
         Private Declare PtrSafe Function SetWindowLongPtr Lib "user32" Alias "SetWindowLongA" _
@@ -20,7 +20,7 @@ Attribute VB_Name = "modWinHost"
     Private Declare PtrSafe Function SetWindowPos Lib "user32" (ByVal hwnd As LongPtr, ByVal hWndInsertAfter As LongPtr, _
         ByVal x As Long, ByVal Y As Long, ByVal cx As Long, ByVal cy As Long, ByVal uFlags As Long) As Long
 #Else
-    ' ŒÃ‚¢ VBA ŠÂ‹«i„§ŠO‚¾‚ªŒİŠ·—pj
+    ' å¤ã„ VBA ç’°å¢ƒï¼ˆæ¨å¥¨å¤–ã ãŒäº’æ›ç”¨ï¼‰
     Private Declare Function GetWindowLongPtr Lib "user32" Alias "GetWindowLongA" _
         (ByVal hwnd As Long, ByVal nIndex As Long) As Long
     Private Declare Function SetWindowLongPtr Lib "user32" Alias "SetWindowLongA" _

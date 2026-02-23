@@ -1,16 +1,16 @@
 Attribute VB_Name = "modADL_Probe"
 
 
-'=== Util: w’èCaption‚Ì‰E—×ƒRƒ“ƒ{‚ğ•Ô‚·i“¯ˆês}6pt‚ÅÅ‚à‹ß‚¢j ===
+'=== Util: æŒ‡å®šCaptionã®å³éš£ã‚³ãƒ³ãƒœã‚’è¿”ã™ï¼ˆåŒä¸€è¡ŒÂ±6ptã§æœ€ã‚‚è¿‘ã„ï¼‰ ===
 Private Function GetRightComboByLabelCaptionIn(p As MSForms.Page, ByVal cap As String) As MSForms.ComboBox
     Dim i As Long, lb As MSForms.label, c As Control, best As MSForms.ComboBox
     Dim dy As Double, bestDx As Double: bestDx = 1E+30
-    ' 1) Captionˆê’vƒ‰ƒxƒ‹‚ğ’T‚·
+    ' 1) Captionä¸€è‡´ãƒ©ãƒ™ãƒ«ã‚’æ¢ã™
     For i = 0 To p.Controls.Count - 1
         If TypeName(p.Controls(i)) = "Label" Then
             Set lb = p.Controls(i)
             If lb.caption = cap Then
-                ' 2) “¯‚¶s(}6pt)‚Å‰E‘¤‚É‚ ‚éÅ’Z‹——£‚ÌComboBox
+                ' 2) åŒã˜è¡Œ(Â±6pt)ã§å³å´ã«ã‚ã‚‹æœ€çŸ­è·é›¢ã®ComboBox
                 For Each c In p.Controls
                     If TypeName(c) = "ComboBox" Then
                         dy = Abs(c.Top - lb.Top)
@@ -33,28 +33,28 @@ End Function
 
 
 
-'=== Resolve: ‹N‹“®ì‚Ì–³–¼Comboi—§‚¿ã‚ª‚è^—§ˆÊ•Ûj‚ğæ“¾ ===
+'=== Resolve: èµ·å±…å‹•ä½œã®ç„¡åComboï¼ˆç«‹ã¡ä¸ŠãŒã‚Šï¼ç«‹ä½ä¿æŒï¼‰ã‚’å–å¾— ===
 Private Sub ResolveKyoUnnamedCombos(ByRef cmbStandUp As MSForms.ComboBox, ByRef cmbStandHold As MSForms.ComboBox)
     Dim mp As MSForms.MultiPage, p As MSForms.Page, c As Control
-    ' mpADL æ“¾
+    ' mpADL å–å¾—
     For Each c In frmEval.Controls
         If TypeName(c) = "MultiPage" Then
             If c.name = "mpADL" Then Set mp = c: Exit For
         End If
     Next c
     If mp Is Nothing Then Exit Sub
-    Set p = mp.Pages(2) ' ‹N‹“®ì
-    Set cmbStandUp = GetRightComboByLabelCaptionIn(p, "—§‚¿ã‚ª‚è")
-    Set cmbStandHold = GetRightComboByLabelCaptionIn(p, "—§ˆÊ•Û")
+    Set p = mp.Pages(2) ' èµ·å±…å‹•ä½œ
+    Set cmbStandUp = GetRightComboByLabelCaptionIn(p, "ç«‹ã¡ä¸ŠãŒã‚Š")
+    Set cmbStandHold = GetRightComboByLabelCaptionIn(p, "ç«‹ä½ä¿æŒ")
 End Sub
 
-'=== Snapshot: ADLiBI/IADL/‹N‹“®ìj‚ğŒÅ’è‡‚ÅƒVƒŠƒAƒ‰ƒCƒY•\¦ ===
+'=== Snapshot: ADLï¼ˆBI/IADL/èµ·å±…å‹•ä½œï¼‰ã‚’å›ºå®šé †ã§ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºè¡¨ç¤º ===
 Public Sub Snapshot_ADL_Once()
     Dim mp As MSForms.MultiPage, p As MSForms.Page, ctl As Control
     Dim i As Long, s As String, v As String
     Dim cmbSU As MSForms.ComboBox, cmbSH As MSForms.ComboBox
 
-    ' mpADL æ“¾
+    ' mpADL å–å¾—
     For Each ctl In frmEval.Controls
         If TypeName(ctl) = "MultiPage" Then
             If ctl.name = "mpADL" Then Set mp = ctl: Exit For
@@ -80,15 +80,15 @@ Public Sub Snapshot_ADL_Once()
     v = p.Controls("txtIADLNote").Text
     s = s & "IADLNote=" & v & "|"
 
-    ' --- ‹N‹“®ì (#2) ---
+    ' --- èµ·å±…å‹•ä½œ (#2) ---
     Set p = mp.Pages(2)
     s = s & "Kyo_Roll=" & p.Controls("cmbKyo_Roll").Text & "|"
     s = s & "Kyo_SitUp=" & p.Controls("cmbKyo_SitUp").Text & "|"
     s = s & "Kyo_SitHold=" & p.Controls("cmbKyo_SitHold").Text & "|"
 
     Call ResolveKyoUnnamedCombos(cmbSU, cmbSH)
-    If Not cmbSU Is Nothing Then s = s & "Kyo_StandUp=" & cmbSU.Text & "|" Else Debug.Print "[WARN] —§‚¿ã‚ª‚è –¢‰ğŒˆ"
-    If Not cmbSH Is Nothing Then s = s & "Kyo_StandHold=" & cmbSH.Text & "|" Else Debug.Print "[WARN] —§ˆÊ•Û –¢‰ğŒˆ"
+    If Not cmbSU Is Nothing Then s = s & "Kyo_StandUp=" & cmbSU.Text & "|" Else Debug.Print "[WARN] ç«‹ã¡ä¸ŠãŒã‚Š æœªè§£æ±º"
+    If Not cmbSH Is Nothing Then s = s & "Kyo_StandHold=" & cmbSH.Text & "|" Else Debug.Print "[WARN] ç«‹ä½ä¿æŒ æœªè§£æ±º"
 
     s = s & "Kyo_Note=" & p.Controls("txtKyoNote").Text
 
@@ -99,13 +99,13 @@ End Sub
 
 
 
-'=== ADL IO Builder: ƒtƒH[ƒ€ã‚ÌADL’l‚ğŒÅ’è‡‚Å˜AŒ‹‚µ‚Ä•Ô‚·i•›ì—p‚È‚µj ===
+'=== ADL IO Builder: ãƒ•ã‚©ãƒ¼ãƒ ä¸Šã®ADLå€¤ã‚’å›ºå®šé †ã§é€£çµã—ã¦è¿”ã™ï¼ˆå‰¯ä½œç”¨ãªã—ï¼‰ ===
 Public Function Build_ADL_IO() As String
     Dim mp As MSForms.MultiPage, p As MSForms.Page, ctl As Control
     Dim i As Long, s As String, v As String
     Dim cmbSU As MSForms.ComboBox, cmbSH As MSForms.ComboBox
 
-    ' mpADL æ“¾
+    ' mpADL å–å¾—
     For Each ctl In frmEval.Controls
         If TypeName(ctl) = "MultiPage" Then
             If ctl.name = "mpADL" Then Set mp = ctl: Exit For
@@ -131,15 +131,15 @@ Public Function Build_ADL_IO() As String
     v = p.Controls("txtIADLNote").Text
     s = s & "IADLNote=" & v & "|"
 
-    ' --- ‹N‹“®ì (#2) ---
+    ' --- èµ·å±…å‹•ä½œ (#2) ---
     Set p = mp.Pages(2)
     s = s & "Kyo_Roll=" & p.Controls("cmbKyo_Roll").Text & "|"
     s = s & "Kyo_SitUp=" & p.Controls("cmbKyo_SitUp").Text & "|"
     s = s & "Kyo_SitHold=" & p.Controls("cmbKyo_SitHold").Text & "|"
 
-    ' –³–¼ƒRƒ“ƒ{‰ğŒˆi—§‚¿ã‚ª‚è^—§ˆÊ•Ûj
-    Set cmbSU = GetRightComboByLabelCaptionIn(p, "—§‚¿ã‚ª‚è")
-    Set cmbSH = GetRightComboByLabelCaptionIn(p, "—§ˆÊ•Û")
+    ' ç„¡åã‚³ãƒ³ãƒœè§£æ±ºï¼ˆç«‹ã¡ä¸ŠãŒã‚Šï¼ç«‹ä½ä¿æŒï¼‰
+    Set cmbSU = GetRightComboByLabelCaptionIn(p, "ç«‹ã¡ä¸ŠãŒã‚Š")
+    Set cmbSH = GetRightComboByLabelCaptionIn(p, "ç«‹ä½ä¿æŒ")
     If Not cmbSU Is Nothing Then s = s & "Kyo_StandUp=" & cmbSU.Text & "|"
     If Not cmbSH Is Nothing Then s = s & "Kyo_StandHold=" & cmbSH.Text & "|"
 
@@ -151,24 +151,24 @@ End Function
 
 
 
-'=== Save: ADLiBI/IADL/‹N‹“®ìj‚ğ EvalData ‚É1s’Ç‹LiIO_ADL—ñj ===
+'=== Save: ADLï¼ˆBI/IADL/èµ·å±…å‹•ä½œï¼‰ã‚’ EvalData ã«1è¡Œè¿½è¨˜ï¼ˆIO_ADLåˆ—ï¼‰ ===
 
 Public Sub Save_ADL_Once()
     Dim ws As Worksheet, look As Object
     Dim s As String, r As Long, c As Long
     Dim lastCol As Long
 
-    Set ws = ThisWorkbook.Worksheets("EvalData")            ' Šù‘¶ƒwƒ‹ƒpiPainIO‚Æ“¯‚¶‘z’èj
+    Set ws = ThisWorkbook.Worksheets("EvalData")            ' æ—¢å­˜ãƒ˜ãƒ«ãƒ‘ï¼ˆPainIOã¨åŒã˜æƒ³å®šï¼‰
     
 
     c = EnsureHeader(ws, "IO_ADL")
 
 
-    ' ’Ç‹Ls‚ğŒˆ’èiƒwƒbƒ_‚ÌŸs‚©‚çŠJnj
+    ' è¿½è¨˜è¡Œã‚’æ±ºå®šï¼ˆãƒ˜ãƒƒãƒ€ã®æ¬¡è¡Œã‹ã‚‰é–‹å§‹ï¼‰
     r = ws.Cells(ws.rows.Count, c).End(xlUp).row: If r < 2 Then r = 2 Else r = r + 1
 
 
-    ' IO¶¬ ¨ ‘‚«‚İ
+    ' IOç”Ÿæˆ â†’ æ›¸ãè¾¼ã¿
     s = Build_ADL_IO()
     Debug.Print "[Chk]"; TypeName(ws); r; c; TypeName(ws.Cells(r, c))
 
@@ -179,7 +179,7 @@ ws.Cells(r, c).Value2 = CStr(s)
 
 End Sub
 
-'=== Helper: Œ©o‚µ—ñ‚ğ•ÛØ‚µ‚Ä—ñ”Ô†‚ğ•Ô‚·i–³‚¯‚ê‚Î1s–Ú‚Ì––”ö‚Éì¬j ===
+'=== Helper: è¦‹å‡ºã—åˆ—ã‚’ä¿è¨¼ã—ã¦åˆ—ç•ªå·ã‚’è¿”ã™ï¼ˆç„¡ã‘ã‚Œã°1è¡Œç›®ã®æœ«å°¾ã«ä½œæˆï¼‰ ===
 Public Function EnsureHeader(ws As Worksheet, ByVal header As String) As Long
 
     Dim M As Variant, lastCol As Long
@@ -200,7 +200,7 @@ End Function
 
 
 
-'=== Load: EvalData‚Ì IO_ADL ÅVs‚ğ“Ç‚İ‚İAƒtƒH[ƒ€‚É”½‰f ===
+'=== Load: EvalDataã® IO_ADL æœ€æ–°è¡Œã‚’èª­ã¿è¾¼ã¿ã€ãƒ•ã‚©ãƒ¼ãƒ ã«åæ˜  ===
 Public Sub Load_ADL_Latest()
     Dim ws As Worksheet, mp As MSForms.MultiPage, p As MSForms.Page, ctl As Control
     Dim c As Long, r As Long, s As String
@@ -211,12 +211,12 @@ Public Sub Load_ADL_Latest()
     Set ws = ThisWorkbook.Worksheets("EvalData")
     c = EnsureHeader(ws, "IO_ADL")
     r = ws.Cells(ws.rows.Count, c).End(xlUp).row
-    If r < 2 Then Exit Sub    ' ƒf[ƒ^‚È‚µ
+    If r < 2 Then Exit Sub    ' ãƒ‡ãƒ¼ã‚¿ãªã—
 
     s = ReadStr_Compat("IO_ADL", r, ws)
     parts = Split(s, "|")
 
-    ' mpADL æ“¾
+    ' mpADL å–å¾—
     For Each ctl In frmEval.Controls
         If TypeName(ctl) = "MultiPage" Then
             If ctl.name = "mpADL" Then Set mp = ctl: Exit For
@@ -224,12 +224,12 @@ Public Sub Load_ADL_Latest()
     Next ctl
     If mp Is Nothing Then Exit Sub
 
-    ' –³–¼ƒRƒ“ƒ{i‹N‹F—§‚¿ã‚ª‚è^—§ˆÊ•Ûj‚ğ‰ğŒˆ
-    Set p = mp.Pages(2) ' ‹N‹“®ì
-    Set cmbSU = GetRightComboByLabelCaptionIn(p, "—§‚¿ã‚ª‚è")
-    Set cmbSH = GetRightComboByLabelCaptionIn(p, "—§ˆÊ•Û")
+    ' ç„¡åã‚³ãƒ³ãƒœï¼ˆèµ·å±…ï¼šç«‹ã¡ä¸ŠãŒã‚Šï¼ç«‹ä½ä¿æŒï¼‰ã‚’è§£æ±º
+    Set p = mp.Pages(2) ' èµ·å±…å‹•ä½œ
+    Set cmbSU = GetRightComboByLabelCaptionIn(p, "ç«‹ã¡ä¸ŠãŒã‚Š")
+    Set cmbSH = GetRightComboByLabelCaptionIn(p, "ç«‹ä½ä¿æŒ")
 
-    ' ƒyƒA‚ğ‡Ÿ”½‰f
+    ' ãƒšã‚¢ã‚’é †æ¬¡åæ˜ 
     For i = LBound(parts) To UBound(parts)
         If Len(parts(i)) = 0 Then GoTo NextI
         If InStr(1, parts(i), "=") = 0 Then GoTo NextI
@@ -263,7 +263,7 @@ Public Sub Load_ADL_Latest()
     Case "IADL_8":                  SafeSetComboValue mp.Pages(1).Controls("cmbIADL_8"), v
     Case "IADLNote":                mp.Pages(1).Controls("txtIADLNote").Text = v
 
-    ' --- ‹N‹“®ì (#2) ---
+    ' --- èµ·å±…å‹•ä½œ (#2) ---
     Case "Kyo_Roll":                SafeSetComboValue mp.Pages(2).Controls("cmbKyo_Roll"), v
     Case "Kyo_SitUp":               SafeSetComboValue mp.Pages(2).Controls("cmbKyo_SitUp"), v
     Case "Kyo_SitHold":             SafeSetComboValue mp.Pages(2).Controls("cmbKyo_SitHold"), v
@@ -281,7 +281,7 @@ End Sub
 
 
 
-'=== Save¨Load: ADL ‚ğˆê”­ŒŸØiEvalData‚É’Ç‹L¨’¼Œã‚ÉƒtƒH[ƒ€‚Ö”½‰fj ===
+'=== Saveâ†’Load: ADL ã‚’ä¸€ç™ºæ¤œè¨¼ï¼ˆEvalDataã«è¿½è¨˜â†’ç›´å¾Œã«ãƒ•ã‚©ãƒ¼ãƒ ã¸åæ˜ ï¼‰ ===
 Public Sub SaveAndReload_ADL()
     Dim ws As Worksheet, c As Long, r As Long, s As String
     Call Save_ADL_Once
@@ -298,18 +298,18 @@ End Sub
 
 
 
-'=== Checklist: ADL •Û‘¶/“Ç‚ÌŒ’‘S«‚ğˆê”­Šm”F ===
+'=== Checklist: ADL ä¿å­˜/èª­è¾¼ã®å¥å…¨æ€§ã‚’ä¸€ç™ºç¢ºèª ===
 Public Sub PreRelease_ADL_Checklist()
     Dim ws As Worksheet, c As Long, r As Long, s As String
     Set ws = ThisWorkbook.Worksheets("EvalData")
     c = EnsureHeader(ws, "IO_ADL")
     r = ws.Cells(ws.rows.Count, c).End(xlUp).row
-    If r < 2 Then Debug.Print "[ADL.Check] ƒf[ƒ^‚È‚µ": Exit Sub
+    If r < 2 Then Debug.Print "[ADL.Check] ãƒ‡ãƒ¼ã‚¿ãªã—": Exit Sub
 
     s = ReadStr_Compat("IO_Sensory", r, ws)
     Debug.Print "[ADL.Check] Col=" & c & " Row=" & r & " | Len=" & Len(s)
 
-    ' ™p“™ƒ`ƒFƒbƒNF•Û‘¶¨“Ç¨’·‚³
+    ' å†ªç­‰ãƒã‚§ãƒƒã‚¯ï¼šä¿å­˜â†’èª­è¾¼â†’é•·ã•
     Call SaveAndReload_ADL
     s = Build_ADL_IO
     Debug.Print "[ADL.Check] AfterReload Len=" & Len(s)
@@ -321,7 +321,7 @@ End Sub
 
 Private Sub WalkCtrlPaths(host As Object, ByVal path As String)
 
-    ' MultiPage ‚Í Controls ‚Å‚Í‚È‚­ Pages ‚ğ‘–¸
+    ' MultiPage ã¯ Controls ã§ã¯ãªã Pages ã‚’èµ°æŸ»
 If TypeName(host) = "MultiPage" Then
     Dim pg As MSForms.Page
     For Each pg In host.Pages
@@ -337,7 +337,7 @@ End If
         p = path & "/" & c.name & ":" & t
         If c.name = "Frame33" Then Debug.Print "[HIT] "; p
         Select Case t
-            Case "Frame", "MultiPage", "Page" 'q‚ğ‚Â‰Â”\«‚ª‚ ‚é‚à‚Ì‚¾‚¯ö‚é
+            Case "Frame", "MultiPage", "Page" 'å­ã‚’æŒã¤å¯èƒ½æ€§ãŒã‚ã‚‹ã‚‚ã®ã ã‘æ½œã‚‹
                 WalkCtrlPaths c, p
         End Select
     Next c
@@ -346,16 +346,16 @@ End Sub
 
 
 
-'=== Save: ADL ‚ğuw’ès rv‚É‘‚«‚Şis‚ÍŠO•”‚ÅŒˆ’èj ===
+'=== Save: ADL ã‚’ã€ŒæŒ‡å®šè¡Œ rã€ã«æ›¸ãè¾¼ã‚€ï¼ˆè¡Œã¯å¤–éƒ¨ã§æ±ºå®šï¼‰ ===
 Public Sub Save_ADL_AtRow(ByVal ws As Worksheet, ByVal r As Long)
     Dim c As Long, s As String
     If ws Is Nothing Then Exit Sub
     If r < 2 Then r = 2
 
-    c = EnsureHeader(ws, "IO_ADL")   ' Œ©o‚µŠm•Û‚µ‚Ä—ñ”Ô†æ“¾i“¯–¼‚ª‘¼‚É‚ ‚éê‡‚ÍA‚»‚ÌŠÖ”‚ğg—p‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹‚Ì‚à‚Ì‚Å‚àOKj
-    s = Build_ADL_IO                 ' Œ»İ‚ÌƒtƒH[ƒ€’l‚ğIO‰»iŒÅ’è‡j
+    c = EnsureHeader(ws, "IO_ADL")   ' è¦‹å‡ºã—ç¢ºä¿ã—ã¦åˆ—ç•ªå·å–å¾—ï¼ˆåŒåãŒä»–ã«ã‚ã‚‹å ´åˆã¯ã€ãã®é–¢æ•°ã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®ã‚‚ã®ã§ã‚‚OKï¼‰
+    s = Build_ADL_IO                 ' ç¾åœ¨ã®ãƒ•ã‚©ãƒ¼ãƒ å€¤ã‚’IOåŒ–ï¼ˆå›ºå®šé †ï¼‰
 
-    ws.Cells(r, c).Value2 = CStr(s)  ' w’ès‚Éã‘‚«•Û‘¶i’Ç‹L‚ÍŒÄ‚Ño‚µ‘¤‚År‚ği‚ß‚éj
+    ws.Cells(r, c).Value2 = CStr(s)  ' æŒ‡å®šè¡Œã«ä¸Šæ›¸ãä¿å­˜ï¼ˆè¿½è¨˜ã¯å‘¼ã³å‡ºã—å´ã§rã‚’é€²ã‚ã‚‹ï¼‰
     Debug.Print "[ADL.Save@Row] Row=" & r & " Col=" & c & " | Len=" & Len(s)
 End Sub
 
@@ -370,42 +370,42 @@ End Sub
 
 
 Private Function ADLKeyNormalize(ByVal Tag As String) As String
-    ' UIƒ^ƒO ¨ •Û‘¶ƒL[ŒİŠ·
-    ' —áFBI.ÛH¨BI_0 / IADL.’²—¨IADL_0 / BI.Total¨BITotal
+    ' UIã‚¿ã‚° â†’ ä¿å­˜ã‚­ãƒ¼äº’æ›
+    ' ä¾‹ï¼šBI.æ‘‚é£Ÿâ†’BI_0 / IADL.èª¿ç†â†’IADL_0 / BI.Totalâ†’BITotal
     Dim M As Object, k As String
     k = Replace(Tag, ".", "_")
     If k = "BI_Total" Then ADLKeyNormalize = "BITotal": Exit Function
     
-    ' “ú–{Œê¨”Ô†‚ÌÅ¬ƒ}ƒbƒvi•K—v‚É‰‚¶‚ÄŸ‚Ìè‚ÅŠg’£j
-    ' BIiƒo[ƒTƒ‹j
+    ' æ—¥æœ¬èªâ†’ç•ªå·ã®æœ€å°ãƒãƒƒãƒ—ï¼ˆå¿…è¦ã«å¿œã˜ã¦æ¬¡ã®æ‰‹ã§æ‹¡å¼µï¼‰
+    ' BIï¼ˆãƒãƒ¼ã‚µãƒ«ï¼‰
     Set M = CreateObject("Scripting.Dictionary")
     M.CompareMode = 1
-    M("BI_ÛH") = "BI_0"
-    M("BI_Ô‚¢‚·-ƒxƒbƒhˆÚæ") = "BI_1"
-    M("BI_®—e") = "BI_2"
-    M("BI_ƒgƒCƒŒ“®ì") = "BI_3"
-    M("BI_“ü—") = "BI_4"
-    M("BI_•às/Ô‚¢‚·ˆÚ“®") = "BI_5"
-    M("BI_ŠK’i¸~") = "BI_6"
-    M("BI_Xˆß") = "BI_7"
-    M("BI_”r•ÖƒRƒ“ƒgƒ[ƒ‹") = "BI_8"
-    M("BI_”r”AƒRƒ“ƒgƒ[ƒ‹") = "BI_9"
+    M("BI_æ‘‚é£Ÿ") = "BI_0"
+    M("BI_è»Šã„ã™-ãƒ™ãƒƒãƒ‰ç§»ä¹—") = "BI_1"
+    M("BI_æ•´å®¹") = "BI_2"
+    M("BI_ãƒˆã‚¤ãƒ¬å‹•ä½œ") = "BI_3"
+    M("BI_å…¥æµ´") = "BI_4"
+    M("BI_æ­©è¡Œ/è»Šã„ã™ç§»å‹•") = "BI_5"
+    M("BI_éšæ®µæ˜‡é™") = "BI_6"
+    M("BI_æ›´è¡£") = "BI_7"
+    M("BI_æ’ä¾¿ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«") = "BI_8"
+    M("BI_æ’å°¿ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«") = "BI_9"
     
     ' IADL
-    M("IADL_’²—") = "IADL_0"
-    M("IADL_ô‘ó") = "IADL_1"
-    M("IADL_‘|œ") = "IADL_2"
-    M("IADL_”ƒ‚¢•¨") = "IADL_3"
-    M("IADL_‹à‘KŠÇ—") = "IADL_4"
-    M("IADL_•–òŠÇ—") = "IADL_5"
-    M("IADL_ï–¡E—]‰ÉŠˆ“®") = "IADL_6"
-    M("IADL_Ğ‰ïQ‰ÁiŠOoE’nˆæŠˆ“®j") = "IADL_7"
-    M("IADL_ƒRƒ~ƒ…ƒjƒP[ƒVƒ‡ƒ“i“d˜bE‰ï˜bj") = "IADL_8"
+    M("IADL_èª¿ç†") = "IADL_0"
+    M("IADL_æ´—æ¿¯") = "IADL_1"
+    M("IADL_æƒé™¤") = "IADL_2"
+    M("IADL_è²·ã„ç‰©") = "IADL_3"
+    M("IADL_é‡‘éŠ­ç®¡ç†") = "IADL_4"
+    M("IADL_æœè–¬ç®¡ç†") = "IADL_5"
+    M("IADL_è¶£å‘³ãƒ»ä½™æš‡æ´»å‹•") = "IADL_6"
+    M("IADL_ç¤¾ä¼šå‚åŠ ï¼ˆå¤–å‡ºãƒ»åœ°åŸŸæ´»å‹•ï¼‰") = "IADL_7"
+    M("IADL_ã‚³ãƒŸãƒ¥ãƒ‹ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ï¼ˆé›»è©±ãƒ»ä¼šè©±ï¼‰") = "IADL_8"
     
     If M.exists(k) Then
         ADLKeyNormalize = M(k)
     Else
-        ADLKeyNormalize = k ' –¢’è‹`‚Í‚»‚Ì‚Ü‚ÜiŸ‚Ìè‚Å•âŠ®j
+        ADLKeyNormalize = k ' æœªå®šç¾©ã¯ãã®ã¾ã¾ï¼ˆæ¬¡ã®æ‰‹ã§è£œå®Œï¼‰
     End If
 End Function
 
@@ -417,7 +417,7 @@ End Function
 
 
 Public Function FindADLControlByKey(ByVal key As String) As Control
-    ' —áFkey="BI_0" ‚â "IADL_7" ‚â "BITotal"
+    ' ä¾‹ï¼škey="BI_0" ã‚„ "IADL_7" ã‚„ "BITotal"
     Dim p As Object, pg As Object, ctl As Control, t As String, Tag As String
     On Error Resume Next
     Set p = frmEval.Controls("mpADL")
@@ -456,21 +456,21 @@ Sub ADL_Load_SmokeTest()
     
    
     
-    ' Œ³‚Ì’l‚ğ‘Ş”ğ
+    ' å…ƒã®å€¤ã‚’é€€é¿
     sOrig = ws.Cells(r, c).value
     
-    ' ƒTƒ“ƒvƒ‹27ƒyƒAi’l‚Í“K“–•¶š‚ÅOKFUI‚ª‹ó‚Å‚È‚¢‚±‚Æ‚¾‚¯Šm”F‚·‚éj
-    sTest = "BITotal=55|BI_0=©—§|BI_1=—v‰î•|BI_2=‰Â|BI_3=•s‰Â|BI_4=¢|BI_5=›|BI_6=~|BI_7=—vŠÄ‹|BI_8=—Ç|BI_9=‰Â|" & _
-            "IADL_0=‰Â|IADL_1=‰Â|IADL_2=•s‰Â|IADL_3=¢|IADL_4=›|IADL_5=~|IADL_6=—vx‰‡|IADL_7=‰Â|IADL_8=‰Â|" & _
-            "IADLNote=ƒeƒXƒg|" & _
-            "Kyo_Roll=‰Â|Kyo_SitUp=‰Â|Kyo_SitHold=¢|Kyo_StandUp=›|Kyo_StandHold=~|Kyo_Note=ƒeƒXƒg"
+    ' ã‚µãƒ³ãƒ—ãƒ«27ãƒšã‚¢ï¼ˆå€¤ã¯é©å½“æ–‡å­—ã§OKï¼šUIãŒç©ºã§ãªã„ã“ã¨ã ã‘ç¢ºèªã™ã‚‹ï¼‰
+    sTest = "BITotal=55|BI_0=è‡ªç«‹|BI_1=è¦ä»‹åŠ©|BI_2=å¯|BI_3=ä¸å¯|BI_4=â–³|BI_5=â—‹|BI_6=Ã—|BI_7=è¦ç›£è¦–|BI_8=è‰¯|BI_9=å¯|" & _
+            "IADL_0=å¯|IADL_1=å¯|IADL_2=ä¸å¯|IADL_3=â–³|IADL_4=â—‹|IADL_5=Ã—|IADL_6=è¦æ”¯æ´|IADL_7=å¯|IADL_8=å¯|" & _
+            "IADLNote=ãƒ†ã‚¹ãƒˆ|" & _
+            "Kyo_Roll=å¯|Kyo_SitUp=å¯|Kyo_SitHold=â–³|Kyo_StandUp=â—‹|Kyo_StandHold=Ã—|Kyo_Note=ãƒ†ã‚¹ãƒˆ"
     
-    ' ‘Š·¨“Ç¨ƒJƒEƒ“ƒg
+    ' æ›¸æ›â†’èª­è¾¼â†’ã‚«ã‚¦ãƒ³ãƒˆ
     ws.Cells(r, c).value = sTest
     Application.Run "Load_ADL_Latest"
     
     
-    ' •œŒ³
+    ' å¾©å…ƒ
     ws.Cells(r, c).value = sOrig
     Debug.Print "[ADL.SMOKE] restored original len=", Len(sOrig)
 End Sub
@@ -488,21 +488,21 @@ Sub ADL_Load_SmokeTest_ListOnly()
     c = EnsureHeader(ws, "IO_ADL")
     r = 132
 
-    ' ‘Ş”ğ
+    ' é€€é¿
     sOrig = ws.Cells(r, c).value
 
-    ' ‚·‚×‚ÄƒŠƒXƒg“à’l‚Åì¬
+    ' ã™ã¹ã¦ãƒªã‚¹ãƒˆå†…å€¤ã§ä½œæˆ
     sTest = "BITotal=55|" & _
-            "BI_0=©—§|BI_1=Œ©ç‚èiŠÄ‹‰ºj|BI_2=ˆê•”‰î•|BI_3=‘S‰î•|BI_4=©—§|BI_5=Œ©ç‚èiŠÄ‹‰ºj|BI_6=ˆê•”‰î•|BI_7=‘S‰î•|BI_8=©—§|BI_9=Œ©ç‚èiŠÄ‹‰ºj|" & _
-            "IADL_0=©—§|IADL_1=Œ©ç‚èiŠÄ‹‰ºj|IADL_2=ˆê•”‰î•|IADL_3=‘S‰î•|IADL_4=©—§|IADL_5=Œ©ç‚èiŠÄ‹‰ºj|IADL_6=ˆê•”‰î•|IADL_7=‘S‰î•|IADL_8=©—§|" & _
-            "IADLNote=ƒeƒXƒg|" & _
-            "Kyo_Roll=©—§|Kyo_SitUp=Œ©ç‚èiŠÄ‹‰ºj|Kyo_SitHold=ˆê•”‰î•|Kyo_StandUp=‘S‰î•|Kyo_StandHold=©—§|Kyo_Note=ƒeƒXƒg"
+            "BI_0=è‡ªç«‹|BI_1=è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰|BI_2=ä¸€éƒ¨ä»‹åŠ©|BI_3=å…¨ä»‹åŠ©|BI_4=è‡ªç«‹|BI_5=è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰|BI_6=ä¸€éƒ¨ä»‹åŠ©|BI_7=å…¨ä»‹åŠ©|BI_8=è‡ªç«‹|BI_9=è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰|" & _
+            "IADL_0=è‡ªç«‹|IADL_1=è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰|IADL_2=ä¸€éƒ¨ä»‹åŠ©|IADL_3=å…¨ä»‹åŠ©|IADL_4=è‡ªç«‹|IADL_5=è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰|IADL_6=ä¸€éƒ¨ä»‹åŠ©|IADL_7=å…¨ä»‹åŠ©|IADL_8=è‡ªç«‹|" & _
+            "IADLNote=ãƒ†ã‚¹ãƒˆ|" & _
+            "Kyo_Roll=è‡ªç«‹|Kyo_SitUp=è¦‹å®ˆã‚Šï¼ˆç›£è¦–ä¸‹ï¼‰|Kyo_SitHold=ä¸€éƒ¨ä»‹åŠ©|Kyo_StandUp=å…¨ä»‹åŠ©|Kyo_StandHold=è‡ªç«‹|Kyo_Note=ãƒ†ã‚¹ãƒˆ"
 
-    ' ‘Š·¨“Ç¨[“U”Šm”F
+    ' æ›¸æ›â†’èª­è¾¼â†’å……å¡«æ•°ç¢ºèª
     ws.Cells(r, c).value = sTest
     Application.Run "Load_ADL_Latest"
     
-    ' •œŒ³
+    ' å¾©å…ƒ
     ws.Cells(r, c).value = sOrig
     Debug.Print "[ADL.SMOKE2] restored original len=", Len(sOrig)
 End Sub
@@ -555,7 +555,7 @@ Public Sub Load_ADL_FromRow(ws As Worksheet, r As Long, owner As Object)
     If Len(s) = 0 Then Exit Sub
     parts = Split(s, "|")
 
-    ' mpADL æ“¾iowner‚©‚çj
+    ' mpADL å–å¾—ï¼ˆownerã‹ã‚‰ï¼‰
     For Each ctl In owner.Controls
         If TypeName(ctl) = "MultiPage" Then
             If ctl.name = "mpADL" Then Set mp = ctl: Exit For
@@ -563,12 +563,12 @@ Public Sub Load_ADL_FromRow(ws As Worksheet, r As Long, owner As Object)
     Next ctl
     If mp Is Nothing Then Exit Sub
 
-    ' –³–¼ƒRƒ“ƒ{i‹N‹F—§‚¿ã‚ª‚è^—§ˆÊ•Ûj‚ğ‰ğŒˆ
-    Set p = mp.Pages(2) ' ‹N‹“®ì
-    Set cmbSU = GetRightComboByLabelCaptionIn(p, "—§‚¿ã‚ª‚è")
-    Set cmbSH = GetRightComboByLabelCaptionIn(p, "—§ˆÊ•Û")
+    ' ç„¡åã‚³ãƒ³ãƒœï¼ˆèµ·å±…ï¼šç«‹ã¡ä¸ŠãŒã‚Šï¼ç«‹ä½ä¿æŒï¼‰ã‚’è§£æ±º
+    Set p = mp.Pages(2) ' èµ·å±…å‹•ä½œ
+    Set cmbSU = GetRightComboByLabelCaptionIn(p, "ç«‹ã¡ä¸ŠãŒã‚Š")
+    Set cmbSH = GetRightComboByLabelCaptionIn(p, "ç«‹ä½ä¿æŒ")
 
-    ' ƒyƒA‚ğ‡Ÿ”½‰f
+    ' ãƒšã‚¢ã‚’é †æ¬¡åæ˜ 
     For i = LBound(parts) To UBound(parts)
         If Len(parts(i)) = 0 Then GoTo NextI
         If InStr(1, parts(i), "=") = 0 Then GoTo NextI
@@ -601,7 +601,7 @@ Public Sub Load_ADL_FromRow(ws As Worksheet, r As Long, owner As Object)
             Case "IADL_8":                  SafeSetComboValue mp.Pages(1).Controls("cmbIADL_8"), v
             Case "IADLNote":                mp.Pages(1).Controls("txtIADLNote").Text = v
 
-            ' --- ‹N‹“®ì (#2) ---
+            ' --- èµ·å±…å‹•ä½œ (#2) ---
             Case "Kyo_Roll":                SafeSetComboValue mp.Pages(2).Controls("cmbKyo_Roll"), v
             Case "Kyo_SitUp":               SafeSetComboValue mp.Pages(2).Controls("cmbKyo_SitUp"), v
             Case "Kyo_SitHold":             SafeSetComboValue mp.Pages(2).Controls("cmbKyo_SitHold"), v

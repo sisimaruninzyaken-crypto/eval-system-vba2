@@ -21,7 +21,7 @@ Public Sub Cleanup_DuplicateROMHeaders_KeepRightmost()
 
     lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
 
-    ' 1) ROM_* ‚ÌˆÊ’u‚ğ‘S‘–¸
+    ' 1) ROM_* ã®ä½ç½®ã‚’å…¨èµ°æŸ»
     For c = 1 To lastCol
         h = CStr(ws.Cells(1, c).value)
         If Len(h) > 0 Then
@@ -32,7 +32,7 @@ Public Sub Cleanup_DuplicateROMHeaders_KeepRightmost()
         End If
     Next c
 
-    ' 2) ‰E’[(Å‘å—ñ)‚¾‚¯c‚µA‘¼‚Ííœ‘ÎÛ‚Æ‚µ‚ÄûW
+    ' 2) å³ç«¯(æœ€å¤§åˆ—)ã ã‘æ®‹ã—ã€ä»–ã¯å‰Šé™¤å¯¾è±¡ã¨ã—ã¦åé›†
     Dim toDel As New Collection
     Dim k As Variant, i As Long, keepCol As Long
     For Each k In map.keys
@@ -47,7 +47,7 @@ Public Sub Cleanup_DuplicateROMHeaders_KeepRightmost()
         End If
     Next k
 
-    ' 3) ~‡‚Åíœ
+    ' 3) é™é †ã§å‰Šé™¤
     Dim arr() As Long, n As Long
     n = toDel.Count
     If n > 0 Then
@@ -55,7 +55,7 @@ Public Sub Cleanup_DuplicateROMHeaders_KeepRightmost()
         For i = 1 To n
             arr(i) = toDel(i)
         Next i
-        ' ~‡ƒ\[ƒg
+        ' é™é †ã‚½ãƒ¼ãƒˆ
         Dim j As Long, tmp As Long
         For i = 1 To n - 1
             For j = i + 1 To n
@@ -64,7 +64,7 @@ Public Sub Cleanup_DuplicateROMHeaders_KeepRightmost()
                 End If
             Next j
         Next i
-        ' íœÀs
+        ' å‰Šé™¤å®Ÿè¡Œ
         For i = 1 To n
             Debug.Print "[DUP-CLEAN] delete col", arr(i), "(" & ws.Cells(1, arr(i)).value & ")"
             ws.Columns(arr(i)).Delete
@@ -75,7 +75,7 @@ Public Sub Cleanup_DuplicateROMHeaders_KeepRightmost()
     Application.ScreenUpdating = True
 End Sub
 
-' Œ©o‚µ‚ªŠ®‘Sˆê’v‚·‚éuˆê”Ô‰E‚Ì—ñ”Ô†v‚ğ•Ô‚·ƒ†[ƒeƒBƒŠƒeƒB
+' è¦‹å‡ºã—ãŒå®Œå…¨ä¸€è‡´ã™ã‚‹ã€Œä¸€ç•ªå³ã®åˆ—ç•ªå·ã€ã‚’è¿”ã™ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£
 Public Function HeaderCol_Compat_Rightmost(ByVal name As String, ByVal ws As Worksheet) As Long
     Dim lastCol As Long, c As Long
     lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
@@ -87,20 +87,20 @@ Public Function HeaderCol_Compat_Rightmost(ByVal name As String, ByVal ws As Wor
     Next c
 End Function
 
-' IO˜AŒ‹•¶š—ñ "key=value|key=value|..." ‚©‚çAw’èkey‚Ì value ‚ğ•Ô‚·ŠÈˆÕƒp[ƒT
+' IOé€£çµæ–‡å­—åˆ— "key=value|key=value|..." ã‹ã‚‰ã€æŒ‡å®škeyã® value ã‚’è¿”ã™ç°¡æ˜“ãƒ‘ãƒ¼ã‚µ
 Public Function GetIOValue(ByVal ioStr As String, ByVal key As String) As String
     Dim token As Variant, klen As Long
-    klen = Len(key) + 1 ' "key=" ‚Ì’·‚³
+    klen = Len(key) + 1 ' "key=" ã®é•·ã•
     For Each token In Split(ioStr, "|")
         If Left$(token, klen) = key & "=" Then
-            GetIOValue = Mid$(token, klen + 1) ' "=" ‚ÌŒã‚ë
+            GetIOValue = Mid$(token, klen + 1) ' "=" ã®å¾Œã‚
             Exit Function
         End If
     Next token
 End Function
 
-' "key=value|key:...|" ‚Ì¬İ‚ğ‘z’èB
-' w’è key ‚Ì‰E‘¤i= ‚Ü‚½‚Í : ‚ÌŒã‚ëj‚ğg‚»‚Ì‚Ü‚Üh•Ô‚·B
+' "key=value|key:...|" ã®æ··åœ¨ã‚’æƒ³å®šã€‚
+' æŒ‡å®š key ã®å³å´ï¼ˆ= ã¾ãŸã¯ : ã®å¾Œã‚ï¼‰ã‚’â€œãã®ã¾ã¾â€è¿”ã™ã€‚
 Public Function GetIOChunk(ByVal ioStr As String, ByVal key As String) As String
     Dim token As Variant, t As String, k1 As String, k2 As String, p As Long
     k1 = key & "=": k2 = key & ":"
@@ -116,17 +116,17 @@ Public Function GetIOChunk(ByVal ioStr As String, ByVal key As String) As String
     Next token
 End Function
 
-' —á: chunk="R=,L=Á¸" -> GetIOSubVal(chunk,"R")="" / GetIOSubVal(chunk,"L")="Á¸"
+' ä¾‹: chunk="R=,L=æ¶ˆå¤±" -> GetIOSubVal(chunk,"R")="" / GetIOSubVal(chunk,"L")="æ¶ˆå¤±"
 Public Function GetIOSubVal(ByVal chunk As String, ByVal subkey As String) As String
     Dim parts As Variant, p As Variant, k As String, pos As Long, tail As String, nextPos As Long
     k = subkey & "="
-    ' ƒJƒ“ƒ}‹æØ‚è‚Å‘–¸iR=... , L=... , ‚È‚Çj
+    ' ã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šã§èµ°æŸ»ï¼ˆR=... , L=... , ãªã©ï¼‰
     parts = Split(chunk, ",")
     For Each p In parts
         p = Trim$(CStr(p))
         If Left$(p, Len(k)) = k Then
             tail = Mid$(p, Len(k) + 1)
-            ' ‚à‚µ "R=xxx L=yyy" ‚İ‚½‚¢‚ÉƒJƒ“ƒ}–³‚µ‚Å‘±‚­ê‡‚É”õ‚¦AŸ‚ÌƒXƒy[ƒX‚Ü‚Å‚ğ’l‚Æ‚İ‚È‚·
+            ' ã‚‚ã— "R=xxx L=yyy" ã¿ãŸã„ã«ã‚«ãƒ³ãƒç„¡ã—ã§ç¶šãå ´åˆã«å‚™ãˆã€æ¬¡ã®ã‚¹ãƒšãƒ¼ã‚¹ã¾ã§ã‚’å€¤ã¨ã¿ãªã™
             nextPos = InStr(1, tail, " ", vbBinaryCompare)
             If nextPos > 0 Then
                 GetIOSubVal = Left$(tail, nextPos - 1)
@@ -150,12 +150,12 @@ Public Sub App_Main()
         .Left = 0
         .Top = 0
 
-        ' ‰æ–Ê‚Éû‚Ü‚é‚æ‚¤‚ÉãŒÀ
+        ' ç”»é¢ã«åã¾ã‚‹ã‚ˆã†ã«ä¸Šé™
         If .Height > Application.UsableHeight + 156 Then .Height = Application.UsableHeight + 156
 
     End With
 
-    ' š‡@ ‚Ü‚¸•\¦i‚±‚±‚Å InsideHeight ‚ªŠm’èj
+    ' â˜…â‘  ã¾ãšè¡¨ç¤ºï¼ˆã“ã“ã§ InsideHeight ãŒç¢ºå®šï¼‰
     frmEval.Show vbModeless
 
         Dim yBtn As Single
@@ -178,7 +178,7 @@ Call frmEval.AdjustBottomButtons
 
 End Sub
 
-'=== Basic.* ‚Æ‹Œ—ñi–¼/•]‰¿“ú ‚È‚Çj‚ğ 1 s•ª‚¾‚¯“¯Šú‚·‚é =====================
+'=== Basic.* ã¨æ—§åˆ—ï¼ˆæ°å/è©•ä¾¡æ—¥ ãªã©ï¼‰ã‚’ 1 è¡Œåˆ†ã ã‘åŒæœŸã™ã‚‹ =====================
 Public Sub SyncBasicInfoColumns(ws As Worksheet, ByVal r As Long)
     Dim headersBasic As Variant
     Dim headersLegacy As Variant
@@ -186,10 +186,10 @@ Public Sub SyncBasicInfoColumns(ws As Worksheet, ByVal r As Long)
     Dim cB As Long, cL As Long
     Dim vB As Variant, vL As Variant
 
-    ' Basic.* Œn‚ğu³v‚Æ‚İ‚È‚·‚ªA
-    ' •Ğ•û‚µ‚©“ü‚Á‚Ä‚¢‚È‚¢ê‡‚ÍA“ü‚Á‚Ä‚¢‚é•û‚©‚ç‚à‚¤•Ğ•û‚ÖƒRƒs[‚·‚éB
+    ' Basic.* ç³»ã‚’ã€Œæ­£ã€ã¨ã¿ãªã™ãŒã€
+    ' ç‰‡æ–¹ã—ã‹å…¥ã£ã¦ã„ãªã„å ´åˆã¯ã€å…¥ã£ã¦ã„ã‚‹æ–¹ã‹ã‚‰ã‚‚ã†ç‰‡æ–¹ã¸ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
      headersBasic = Array("Basic.EvalDate", "Basic.Name", "Basic.Age", "Basic.Evaluator")
-     headersLegacy = Array("•]‰¿“ú", "–¼", "”N—î", "•]‰¿Ò")
+     headersLegacy = Array("è©•ä¾¡æ—¥", "æ°å", "å¹´é½¢", "è©•ä¾¡è€…")
 
 
     For i = LBound(headersBasic) To UBound(headersBasic)
@@ -197,7 +197,7 @@ Public Sub SyncBasicInfoColumns(ws As Worksheet, ByVal r As Long)
         cL = modEvalIOEntry.FindColByHeaderExact(ws, headersLegacy(i))
 
 
-        ' ‚Ç‚¿‚ç‚©‚Ì—ñ‚ª‘¶İ‚µ‚Ä‚¢‚ê‚Î“¯Šú‘ÎÛ
+        ' ã©ã¡ã‚‰ã‹ã®åˆ—ãŒå­˜åœ¨ã—ã¦ã„ã‚Œã°åŒæœŸå¯¾è±¡
         If cB > 0 Or cL > 0 Then
             If cB > 0 Then
                 vB = ws.Cells(r, cB).value
@@ -211,9 +211,9 @@ Public Sub SyncBasicInfoColumns(ws As Worksheet, ByVal r As Long)
                 vL = vbNullString
             End If
 
-            ' —Dæ“xF
-            ' 1) Basic ‘¤‚É’l‚ª‚ ‚Á‚Ä‹Œ—ñ‚ª‹ó ¨ Basic ¨ ‹Œ—ñ‚ÖƒRƒs[
-            ' 2) Basic ‘¤‚ª‹ó‚Å‹Œ—ñ‚É’l ¨ ‹Œ—ñ ¨ Basic ‚ÖƒRƒs[
+            ' å„ªå…ˆåº¦ï¼š
+            ' 1) Basic å´ã«å€¤ãŒã‚ã£ã¦æ—§åˆ—ãŒç©º â†’ Basic â†’ æ—§åˆ—ã¸ã‚³ãƒ”ãƒ¼
+            ' 2) Basic å´ãŒç©ºã§æ—§åˆ—ã«å€¤ â†’ æ—§åˆ— â†’ Basic ã¸ã‚³ãƒ”ãƒ¼
             If cB > 0 And Len(vB) > 0 And cL > 0 And Len(vL) = 0 Then
                 ws.Cells(r, cL).value = vB
             ElseIf cL > 0 And Len(vL) > 0 And cB > 0 And Len(vB) = 0 Then
@@ -240,26 +240,26 @@ Public Sub Tighten_DailyLog_Boxes()
     Dim uf As Object: Set uf = frmEval
 
     Dim mp As Object: Set mp = uf.Controls("MultiPage1")
-    Dim pg As Object: Set pg = mp.Pages(7) ' “úX‚Ì‹L˜^
+    Dim pg As Object: Set pg = mp.Pages(7) ' æ—¥ã€…ã®è¨˜éŒ²
 
     Dim f As MSForms.Frame: Set f = pg.Controls("fraDailyLog")
     Dim note As MSForms.TextBox: Set note = pg.Controls("txtDailyNote")
     Dim lst As MSForms.ListBox: Set lst = pg.Controls("lstDailyLogList")
 
     Const gap As Single = 24
-    Const NOTE_H As Single = 180 ' ©‚±‚±‚¾‚¯‚Å’²®iŒ»ó290.4¨220j
+    Const NOTE_H As Single = 180 ' â†ã“ã“ã ã‘ã§èª¿æ•´ï¼ˆç¾çŠ¶290.4â†’220ï¼‰
 
-    ' ‹L˜^“à—eF‚‚³‚ğ‹l‚ß‚éiƒXƒNƒ[ƒ‹‚ÍˆÛj
+    ' è¨˜éŒ²å†…å®¹ï¼šé«˜ã•ã‚’è©°ã‚ã‚‹ï¼ˆã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã¯ç¶­æŒï¼‰
     note.multiline = True
     note.ScrollBars = fmScrollBarsVertical
     note.Height = NOTE_H
     
-    ' ˆê——Fã‚Ö‹l‚ß‚ÄA‰º’[‚Í¡‚Ì‚Ü‚Üi=‚‚³‚ª‘‚¦‚éj
+    ' ä¸€è¦§ï¼šä¸Šã¸è©°ã‚ã¦ã€ä¸‹ç«¯ã¯ä»Šã®ã¾ã¾ï¼ˆ=é«˜ã•ãŒå¢—ãˆã‚‹ï¼‰
     Dim bottomKeep As Single
     bottomKeep = f.Height - 12
 
 
-    ' ƒ‰ƒxƒ‹‚ğuˆê——‚Ì’¼ãv‚É’u‚­
+    ' ãƒ©ãƒ™ãƒ«ã‚’ã€Œä¸€è¦§ã®ç›´ä¸Šã€ã«ç½®ã
     Dim lbl As MSForms.label
     Set lbl = pg.Controls("lblDailyHistory")
 
@@ -267,11 +267,11 @@ Public Sub Tighten_DailyLog_Boxes()
 
     lbl.Top = note.Top + note.Height + gap
     lst.Top = lbl.Top + lbl.Height + LBL_GAP
-    Const LIST_MAX_H As Single = 140   ' © D‚İ‚Å’²®
+    Const LIST_MAX_H As Single = 140   ' â† å¥½ã¿ã§èª¿æ•´
     lst.Height = Application.Min(LIST_MAX_H, Application.Max(60, bottomKeep - lst.Top))
 
 
-    ' ListBox‚Íˆì‚ê‚½‚ç©“®‚ÅƒXƒNƒ[ƒ‹‚ªo‚éií•\¦‚Íd—lã‚Å‚«‚È‚¢j
+    ' ListBoxã¯æº¢ã‚ŒãŸã‚‰è‡ªå‹•ã§ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãŒå‡ºã‚‹ï¼ˆå¸¸æ™‚è¡¨ç¤ºã¯ä»•æ§˜ä¸Šã§ããªã„ï¼‰
     lst.IntegralHeight = False
 
 
@@ -338,16 +338,16 @@ Public Sub Build_POST_Narrative()
     posture = CollectTrueTags("Posture.")
     contr = CollectTrueTags("Contracture.")
 
-    note = GetTagText("Posture.”õl")
-    noteC = GetTagText("Contracture.”õl")
+    note = GetTagText("Posture.å‚™è€ƒ")
+    noteC = GetTagText("Contracture.å‚™è€ƒ")
 
-    If posture = "" Then posture = "p¨F“Á‹L‚È‚µ" Else posture = "p¨F" & posture
-    If contr = "" Then contr = "SkF“Á‹L‚È‚µ" Else contr = "SkF" & contr
+    If posture = "" Then posture = "å§¿å‹¢ï¼šç‰¹è¨˜ãªã—" Else posture = "å§¿å‹¢ï¼š" & posture
+    If contr = "" Then contr = "æ‹˜ç¸®ï¼šç‰¹è¨˜ãªã—" Else contr = "æ‹˜ç¸®ï¼š" & contr
 
     Debug.Print posture
     Debug.Print contr
-    If note <> "" Then Debug.Print "p¨”õlF" & note
-    If noteC <> "" Then Debug.Print "Sk”õlF" & noteC
+    If note <> "" Then Debug.Print "å§¿å‹¢å‚™è€ƒï¼š" & note
+    If noteC <> "" Then Debug.Print "æ‹˜ç¸®å‚™è€ƒï¼š" & noteC
 End Sub
 
 Private Function CollectTrueTags(ByVal prefix As String) As String
@@ -362,7 +362,7 @@ Private Function CollectTrueTags(ByVal prefix As String) As String
     res = res & CollectInFrame(f36, prefix)
 
     If Len(res) > 0 Then
-        If Right$(res, 1) = "A" Then res = Left$(res, Len(res) - 1)
+        If Right$(res, 1) = "ã€" Then res = Left$(res, Len(res) - 1)
     End If
     CollectTrueTags = res
 End Function
@@ -374,7 +374,7 @@ Private Function CollectInFrame(ByVal fr As Object, ByVal prefix As String) As S
             If TypeName(c) = "CheckBox" Then
                 t = CStr(c.Tag)
                 If Len(t) > 0 And Left$(t, Len(prefix)) = prefix Then
-                    If c.value = True Then s = s & Replace$(t, prefix, "") & "A"
+                    If c.value = True Then s = s & Replace$(t, prefix, "") & "ã€"
                 End If
             End If
         End If
@@ -425,16 +425,16 @@ Public Function AsLongArray(ByVal v As Variant) As Variant
 End Function
 
 Public Function NormalizeName(ByVal s As String) As String
-    s = Replace$(CStr(s), " ", "")   ' ”¼ŠpƒXƒy[ƒXœ‹
-    s = Replace$(s, "@", "")        ' ‘SŠpƒXƒy[ƒXœ‹
+    s = Replace$(CStr(s), " ", "")   ' åŠè§’ã‚¹ãƒšãƒ¼ã‚¹é™¤å»
+    s = Replace$(s, "ã€€", "")        ' å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹é™¤å»
     NormalizeName = s
 End Function
 
 
 
-' –¼‚ğˆóü—p‚É•šš‰»‚·‚é
-' 4?5•¶šF2E4•¶š–Ú‚ğZiƒ†[ƒU[w’èj
-Public Function MaskNameForPrint(ByVal s As String, Optional ByVal maskChar As String = "Z") As String
+' æ°åã‚’å°åˆ·ç”¨ã«ä¼å­—åŒ–ã™ã‚‹
+' 4?5æ–‡å­—ï¼š2ãƒ»4æ–‡å­—ç›®ã‚’ã€‡ï¼ˆãƒ¦ãƒ¼ã‚¶ãƒ¼æŒ‡å®šï¼‰
+Public Function MaskNameForPrint(ByVal s As String, Optional ByVal maskChar As String = "ã€‡") As String
     Dim n As Long, i As Long
     Dim out As String, ch As String
 
@@ -459,7 +459,7 @@ Public Function MaskNameForPrint(ByVal s As String, Optional ByVal maskChar As S
             Case 4, 5
                 If (i = 2) Or (i = 4) Then out = out & maskChar Else out = out & ch
             Case Else
-                ' 6•¶šˆÈãF‹ô”ˆÊ’u‚ğ•šši2,4,6,...j
+                ' 6æ–‡å­—ä»¥ä¸Šï¼šå¶æ•°ä½ç½®ã‚’ä¼å­—ï¼ˆ2,4,6,...ï¼‰
                 If (i Mod 2 = 0) Then out = out & maskChar Else out = out & ch
         End Select
     Next i
@@ -469,8 +469,8 @@ End Function
 
 
 
-' Œ’PˆÊ‚ÌƒuƒbƒN‚ÉA—˜—pÒƒV[ƒg‚ğ’Ç‰Á‚µ‚Ä‚¢‚­
-' ymKey —á: "2026-02" ‚È‚ÇiŒ’PˆÊ‚ÅˆêˆÓ‚É‚È‚é•¶š—ñj
+' æœˆå˜ä½ã®ãƒ–ãƒƒã‚¯ã«ã€åˆ©ç”¨è€…ã‚·ãƒ¼ãƒˆã‚’è¿½åŠ ã—ã¦ã„ã
+' ymKey ä¾‹: "2026-02" ãªã©ï¼ˆæœˆå˜ä½ã§ä¸€æ„ã«ãªã‚‹æ–‡å­—åˆ—ï¼‰
 Public Sub ExportMonitoring_ToMonthlyWorkbook(ByVal dailyDate As Date, ByVal clientName As String, ByVal bodyText As String)
     
     If Len(Trim$(clientName)) = 0 Then
@@ -516,7 +516,7 @@ Else
 End If
 
 
-    ' Šù‚É“¯–¼ƒV[ƒg‚ª‚ ‚ê‚Îíœ‚µ‚Äì‚è’¼‚µiã‘‚«‰^—pj
+    ' æ—¢ã«åŒåã‚·ãƒ¼ãƒˆãŒã‚ã‚Œã°å‰Šé™¤ã—ã¦ä½œã‚Šç›´ã—ï¼ˆä¸Šæ›¸ãé‹ç”¨ï¼‰
     If Len(Trim$(clientName)) > 0 Then
     On Error Resume Next
     Application.DisplayAlerts = False
@@ -526,7 +526,7 @@ End If
 End If
 
 
-    ' ƒeƒ“ƒvƒŒ Monitoring ‚ğ‚±‚ÌŒƒuƒbƒN‚ÖƒRƒs[
+    ' ãƒ†ãƒ³ãƒ—ãƒ¬ Monitoring ã‚’ã“ã®æœˆãƒ–ãƒƒã‚¯ã¸ã‚³ãƒ”ãƒ¼
     ThisWorkbook.Worksheets("Monitoring").Copy After:=wbNew.Worksheets(wbNew.Worksheets.Count)
     Set wsNew = wbNew.Worksheets(wbNew.Worksheets.Count)
     
@@ -547,39 +547,39 @@ End With
 
 
 
-    ' ƒV[ƒg–¼‚ÍÀ–¼‚ÅOK
+    ' ã‚·ãƒ¼ãƒˆåã¯å®Ÿåã§OK
     wsNew.name = Left$(clientName, 31)
 
-    ' ˆóü•¨‚Ì•\¦–¼‚¾‚¯•ššiƒV[ƒg–¼‚ÍÀ–¼j
+    ' å°åˆ·ç‰©ã®è¡¨ç¤ºåã ã‘ä¼å­—ï¼ˆã‚·ãƒ¼ãƒˆåã¯å®Ÿåï¼‰
     wsNew.Range("C7").value = MaskNameForPrint(clientName)
 
-    ' –{•¶
+    ' æœ¬æ–‡
     wsNew.Range("A32:J37").Merge
     Dim p As Long
 Dim s As String
 
 s = bodyText
-p = InStr(1, s, "¡ ƒRƒƒ“ƒgEl@", vbTextCompare)
+p = InStr(1, s, "â–  ã‚³ãƒ¡ãƒ³ãƒˆãƒ»è€ƒå¯Ÿ", vbTextCompare)
 
 If p > 0 Then
-    s = Mid$(s, p + Len("¡ ƒRƒƒ“ƒgEl@"))
+    s = Mid$(s, p + Len("â–  ã‚³ãƒ¡ãƒ³ãƒˆãƒ»è€ƒå¯Ÿ"))
     s = Trim$(s)
 Else
-    s = bodyText ' Œ©‚Â‚©‚ç‚È‚¢‚Í•ÛŒ¯‚Å‘S•¶
+    s = bodyText ' è¦‹ã¤ã‹ã‚‰ãªã„æ™‚ã¯ä¿é™ºã§å…¨æ–‡
 End If
 
 
 Dim p1 As Long, p2 As Long
 Dim tok As String, special As String
 
-tok = "¡ ‚±‚ÌŒ‚É‹L˜^‚³‚ê‚½“Á‹L–€"
+tok = "â–  ã“ã®æœˆã«è¨˜éŒ²ã•ã‚ŒãŸç‰¹è¨˜äº‹é …"
 p1 = InStr(1, bodyText, tok, vbTextCompare)
 
 If p1 > 0 Then
     special = Mid$(bodyText, p1 + Len(tok))
-    ' Ÿ‚ÌŒ©o‚µ‚Å~‚ß‚éiŒó•âj
-    p2 = InStr(1, special, "¡ ƒRƒƒ“ƒgEl@", vbTextCompare)
-    If p2 = 0 Then p2 = InStr(1, special, "¡ –{•¶", vbTextCompare)
+    ' æ¬¡ã®è¦‹å‡ºã—ã§æ­¢ã‚ã‚‹ï¼ˆå€™è£œï¼‰
+    p2 = InStr(1, special, "â–  ã‚³ãƒ¡ãƒ³ãƒˆãƒ»è€ƒå¯Ÿ", vbTextCompare)
+    If p2 = 0 Then p2 = InStr(1, special, "â–  æœ¬æ–‡", vbTextCompare)
     If p2 > 0 Then special = Left$(special, p2 - 1)
     special = Trim$(special)
 Else
@@ -589,19 +589,19 @@ End If
 
 
 Dim tmplNoSpecial As String
-tmplNoSpecial = "‚±‚ÌŒ‚Í“Á‹L–€‚Æ‚È‚é‹L˜^‚Í‚ ‚è‚Ü‚¹‚ñ‚Å‚µ‚½B" & vbCrLf & _
-                "‘Ì’²–Ê‚É‘å‚«‚È•Ï“®‚Í‚È‚­A“úX‚ÌƒŠƒnƒrƒŠ‚É‚àˆÀ’è‚µ‚Äæ‚è‘g‚Ü‚ê‚Ä‚¢‚Ü‚µ‚½B" & vbCrLf & _
-                "¡Œã‚àŒ»İ‚Ìó‘Ô‚ğˆÛ‚Å‚«‚é‚æ‚¤Aˆø‚«‘±‚«Œo‰ß‚ğŠÏ@‚µ‚Ä‚¢‚«‚Ü‚·B"
+tmplNoSpecial = "ã“ã®æœˆã¯ç‰¹è¨˜äº‹é …ã¨ãªã‚‹è¨˜éŒ²ã¯ã‚ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚" & vbCrLf & _
+                "ä½“èª¿é¢ã«å¤§ããªå¤‰å‹•ã¯ãªãã€æ—¥ã€…ã®ãƒªãƒãƒ“ãƒªã«ã‚‚å®‰å®šã—ã¦å–ã‚Šçµ„ã¾ã‚Œã¦ã„ã¾ã—ãŸã€‚" & vbCrLf & _
+                "ä»Šå¾Œã‚‚ç¾åœ¨ã®çŠ¶æ…‹ã‚’ç¶­æŒã§ãã‚‹ã‚ˆã†ã€å¼•ãç¶šãçµŒéã‚’è¦³å¯Ÿã—ã¦ã„ãã¾ã™ã€‚"
 
-If Len(Trim$(special)) = 0 Or InStr(special, "“Á‹L–€‚Æ‚È‚é‹L˜^‚Í‚ ‚è‚Ü‚¹‚ñ") > 0 Then
+If Len(Trim$(special)) = 0 Or InStr(special, "ç‰¹è¨˜äº‹é …ã¨ãªã‚‹è¨˜éŒ²ã¯ã‚ã‚Šã¾ã›ã‚“") > 0 Then
     
-    ' “Á‹L–€‚È‚µ
+    ' ç‰¹è¨˜äº‹é …ãªã—
     wsNew.Range("A24").value = tmplNoSpecial
     wsNew.Range("A31:J37").ClearContents
 
 Else
     
-    ' “Á‹L–€‚ ‚è
+    ' ç‰¹è¨˜äº‹é …ã‚ã‚Š
     wsNew.Range("A24").value = special
     wsNew.Range("A31").value = s
 
@@ -630,7 +630,7 @@ End With
     
     wsNew.Range("A24:J29").Merge
     With wsNew.Range("A31: J37 ")
-      .Font.name = "‚l‚r ‚oƒSƒVƒbƒN"
+      .Font.name = "ï¼­ï¼³ ï¼°ã‚´ã‚·ãƒƒã‚¯"
       .Font.Size = 11
     End With
     

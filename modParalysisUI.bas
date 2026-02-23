@@ -2,7 +2,7 @@ Attribute VB_Name = "modParalysisUI"
 
 Option Explicit
 
-' ===== UI—p‚Ìƒ[ƒJƒ‹’è”i‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚¾‚¯‚Å—LŒøj=====
+' ===== UIç”¨ã®ãƒ­ãƒ¼ã‚«ãƒ«å®šæ•°ï¼ˆã“ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã ã‘ã§æœ‰åŠ¹ï¼‰=====
 Private Const PAD_X As Single = 12
 Private Const PAD_Y As Single = 8
 Private Const COL1_W As Single = 110
@@ -17,32 +17,32 @@ Public Sub BuildParalysisTabUI(host As MSForms.Frame)
     w = host.Width: h = host.Height
     Y = PAD_Y
 
-    ' Œ©o‚µ:Šî–{î•ñ
-    Y = AddSectionTitle_(host, "Šî–{î•ñ", Y)
-    Y = AddComboRow_(host, "–ƒáƒ‘¤", "cboParalysisSide", Array("‰E", "¶", "—¼‘¤"), Y)
-    Y = AddComboRow_(host, "–ƒáƒ‚Ìí—Ş", "cboParalysisType", Array("•Ğ–ƒáƒ", "lˆ–ƒáƒ", "’P–ƒáƒ"), Y)
+    ' è¦‹å‡ºã—:åŸºæœ¬æƒ…å ±
+    Y = AddSectionTitle_(host, "åŸºæœ¬æƒ…å ±", Y)
+    Y = AddComboRow_(host, "éº»ç—ºå´", "cboParalysisSide", Array("å³", "å·¦", "ä¸¡å´"), Y)
+    Y = AddComboRow_(host, "éº»ç—ºã®ç¨®é¡", "cboParalysisType", Array("ç‰‡éº»ç—º", "å››è‚¢éº»ç—º", "å˜éº»ç—º"), Y)
 
-    ' Œ©o‚µ:BRS
+    ' è¦‹å‡ºã—:BRS
     Y = Y + ROM_HDR_GAP
 Y = AddSectionTitle_(host, "Brunnstrom Recovery Stage(BRS)", Y)
 
-Dim brsValues As Variant          ' © ‚±‚±‚ğC³(Dim ‚ÌŒã‚ÉƒXƒy[ƒX)
-brsValues = Array("‡T", "‡U", "‡V", "‡W", "‡X", "‡Y")
+Dim brsValues As Variant          ' â† ã“ã“ã‚’ä¿®æ­£(Dim ã®å¾Œã«ã‚¹ãƒšãƒ¼ã‚¹)
+brsValues = Array("â… ", "â…¡", "â…¢", "â…£", "â…¤", "â…¥")
 
-Y = AddComboRow_(host, "ãˆ", "cboBRS_Upper", brsValues, Y)
-Y = AddComboRow_(host, "èw", "cboBRS_Hand", brsValues, Y)
-Y = AddComboRow_(host, "‰ºˆ", "cboBRS_Lower", brsValues, Y)
-    ' Œ©o‚µ:”ºŒ»Û
+Y = AddComboRow_(host, "ä¸Šè‚¢", "cboBRS_Upper", brsValues, Y)
+Y = AddComboRow_(host, "æ‰‹æŒ‡", "cboBRS_Hand", brsValues, Y)
+Y = AddComboRow_(host, "ä¸‹è‚¢", "cboBRS_Lower", brsValues, Y)
+    ' è¦‹å‡ºã—:éšä¼´ç¾è±¡
     Y = Y + ROM_HDR_GAP
-    Y = AddSectionTitle_(host, "”ºŒ»Û", Y)
-    Y = AddCheckRow_(host, "‹¤“¯‰^“®", "chkSynergy", Y)
-    Y = AddCheckRow_(host, "˜A‡”½‰", "chkAssociatedRxn", Y)
+    Y = AddSectionTitle_(host, "éšä¼´ç¾è±¡", Y)
+    Y = AddCheckRow_(host, "å…±åŒé‹å‹•", "chkSynergy", Y)
+    Y = AddCheckRow_(host, "é€£åˆåå¿œ", "chkAssociatedRxn", Y)
 
-    ' ”õl—“
+    ' å‚™è€ƒæ¬„
     PlaceMemoBelow host, w, h, Y, "txtParalysisMemo"
 End Sub
 
-' ---- sƒrƒ‹ƒ_(Private) ----
+' ---- è¡Œãƒ“ãƒ«ãƒ€(Private) ----
 Private Function AddSectionTitle_(host As MSForms.Frame, ttl As String, Y As Single) As Single
     Dim lbl As MSForms.label
     Set lbl = host.Controls.Add("Forms.Label.1")
@@ -100,7 +100,7 @@ Private Function AddCheckRow_(host As MSForms.Frame, cap As String, ctlName As S
     Dim chk As MSForms.CheckBox
     Set chk = host.Controls.Add("Forms.CheckBox.1", ctlName, True)
     With chk
-        .caption = "—L"
+        .caption = "æœ‰"
         .Left = xChk: .Top = PX(Y)
         .Width = PX(60): .Height = ROW_H
     End With

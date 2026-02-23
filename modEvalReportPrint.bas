@@ -4,7 +4,7 @@ Option Explicit
 
 Private Sub WalkContainer(ByVal cont As Object, ByRef maxBottom As Double)
     
-   '--- MultiPage ‚Í Controls ‚ğ‚½‚È‚¢iPages ‚ğŒ@‚éj
+   '--- MultiPage ã¯ Controls ã‚’æŒãŸãªã„ï¼ˆPages ã‚’æ˜ã‚‹ï¼‰
 If TypeName(cont) = "MultiPage" Then
     Dim p As MSForms.Page
     For Each p In cont.Pages
@@ -28,7 +28,7 @@ End If
                   Or (TypeOf c Is MSForms.MultiPage) _
                   Or (TypeOf c Is MSForms.Page)
 
-    ' —ti“ü—Í•”•i‚È‚Çj‚¾‚¯‚Å maxBottom ‚ğXV‚·‚é
+    ' è‘‰ï¼ˆå…¥åŠ›éƒ¨å“ãªã©ï¼‰ã ã‘ã§ maxBottom ã‚’æ›´æ–°ã™ã‚‹
     If c.Visible Then
         If Not isContainer Then
             If c.Top + c.Height > maxBottom Then maxBottom = c.Top + c.Height: lastMaxInfo = TypeName(c) & "  " & c.name & "  Bottom=" & (c.Top + c.Height)
@@ -37,7 +37,7 @@ End If
         End If
     End If
 
-    ' ƒRƒ“ƒeƒi‚ÍŒ@‚éi’†g‚ğŒ©‚éj
+    ' ã‚³ãƒ³ãƒ†ãƒŠã¯æ˜ã‚‹ï¼ˆä¸­èº«ã‚’è¦‹ã‚‹ï¼‰
     If isContainer Then
         WalkContainer c, maxBottom
     End If
@@ -83,7 +83,7 @@ Public Sub Fix_Page8_DailyLog_Once()
         pg.Controls("lstDailyLogList").Height = 140
     End If
 
-    'ŒŸØƒƒOiŒ‹‰Ê‚¾‚¯j
+    'æ¤œè¨¼ãƒ­ã‚°ï¼ˆçµæœã ã‘ï¼‰
     maxBottom = 0#
     WalkContainer pg, maxBottom
     Static callN As Long: callN = callN + 1: Debug.Print "[Fix_Page8] call#" & callN & " needShrink=" & needShrink & "  NewBottom=" & maxBottom & "  Overflow=" & (maxBottom - mp.Height)
@@ -97,12 +97,12 @@ Public Sub Fix_Page6_Walk_FrameScroll_Once()
     Dim f As Object
     Set f = frmEval.Controls("MultiPage1").Pages("Page6").Controls("Frame6")
 
-    '•\¦˜g‚ğMP1‚É‡‚í‚¹‚é
+    'è¡¨ç¤ºæ ã‚’MP1ã«åˆã‚ã›ã‚‹
     f.Height = frmEval.Controls("MultiPage1").Height
     f.ScrollBars = fmScrollBarsVertical
     f.ScrollTop = 0
 
-    '’†g‚ÌÅ‘åBottom ¨ ScrollHeight
+    'ä¸­èº«ã®æœ€å¤§Bottom â†’ ScrollHeight
     Dim maxBottom As Double: maxBottom = 0#
     Dim c As Object
     For Each c In f.Controls
@@ -151,9 +151,9 @@ Public Sub Temp_SetScroll_Frame1_PostureTab()
     Dim pg As Object: Set pg = mp.Pages(mp.value)
 
     With pg.Controls("Frame1")
-        .Height = mp.Height                '©•\¦˜g‚Éû‚ß‚éi‚±‚±‚ª–{ŠÛj
+        .Height = mp.Height                'â†è¡¨ç¤ºæ ã«åã‚ã‚‹ï¼ˆã“ã“ãŒæœ¬ä¸¸ï¼‰
         .ScrollBars = fmScrollBarsVertical
-        .ScrollHeight = 396 + 24           '©’†gBottom(396) + —]”’
+        .ScrollHeight = 396 + 24           'â†ä¸­èº«Bottom(396) + ä½™ç™½
     End With
 End Sub
 

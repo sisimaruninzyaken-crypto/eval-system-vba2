@@ -1,5 +1,5 @@
 Attribute VB_Name = "Module_PostureOnce"
-' ==== ˆê‰ñ‚«‚èFŽp¨ƒ^ƒu‚ÌŽå—vƒRƒ“ƒgƒ[ƒ‹—ñ‹“ ====
+' ==== ä¸€å›žãã‚Šï¼šå§¿å‹¢ã‚¿ãƒ–ã®ä¸»è¦ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«åˆ—æŒ™ ====
 Public Sub Posture_ListOnce()
     Dim uf As Object: Set uf = frmEval
     Dim mp As Object, pg As Object
@@ -7,7 +7,7 @@ Public Sub Posture_ListOnce()
 
     On Error Resume Next
 
-    ' ‚Ç‚ê‚©‚ÌMultiPage‚ðŒ©‚Â‚¯‚éi–¼‘O‚ÉˆË‘¶‚µ‚È‚¢j
+    ' ã©ã‚Œã‹ã®MultiPageã‚’è¦‹ã¤ã‘ã‚‹ï¼ˆåå‰ã«ä¾å­˜ã—ãªã„ï¼‰
     For Each c In uf.Controls
         If TypeName(c) = "MultiPage" Then Set mp = c: Exit For
         If c.Controls.Count >= 0 Then
@@ -22,7 +22,7 @@ Public Sub Posture_ListOnce()
     Set pg = mp.Pages(mp.value)
     Debug.Print "=== Controls on current page (type | name | caption) ==="
 
-    ' ƒy[ƒW’¼‰º‚Æ1ŠK‘w“à‘¤iFrame‚È‚Çj‚ð—ñ‹“
+    ' ãƒšãƒ¼ã‚¸ç›´ä¸‹ã¨1éšŽå±¤å†…å´ï¼ˆFrameãªã©ï¼‰ã‚’åˆ—æŒ™
     For Each c In pg.Controls
         Debug.Print TypeName(c), "|", SafeName1(c), "|", SafeCap1(c)
         If c.Controls.Count >= 0 Then

@@ -6,10 +6,10 @@ Public gForcedName As String
 Public gForcedID As String
 
 '====================================================
-' A4—¼–ÊƒpƒbƒN¶¬
-' •\F–¼ƒwƒbƒ_ + TUG + ˆ¬—Í(‰E¶)
-' — F10m•às + 5‰ñ—§‚¿ã‚ª‚è + ƒZƒ~ƒ^ƒ“ƒfƒ€
-' ‚·‚×‚ÄFÅ‘å8‰ñ / “¯“úd•¡‚Í‚»‚Ì“ú‚ÌÅŒã‚ğÌ—p / ‰¡²‚Í“ú•tƒ‰ƒxƒ‹‚Ì‚İ
+' A4ä¸¡é¢ãƒ‘ãƒƒã‚¯ç”Ÿæˆ
+' è¡¨ï¼šæ°åãƒ˜ãƒƒãƒ€ + TUG + æ¡åŠ›(å³å·¦)
+' è£ï¼š10mæ­©è¡Œ + 5å›ç«‹ã¡ä¸ŠãŒã‚Š + ã‚»ãƒŸã‚¿ãƒ³ãƒ‡ãƒ 
+' ã™ã¹ã¦ï¼šæœ€å¤§8å› / åŒæ—¥é‡è¤‡ã¯ãã®æ—¥ã®æœ€å¾Œã‚’æ¡ç”¨ / æ¨ªè»¸ã¯æ—¥ä»˜ãƒ©ãƒ™ãƒ«ã®ã¿
 '====================================================
 Public Sub Build_TestEval_PrintPack()
 
@@ -25,16 +25,16 @@ End If
 
 
 
-    nm = InputBox("–¼iŠ®‘Sˆê’vj")
+    nm = InputBox("æ°åï¼ˆå®Œå…¨ä¸€è‡´ï¼‰")
     If Len(nm) = 0 Then Exit Sub
-    idFilter = InputBox("ID‚Åi‚éê‡‚¾‚¯“ü—Íi‹ó—“=‘SŒj")
+    idFilter = InputBox("IDã§çµã‚‹å ´åˆã ã‘å…¥åŠ›ï¼ˆç©ºæ¬„=å…¨ä»¶ï¼‰")
 
     Set sh = ThisWorkbook.Worksheets("Viz_Print4")
 
-    ' ƒV[ƒg‰Šú‰»iŠù‘¶ƒ`ƒƒ[ƒgíœj
+    ' ã‚·ãƒ¼ãƒˆåˆæœŸåŒ–ï¼ˆæ—¢å­˜ãƒãƒ£ãƒ¼ãƒˆå‰Šé™¤ï¼‰
     ClearSheetAndCharts sh
 
-    ' ƒy[ƒWİ’èiA4cE2ƒy[ƒWj
+    ' ãƒšãƒ¼ã‚¸è¨­å®šï¼ˆA4ç¸¦ãƒ»2ãƒšãƒ¼ã‚¸ï¼‰
     SetupPrint3PagesA4 sh, nm
 
         
@@ -42,10 +42,10 @@ End If
         
         
        ' =========================
-' 1–‡–ÚF•]‰¿Œ‹‰Êi•ªÍƒeƒLƒXƒgj
+' 1æšç›®ï¼šè©•ä¾¡çµæœï¼ˆåˆ†æãƒ†ã‚­ã‚¹ãƒˆï¼‰
 ' =========================
 With sh.Range("A1")
-    .value = "–¼F " & nm
+    .value = "æ°åï¼š " & nm
     .Font.Size = 20
     .Font.Bold = True
 End With
@@ -53,53 +53,53 @@ End With
 
 
 ' =========================
-' ‰üƒy[ƒWF2–‡–Ú/3–‡–Ú
+' æ”¹ãƒšãƒ¼ã‚¸ï¼š2æšç›®/3æšç›®
 ' =========================
 sh.ResetAllPageBreaks
-sh.HPageBreaks.Add Before:=sh.rows(58)  ' 2–‡–ÚŠJn
-sh.HPageBreaks.Add Before:=sh.rows(117)  ' 3–‡–ÚŠJn
+sh.HPageBreaks.Add Before:=sh.rows(58)  ' 2æšç›®é–‹å§‹
+sh.HPageBreaks.Add Before:=sh.rows(117)  ' 3æšç›®é–‹å§‹
 
 ' =========================
-' 2–‡–ÚFƒOƒ‰ƒt2‚ÂiTUG/ˆ¬—Íj
+' 2æšç›®ï¼šã‚°ãƒ©ãƒ•2ã¤ï¼ˆTUG/æ¡åŠ›ï¼‰
 ' =========================
 AddSingleSeriesChart_FromIO sh, nm, idFilter, _
-    "TUG„ˆÚi•bj", "Test_TUG_sec", "•b", _
+    "TUGæ¨ç§»ï¼ˆç§’ï¼‰", "Test_TUG_sec", "ç§’", _
     15, 850, 500, 220
 
 
 AddGripChart_FromIO sh, nm, idFilter, _
-    "ˆ¬—Í„ˆÚi‰E/¶ kgj", "kg", _
+    "æ¡åŠ›æ¨ç§»ï¼ˆå³/å·¦ kgï¼‰", "kg", _
     15, 1085, 500, 220
 
 AddSingleSeriesChart_FromIO sh, nm, idFilter, _
-    "10m•às„ˆÚi•bj", "Test_10MWalk_sec", "•b", _
+    "10mæ­©è¡Œæ¨ç§»ï¼ˆç§’ï¼‰", "Test_10MWalk_sec", "ç§’", _
     15, 1320, 500, 220
     
     
     ' =========================
-' 3–‡–ÚFƒOƒ‰ƒt3‚Âi10m/5STS/ƒZƒ~j
+' 3æšç›®ï¼šã‚°ãƒ©ãƒ•3ã¤ï¼ˆ10m/5STS/ã‚»ãƒŸï¼‰
 ' =========================
 
 
 AddSingleSeriesChart_FromIO sh, nm, idFilter, _
-    "5‰ñ—§‚¿ã‚ª‚è„ˆÚi•bj", "Test_5xSitStand_sec", "•b", _
+    "5å›ç«‹ã¡ä¸ŠãŒã‚Šæ¨ç§»ï¼ˆç§’ï¼‰", "Test_5xSitStand_sec", "ç§’", _
     15, 1600, 500, 220
 
 AddSingleSeriesChart_FromIO sh, nm, idFilter, _
-    "ƒZƒ~ƒ^ƒ“ƒfƒ€„ˆÚi•bj", "Test_SemiTandem_sec", "•b", _
+    "ã‚»ãƒŸã‚¿ãƒ³ãƒ‡ãƒ æ¨ç§»ï¼ˆç§’ï¼‰", "Test_SemiTandem_sec", "ç§’", _
     15, 1835, 500, 220
  
         
         
         
         
-     '•ªÍƒeƒLƒXƒgiƒŒƒCƒAƒEƒgŠm’èj
+     'åˆ†æãƒ†ã‚­ã‚¹ãƒˆï¼ˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆç¢ºå®šï¼‰
 Write_AnalysisBoxes_ByRanges sh, nm, idFilter
 
-'‰üƒy[ƒW‚ÍÅŒã‚É1‰ñ‚¾‚¯İ’è
+'æ”¹ãƒšãƒ¼ã‚¸ã¯æœ€å¾Œã«1å›ã ã‘è¨­å®š
 sh.ResetAllPageBreaks
-sh.HPageBreaks.Add Before:=sh.rows(58)   '2–‡–ÚŠJn
-sh.HPageBreaks.Add Before:=sh.rows(117)  '3–‡–ÚŠJn
+sh.HPageBreaks.Add Before:=sh.rows(58)   '2æšç›®é–‹å§‹
+sh.HPageBreaks.Add Before:=sh.rows(117)  '3æšç›®é–‹å§‹
 
 
 #If APP_DEBUG Then
@@ -107,7 +107,7 @@ sh.HPageBreaks.Add Before:=sh.rows(117)  '3–‡–ÚŠJn
 #End If
 
 
-'ƒvƒŒƒrƒ…[‚È‚µ‚Åˆóü
+'ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ãªã—ã§å°åˆ·
 sh.PrintOut
 
 
@@ -116,7 +116,7 @@ sh.PrintOut
 End Sub
 
 '====================================================
-' ƒ`ƒƒ[ƒgì¬i’PˆêŒn—ñj
+' ãƒãƒ£ãƒ¼ãƒˆä½œæˆï¼ˆå˜ä¸€ç³»åˆ—ï¼‰
 '====================================================
 Private Sub AddSingleSeriesChart_FromIO( _
     ByVal sh As Worksheet, _
@@ -131,7 +131,7 @@ Private Sub AddSingleSeriesChart_FromIO( _
     CollectSeries_FromIO nm, idFilter, ioKey, dates, vals, cnt
 
     If cnt = 0 Then
-        ' ‹ó‚Å‚à˜g‚¾‚¯ì‚ç‚¸ƒXƒLƒbƒvi‰^—pã‚í‚©‚è‚â‚·‚¢j
+        ' ç©ºã§ã‚‚æ ã ã‘ä½œã‚‰ãšã‚¹ã‚­ãƒƒãƒ—ï¼ˆé‹ç”¨ä¸Šã‚ã‹ã‚Šã‚„ã™ã„ï¼‰
         Exit Sub
     End If
 
@@ -156,7 +156,7 @@ Private Sub AddSingleSeriesChart_FromIO( _
         .SeriesCollection(1).values = vals
 
         .Axes(xlCategory).HasTitle = True
-        .Axes(xlCategory).AxisTitle.Text = "“ú•t"
+        .Axes(xlCategory).AxisTitle.Text = "æ—¥ä»˜"
         .Axes(xlValue).HasTitle = True
         .Axes(xlValue).AxisTitle.Text = yUnit
         
@@ -168,7 +168,7 @@ Private Sub AddSingleSeriesChart_FromIO( _
 End Sub
 
 '====================================================
-' ƒ`ƒƒ[ƒgì¬iˆ¬—ÍF‰E¶2Œn—ñj
+' ãƒãƒ£ãƒ¼ãƒˆä½œæˆï¼ˆæ¡åŠ›ï¼šå³å·¦2ç³»åˆ—ï¼‰
 '====================================================
 Private Sub AddGripChart_FromIO( _
     ByVal sh As Worksheet, _
@@ -199,17 +199,17 @@ Private Sub AddGripChart_FromIO( _
 
 
         .SeriesCollection.NewSeries
-        .SeriesCollection(1).name = "ˆ¬—Í ‰E(kg)"
+        .SeriesCollection(1).name = "æ¡åŠ› å³(kg)"
         .SeriesCollection(1).XValues = xLbl
         .SeriesCollection(1).values = vR
 
         .SeriesCollection.NewSeries
-        .SeriesCollection(2).name = "ˆ¬—Í ¶(kg)"
+        .SeriesCollection(2).name = "æ¡åŠ› å·¦(kg)"
         .SeriesCollection(2).XValues = xLbl
         .SeriesCollection(2).values = vL
 
         .Axes(xlCategory).HasTitle = True
-        .Axes(xlCategory).AxisTitle.Text = "“ú•t"
+        .Axes(xlCategory).AxisTitle.Text = "æ—¥ä»˜"
         .Axes(xlValue).HasTitle = True
         .Axes(xlValue).AxisTitle.Text = yUnit
         
@@ -221,7 +221,7 @@ Private Sub AddGripChart_FromIO( _
 End Sub
 
 '====================================================
-' ƒf[ƒ^ûWi’PˆêŒn—ñj
+' ãƒ‡ãƒ¼ã‚¿åé›†ï¼ˆå˜ä¸€ç³»åˆ—ï¼‰
 '====================================================
 Private Sub CollectSeries_FromIO( _
     ByVal nm As String, _
@@ -236,7 +236,7 @@ Private Sub CollectSeries_FromIO( _
     Dim s As String, v As String
 
     Set ws = ThisWorkbook.Worksheets("EvalData")
-    lastR = ws.Cells(ws.rows.Count, 89).End(xlUp).row ' 89=–¼
+    lastR = ws.Cells(ws.rows.Count, 89).End(xlUp).row ' 89=æ°å
 
     cnt = 0
     For r = 2 To lastR
@@ -244,7 +244,7 @@ Private Sub CollectSeries_FromIO( _
             idVal = CStr(ws.Cells(r, 97).value) ' 97=ID
             If Len(idFilter) = 0 Or idVal = idFilter Then
 
-                ed = ws.Cells(r, 86).value ' 86=•]‰¿“úiŠm’èj
+                ed = ws.Cells(r, 86).value ' 86=è©•ä¾¡æ—¥ï¼ˆç¢ºå®šï¼‰
                 If Not IsDate(ed) Then GoTo ContinueNext
                 dt = CDate(ed)
 
@@ -252,7 +252,7 @@ Private Sub CollectSeries_FromIO( _
                 v = GetIOVal_Pack(s, ioKey)
 
                 If Len(v) = 0 Or v = "." Then GoTo ContinueNext
-                v = Replace(v, ":", ".") ' 44:80 ‘Îô
+                v = Replace(v, ":", ".") ' 44:80 å¯¾ç­–
 
                 cnt = cnt + 1
                 ReDim Preserve dates(1 To cnt)
@@ -272,7 +272,7 @@ ContinueNext:
 End Sub
 
 '====================================================
-' ƒf[ƒ^ûWiˆ¬—Í‰E¶j
+' ãƒ‡ãƒ¼ã‚¿åé›†ï¼ˆæ¡åŠ›å³å·¦ï¼‰
 '====================================================
 Private Sub CollectGrip_FromIO( _
     ByVal nm As String, _
@@ -328,7 +328,7 @@ ContinueNext:
 End Sub
 
 '====================================================
-' IO•¶š—ñ‚©‚ç key ‚Ì’l‚ğ”²‚­i‹æØ‚è | / Œ`® key=valuej
+' IOæ–‡å­—åˆ—ã‹ã‚‰ key ã®å€¤ã‚’æŠœãï¼ˆåŒºåˆ‡ã‚Š | / å½¢å¼ key=valueï¼‰
 '====================================================
 Private Function GetIOVal_Pack(ByVal s As String, ByVal key As String) As String
     Dim parts() As String, i As Long, kv() As String
@@ -346,7 +346,7 @@ Private Function GetIOVal_Pack(ByVal s As String, ByVal key As String) As String
 End Function
 
 '====================================================
-' ƒ\[ƒg•“¯“úd•¡œŠO•Å‘åNŒ
+' ã‚½ãƒ¼ãƒˆï¼†åŒæ—¥é‡è¤‡é™¤å¤–ï¼†æœ€å¤§Nä»¶
 '====================================================
 Private Sub SortByDate_1(ByRef d() As Date, ByRef v() As Double, ByVal cnt As Long)
     Dim i As Long, j As Long
@@ -389,7 +389,7 @@ Private Sub DedupByDate_1(ByRef d() As Date, ByRef v() As Double, ByRef cnt As L
             lastKey = dayKey
         Else
             nd(n) = d(i)
-            nv(n) = v(i) ' “¯“ú‚ÌÅŒã‚Åã‘‚«
+            nv(n) = v(i) ' åŒæ—¥ã®æœ€å¾Œã§ä¸Šæ›¸ã
         End If
     Next i
 
@@ -414,7 +414,7 @@ Private Sub DedupByDate_2(ByRef d() As Date, ByRef v1() As Double, ByRef v2() As
             lastKey = dayKey
         Else
             nd(n) = d(i)
-            n1(n) = v1(i) ' “¯“ú‚ÌÅŒã‚Åã‘‚«
+            n1(n) = v1(i) ' åŒæ—¥ã®æœ€å¾Œã§ä¸Šæ›¸ã
             n2(n) = v2(i)
         End If
     Next i
@@ -465,7 +465,7 @@ Private Sub SwapDbl_Pack(ByRef a As Double, ByRef b As Double)
 End Sub
 
 '====================================================
-' ƒV[ƒg‰Šú‰»•ˆóüİ’è
+' ã‚·ãƒ¼ãƒˆåˆæœŸåŒ–ï¼†å°åˆ·è¨­å®š
 '====================================================
 Private Sub ClearSheetAndCharts(ByVal sh As Worksheet)
     Dim co As ChartObject
@@ -498,7 +498,7 @@ End Sub
 
 
 Private Sub Write_AnalysisBoxes_ByRanges(ByVal sh As Worksheet, ByVal nm As String, ByVal idFilter As String)
-    ' cŠ[‘|œiƒZƒ‹‚Éc‚Á‚½•ªÍ•¶š{‹Œƒ{ƒbƒNƒXj
+    ' æ®‹éª¸æƒé™¤ï¼ˆã‚»ãƒ«ã«æ®‹ã£ãŸåˆ†ææ–‡å­—ï¼‹æ—§ãƒœãƒƒã‚¯ã‚¹ï¼‰
     On Error Resume Next
     sh.Range("B4:BC55").ClearContents
     sh.Shapes("SummaryBox").Delete
@@ -506,7 +506,7 @@ Private Sub Write_AnalysisBoxes_ByRanges(ByVal sh As Worksheet, ByVal nm As Stri
     sh.Shapes("PlanBox").Delete
     On Error GoTo 0
 
-    ' 3ƒuƒƒbƒNi”ÍˆÍƒTƒCƒY‚É’Ç]‚µ‚ÄƒeƒLƒXƒgƒ{ƒbƒNƒXì¬j
+    ' 3ãƒ–ãƒ­ãƒƒã‚¯ï¼ˆç¯„å›²ã‚µã‚¤ã‚ºã«è¿½å¾“ã—ã¦ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ä½œæˆï¼‰
     PutBoxOnRange sh, "SummaryBox", sh.Range("B8:J20"), Build_Block_Summary(nm, idFilter)
     PutBoxOnRange sh, "InterpBox", sh.Range("B24:J37"), Build_Block_Interpretation(nm, idFilter)
     PutBoxOnRange sh, "PlanBox", sh.Range("B41:J54"), Build_Block_Plan(nm, idFilter)
@@ -551,53 +551,53 @@ Private Function Build_TestEval_AnalysisText_Pack(ByVal nm As String, ByVal idFi
     Dim sTUG As String, s10m As String, s5 As String, sSemi As String, sGrip As String
     Dim body As String
 
-    ' TUGi¬‚³‚¢‚Ù‚Ç—Ç‚¢j
+    ' TUGï¼ˆå°ã•ã„ã»ã©è‰¯ã„ï¼‰
     CollectSeries_FromIO nm, idFilter, "Test_TUG_sec", d, v, cnt
-    sTUG = MetricLine_TimeSmallerBetter_Pack("TUG", "•b", cnt, v)
+    sTUG = MetricLine_TimeSmallerBetter_Pack("TUG", "ç§’", cnt, v)
 
-    ' 10mi¬‚³‚¢‚Ù‚Ç—Ç‚¢j
+    ' 10mï¼ˆå°ã•ã„ã»ã©è‰¯ã„ï¼‰
     CollectSeries_FromIO nm, idFilter, "Test_10MWalk_sec", d, v, cnt
-    s10m = MetricLine_TimeSmallerBetter_Pack("10m•às", "•b", cnt, v)
+    s10m = MetricLine_TimeSmallerBetter_Pack("10mæ­©è¡Œ", "ç§’", cnt, v)
 
-    ' 5‰ñ—§‚¿ã‚ª‚èi¬‚³‚¢‚Ù‚Ç—Ç‚¢j
+    ' 5å›ç«‹ã¡ä¸ŠãŒã‚Šï¼ˆå°ã•ã„ã»ã©è‰¯ã„ï¼‰
     CollectSeries_FromIO nm, idFilter, "Test_5xSitStand_sec", d, v, cnt
-    s5 = MetricLine_TimeSmallerBetter_Pack("5‰ñ—§‚¿ã‚ª‚è", "•b", cnt, v)
+    s5 = MetricLine_TimeSmallerBetter_Pack("5å›ç«‹ã¡ä¸ŠãŒã‚Š", "ç§’", cnt, v)
 
-    ' ƒZƒ~i‘å‚«‚¢‚Ù‚Ç—Ç‚¢j
+    ' ã‚»ãƒŸï¼ˆå¤§ãã„ã»ã©è‰¯ã„ï¼‰
     CollectSeries_FromIO nm, idFilter, "Test_SemiTandem_sec", d, v, cnt
-    sSemi = MetricLine_LargerBetter_Pack("ƒZƒ~ƒ^ƒ“ƒfƒ€", "•b", cnt, v)
+    sSemi = MetricLine_LargerBetter_Pack("ã‚»ãƒŸã‚¿ãƒ³ãƒ‡ãƒ ", "ç§’", cnt, v)
 
-    ' ˆ¬—Íi‘å‚«‚¢‚Ù‚Ç—Ç‚¢A‰E/¶j
+    ' æ¡åŠ›ï¼ˆå¤§ãã„ã»ã©è‰¯ã„ã€å³/å·¦ï¼‰
     CollectGrip_FromIO nm, idFilter, dr, vR, vL, cntG
     sGrip = GripLine_Pack(cntG, vR, vL)
 
     body = ""
-    body = body & "y•]‰¿Œ‹‰Ê‚Ì•ªÍz" & vbCrLf
-    body = body & "–¼F " & nm & vbCrLf & vbCrLf
+    body = body & "ã€è©•ä¾¡çµæœã®åˆ†æã€‘" & vbCrLf
+    body = body & "æ°åï¼š " & nm & vbCrLf & vbCrLf
 
-    body = body & "¡—v“_i’¼‹ß‚Æ‘O‰ñ‚Ì”äŠrj" & vbCrLf
-    body = body & "E" & sTUG & vbCrLf
-    body = body & "E" & s10m & vbCrLf
-    body = body & "E" & s5 & vbCrLf
-    body = body & "E" & sSemi & vbCrLf
-    body = body & "E" & sGrip & vbCrLf & vbCrLf
+    body = body & "â– è¦ç‚¹ï¼ˆç›´è¿‘ã¨å‰å›ã®æ¯”è¼ƒï¼‰" & vbCrLf
+    body = body & "ãƒ»" & sTUG & vbCrLf
+    body = body & "ãƒ»" & s10m & vbCrLf
+    body = body & "ãƒ»" & s5 & vbCrLf
+    body = body & "ãƒ»" & sSemi & vbCrLf
+    body = body & "ãƒ»" & sGrip & vbCrLf & vbCrLf
 
-    body = body & "¡‰ğßiŠÈˆÕj" & vbCrLf
-    body = body & "EˆÚ“®”\—ÍFTUG/10m•às‚ª‰ü‘Pi’Zkj‚µ‚Ä‚¢‚ê‚ÎA“®ìŠJnE•ûŒü“]Š·E•às‘¬“x‚Ì‰ü‘P‚ª¦´‚³‚ê‚Ü‚·B" & vbCrLf
-    body = body & "E‰ºˆ‹Ø—ÍE—§‚¿ã‚ª‚èF5‰ñ—§‚¿ã‚ª‚è‚ª’Zk‚·‚ê‚ÎA—§‚¿ã‚ª‚è”½•œ‚ÌŒø—¦Œüã‚ª¦´‚³‚ê‚Ü‚·B" & vbCrLf
-    body = body & "Eƒoƒ‰ƒ“ƒXFƒZƒ~ƒ^ƒ“ƒfƒ€‚ª‰„’·‚·‚ê‚ÎÃ“Iƒoƒ‰ƒ“ƒX‚ÌŒüã‚ª¦´‚³‚ê‚Ü‚·B" & vbCrLf
-    body = body & "Eãˆ‹Ø—ÍFˆ¬—Í‚ª‘‰Á‚·‚ê‚Î‘Sg‹Ø—ÍEŠˆ“®—Ê‚Ì‰ü‘Pw•W‚Ìˆê‚Â‚É‚È‚è‚Ü‚·B" & vbCrLf & vbCrLf
+    body = body & "â– è§£é‡ˆï¼ˆç°¡æ˜“ï¼‰" & vbCrLf
+    body = body & "ãƒ»ç§»å‹•èƒ½åŠ›ï¼šTUG/10mæ­©è¡ŒãŒæ”¹å–„ï¼ˆçŸ­ç¸®ï¼‰ã—ã¦ã„ã‚Œã°ã€å‹•ä½œé–‹å§‹ãƒ»æ–¹å‘è»¢æ›ãƒ»æ­©è¡Œé€Ÿåº¦ã®æ”¹å–„ãŒç¤ºå”†ã•ã‚Œã¾ã™ã€‚" & vbCrLf
+    body = body & "ãƒ»ä¸‹è‚¢ç­‹åŠ›ãƒ»ç«‹ã¡ä¸ŠãŒã‚Šï¼š5å›ç«‹ã¡ä¸ŠãŒã‚ŠãŒçŸ­ç¸®ã™ã‚Œã°ã€ç«‹ã¡ä¸ŠãŒã‚Šåå¾©ã®åŠ¹ç‡å‘ä¸ŠãŒç¤ºå”†ã•ã‚Œã¾ã™ã€‚" & vbCrLf
+    body = body & "ãƒ»ãƒãƒ©ãƒ³ã‚¹ï¼šã‚»ãƒŸã‚¿ãƒ³ãƒ‡ãƒ ãŒå»¶é•·ã™ã‚Œã°é™çš„ãƒãƒ©ãƒ³ã‚¹ã®å‘ä¸ŠãŒç¤ºå”†ã•ã‚Œã¾ã™ã€‚" & vbCrLf
+    body = body & "ãƒ»ä¸Šè‚¢ç­‹åŠ›ï¼šæ¡åŠ›ãŒå¢—åŠ ã™ã‚Œã°å…¨èº«ç­‹åŠ›ãƒ»æ´»å‹•é‡ã®æ”¹å–„æŒ‡æ¨™ã®ä¸€ã¤ã«ãªã‚Šã¾ã™ã€‚" & vbCrLf & vbCrLf
 
-    body = body & "¡Ÿ‚Ì•ûji‚½‚½‚«‘äj" & vbCrLf
-    body = body & "E’á‰º/’â‘Ø‚ª‚ ‚é€–Ú‚ÍA•p“xiTjE•‰‰×i‰ñ”/ŠÔjEƒtƒH[ƒ€‚ğŒ©’¼‚µA1€–Ú‚¸‚Â‰ü‘Pô‚ğ“–‚Ä‚Ü‚·B" & vbCrLf
-    body = body & "E“]“|ƒŠƒXƒN‚ª‹^‚í‚ê‚éê‡iTUGˆ«‰»/ƒZƒ~’á‰ºj‚ÍA•ûŒü“]Š·E’i·E‹·Š•às‚Ì—ûK‚ğ’Ç‰Á‚µ‚Ü‚·B" & vbCrLf
+    body = body & "â– æ¬¡ã®æ–¹é‡ï¼ˆãŸãŸãå°ï¼‰" & vbCrLf
+    body = body & "ãƒ»ä½ä¸‹/åœæ»ãŒã‚ã‚‹é …ç›®ã¯ã€é »åº¦ï¼ˆé€±ï¼‰ãƒ»è² è·ï¼ˆå›æ•°/æ™‚é–“ï¼‰ãƒ»ãƒ•ã‚©ãƒ¼ãƒ ã‚’è¦‹ç›´ã—ã€1é …ç›®ãšã¤æ”¹å–„ç­–ã‚’å½“ã¦ã¾ã™ã€‚" & vbCrLf
+    body = body & "ãƒ»è»¢å€’ãƒªã‚¹ã‚¯ãŒç–‘ã‚ã‚Œã‚‹å ´åˆï¼ˆTUGæ‚ªåŒ–/ã‚»ãƒŸä½ä¸‹ï¼‰ã¯ã€æ–¹å‘è»¢æ›ãƒ»æ®µå·®ãƒ»ç‹­æ‰€æ­©è¡Œã®ç·´ç¿’ã‚’è¿½åŠ ã—ã¾ã™ã€‚" & vbCrLf
 
     Build_TestEval_AnalysisText_Pack = body
 End Function
 
 Private Function MetricLine_TimeSmallerBetter_Pack(ByVal label As String, ByVal unit As String, ByVal cnt As Long, ByRef v() As Double) As String
     If cnt <= 0 Then
-        MetricLine_TimeSmallerBetter_Pack = label & "Fƒf[ƒ^‚È‚µ"
+        MetricLine_TimeSmallerBetter_Pack = label & "ï¼šãƒ‡ãƒ¼ã‚¿ãªã—"
         Exit Function
     End If
 
@@ -606,15 +606,15 @@ Private Function MetricLine_TimeSmallerBetter_Pack(ByVal label As String, ByVal 
     If cnt >= 2 Then
         prev = v(cnt - 1)
         diff = latest - prev
-        MetricLine_TimeSmallerBetter_Pack = label & "F’¼‹ß " & latest & unit & "i‘O‰ñ " & prev & unit & "j" & TrendWord_Time_Pack(diff)
+        MetricLine_TimeSmallerBetter_Pack = label & "ï¼šç›´è¿‘ " & latest & unit & "ï¼ˆå‰å› " & prev & unit & "ï¼‰" & TrendWord_Time_Pack(diff)
     Else
-        MetricLine_TimeSmallerBetter_Pack = label & "F’¼‹ß " & latest & unit & "i‘O‰ñ‚È‚µj"
+        MetricLine_TimeSmallerBetter_Pack = label & "ï¼šç›´è¿‘ " & latest & unit & "ï¼ˆå‰å›ãªã—ï¼‰"
     End If
 End Function
 
 Private Function MetricLine_LargerBetter_Pack(ByVal label As String, ByVal unit As String, ByVal cnt As Long, ByRef v() As Double) As String
     If cnt <= 0 Then
-        MetricLine_LargerBetter_Pack = label & "Fƒf[ƒ^‚È‚µ"
+        MetricLine_LargerBetter_Pack = label & "ï¼šãƒ‡ãƒ¼ã‚¿ãªã—"
         Exit Function
     End If
 
@@ -623,15 +623,15 @@ Private Function MetricLine_LargerBetter_Pack(ByVal label As String, ByVal unit 
     If cnt >= 2 Then
         prev = v(cnt - 1)
         diff = latest - prev
-        MetricLine_LargerBetter_Pack = label & "F’¼‹ß " & latest & unit & "i‘O‰ñ " & prev & unit & "j" & TrendWord_Larger_Pack(diff)
+        MetricLine_LargerBetter_Pack = label & "ï¼šç›´è¿‘ " & latest & unit & "ï¼ˆå‰å› " & prev & unit & "ï¼‰" & TrendWord_Larger_Pack(diff)
     Else
-        MetricLine_LargerBetter_Pack = label & "F’¼‹ß " & latest & unit & "i‘O‰ñ‚È‚µj"
+        MetricLine_LargerBetter_Pack = label & "ï¼šç›´è¿‘ " & latest & unit & "ï¼ˆå‰å›ãªã—ï¼‰"
     End If
 End Function
 
 Private Function GripLine_Pack(ByVal cnt As Long, ByRef vR() As Double, ByRef vL() As Double) As String
     If cnt <= 0 Then
-        GripLine_Pack = "ˆ¬—Íi‰E/¶jFƒf[ƒ^‚È‚µ"
+        GripLine_Pack = "æ¡åŠ›ï¼ˆå³/å·¦ï¼‰ï¼šãƒ‡ãƒ¼ã‚¿ãªã—"
         Exit Function
     End If
 
@@ -640,51 +640,51 @@ Private Function GripLine_Pack(ByVal cnt As Long, ByRef vR() As Double, ByRef vL
 
     If cnt >= 2 Then
         pr = vR(cnt - 1): pl = vL(cnt - 1)
-        GripLine_Pack = "ˆ¬—Íi‰E/¶jF’¼‹ß " & lr & " / " & ll & "kgi‘O‰ñ " & pr & " / " & pl & "kgj" & GripTrendWord_Pack(lr - pr, ll - pl)
+        GripLine_Pack = "æ¡åŠ›ï¼ˆå³/å·¦ï¼‰ï¼šç›´è¿‘ " & lr & " / " & ll & "kgï¼ˆå‰å› " & pr & " / " & pl & "kgï¼‰" & GripTrendWord_Pack(lr - pr, ll - pl)
     Else
-        GripLine_Pack = "ˆ¬—Íi‰E/¶jF’¼‹ß " & lr & " / " & ll & "kgi‘O‰ñ‚È‚µj"
+        GripLine_Pack = "æ¡åŠ›ï¼ˆå³/å·¦ï¼‰ï¼šç›´è¿‘ " & lr & " / " & ll & "kgï¼ˆå‰å›ãªã—ï¼‰"
     End If
 End Function
 
 Private Function TrendWord_Time_Pack(ByVal diff As Double) As String
     If Abs(diff) < 0.000001 Then
-        TrendWord_Time_Pack = "i•Ï‰»‚È‚µj"
+        TrendWord_Time_Pack = "ï¼ˆå¤‰åŒ–ãªã—ï¼‰"
     ElseIf diff < 0 Then
-        TrendWord_Time_Pack = "i‰ü‘PF’Zkj"
+        TrendWord_Time_Pack = "ï¼ˆæ”¹å–„ï¼šçŸ­ç¸®ï¼‰"
     Else
-        TrendWord_Time_Pack = "i’á‰ºF‰„’·j"
+        TrendWord_Time_Pack = "ï¼ˆä½ä¸‹ï¼šå»¶é•·ï¼‰"
     End If
 End Function
 
 Private Function TrendWord_Larger_Pack(ByVal diff As Double) As String
     If Abs(diff) < 0.000001 Then
-        TrendWord_Larger_Pack = "i•Ï‰»‚È‚µj"
+        TrendWord_Larger_Pack = "ï¼ˆå¤‰åŒ–ãªã—ï¼‰"
     ElseIf diff > 0 Then
-        TrendWord_Larger_Pack = "i‰ü‘PFŒüãj"
+        TrendWord_Larger_Pack = "ï¼ˆæ”¹å–„ï¼šå‘ä¸Šï¼‰"
     Else
-        TrendWord_Larger_Pack = "i’á‰ºF’á‰ºj"
+        TrendWord_Larger_Pack = "ï¼ˆä½ä¸‹ï¼šä½ä¸‹ï¼‰"
     End If
 End Function
 
 Private Function GripTrendWord_Pack(ByVal diffR As Double, ByVal diffL As Double) As String
     Dim r As String, l As String
     If Abs(diffR) < 0.000001 Then
-        r = "‰E=}0"
+        r = "å³=Â±0"
     ElseIf diffR > 0 Then
-        r = "‰E=ª"
+        r = "å³=â†‘"
     Else
-        r = "‰E=«"
+        r = "å³=â†“"
     End If
 
     If Abs(diffL) < 0.000001 Then
-        l = "¶=}0"
+        l = "å·¦=Â±0"
     ElseIf diffL > 0 Then
-        l = "¶=ª"
+        l = "å·¦=â†‘"
     Else
-        l = "¶=«"
+        l = "å·¦=â†“"
     End If
 
-    GripTrendWord_Pack = "i" & r & " / " & l & "j"
+    GripTrendWord_Pack = "ï¼ˆ" & r & " / " & l & "ï¼‰"
 End Function
 
 
@@ -692,7 +692,7 @@ End Function
 
 
 '====================================================
-' 3ƒuƒƒbƒN‘‚«‚İiD`BCj
+' 3ãƒ–ãƒ­ãƒƒã‚¯æ›¸ãè¾¼ã¿ï¼ˆDã€œBCï¼‰
 '====================================================
 Private Sub Write_TestEval_AnalysisText_3Blocks(ByVal sh As Worksheet, ByVal nm As String, ByVal idFilter As String)
     WriteBlock sh, "D6:BC10", Build_Block_Summary(nm, idFilter)
@@ -717,43 +717,43 @@ Private Sub WriteBlock(ByVal sh As Worksheet, ByVal addr As String, ByVal txt As
 End Sub
 
 '====================================================
-' ã’iF—v–ñi”’l{‘O‰ñ”äj
+' ä¸Šæ®µï¼šè¦ç´„ï¼ˆæ•°å€¤ï¼‹å‰å›æ¯”ï¼‰
 '====================================================
 Private Function Build_Block_Summary(ByVal nm As String, ByVal idFilter As String) As String
     Dim d() As Date, v() As Double, cnt As Long
     Dim dG() As Date, vR() As Double, vL() As Double, cntG As Long
     Dim s As String
 
-    s = "y•]‰¿Œ‹‰Ê‚Ì—v–ñz" & vbCrLf
-    s = s & "–¼F " & nm & vbCrLf
-    s = s & "’¼‹ß/‘O‰ñ‚Ì”äŠri“¯“úd•¡œŠOEÅ‘å8‰ñj" & vbCrLf & vbCrLf
+    s = "ã€è©•ä¾¡çµæœã®è¦ç´„ã€‘" & vbCrLf
+    s = s & "æ°åï¼š " & nm & vbCrLf
+    s = s & "ç›´è¿‘/å‰å›ã®æ¯”è¼ƒï¼ˆåŒæ—¥é‡è¤‡é™¤å¤–ãƒ»æœ€å¤§8å›ï¼‰" & vbCrLf & vbCrLf
 
-    ' TUGi¬‚³‚¢‚Ù‚Ç—Ç‚¢j
+    ' TUGï¼ˆå°ã•ã„ã»ã©è‰¯ã„ï¼‰
     CollectSeries_FromIO nm, idFilter, "Test_TUG_sec", d, v, cnt
-    s = s & "ETUGF" & SummaryLine_TimeBetterSmall(d, v, cnt, "•b") & vbCrLf
+    s = s & "ãƒ»TUGï¼š" & SummaryLine_TimeBetterSmall(d, v, cnt, "ç§’") & vbCrLf
 
-    ' 10mi¬‚³‚¢‚Ù‚Ç—Ç‚¢j
+    ' 10mï¼ˆå°ã•ã„ã»ã©è‰¯ã„ï¼‰
     CollectSeries_FromIO nm, idFilter, "Test_10MWalk_sec", d, v, cnt
-    s = s & "E10m•àsF" & SummaryLine_TimeBetterSmall(d, v, cnt, "•b") & vbCrLf
+    s = s & "ãƒ»10mæ­©è¡Œï¼š" & SummaryLine_TimeBetterSmall(d, v, cnt, "ç§’") & vbCrLf
 
-    ' 5STSi¬‚³‚¢‚Ù‚Ç—Ç‚¢j
+    ' 5STSï¼ˆå°ã•ã„ã»ã©è‰¯ã„ï¼‰
     CollectSeries_FromIO nm, idFilter, "Test_5xSitStand_sec", d, v, cnt
-    s = s & "E5‰ñ—§‚¿ã‚ª‚èF" & SummaryLine_TimeBetterSmall(d, v, cnt, "•b") & vbCrLf
+    s = s & "ãƒ»5å›ç«‹ã¡ä¸ŠãŒã‚Šï¼š" & SummaryLine_TimeBetterSmall(d, v, cnt, "ç§’") & vbCrLf
 
-    ' ƒZƒ~i‘å‚«‚¢‚Ù‚Ç—Ç‚¢j
+    ' ã‚»ãƒŸï¼ˆå¤§ãã„ã»ã©è‰¯ã„ï¼‰
     CollectSeries_FromIO nm, idFilter, "Test_SemiTandem_sec", d, v, cnt
-    s = s & "EƒZƒ~ƒ^ƒ“ƒfƒ€F" & SummaryLine_BetterLarge(d, v, cnt, "•b") & vbCrLf
+    s = s & "ãƒ»ã‚»ãƒŸã‚¿ãƒ³ãƒ‡ãƒ ï¼š" & SummaryLine_BetterLarge(d, v, cnt, "ç§’") & vbCrLf
 
-    ' ˆ¬—Íi‘å‚«‚¢‚Ù‚Ç—Ç‚¢F‰E/¶j
+    ' æ¡åŠ›ï¼ˆå¤§ãã„ã»ã©è‰¯ã„ï¼šå³/å·¦ï¼‰
     CollectGrip_FromIO nm, idFilter, dG, vR, vL, cntG
-    s = s & "Eˆ¬—Íi‰E/¶jF" & SummaryLine_Grip(dG, vR, vL, cntG) & vbCrLf
+    s = s & "ãƒ»æ¡åŠ›ï¼ˆå³/å·¦ï¼‰ï¼š" & SummaryLine_Grip(dG, vR, vL, cntG) & vbCrLf
 
     Build_Block_Summary = s
 End Function
 
 Private Function SummaryLine_TimeBetterSmall(ByRef d() As Date, ByRef v() As Double, ByVal cnt As Long, ByVal unit As String) As String
     If cnt <= 0 Then
-        SummaryLine_TimeBetterSmall = "ƒf[ƒ^‚È‚µ"
+        SummaryLine_TimeBetterSmall = "ãƒ‡ãƒ¼ã‚¿ãªã—"
         Exit Function
     End If
 
@@ -764,7 +764,7 @@ Private Function SummaryLine_TimeBetterSmall(ByRef d() As Date, ByRef v() As Dou
     d1 = Format$(d(cnt), "yyyy/mm/dd")
 
     If cnt = 1 Then
-        SummaryLine_TimeBetterSmall = d1 & "  " & latest & unit & "i‰‰ñj"
+        SummaryLine_TimeBetterSmall = d1 & "  " & latest & unit & "ï¼ˆåˆå›ï¼‰"
         Exit Function
     End If
 
@@ -773,20 +773,20 @@ Private Function SummaryLine_TimeBetterSmall(ByRef d() As Date, ByRef v() As Dou
     diff = latest - prev
 
     If Abs(diff) < 0.000001 Then
-        mark = "¨"
+        mark = "â†’"
     ElseIf diff < 0 Then
-        mark = "«"  '’Zk=‰ü‘P
+        mark = "â†“"  'çŸ­ç¸®=æ”¹å–„
     Else
-        mark = "ª"  '‰„’·=ˆ«‰»
+        mark = "â†‘"  'å»¶é•·=æ‚ªåŒ–
     End If
 
     SummaryLine_TimeBetterSmall = d1 & "  " & latest & unit & "  " & mark & _
-                                 "i‘O‰ñ " & d0 & " " & prev & unit & " / · " & Format$(diff, "+0.0;-0.0;0.0") & unit & "j"
+                                 "ï¼ˆå‰å› " & d0 & " " & prev & unit & " / å·® " & Format$(diff, "+0.0;-0.0;0.0") & unit & "ï¼‰"
 End Function
 
 Private Function SummaryLine_BetterLarge(ByRef d() As Date, ByRef v() As Double, ByVal cnt As Long, ByVal unit As String) As String
     If cnt <= 0 Then
-        SummaryLine_BetterLarge = "ƒf[ƒ^‚È‚µ"
+        SummaryLine_BetterLarge = "ãƒ‡ãƒ¼ã‚¿ãªã—"
         Exit Function
     End If
 
@@ -797,7 +797,7 @@ Private Function SummaryLine_BetterLarge(ByRef d() As Date, ByRef v() As Double,
     d1 = Format$(d(cnt), "yyyy/mm/dd")
 
     If cnt = 1 Then
-        SummaryLine_BetterLarge = d1 & "  " & latest & unit & "i‰‰ñj"
+        SummaryLine_BetterLarge = d1 & "  " & latest & unit & "ï¼ˆåˆå›ï¼‰"
         Exit Function
     End If
 
@@ -806,20 +806,20 @@ Private Function SummaryLine_BetterLarge(ByRef d() As Date, ByRef v() As Double,
     diff = latest - prev
 
     If Abs(diff) < 0.000001 Then
-        mark = "¨"
+        mark = "â†’"
     ElseIf diff > 0 Then
-        mark = "ª"  '‰„’·=‰ü‘P
+        mark = "â†‘"  'å»¶é•·=æ”¹å–„
     Else
-        mark = "«"  '’Zk=’á‰º
+        mark = "â†“"  'çŸ­ç¸®=ä½ä¸‹
     End If
 
     SummaryLine_BetterLarge = d1 & "  " & latest & unit & "  " & mark & _
-                             "i‘O‰ñ " & d0 & " " & prev & unit & " / · " & Format$(diff, "+0.0;-0.0;0.0") & unit & "j"
+                             "ï¼ˆå‰å› " & d0 & " " & prev & unit & " / å·® " & Format$(diff, "+0.0;-0.0;0.0") & unit & "ï¼‰"
 End Function
 
 Private Function SummaryLine_Grip(ByRef d() As Date, ByRef r() As Double, ByRef l() As Double, ByVal cnt As Long) As String
     If cnt <= 0 Then
-        SummaryLine_Grip = "ƒf[ƒ^‚È‚µ"
+        SummaryLine_Grip = "ãƒ‡ãƒ¼ã‚¿ãªã—"
         Exit Function
     End If
 
@@ -831,7 +831,7 @@ Private Function SummaryLine_Grip(ByRef d() As Date, ByRef r() As Double, ByRef 
     d1 = Format$(d(cnt), "yyyy/mm/dd")
 
     If cnt = 1 Then
-        SummaryLine_Grip = d1 & "  " & lr & " / " & ll & "kgi‰‰ñj"
+        SummaryLine_Grip = d1 & "  " & lr & " / " & ll & "kgï¼ˆåˆå›ï¼‰"
         Exit Function
     End If
 
@@ -840,165 +840,165 @@ Private Function SummaryLine_Grip(ByRef d() As Date, ByRef r() As Double, ByRef 
     dr = lr - pr: dl = ll - pl
 
 If Abs(dr) < 0.000001 Then
-    markR = "¨"
+    markR = "â†’"
 ElseIf dr > 0 Then
-    markR = "ª"
+    markR = "â†‘"
 Else
-    markR = "«"
+    markR = "â†“"
 End If
 
 If Abs(dl) < 0.000001 Then
-    markL = "¨"
+    markL = "â†’"
 ElseIf dl > 0 Then
-    markL = "ª"
+    markL = "â†‘"
 Else
-    markL = "«"
+    markL = "â†“"
 End If
 
 
-    SummaryLine_Grip = d1 & "  " & lr & " / " & ll & "kgi" & markR & "/" & markL & _
-                       " ‘O‰ñ " & d0 & " " & pr & " / " & pl & "kgj"
+    SummaryLine_Grip = d1 & "  " & lr & " / " & ll & "kgï¼ˆ" & markR & "/" & markL & _
+                       " å‰å› " & d0 & " " & pr & " / " & pl & "kgï¼‰"
 End Function
 
 
 '====================================================
-' ’†’iF‰ğßiƒOƒ‰ƒt‚ÌˆÓ–¡‚Ã‚¯j
+' ä¸­æ®µï¼šè§£é‡ˆï¼ˆã‚°ãƒ©ãƒ•ã®æ„å‘³ã¥ã‘ï¼‰
 '====================================================
 Private Function Build_Block_Interpretation(ByVal nm As String, ByVal idFilter As String) As String
     Dim d() As Date, v() As Double, cnt As Long
     Dim s As String
 
-    s = "y•Ï‰»‚Ì‰ğßz" & vbCrLf
+    s = "ã€å¤‰åŒ–ã®è§£é‡ˆã€‘" & vbCrLf
 
     CollectSeries_FromIO nm, idFilter, "Test_TUG_sec", d, v, cnt
     s = s & Interpret_Time("TUG", cnt, v)
 
     CollectSeries_FromIO nm, idFilter, "Test_10MWalk_sec", d, v, cnt
-    s = s & Interpret_Time("10m•às", cnt, v)
+    s = s & Interpret_Time("10mæ­©è¡Œ", cnt, v)
 
     CollectSeries_FromIO nm, idFilter, "Test_5xSitStand_sec", d, v, cnt
-    s = s & Interpret_Time("5‰ñ—§‚¿ã‚ª‚è", cnt, v)
+    s = s & Interpret_Time("5å›ç«‹ã¡ä¸ŠãŒã‚Š", cnt, v)
 
     CollectSeries_FromIO nm, idFilter, "Test_SemiTandem_sec", d, v, cnt
-    s = s & Interpret_Larger("ƒZƒ~ƒ^ƒ“ƒfƒ€", cnt, v)
+    s = s & Interpret_Larger("ã‚»ãƒŸã‚¿ãƒ³ãƒ‡ãƒ ", cnt, v)
 
     Build_Block_Interpretation = s
 End Function
 
 '====================================================
-' ‰º’iF•ûjiŸ‚Ìˆêèj
+' ä¸‹æ®µï¼šæ–¹é‡ï¼ˆæ¬¡ã®ä¸€æ‰‹ï¼‰
 '====================================================
 Private Function Build_Block_Plan(ByVal nm As String, ByVal idFilter As String) As String
     Dim d() As Date, v() As Double, cnt As Long
     Dim s As String
 
-    s = "y¡Œã‚Ì•ûji‚½‚½‚«‘äjz" & vbCrLf
+    s = "ã€ä»Šå¾Œã®æ–¹é‡ï¼ˆãŸãŸãå°ï¼‰ã€‘" & vbCrLf
 
     CollectSeries_FromIO nm, idFilter, "Test_TUG_sec", d, v, cnt
     s = s & Plan_Time(cnt, v, _
-        "•ûŒü“]Š·E’i·E‹·Š•às‚ğŠÜ‚Ş‰Û‘è‚ğ’iŠK“I‚É’Ç‰Á‚µ‚Ü‚·B", _
-        "Šî–{“®ì‚ÌˆÀ’è‰»‚ğŒp‘±‚µA•‰‰×—Ê‚Ì”÷’²®‚ğs‚¢‚Ü‚·B")
+        "æ–¹å‘è»¢æ›ãƒ»æ®µå·®ãƒ»ç‹­æ‰€æ­©è¡Œã‚’å«ã‚€èª²é¡Œã‚’æ®µéšçš„ã«è¿½åŠ ã—ã¾ã™ã€‚", _
+        "åŸºæœ¬å‹•ä½œã®å®‰å®šåŒ–ã‚’ç¶™ç¶šã—ã€è² è·é‡ã®å¾®èª¿æ•´ã‚’è¡Œã„ã¾ã™ã€‚")
 
     CollectSeries_FromIO nm, idFilter, "Test_5xSitStand_sec", d, v, cnt
     s = s & Plan_Time(cnt, v, _
-        "—§‚¿ã‚ª‚è”½•œ‚Ì‰ñ”Eƒeƒ“ƒ|‚ğ’²®‚µA‰ºˆ‹Ø—ÍŒüã‚ğ}‚è‚Ü‚·B", _
-        "ƒtƒH[ƒ€Šm”F‚ğ—Dæ‚µA”½•œŒø—¦‚Ì‰ü‘P‚ğ}‚è‚Ü‚·B")
+        "ç«‹ã¡ä¸ŠãŒã‚Šåå¾©ã®å›æ•°ãƒ»ãƒ†ãƒ³ãƒã‚’èª¿æ•´ã—ã€ä¸‹è‚¢ç­‹åŠ›å‘ä¸Šã‚’å›³ã‚Šã¾ã™ã€‚", _
+        "ãƒ•ã‚©ãƒ¼ãƒ ç¢ºèªã‚’å„ªå…ˆã—ã€åå¾©åŠ¹ç‡ã®æ”¹å–„ã‚’å›³ã‚Šã¾ã™ã€‚")
 
     Build_Block_Plan = s
 End Function
 
 '====================================================
-' ’Z•¶ƒwƒ‹ƒp[
+' çŸ­æ–‡ãƒ˜ãƒ«ãƒ‘ãƒ¼
 '====================================================
 Private Function Line_Short_Time(ByVal unit As String, ByVal cnt As Long, ByRef v() As Double) As String
-    If cnt <= 0 Then Line_Short_Time = "ƒf[ƒ^‚È‚µ": Exit Function
+    If cnt <= 0 Then Line_Short_Time = "ãƒ‡ãƒ¼ã‚¿ãªã—": Exit Function
     If cnt >= 2 Then
-        Line_Short_Time = v(cnt) & unit & "i‘O‰ñ”ä " & Format$(v(cnt) - v(cnt - 1), "+0.0;-0.0;0.0") & unit & "j"
+        Line_Short_Time = v(cnt) & unit & "ï¼ˆå‰å›æ¯” " & Format$(v(cnt) - v(cnt - 1), "+0.0;-0.0;0.0") & unit & "ï¼‰"
     Else
-        Line_Short_Time = v(cnt) & unit & "i‰‰ñj"
+        Line_Short_Time = v(cnt) & unit & "ï¼ˆåˆå›ï¼‰"
     End If
 End Function
 
 Private Function Line_Short_Larger(ByVal unit As String, ByVal cnt As Long, ByRef v() As Double) As String
-    If cnt <= 0 Then Line_Short_Larger = "ƒf[ƒ^‚È‚µ": Exit Function
+    If cnt <= 0 Then Line_Short_Larger = "ãƒ‡ãƒ¼ã‚¿ãªã—": Exit Function
     If cnt >= 2 Then
-        Line_Short_Larger = v(cnt) & unit & "i‘O‰ñ”ä " & Format$(v(cnt) - v(cnt - 1), "+0.0;-0.0;0.0") & unit & "j"
+        Line_Short_Larger = v(cnt) & unit & "ï¼ˆå‰å›æ¯” " & Format$(v(cnt) - v(cnt - 1), "+0.0;-0.0;0.0") & unit & "ï¼‰"
     Else
-        Line_Short_Larger = v(cnt) & unit & "i‰‰ñj"
+        Line_Short_Larger = v(cnt) & unit & "ï¼ˆåˆå›ï¼‰"
     End If
 End Function
 
 Private Function Line_Short_Grip(ByVal cnt As Long, ByRef r() As Double, ByRef l() As Double) As String
-    If cnt <= 0 Then Line_Short_Grip = "ƒf[ƒ^‚È‚µ": Exit Function
+    If cnt <= 0 Then Line_Short_Grip = "ãƒ‡ãƒ¼ã‚¿ãªã—": Exit Function
     If cnt >= 2 Then
-        Line_Short_Grip = r(cnt) & " / " & l(cnt) & "kgi‘O‰ñ”ä " & _
+        Line_Short_Grip = r(cnt) & " / " & l(cnt) & "kgï¼ˆå‰å›æ¯” " & _
             Format$(r(cnt) - r(cnt - 1), "+0.0;-0.0;0.0") & " / " & _
-            Format$(l(cnt) - l(cnt - 1), "+0.0;-0.0;0.0") & "kgj"
+            Format$(l(cnt) - l(cnt - 1), "+0.0;-0.0;0.0") & "kgï¼‰"
     Else
-        Line_Short_Grip = r(cnt) & " / " & l(cnt) & "kgi‰‰ñj"
+        Line_Short_Grip = r(cnt) & " / " & l(cnt) & "kgï¼ˆåˆå›ï¼‰"
     End If
 End Function
 
 Private Function Interpret_Time(ByVal label As String, ByVal cnt As Long, ByRef v() As Double) As String
-    ' ¬‚³‚¢‚Ù‚Ç—Ç‚¢iTUG/10m/5STSj
+    ' å°ã•ã„ã»ã©è‰¯ã„ï¼ˆTUG/10m/5STSï¼‰
     If cnt < 2 Then
-        Interpret_Time = "E" & label & "F‰‰ñ•]‰¿‚Ì‚½‚ßA¡Œã‚Ì„ˆÚ‚ğŠm”F‚µ‚Ü‚·B" & vbCrLf
+        Interpret_Time = "ãƒ»" & label & "ï¼šåˆå›è©•ä¾¡ã®ãŸã‚ã€ä»Šå¾Œã®æ¨ç§»ã‚’ç¢ºèªã—ã¾ã™ã€‚" & vbCrLf
         Exit Function
     End If
 
     Dim d1 As Double, d3 As Double, rng As Double
-    d1 = v(cnt) - v(cnt - 1) '‘O‰ñ”ä
-    d3 = Trend3_Pack(v, cnt, True) '’¼‹ß3‰ñ‚ÌŒXŒüiTrue=¬‚³‚¢‚Ù‚Ç—Ç‚¢j
-    rng = Range3_Pack(v, cnt)      '’¼‹ß3‰ñ‚Ì•Ï“®•
+    d1 = v(cnt) - v(cnt - 1) 'å‰å›æ¯”
+    d3 = Trend3_Pack(v, cnt, True) 'ç›´è¿‘3å›ã®å‚¾å‘ï¼ˆTrue=å°ã•ã„ã»ã©è‰¯ã„ï¼‰
+    rng = Range3_Pack(v, cnt)      'ç›´è¿‘3å›ã®å¤‰å‹•å¹…
 
     If rng >= 5 Then
-        Interpret_Time = "E" & label & "F“ú‚É‚æ‚é•Ï“®‚ª‘å‚«‚­A‘Ì’²EŠÂ‹«E”æ˜J‚Ì‰e‹¿‚ªo‚Ä‚¢‚é‰Â”\«‚ª‚ ‚è‚Ü‚·B" & vbCrLf
+        Interpret_Time = "ãƒ»" & label & "ï¼šæ—¥ã«ã‚ˆã‚‹å¤‰å‹•ãŒå¤§ããã€ä½“èª¿ãƒ»ç’°å¢ƒãƒ»ç–²åŠ´ã®å½±éŸ¿ãŒå‡ºã¦ã„ã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚" & vbCrLf
     ElseIf d3 < 0 Then
-        Interpret_Time = "E" & label & "F’¼‹ß3‰ñ‚Å‰ü‘PŒXŒü‚ª‘±‚¢‚Ä‚¨‚èA“®ìŒø—¦‚ÌŒüã‚ª¦´‚³‚ê‚Ü‚·B" & vbCrLf
+        Interpret_Time = "ãƒ»" & label & "ï¼šç›´è¿‘3å›ã§æ”¹å–„å‚¾å‘ãŒç¶šã„ã¦ãŠã‚Šã€å‹•ä½œåŠ¹ç‡ã®å‘ä¸ŠãŒç¤ºå”†ã•ã‚Œã¾ã™ã€‚" & vbCrLf
     ElseIf d3 > 0 Then
-        Interpret_Time = "E" & label & "F’¼‹ß3‰ñ‚Å‚â‚â’á‰ºŒXŒü‚ª‚ ‚èA•‰‰×—Ê‚â‰ñ•œó‹µ‚ÌÄŠm”F‚ª•K—v‚Å‚·B" & vbCrLf
+        Interpret_Time = "ãƒ»" & label & "ï¼šç›´è¿‘3å›ã§ã‚„ã‚„ä½ä¸‹å‚¾å‘ãŒã‚ã‚Šã€è² è·é‡ã‚„å›å¾©çŠ¶æ³ã®å†ç¢ºèªãŒå¿…è¦ã§ã™ã€‚" & vbCrLf
     ElseIf d1 < 0 Then
-        Interpret_Time = "E" & label & "F‘O‰ñ‚æ‚è’Zk‚µ‚Ä‚¨‚èA‰ü‘P‚ª¦´‚³‚ê‚Ü‚·B" & vbCrLf
+        Interpret_Time = "ãƒ»" & label & "ï¼šå‰å›ã‚ˆã‚ŠçŸ­ç¸®ã—ã¦ãŠã‚Šã€æ”¹å–„ãŒç¤ºå”†ã•ã‚Œã¾ã™ã€‚" & vbCrLf
     ElseIf d1 > 0 Then
-        Interpret_Time = "E" & label & "F‘O‰ñ‚æ‚è‰„’·‚µ‚Ä‚¨‚èA”æ˜J‚â’É‚İ“™‚Ì‰e‹¿‚ªl‚¦‚ç‚ê‚Ü‚·B" & vbCrLf
+        Interpret_Time = "ãƒ»" & label & "ï¼šå‰å›ã‚ˆã‚Šå»¶é•·ã—ã¦ãŠã‚Šã€ç–²åŠ´ã‚„ç—›ã¿ç­‰ã®å½±éŸ¿ãŒè€ƒãˆã‚‰ã‚Œã¾ã™ã€‚" & vbCrLf
     Else
-        Interpret_Time = "E" & label & "F‘å‚«‚È•Ï‰»‚Í‚È‚­AˆÛŒXŒü‚Å‚·B" & vbCrLf
+        Interpret_Time = "ãƒ»" & label & "ï¼šå¤§ããªå¤‰åŒ–ã¯ãªãã€ç¶­æŒå‚¾å‘ã§ã™ã€‚" & vbCrLf
     End If
 End Function
 
 Private Function Interpret_Larger(ByVal label As String, ByVal cnt As Long, ByRef v() As Double) As String
-    ' ‘å‚«‚¢‚Ù‚Ç—Ç‚¢iƒZƒ~j
+    ' å¤§ãã„ã»ã©è‰¯ã„ï¼ˆã‚»ãƒŸï¼‰
     If cnt < 2 Then
-        Interpret_Larger = "E" & label & "F‰‰ñ•]‰¿‚Ì‚½‚ßA¡Œã‚Ì„ˆÚ‚ğŠm”F‚µ‚Ü‚·B" & vbCrLf
+        Interpret_Larger = "ãƒ»" & label & "ï¼šåˆå›è©•ä¾¡ã®ãŸã‚ã€ä»Šå¾Œã®æ¨ç§»ã‚’ç¢ºèªã—ã¾ã™ã€‚" & vbCrLf
         Exit Function
     End If
 
     Dim d1 As Double, d3 As Double, rng As Double
     d1 = v(cnt) - v(cnt - 1)
-    d3 = Trend3_Pack(v, cnt, False) 'False=‘å‚«‚¢‚Ù‚Ç—Ç‚¢
+    d3 = Trend3_Pack(v, cnt, False) 'False=å¤§ãã„ã»ã©è‰¯ã„
     rng = Range3_Pack(v, cnt)
 
     If rng >= 10 Then
-        Interpret_Larger = "E" & label & "F“ú‚É‚æ‚é•Ï“®‚ª‘å‚«‚­Ap¨ExŠî’ê–ÊE’ˆÓ”z•ª‚Ì‰e‹¿‚ªo‚Ä‚¢‚é‰Â”\«‚ª‚ ‚è‚Ü‚·B" & vbCrLf
+        Interpret_Larger = "ãƒ»" & label & "ï¼šæ—¥ã«ã‚ˆã‚‹å¤‰å‹•ãŒå¤§ããã€å§¿å‹¢ãƒ»æ”¯æŒåŸºåº•é¢ãƒ»æ³¨æ„é…åˆ†ã®å½±éŸ¿ãŒå‡ºã¦ã„ã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚" & vbCrLf
     ElseIf d3 > 0 Then
-        Interpret_Larger = "E" & label & "F’¼‹ß3‰ñ‚ÅŒüãŒXŒü‚ª‘±‚¢‚Ä‚¨‚èAÃ“Iƒoƒ‰ƒ“ƒX‚Ì‰ü‘P‚ª¦´‚³‚ê‚Ü‚·B" & vbCrLf
+        Interpret_Larger = "ãƒ»" & label & "ï¼šç›´è¿‘3å›ã§å‘ä¸Šå‚¾å‘ãŒç¶šã„ã¦ãŠã‚Šã€é™çš„ãƒãƒ©ãƒ³ã‚¹ã®æ”¹å–„ãŒç¤ºå”†ã•ã‚Œã¾ã™ã€‚" & vbCrLf
     ElseIf d3 < 0 Then
-        Interpret_Larger = "E" & label & "F’¼‹ß3‰ñ‚Å’á‰ºŒXŒü‚ª‚ ‚èA‚Ó‚ç‚Â‚«—vˆöi”æ˜JEáu’ÉE’ˆÓj‚ğÄŠm”F‚µ‚Ü‚·B" & vbCrLf
+        Interpret_Larger = "ãƒ»" & label & "ï¼šç›´è¿‘3å›ã§ä½ä¸‹å‚¾å‘ãŒã‚ã‚Šã€ãµã‚‰ã¤ãè¦å› ï¼ˆç–²åŠ´ãƒ»ç–¼ç—›ãƒ»æ³¨æ„ï¼‰ã‚’å†ç¢ºèªã—ã¾ã™ã€‚" & vbCrLf
     ElseIf d1 > 0 Then
-        Interpret_Larger = "E" & label & "F‘O‰ñ‚æ‚èŒüã‚µ‚Ä‚¨‚èA‰ü‘P‚ª¦´‚³‚ê‚Ü‚·B" & vbCrLf
+        Interpret_Larger = "ãƒ»" & label & "ï¼šå‰å›ã‚ˆã‚Šå‘ä¸Šã—ã¦ãŠã‚Šã€æ”¹å–„ãŒç¤ºå”†ã•ã‚Œã¾ã™ã€‚" & vbCrLf
     ElseIf d1 < 0 Then
-        Interpret_Larger = "E" & label & "F‘O‰ñ‚æ‚è’á‰º‚µ‚Ä‚¨‚èAxŠî’ê–Ê‚âp¨‚ÌÄŠm”F‚ª•K—v‚Å‚·B" & vbCrLf
+        Interpret_Larger = "ãƒ»" & label & "ï¼šå‰å›ã‚ˆã‚Šä½ä¸‹ã—ã¦ãŠã‚Šã€æ”¯æŒåŸºåº•é¢ã‚„å§¿å‹¢ã®å†ç¢ºèªãŒå¿…è¦ã§ã™ã€‚" & vbCrLf
     Else
-        Interpret_Larger = "E" & label & "F‘å‚«‚È•Ï‰»‚Í‚È‚­AˆÛŒXŒü‚Å‚·B" & vbCrLf
+        Interpret_Larger = "ãƒ»" & label & "ï¼šå¤§ããªå¤‰åŒ–ã¯ãªãã€ç¶­æŒå‚¾å‘ã§ã™ã€‚" & vbCrLf
     End If
 End Function
 
-'==== ’¼‹ß3‰ñ‚ÌuŒXŒüvF•½‹Ï‚Æ‚Ì·i‚´‚Á‚­‚èj ====
+'==== ç›´è¿‘3å›ã®ã€Œå‚¾å‘ã€ï¼šå¹³å‡ã¨ã®å·®ï¼ˆã–ã£ãã‚Šï¼‰ ====
 Private Function Trend3_Pack(ByRef v() As Double, ByVal cnt As Long, ByVal smallerBetter As Boolean) As Double
     Dim n As Long, a As Double, b As Double, c As Double
     If cnt >= 3 Then
         a = v(cnt - 2): b = v(cnt - 1): c = v(cnt)
-        ' ¬‚³‚¢‚Ù‚Ç—Ç‚¢F‰º‚ª‚Á‚Ä‚¢‚ê‚Îƒ}ƒCƒiƒXi‰ü‘Pj
+        ' å°ã•ã„ã»ã©è‰¯ã„ï¼šä¸‹ãŒã£ã¦ã„ã‚Œã°ãƒã‚¤ãƒŠã‚¹ï¼ˆæ”¹å–„ï¼‰
         If smallerBetter Then
             Trend3_Pack = (c - a)
         Else
@@ -1009,7 +1009,7 @@ Private Function Trend3_Pack(ByRef v() As Double, ByVal cnt As Long, ByVal small
     End If
 End Function
 
-'==== ’¼‹ß3‰ñ‚Ì•Ï“®•imax-minj ====
+'==== ç›´è¿‘3å›ã®å¤‰å‹•å¹…ï¼ˆmax-minï¼‰ ====
 Private Function Range3_Pack(ByRef v() As Double, ByVal cnt As Long) As Double
     If cnt < 3 Then
         Range3_Pack = 0
@@ -1024,35 +1024,35 @@ End Function
 
 
 Private Function Plan_Time(ByVal cnt As Long, ByRef v() As Double, ByVal improveTxt As String, ByVal stableTxt As String) As String
-    ' ¬‚³‚¢‚Ù‚Ç—Ç‚¢iTUG/5STS‚È‚Çj
+    ' å°ã•ã„ã»ã©è‰¯ã„ï¼ˆTUG/5STSãªã©ï¼‰
     If cnt <= 0 Then
-        Plan_Time = "Eƒf[ƒ^‚ª‚È‚¢‚½‚ßA•]‰¿‚ğŒp‘±‚µ‚ÄŒXŒü‚ğŠm”F‚µ‚Ü‚·B" & vbCrLf
+        Plan_Time = "ãƒ»ãƒ‡ãƒ¼ã‚¿ãŒãªã„ãŸã‚ã€è©•ä¾¡ã‚’ç¶™ç¶šã—ã¦å‚¾å‘ã‚’ç¢ºèªã—ã¾ã™ã€‚" & vbCrLf
         Exit Function
     End If
 
     If cnt = 1 Then
-        Plan_Time = "E‰‰ñ•]‰¿‚Ì‚½‚ßA“¯ğŒ‚ÅÄ•]‰¿‚µŠî€’l‚ğŒÅ‚ß‚Ü‚·B" & vbCrLf
+        Plan_Time = "ãƒ»åˆå›è©•ä¾¡ã®ãŸã‚ã€åŒæ¡ä»¶ã§å†è©•ä¾¡ã—åŸºæº–å€¤ã‚’å›ºã‚ã¾ã™ã€‚" & vbCrLf
         Exit Function
     End If
 
     Dim diff As Double
-    diff = v(cnt) - v(cnt - 1) 'ƒ}ƒCƒiƒX=‰ü‘PAƒvƒ‰ƒX=ˆ«‰»
+    diff = v(cnt) - v(cnt - 1) 'ãƒã‚¤ãƒŠã‚¹=æ”¹å–„ã€ãƒ—ãƒ©ã‚¹=æ‚ªåŒ–
 
-    ' ’¼‹ß3‰ñ‚Ì•Ï“®•‚ª‘å‚«‚¢“ú“à/“úŠÔ‚ÌƒuƒŒ‚ª‹­‚¢
+    ' ç›´è¿‘3å›ã®å¤‰å‹•å¹…ãŒå¤§ãã„ï¼æ—¥å†…/æ—¥é–“ã®ãƒ–ãƒ¬ãŒå¼·ã„
     Dim rng As Double
     rng = Range3_Pack(v, cnt)
 
     If rng >= 5 Then
-        Plan_Time = "E“ú‚É‚æ‚é•Ï“®‚ª‘å‚«‚¢‚½‚ßA•]‰¿ğŒiŒCE•â•‹ïEáu’ÉE”æ˜JEŠÔ‘Ñj‚ğ‘µ‚¦‚ÄˆÀ’è‰»‚ğ—Dæ‚µ‚Ü‚·B" & vbCrLf
+        Plan_Time = "ãƒ»æ—¥ã«ã‚ˆã‚‹å¤‰å‹•ãŒå¤§ãã„ãŸã‚ã€è©•ä¾¡æ¡ä»¶ï¼ˆé´ãƒ»è£œåŠ©å…·ãƒ»ç–¼ç—›ãƒ»ç–²åŠ´ãƒ»æ™‚é–“å¸¯ï¼‰ã‚’æƒãˆã¦å®‰å®šåŒ–ã‚’å„ªå…ˆã—ã¾ã™ã€‚" & vbCrLf
     ElseIf diff < -0.000001 Then
-        Plan_Time = "E" & improveTxt & vbCrLf
-        Plan_Time = Plan_Time & "E‰ü‘P‚ªo‚Ä‚¢‚é‚½‚ßA’iŠK“I‚É‰Û‘è“ï“xi•ûŒü“]Š·E’i·E‹·Š‚È‚Çj‚ğã‚°‚Ä”Ä‰»‚ğ‘_‚¢‚Ü‚·B" & vbCrLf
+        Plan_Time = "ãƒ»" & improveTxt & vbCrLf
+        Plan_Time = Plan_Time & "ãƒ»æ”¹å–„ãŒå‡ºã¦ã„ã‚‹ãŸã‚ã€æ®µéšçš„ã«èª²é¡Œé›£åº¦ï¼ˆæ–¹å‘è»¢æ›ãƒ»æ®µå·®ãƒ»ç‹­æ‰€ãªã©ï¼‰ã‚’ä¸Šã’ã¦æ±åŒ–ã‚’ç‹™ã„ã¾ã™ã€‚" & vbCrLf
     ElseIf diff > 0.000001 Then
-        Plan_Time = "E‘O‰ñ‚æ‚èˆ«‰»‚µ‚Ä‚¢‚é‚½‚ßA•‰‰×—Êi‰ñ”/‘¬“xj‚Æ‹x‘§—Ê‚ğ’²®‚µAƒtƒH[ƒ€‚ÌÄŠm”F‚ğ—Dæ‚µ‚Ü‚·B" & vbCrLf
-        Plan_Time = Plan_Time & "E" & stableTxt & vbCrLf
+        Plan_Time = "ãƒ»å‰å›ã‚ˆã‚Šæ‚ªåŒ–ã—ã¦ã„ã‚‹ãŸã‚ã€è² è·é‡ï¼ˆå›æ•°/é€Ÿåº¦ï¼‰ã¨ä¼‘æ¯é‡ã‚’èª¿æ•´ã—ã€ãƒ•ã‚©ãƒ¼ãƒ ã®å†ç¢ºèªã‚’å„ªå…ˆã—ã¾ã™ã€‚" & vbCrLf
+        Plan_Time = Plan_Time & "ãƒ»" & stableTxt & vbCrLf
     Else
-        Plan_Time = "EˆÛŒXŒü‚Ì‚½‚ßAŒ»sƒƒjƒ…[‚ğŒp‘±‚µ‚Â‚ÂAã“_‚É‚È‚è‚â‚·‚¢‹Ç–ÊiŠJn“®ìE—§‚¿’¼‚èEI”Õ”æ˜Jj‚ğd“_ŠÏ@‚µ‚Ü‚·B" & vbCrLf
-        Plan_Time = Plan_Time & "E" & stableTxt & vbCrLf
+        Plan_Time = "ãƒ»ç¶­æŒå‚¾å‘ã®ãŸã‚ã€ç¾è¡Œãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ç¶™ç¶šã—ã¤ã¤ã€å¼±ç‚¹ã«ãªã‚Šã‚„ã™ã„å±€é¢ï¼ˆé–‹å§‹å‹•ä½œãƒ»ç«‹ã¡ç›´ã‚Šãƒ»çµ‚ç›¤ç–²åŠ´ï¼‰ã‚’é‡ç‚¹è¦³å¯Ÿã—ã¾ã™ã€‚" & vbCrLf
+        Plan_Time = Plan_Time & "ãƒ»" & stableTxt & vbCrLf
     End If
 End Function
 

@@ -63,10 +63,10 @@ End If
     Exit Sub
 End If
         
-    ' ƒwƒbƒ_ ¨ — Œû“¯ŠúiŠù‘¶ƒƒWƒbƒN‹ì“®j
+    ' ãƒ˜ãƒƒãƒ€ â†’ è£å£åŒæœŸï¼ˆæ—¢å­˜ãƒ­ã‚¸ãƒƒã‚¯é§†å‹•ï¼‰
     frmEval.Controls("txtName").Text = tb.Text
 
-    ' Œó•âBOX‚ğŠmÀ‚Éo‚·
+    ' å€™è£œBOXã‚’ç¢ºå®Ÿã«å‡ºã™
     frmEval.EnsureNameSuggestList
     frmEval.UpdateNameSuggest
     

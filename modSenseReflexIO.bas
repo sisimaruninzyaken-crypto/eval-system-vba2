@@ -2,9 +2,9 @@ Attribute VB_Name = "modSenseReflexIO"
 '==== modSenseReflexIO ====
 Option Explicit
 
-' Œ`®:
-'   1ƒŒƒR[ƒh‚Í  baseKey:R=<ListIndex>,L=<Value>
-'   ‹æØ‚è‚Í "|" —á) HyomenShokkaku:R=2,L=2|ShinbuIchi:R=1,L=1
+' å½¢å¼:
+'   1ãƒ¬ã‚³ãƒ¼ãƒ‰ã¯  baseKey:R=<ListIndex>,L=<Value>
+'   åŒºåˆ‡ã‚Šã¯ "|" ä¾‹) HyomenShokkaku:R=2,L=2|ShinbuIchi:R=1,L=1
 Private Const SEP_REC As String = "|"
 Private Const SEP_KV  As String = ":"
 Private Const SEP_RL  As String = ","
@@ -23,32 +23,32 @@ Public Function SerializeRL(container As Object) As String
     Set dl = CreateObject("Scripting.Dictionary")
     dr.CompareMode = 1: dl.CompareMode = 1  ' TextCompare
 
-    ' •—Dæ‚ÅƒRƒ“ƒeƒi”z‰º‚ğ‘‚È‚ßiFrame/PagesŠÜ‚Şj
+    ' å¹…å„ªå…ˆã§ã‚³ãƒ³ãƒ†ãƒŠé…ä¸‹ã‚’ç·ãªã‚ï¼ˆFrame/Pageså«ã‚€ï¼‰
     q.Add container
     Do While q.Count > 0
         Set node = q(1): q.Remove 1
         On Error Resume Next
 
-        ' qƒRƒ“ƒgƒ[ƒ‹‚ğ‘–¸
+        ' å­ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’èµ°æŸ»
         For Each ch In node.Controls
-            ' q‚ª‚³‚ç‚É Controls/Pages ‚ğ‚Â‚È‚çƒLƒ…[‚Ö
+            ' å­ãŒã•ã‚‰ã« Controls/Pages ã‚’æŒã¤ãªã‚‰ã‚­ãƒ¥ãƒ¼ã¸
             Dim dummy As Object, pg As Object
             Set dummy = ch.Controls
             If Err.Number = 0 Then q.Add ch
             Err.Clear
             
-            ' ComboBox ‚Ì‚İ‘ÎÛ
+            ' ComboBox ã®ã¿å¯¾è±¡
             If TypeName(ch) = "ComboBox" Then
                 nm = ch.name: side = "": base = ""
-                ' æ“ªƒvƒŒƒtƒBƒNƒX
+                ' å…ˆé ­ãƒ—ãƒ¬ãƒ•ã‚£ã‚¯ã‚¹
                 If LCase$(Left$(nm, 5)) = "cbor_" Then side = "R": base = Mid$(nm, 6)
                 If LCase$(Left$(nm, 5)) = "cbol_" Then side = "L": base = Mid$(nm, 6)
-                ' ––”öƒTƒtƒBƒbƒNƒX (_R/_L)
+                ' æœ«å°¾ã‚µãƒ•ã‚£ãƒƒã‚¯ã‚¹ (_R/_L)
                 If side = "" Then
                     If LCase$(Right$(nm, 2)) = "_r" Then side = "R": base = Left$(nm, Len(nm) - 2)
                     If LCase$(Right$(nm, 2)) = "_l" Then side = "L": base = Left$(nm, Len(nm) - 2)
                 End If
-                ' ƒAƒ“ƒ_[ƒXƒRƒA–³‚µicboRŒ¨‹ü‹È ‚È‚Çj
+                ' ã‚¢ãƒ³ãƒ€ãƒ¼ã‚¹ã‚³ã‚¢ç„¡ã—ï¼ˆcboRè‚©å±ˆæ›² ãªã©ï¼‰
                 If side = "" Then
                     If LCase$(Left$(nm, 4)) = "cbor" Then side = "R": base = Mid$(nm, 5)
                     If LCase$(Left$(nm, 4)) = "cbol" Then side = "L": base = Mid$(nm, 5)
@@ -63,7 +63,7 @@ Public Function SerializeRL(container As Object) As String
         On Error GoTo 0
     Loop
 
-    ' R/L ‚ª‘µ‚Á‚½‚à‚Ì‚¾‚¯o—Í
+    ' R/L ãŒæƒã£ãŸã‚‚ã®ã ã‘å‡ºåŠ›
     Dim k As Variant
     For Each k In dr.keys
         If dl.exists(k) Then
@@ -95,9 +95,9 @@ Public Sub DeserializeRL(container As Object, ByVal payload As String)
 
         On Error Resume Next
         rIdx = val(Split(rl(0), "=")(1))   ' "R=2"
-        lVal = CStr(Split(rl(1), "=")(1))  ' "L=1" ‚È‚Ç
+        lVal = CStr(Split(rl(1), "=")(1))  ' "L=1" ãªã©
 
-        ' Ä‹A’Tõ‚Å[‚¢ŠK‘w‚ÌƒRƒ“ƒ{‚àŒŸo
+        ' å†å¸°æ¢ç´¢ã§æ·±ã„éšå±¤ã®ã‚³ãƒ³ãƒœã‚‚æ¤œå‡º
         Set rCtl = FindCtlDeep(container, "cboR_" & base)
         Set lCtl = FindCtlDeep(container, "cboL_" & base)
         On Error GoTo 0
@@ -113,7 +113,7 @@ End Sub
 
 
 
-'--- —ñ I/Oiƒwƒbƒ_‚Í‰Â•Ïj ---
+'--- åˆ— I/Oï¼ˆãƒ˜ãƒƒãƒ€ã¯å¯å¤‰ï¼‰ ---
 Public Sub SaveRLToSheet(ws As Worksheet, ByVal r As Long, ByVal header As String, container As Object)
     Dim c As Long, s As String
     c = EnsureHeaderCol(ws, header)
@@ -139,13 +139,13 @@ Public Sub SaveSensoryToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal owne
     Dim i As Long, j As Long
     Dim c As Long, s As String
 
-    ' ‡@ MultiPage “à‚©‚ç Caption ‚ÉuŠ´Šov‚ğŠÜ‚Ş Page ‚ğ“Á’èi—áFŠ´Šoi•\İE[•”jj
+    ' â‘  MultiPage å†…ã‹ã‚‰ Caption ã«ã€Œæ„Ÿè¦šã€ã‚’å«ã‚€ Page ã‚’ç‰¹å®šï¼ˆä¾‹ï¼šæ„Ÿè¦šï¼ˆè¡¨åœ¨ãƒ»æ·±éƒ¨ï¼‰ï¼‰
     On Error Resume Next
     For Each ctl In owner.Controls
         If TypeName(ctl) = "MultiPage" Then
             Set mp = ctl
             For Each pg In mp.Pages
-                If InStr(pg.caption, "Š´Šo") > 0 Then
+                If InStr(pg.caption, "æ„Ÿè¦š") > 0 Then
                     Set target = pg
                     Exit For
                 End If
@@ -154,15 +154,15 @@ Public Sub SaveSensoryToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal owne
         End If
     Next ctl
     On Error GoTo 0
-    If target Is Nothing Then Set target = owner  ' ”O‚Ì‚½‚ß
+    If target Is Nothing Then Set target = owner  ' å¿µã®ãŸã‚
 
-    ' ‡A target ”z‰º‚ğ•—Dæ‚Å‘–¸‚µ‚Ä ComboBox ‚ğ‚·‚×‚ÄûWiFrame ‚Ì’†‚àŒ@‚éj
+    ' â‘¡ target é…ä¸‹ã‚’å¹…å„ªå…ˆã§èµ°æŸ»ã—ã¦ ComboBox ã‚’ã™ã¹ã¦åé›†ï¼ˆFrame ã®ä¸­ã‚‚æ˜ã‚‹ï¼‰
     q.Add target
     Do While q.Count > 0
         Set node = q(1): q.Remove 1
         On Error Resume Next
         For Each ch In node.Controls
-            ' q‚ª‚³‚ç‚É Controls ‚ğ‚Â‚È‚çƒLƒ…[‚ÉÏ‚Ş
+            ' å­ãŒã•ã‚‰ã« Controls ã‚’æŒã¤ãªã‚‰ã‚­ãƒ¥ãƒ¼ã«ç©ã‚€
             Set tmp = ch.Controls
             If Err.Number = 0 Then q.Add ch
             Err.Clear
@@ -174,9 +174,9 @@ Public Sub SaveSensoryToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal owne
         On Error GoTo 0
     Loop
 
-    ' ‡B ˆÊ’u‚ÅˆÀ’èƒ\[ƒgiTop ¨ LeftjBs‚¸‚ê‹zû‚Ì‚½‚ß Top ‚Í}6‚Ì‹–—e‚Å”äŠr
+    ' â‘¢ ä½ç½®ã§å®‰å®šã‚½ãƒ¼ãƒˆï¼ˆTop â†’ Leftï¼‰ã€‚è¡Œãšã‚Œå¸åã®ãŸã‚ Top ã¯Â±6ã®è¨±å®¹ã§æ¯”è¼ƒ
     If combos.Count = 0 Then
-        s = "" ' ‰½‚à–³‚¯‚ê‚Î‹ó
+        s = "" ' ä½•ã‚‚ç„¡ã‘ã‚Œã°ç©º
         GoTo WRITE_OUT
     End If
 
@@ -199,10 +199,10 @@ For i = 1 To uniq.Count: Set arr(i) = uniq(i): Next i
         Next j
     Next i
 
-        ' ‡C •À‚Ñ‡‚ÅƒL[Š„“–i‰E¨¶‚Ì‡‚Å1€–Ú‚Æ‚İ‚È‚·j
-    '    ‘z’è‡F•\İ_GŠo, •\İ_’ÉŠo, •\İ_‰·“xŠo, [•”_ˆÊ’uŠo, [•”_U“®Šo
+        ' â‘£ ä¸¦ã³é †ã§ã‚­ãƒ¼å‰²å½“ï¼ˆå³â†’å·¦ã®é †ã§1é …ç›®ã¨ã¿ãªã™ï¼‰
+    '    æƒ³å®šé †ï¼šè¡¨åœ¨_è§¦è¦š, è¡¨åœ¨_ç—›è¦š, è¡¨åœ¨_æ¸©åº¦è¦š, æ·±éƒ¨_ä½ç½®è¦š, æ·±éƒ¨_æŒ¯å‹•è¦š
     Dim keys As Variant
-    keys = Array("•\İ_GŠo", "•\İ_’ÉŠo", "•\İ_‰·“xŠo", "[•”_ˆÊ’uŠo", "[•”_U“®Šo")
+    keys = Array("è¡¨åœ¨_è§¦è¦š", "è¡¨åœ¨_ç—›è¦š", "è¡¨åœ¨_æ¸©åº¦è¦š", "æ·±éƒ¨_ä½ç½®è¦š", "æ·±éƒ¨_æŒ¯å‹•è¦š")
 
     s = ""
     Dim k As Long
@@ -211,9 +211,9 @@ For i = 1 To uniq.Count: Set arr(i) = uniq(i): Next i
 
     pos = 1
     For k = LBound(keys) To UBound(keys)
-        If pos + 1 > UBound(arr) Then Exit For   ' ˆÀ‘S
+        If pos + 1 > UBound(arr) Then Exit For   ' å®‰å…¨
 
-        ' --- ‰E‘¤ƒRƒ“ƒ{iRj ---
+        ' --- å³å´ã‚³ãƒ³ãƒœï¼ˆRï¼‰ ---
         If arr(pos).ListIndex >= 0 Then
             vR = CStr(arr(pos).List(arr(pos).ListIndex, 0))
         Else
@@ -221,7 +221,7 @@ For i = 1 To uniq.Count: Set arr(i) = uniq(i): Next i
             If Len(vR) = 0 Then vR = CStr(arr(pos).value)
         End If
 
-        ' --- ¶‘¤ƒRƒ“ƒ{iLj ---
+        ' --- å·¦å´ã‚³ãƒ³ãƒœï¼ˆLï¼‰ ---
         If pos + 1 <= UBound(arr) Then
             If arr(pos + 1).ListIndex >= 0 Then
                 vL = CStr(arr(pos + 1).List(arr(pos + 1).ListIndex, 0))
@@ -233,7 +233,7 @@ For i = 1 To uniq.Count: Set arr(i) = uniq(i): Next i
             vL = ""
         End If
 
-        ' --- •¶š—ñ‘g‚İ—§‚Ä ---
+        ' --- æ–‡å­—åˆ—çµ„ã¿ç«‹ã¦ ---
         If Len(s) > 0 Then s = s & SEP_REC
         s = s & keys(k) & SEP_KV & "R=" & vR & SEP_RL & "L=" & vL
 
@@ -244,19 +244,19 @@ For i = 1 To uniq.Count: Set arr(i) = uniq(i): Next i
 
 
 WRITE_OUT:
-    ' ‡D ƒV[ƒg‘‚«o‚µiIO_Sensory ‚É¡‰ñ‘g‚İ—§‚Ä‚½ s ‚ğ•Û‘¶j
+    ' â‘¤ ã‚·ãƒ¼ãƒˆæ›¸ãå‡ºã—ï¼ˆIO_Sensory ã«ä»Šå›çµ„ã¿ç«‹ã¦ãŸ s ã‚’ä¿å­˜ï¼‰
     c = EnsureHeader(ws, "IO_Sensory")
     ws.Cells(r, c).value = s
     Debug.Print "[SENSE][SAVE] row=" & r & " col=" & c & " len=" & Len(s)
 
 
-' --- SENSE ”õl‚ğ•Û‘¶iSENSE_NOTEj ---
+' --- SENSE å‚™è€ƒã‚’ä¿å­˜ï¼ˆSENSE_NOTEï¼‰ ---
 Dim noteCtl As Object, box As Object, subCtl As Object
 Dim bestH As Single: bestH = 0
 Dim note As String
 
 On Error Resume Next
-' ƒy[ƒW“à‚Å MultiLine ‚Ü‚½‚ÍÅ‚à”w‚Ì‚‚¢ TextBox ‚ğ‘I‚Ôi“Ç‚İ‚İ‚Æ“¯‚¶Šî€j
+' ãƒšãƒ¼ã‚¸å†…ã§ MultiLine ã¾ãŸã¯æœ€ã‚‚èƒŒã®é«˜ã„ TextBox ã‚’é¸ã¶ï¼ˆï¼èª­ã¿è¾¼ã¿ã¨åŒã˜åŸºæº–ï¼‰
 For Each box In target.Controls
     If TypeName(box) = "TextBox" Then
         If box.multiline Or box.Height > bestH Then
@@ -292,15 +292,15 @@ End Sub
 
 
 
-' Ä‹A“I‚Éq‘·‚©‚çƒRƒ“ƒgƒ[ƒ‹‚ğ’T‚·
+' å†å¸°çš„ã«å­å­«ã‹ã‚‰ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’æ¢ã™
 Private Function FindCtlDeep(root As Object, ByVal ctlName As String) As Object
     Dim ch As Object, tmp As Object
     On Error Resume Next
-    Set FindCtlDeep = root.Controls(ctlName) ' ‚Ü‚¸’¼‰º‚ğ‚·
+    Set FindCtlDeep = root.Controls(ctlName) ' ã¾ãšç›´ä¸‹ã‚’è©¦ã™
     On Error GoTo 0
     If Not FindCtlDeep Is Nothing Then Exit Function
 
-    ' q‚ğ‡‚ÉŒ@‚éiControls‚ğ‚½‚È‚¢ê‡‚ÍƒGƒ‰[‚ğˆ¬‚è‚Â‚Ô‚·j
+    ' å­ã‚’é †ã«æ˜ã‚‹ï¼ˆControlsã‚’æŒãŸãªã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼ã‚’æ¡ã‚Šã¤ã¶ã™ï¼‰
     For Each ch In root.Controls
         On Error Resume Next
         Set tmp = ch.Controls
@@ -320,12 +320,12 @@ End Function
 Public Sub TraceSensoryComboNames(owner As Object)
     Dim ctl As Object, subCtl As Object, mp As Object, pg As Object, target As Object
 
-    ' MultiPage“à‚Å Caption ‚ÉuŠ´Šov‚ğŠÜ‚Şƒy[ƒW‚¾‚¯“Á’è
+    ' MultiPageå†…ã§ Caption ã«ã€Œæ„Ÿè¦šã€ã‚’å«ã‚€ãƒšãƒ¼ã‚¸ã ã‘ç‰¹å®š
     For Each ctl In owner.Controls
         If TypeName(ctl) = "MultiPage" Then
             Set mp = ctl
             For Each pg In mp.Pages
-                If InStr(pg.caption, "Š´Šo") > 0 Then
+                If InStr(pg.caption, "æ„Ÿè¦š") > 0 Then
                     Set target = pg
                     Exit For
                 End If
@@ -335,7 +335,7 @@ Public Sub TraceSensoryComboNames(owner As Object)
     Next ctl
     If target Is Nothing Then Set target = owner
 
-    ' 1ŠK‘w{Frame“à‚ÌComboBox‚¾‚¯‚ğ—ñ‹“iÄ‹A‚È‚µA.Pages‚É‚àG‚ê‚È‚¢j
+    ' 1éšå±¤ï¼‹Frameå†…ã®ComboBoxã ã‘ã‚’åˆ—æŒ™ï¼ˆå†å¸°ãªã—ã€.Pagesã«ã‚‚è§¦ã‚Œãªã„ï¼‰
     For Each ctl In target.Controls
         If TypeName(ctl) = "ComboBox" Then
             Debug.Print "[SENSE][CB] "; ctl.name
@@ -364,13 +364,13 @@ End If
     Dim kv As Variant, rl As Variant, k As Long, pos As Long
     Dim d As Object: Set d = CreateObject("Scripting.Dictionary"): d.CompareMode = 1
 
-    ' 1) uŠ´Šov‚ğŠÜ‚Şƒ^ƒu‚ğ“Á’èi—áFŠ´Šoi•\İE[•”jj
+    ' 1) ã€Œæ„Ÿè¦šã€ã‚’å«ã‚€ã‚¿ãƒ–ã‚’ç‰¹å®šï¼ˆä¾‹ï¼šæ„Ÿè¦šï¼ˆè¡¨åœ¨ãƒ»æ·±éƒ¨ï¼‰ï¼‰
     On Error Resume Next
     For Each ctl In owner.Controls
         If TypeName(ctl) = "MultiPage" Then
             Set mp = ctl
             For Each pg In mp.Pages
-                If InStr(pg.caption, "Š´Šo") > 0 Then Set target = pg: Exit For
+                If InStr(pg.caption, "æ„Ÿè¦š") > 0 Then Set target = pg: Exit For
             Next pg
             If Not target Is Nothing Then Exit For
         End If
@@ -378,12 +378,12 @@ End If
     On Error GoTo 0
     If target Is Nothing Then Set target = owner
 
-    ' 2) ƒV[ƒg‚©‚ç SENSE_IO æ“¾¨«‘‚Éƒp[ƒXiR/L‚Æ‚àValue‚Åˆµ‚¤j
+    ' 2) ã‚·ãƒ¼ãƒˆã‹ã‚‰ SENSE_IO å–å¾—â†’è¾æ›¸ã«ãƒ‘ãƒ¼ã‚¹ï¼ˆR/Lã¨ã‚‚Valueã§æ‰±ã†ï¼‰
     s = ReadStr_Compat("IO_Sensory", r, ws)
     s = ReadStr_Compat("IO_Sensory", r, ws)
     
     If Len(s) > 0 Then
-        recs = Split(s, SEP_REC) ' "|" ‹æØ‚è
+        recs = Split(s, SEP_REC) ' "|" åŒºåˆ‡ã‚Š
         For Each rec In recs
             If Len(rec) = 0 Then GoTo cont
             kv = Split(rec, SEP_KV)  ' "key:R=..,L=.."
@@ -395,7 +395,7 @@ cont:
         Next rec
     End If
 
-    ' 3) Š´Šoƒ^ƒu“à‚Ì ComboBox ‚ğûWiFrame“à‚àŒ@‚éFÄ‹A‚È‚µ‚Ì•—Dæj
+    ' 3) æ„Ÿè¦šã‚¿ãƒ–å†…ã® ComboBox ã‚’åé›†ï¼ˆFrameå†…ã‚‚æ˜ã‚‹ï¼šå†å¸°ãªã—ã®å¹…å„ªå…ˆï¼‰
     Dim q As New Collection, node As Object, ch As Object, tmp As Object
     Dim combos As New Collection
     q.Add target
@@ -404,14 +404,14 @@ cont:
         On Error Resume Next
         For Each ch In node.Controls
             Set tmp = ch.Controls
-            If Err.Number = 0 Then q.Add ch  ' q‚ğŒ@‚é
+            If Err.Number = 0 Then q.Add ch  ' å­ã‚’æ˜ã‚‹
             Err.Clear
             If TypeName(ch) = "ComboBox" Then combos.Add ch
         Next ch
         On Error GoTo 0
     Loop
 
-    ' 4) d•¡œ‹¨Top¨Left‚ÅˆÀ’èƒ\[ƒg
+    ' 4) é‡è¤‡é™¤å»â†’Topâ†’Leftã§å®‰å®šã‚½ãƒ¼ãƒˆ
     If combos.Count = 0 Then Exit Sub
     Dim seen As Object: Set seen = CreateObject("Scripting.Dictionary"): seen.CompareMode = 1
     Dim uniq As New Collection, i As Long, j As Long
@@ -431,16 +431,16 @@ cont:
         Next j
     Next i
 
-    ' 5) •Û‘¶‚Æ“¯‚¶ƒL[‡‚Å”½‰fiR¨L ‚Ì•À‚Ñ‚Å1€–Új
-    Dim keys As Variant: keys = Array("•\İ_GŠo", "•\İ_’ÉŠo", "•\İ_‰·“xŠo", "[•”_ˆÊ’uŠo", "[•”_U“®Šo")
+    ' 5) ä¿å­˜ã¨åŒã˜ã‚­ãƒ¼é †ã§åæ˜ ï¼ˆRâ†’L ã®ä¸¦ã³ã§1é …ç›®ï¼‰
+    Dim keys As Variant: keys = Array("è¡¨åœ¨_è§¦è¦š", "è¡¨åœ¨_ç—›è¦š", "è¡¨åœ¨_æ¸©åº¦è¦š", "æ·±éƒ¨_ä½ç½®è¦š", "æ·±éƒ¨_æŒ¯å‹•è¦š")
     pos = 1
     For k = LBound(keys) To UBound(keys)
         If pos + 1 > UBound(arr) Then Exit For
         If d.exists(keys(k)) Then
             Dim pair As Variant
-            pair = d(keys(k))                  ' pair(0)=R‚Ì’l, pair(1)=L‚Ì’l
+            pair = d(keys(k))                  ' pair(0)=Rã®å€¤, pair(1)=Lã®å€¤
             On Error Resume Next
-       ' R‘¤i–¢“o˜^‚Ì’l‚Å‚àŠmÀ‚É•\¦j
+       ' Rå´ï¼ˆæœªç™»éŒ²ã®å€¤ã§ã‚‚ç¢ºå®Ÿã«è¡¨ç¤ºï¼‰
 Dim tR As String: tR = CStr(pair(0))
 Dim ii As Long, found As Boolean
 arr(pos).value = tR
@@ -458,7 +458,7 @@ If Trim$(CStr(arr(pos).value)) <> Trim$(tR) Then
     End If
 End If
 
-' L‘¤F“¯—l‚ÉƒtƒH[ƒ‹ƒoƒbƒN
+' Lå´ï¼šåŒæ§˜ã«ãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯
 Dim tL As String: tL = CStr(pair(1))
 arr(pos + 1).value = tL
 If Trim$(CStr(arr(pos + 1).value)) <> Trim$(tL) Then
@@ -473,13 +473,13 @@ End If
             On Error GoTo 0
             
         Else
-            Debug.Print "[SENSE][MISS]"; keys(k); "iƒf[ƒ^‚È‚µj"
+            Debug.Print "[SENSE][MISS]"; keys(k); "ï¼ˆãƒ‡ãƒ¼ã‚¿ãªã—ï¼‰"
         End If
         pos = pos + 2
     Next k
     
     
-    ' --- SENSE ”õl‚ğ“Ç‚İ‚İiSENSE_NOTEj ---
+    ' --- SENSE å‚™è€ƒã‚’èª­ã¿è¾¼ã¿ï¼ˆSENSE_NOTEï¼‰ ---
 Dim cNote As Long, note As String
 Dim box As Object, subCtl As Object, noteCtl As Object
 Dim bestH As Single: bestH = 0
@@ -488,7 +488,7 @@ cNote = EnsureHeaderCol(ws, "SENSE_NOTE")
 note = CStr(ws.Cells(r, cNote).value)
 
 On Error Resume Next
-' ƒy[ƒW“à‚Å MultiLine ‚Ü‚½‚ÍÅ‚à”w‚Ì‚‚¢ TextBox ‚ğ‘I‚Ô
+' ãƒšãƒ¼ã‚¸å†…ã§ MultiLine ã¾ãŸã¯æœ€ã‚‚èƒŒã®é«˜ã„ TextBox ã‚’é¸ã¶
 For Each box In target.Controls
     If TypeName(box) = "TextBox" Then
         If box.multiline Or box.Height > bestH Then

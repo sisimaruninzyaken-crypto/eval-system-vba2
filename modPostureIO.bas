@@ -1,6 +1,6 @@
 Attribute VB_Name = "modPostureIO"
 
-' ===== modPostureIO.basi•¡”€–Ú{”õl ”Åj=====
+' ===== modPostureIO.basï¼ˆè¤‡æ•°é …ç›®ï¼‹å‚™è€ƒ ç‰ˆï¼‰=====
 Option Explicit
 
 Public Sub SavePostureToSheet(ws As Worksheet, ByVal r As Long, owner As Object)
@@ -8,56 +8,56 @@ Public Sub SavePostureToSheet(ws As Worksheet, ByVal r As Long, owner As Object)
     caps = PostureCaptions()
     For i = LBound(caps) To UBound(caps)
         cap = CStr(caps(i))
-        col = EnsureHeaderCol_Posture(ws, "p¨_" & cap)
+        col = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_" & cap)
         ws.Cells(r, col).value = GetCheckByCaption(owner, cap)
         Debug.Print "[SAVE][Posture]", cap, "=", ws.Cells(r, col).value
     Next
 
-   ' œ”ÕŒXÎiƒRƒ“ƒ{j?¨ ˜gup¨•]‰¿v“à‚Ìƒ‰ƒxƒ‹uœ”ÕŒXÎv‚É•R‚Ã‚­Combo‚ğE‚¤
+   ' éª¨ç›¤å‚¾æ–œï¼ˆã‚³ãƒ³ãƒœï¼‰?â†’ æ ã€Œå§¿å‹¢è©•ä¾¡ã€å†…ã®ãƒ©ãƒ™ãƒ«ã€Œéª¨ç›¤å‚¾æ–œã€ã«ç´ã¥ãComboã‚’æ‹¾ã†
 Dim cPel As Long, pel As String
-cPel = EnsureHeaderCol_Posture(ws, "p¨_œ”ÕŒXÎ")
-pel = GetComboInFrameByLabelCaption_(owner, "p¨•]‰¿", "œ”ÕŒXÎ")
+cPel = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_éª¨ç›¤å‚¾æ–œ")
+pel = GetComboInFrameByLabelCaption_(owner, "å§¿å‹¢è©•ä¾¡", "éª¨ç›¤å‚¾æ–œ")
 ws.Cells(r, cPel).value = pel
-Debug.Print "[SAVE][Posture] œ”ÕŒXÎ =", pel
+Debug.Print "[SAVE][Posture] éª¨ç›¤å‚¾æ–œ =", pel
 
-' ã’i ”õlip¨‚Ì”õlj?¨ ˜gup¨•]‰¿v“à‚Ìƒ‰ƒxƒ‹u”õlv‚É•R‚Ã‚­TextBox‚ğE‚¤
+' ä¸Šæ®µ å‚™è€ƒï¼ˆå§¿å‹¢ã®å‚™è€ƒï¼‰?â†’ æ ã€Œå§¿å‹¢è©•ä¾¡ã€å†…ã®ãƒ©ãƒ™ãƒ«ã€Œå‚™è€ƒã€ã«ç´ã¥ãTextBoxã‚’æ‹¾ã†
 Dim cNote As Long, noteVal As String
-cNote = EnsureHeaderCol_Posture(ws, "p¨_”õl")
-noteVal = GetTextInFrameByLabelCaption_(owner, "p¨•]‰¿", "”õl")
+cNote = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_å‚™è€ƒ")
+noteVal = GetTextInFrameByLabelCaption_(owner, "å§¿å‹¢è©•ä¾¡", "å‚™è€ƒ")
 ws.Cells(r, cNote).value = noteVal
-Debug.Print "[SAVE][Posture] ”õl =", noteVal
+Debug.Print "[SAVE][Posture] å‚™è€ƒ =", noteVal
 
 
    
-   ' ?? ŠÖßSkFèò•”i¶‰E‚È‚µj
+   ' ?? é–¢ç¯€æ‹˜ç¸®ï¼šé ¸éƒ¨ï¼ˆå·¦å³ãªã—ï¼‰
 Dim colNeck As Long
-colNeck = EnsureHeaderCol_Posture(ws, "p¨_Sk_èò•”")
-ws.Cells(r, colNeck).value = GetCheckInFrameByCaptionLike_(owner, "ŠÖßSk", "èò•”")
-Debug.Print "[SAVE][Posture] Sk_èò•” =", ws.Cells(r, colNeck).value
+colNeck = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_æ‹˜ç¸®_é ¸éƒ¨")
+ws.Cells(r, colNeck).value = GetCheckInFrameByCaptionLike_(owner, "é–¢ç¯€æ‹˜ç¸®", "é ¸éƒ¨")
+Debug.Print "[SAVE][Posture] æ‹˜ç¸®_é ¸éƒ¨ =", ws.Cells(r, colNeck).value
 
    
 
-    ' ?? ŠÖßSkF6•”ˆÊi‰E/¶j ??
+    ' ?? é–¢ç¯€æ‹˜ç¸®ï¼š6éƒ¨ä½ï¼ˆå³/å·¦ï¼‰ ??
 Dim colJ As Long, joints As Variant, jr As String
 
-joints = Array("Œ¨ŠÖß", "•IŠÖß", "èŠÖß", "ŒÒŠÖß", "•GŠÖß", "‘«ŠÖß")
+joints = Array("è‚©é–¢ç¯€", "è‚˜é–¢ç¯€", "æ‰‹é–¢ç¯€", "è‚¡é–¢ç¯€", "è†é–¢ç¯€", "è¶³é–¢ç¯€")
 
 For i = LBound(joints) To UBound(joints)
     jr = CStr(joints(i))
-    colJ = EnsureHeaderCol_Posture(ws, "p¨_Sk_" & Replace(jr, "ŠÖß", "") & "_‰E")
-    ws.Cells(r, colJ).value = GetKoushuku_OnRow_(owner, jr, "‰E")
+    colJ = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_æ‹˜ç¸®_" & Replace(jr, "é–¢ç¯€", "") & "_å³")
+    ws.Cells(r, colJ).value = GetKoushuku_OnRow_(owner, jr, "å³")
 
-    colJ = EnsureHeaderCol_Posture(ws, "p¨_Sk_" & Replace(jr, "ŠÖß", "") & "_¶")
-    ws.Cells(r, colJ).value = GetKoushuku_OnRow_(owner, jr, "¶")
+    colJ = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_æ‹˜ç¸®_" & Replace(jr, "é–¢ç¯€", "") & "_å·¦")
+    ws.Cells(r, colJ).value = GetKoushuku_OnRow_(owner, jr, "å·¦")
 Next
 
 
-    ' ”õlip¨ƒuƒƒbƒNj
+    ' å‚™è€ƒï¼ˆå§¿å‹¢ãƒ–ãƒ­ãƒƒã‚¯ï¼‰
     Dim cKNote As Long, kNote As String
-cKNote = EnsureHeaderCol_Posture(ws, "p¨_Sk_”õl")
-kNote = GetTextInFrameByLabelCaption_(owner, "ŠÖßSk", "”õl")
+cKNote = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_æ‹˜ç¸®_å‚™è€ƒ")
+kNote = GetTextInFrameByLabelCaption_(owner, "é–¢ç¯€æ‹˜ç¸®", "å‚™è€ƒ")
 ws.Cells(r, cKNote).value = kNote
-Debug.Print "[SAVE][Posture] Sk_”õl =", kNote
+Debug.Print "[SAVE][Posture] æ‹˜ç¸®_å‚™è€ƒ =", kNote
 
 End Sub
 
@@ -68,7 +68,7 @@ Public Sub LoadPostureFromSheet(ws As Worksheet, ByVal r As Long, owner As Objec
     caps = PostureCaptions()
     For i = LBound(caps) To UBound(caps)
         cap = CStr(caps(i))
-        col = EnsureHeaderCol_Posture(ws, "p¨_" & cap)
+        col = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_" & cap)
         v = ws.Cells(r, col).value
         
 
@@ -78,67 +78,67 @@ Public Sub LoadPostureFromSheet(ws As Worksheet, ByVal r As Long, owner As Objec
         
     Next
 
-    ' œ”ÕŒXÎiƒRƒ“ƒ{j
+    ' éª¨ç›¤å‚¾æ–œï¼ˆã‚³ãƒ³ãƒœï¼‰
 Dim cPel As Long, vPel As Variant
-cPel = EnsureHeaderCol_Posture(ws, "p¨_œ”ÕŒXÎ")
+cPel = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_éª¨ç›¤å‚¾æ–œ")
 vPel = ws.Cells(r, cPel).value
-SetComboInFrameByLabelCaption_ owner, "p¨•]‰¿", "œ”ÕŒXÎ", CStr(vPel)
+SetComboInFrameByLabelCaption_ owner, "å§¿å‹¢è©•ä¾¡", "éª¨ç›¤å‚¾æ–œ", CStr(vPel)
 
-' ã’i ”õlip¨‚Ì”õlj
+' ä¸Šæ®µ å‚™è€ƒï¼ˆå§¿å‹¢ã®å‚™è€ƒï¼‰
 Dim cNote As Long, vNote As Variant
-cNote = EnsureHeaderCol_Posture(ws, "p¨_”õl")
+cNote = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_å‚™è€ƒ")
 vNote = ws.Cells(r, cNote).value
-SetTextInFrameByLabelCaption_ owner, "p¨•]‰¿", "”õl", CStr(vNote)
+SetTextInFrameByLabelCaption_ owner, "å§¿å‹¢è©•ä¾¡", "å‚™è€ƒ", CStr(vNote)
 
 
     
-    ' ?? ŠÖßSkFèò•”i¶‰E‚È‚µj
+    ' ?? é–¢ç¯€æ‹˜ç¸®ï¼šé ¸éƒ¨ï¼ˆå·¦å³ãªã—ï¼‰
 Dim colNeck As Long, vNeck As Variant
-colNeck = EnsureHeaderCol_Posture(ws, "p¨_Sk_èò•”")
+colNeck = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_æ‹˜ç¸®_é ¸éƒ¨")
 vNeck = ws.Cells(r, colNeck).value
-SetCheckInFrameByCaptionLike_ owner, "ŠÖßSk", "èò•”", CBool(vNeck)
+SetCheckInFrameByCaptionLike_ owner, "é–¢ç¯€æ‹˜ç¸®", "é ¸éƒ¨", CBool(vNeck)
 
 
     
 
-    ' ?? ŠÖßSkF6•”ˆÊi‰E/¶j ??
+    ' ?? é–¢ç¯€æ‹˜ç¸®ï¼š6éƒ¨ä½ï¼ˆå³/å·¦ï¼‰ ??
 Dim colJ As Long, joints As Variant, jr As String
 
-joints = Array("Œ¨ŠÖß", "•IŠÖß", "èŠÖß", "ŒÒŠÖß", "•GŠÖß", "‘«ŠÖß")
+joints = Array("è‚©é–¢ç¯€", "è‚˜é–¢ç¯€", "æ‰‹é–¢ç¯€", "è‚¡é–¢ç¯€", "è†é–¢ç¯€", "è¶³é–¢ç¯€")
 
 For i = LBound(joints) To UBound(joints)
     jr = CStr(joints(i))
 
-    colJ = EnsureHeaderCol_Posture(ws, "p¨_Sk_" & Replace(jr, "ŠÖß", "") & "_‰E")
+    colJ = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_æ‹˜ç¸®_" & Replace(jr, "é–¢ç¯€", "") & "_å³")
     v = ws.Cells(r, colJ).value
-    SetKoushuku_OnRow_ owner, jr, "‰E", CBool(v)
+    SetKoushuku_OnRow_ owner, jr, "å³", CBool(v)
 
-    colJ = EnsureHeaderCol_Posture(ws, "p¨_Sk_" & Replace(jr, "ŠÖß", "") & "_¶")
+    colJ = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_æ‹˜ç¸®_" & Replace(jr, "é–¢ç¯€", "") & "_å·¦")
     v = ws.Cells(r, colJ).value
-    SetKoushuku_OnRow_ owner, jr, "¶", CBool(v)
+    SetKoushuku_OnRow_ owner, jr, "å·¦", CBool(v)
 Next i
 
-    ' ”õlip¨ƒuƒƒbƒNj
+    ' å‚™è€ƒï¼ˆå§¿å‹¢ãƒ–ãƒ­ãƒƒã‚¯ï¼‰
     Dim cKNote As Long, vKNote As Variant
-cKNote = EnsureHeaderCol_Posture(ws, "p¨_Sk_”õl")
+cKNote = EnsureHeaderCol_Posture(ws, "å§¿å‹¢_æ‹˜ç¸®_å‚™è€ƒ")
 vKNote = ws.Cells(r, cKNote).value
-SetTextInFrameByLabelCaption_ owner, "ŠÖßSk", "”õl", CStr(vKNote)
+SetTextInFrameByLabelCaption_ owner, "é–¢ç¯€æ‹˜ç¸®", "å‚™è€ƒ", CStr(vKNote)
 
 
 End Sub
 
 
 
-' ====== ‚±‚±‚©‚çƒwƒ‹ƒp ======
+' ====== ã“ã“ã‹ã‚‰ãƒ˜ãƒ«ãƒ‘ ======
 
-' ˆµ‚¤ƒ`ƒFƒbƒN€–Ú–¼iƒLƒƒƒvƒVƒ‡ƒ“j‚ğ‚±‚±‚É’Ç‰Á‚µ‚Ä‚¢‚­
+' æ‰±ã†ãƒã‚§ãƒƒã‚¯é …ç›®åï¼ˆã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ï¼‰ã‚’ã“ã“ã«è¿½åŠ ã—ã¦ã„ã
 
 Private Function PostureCaptions() As Variant
-    PostureCaptions = Array("“ª•”‘O•û“Ëo", "‰~”w", "‘¤œ^", "‘ÌŠ²‰ñù", "”½’£•G")
+    PostureCaptions = Array("é ­éƒ¨å‰æ–¹çªå‡º", "å††èƒŒ", "å´å¼¯", "ä½“å¹¹å›æ—‹", "åå¼µè†")
 End Function
 
 
-' --- CheckBoxiCaptionˆê’vjæ“¾/İ’è ---
+' --- CheckBoxï¼ˆCaptionä¸€è‡´ï¼‰å–å¾—/è¨­å®š ---
 Private Function GetCheckByCaption(owner As Object, ByVal cap As String) As Boolean
     Dim chk As Object
     Set chk = FindCheckByCaptionLike_(owner, cap)
@@ -151,7 +151,7 @@ Private Sub SetCheckByCaption(owner As Object, ByVal cap As String, ByVal v As B
     If Not chk Is Nothing Then chk.value = v
 End Sub
 
-' --- Caption‚Åƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ğ’T‚·i“ü‚êqÄ‹AE•”•ªˆê’vOKj---
+' --- Captionã§ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã‚’æ¢ã™ï¼ˆå…¥ã‚Œå­å†å¸°ãƒ»éƒ¨åˆ†ä¸€è‡´OKï¼‰---
 Private Function FindCheckByCaptionLike_(container As Object, ByVal needle As String) As Object
     Dim c As Object
     On Error Resume Next
@@ -168,7 +168,7 @@ Private Function FindCheckByCaptionLike_(container As Object, ByVal needle As St
     Next
 End Function
 
-' --- ”õlFƒ‰ƒxƒ‹u”õlv‚Æ“¯‚¶e“à‚ÌTextBox‚ğE‚¤ ---
+' --- å‚™è€ƒï¼šãƒ©ãƒ™ãƒ«ã€Œå‚™è€ƒã€ã¨åŒã˜è¦ªå†…ã®TextBoxã‚’æ‹¾ã† ---
 Private Function GetTextByLabelCaption(owner As Object, ByVal labelCap As String) As String
     Dim tb As Object: Set tb = FindTextBoxNearLabel_(owner, labelCap)
     If Not tb Is Nothing Then GetTextByLabelCaption = CStr(tb.Text)
@@ -179,14 +179,14 @@ Private Sub SetTextByLabelCaption(owner As Object, ByVal labelCap As String, ByV
     If Not tb Is Nothing Then tb.Text = s
 End Sub
 
-' ƒ‰ƒxƒ‹‚ÌCaptionˆê’v¨“¯‚¶eiFrame‚È‚Çj“à‚ÌTextBox‚ğ•Ô‚·iÅ‰‚Ì1‚Âj
+' ãƒ©ãƒ™ãƒ«ã®Captionä¸€è‡´â†’åŒã˜è¦ªï¼ˆFrameãªã©ï¼‰å†…ã®TextBoxã‚’è¿”ã™ï¼ˆæœ€åˆã®1ã¤ï¼‰
 Private Function FindTextBoxNearLabel_(container As Object, ByVal labelCap As String) As Object
     Dim c As Object, inner As Object
     On Error Resume Next
     For Each c In container.Controls
         If TypeName(c) = "Label" Then
             If InStr(1, Trim$(c.caption), Trim$(labelCap), vbTextCompare) > 0 Then
-                ' “¯‚¶e“à‚ÌTextBox‚ğ•Ô‚·
+                ' åŒã˜è¦ªå†…ã®TextBoxã‚’è¿”ã™
                 For Each inner In c.parent.Controls
                     If TypeName(inner) = "TextBox" Then Set FindTextBoxNearLabel_ = inner: Exit Function
                 Next
@@ -199,13 +199,13 @@ Private Function FindTextBoxNearLabel_(container As Object, ByVal labelCap As St
     Next
 End Function
 
-' q‚ğ‚Â‚©‚Ì”»’èiˆÀ‘S”Åj
+' å­ã‚’æŒã¤ã‹ã®åˆ¤å®šï¼ˆå®‰å…¨ç‰ˆï¼‰
 Private Function HasControls__(obj As Object) As Boolean
     On Error Resume Next
     HasControls__ = (obj.Controls.Count >= 0)
 End Function
 
-' --- p¨—pƒ[ƒJƒ‹: Œ©o‚µ—ñ‚ğŠm•Û‚µ‚Ä—ñ”Ô†‚ğ•Ô‚· ---
+' --- å§¿å‹¢ç”¨ãƒ­ãƒ¼ã‚«ãƒ«: è¦‹å‡ºã—åˆ—ã‚’ç¢ºä¿ã—ã¦åˆ—ç•ªå·ã‚’è¿”ã™ ---
 Private Function EnsureHeaderCol_Posture(ws As Worksheet, ByVal header As String) As Long
     Dim c As Range
     Set c = Nothing
@@ -253,13 +253,13 @@ End Function
 
 
 
-' ==== ŠÖßSkisƒ‰ƒxƒ‹‚Ìu‰E^¶vƒ`ƒFƒbƒNjƒwƒ‹ƒp ====
+' ==== é–¢ç¯€æ‹˜ç¸®ï¼ˆè¡Œãƒ©ãƒ™ãƒ«ã®ã€Œå³ï¼å·¦ã€ãƒã‚§ãƒƒã‚¯ï¼‰ãƒ˜ãƒ«ãƒ‘ ====
 
-' ƒ‰ƒxƒ‹Caption•”ˆÊ–¼i—áuŒ¨ŠÖßvj‚Æ“¯‚¶s‚Ìu‰E^¶vCheckBox‚ğ’T‚·iTop‚ª‹ß‚¢‚à‚Ì‚ğÌ—pj
+' ãƒ©ãƒ™ãƒ«Captionï¼éƒ¨ä½åï¼ˆä¾‹ã€Œè‚©é–¢ç¯€ã€ï¼‰ã¨åŒã˜è¡Œã®ã€Œå³ï¼å·¦ã€CheckBoxã‚’æ¢ã™ï¼ˆTopãŒè¿‘ã„ã‚‚ã®ã‚’æ¡ç”¨ï¼‰
 Private Function FindSideCheck_OnSameRow_(owner As Object, ByVal rowLabel As String, ByVal sideCaption As String) As Object
     Dim lbl As Object, p As Object, c As Object
     Dim best As Object, bestDy As Single, dy As Single, tol As Single
-    tol = 18 ' “¯‚¶s‚Æ‚İ‚È‚·Top‹——£iƒtƒH[ƒ€‚ÌƒXƒP[ƒ‹‚É‚æ‚è’²®‰Âj
+    tol = 18 ' åŒã˜è¡Œã¨ã¿ãªã™Topè·é›¢ï¼ˆãƒ•ã‚©ãƒ¼ãƒ ã®ã‚¹ã‚±ãƒ¼ãƒ«ã«ã‚ˆã‚Šèª¿æ•´å¯ï¼‰
 
     Set lbl = FindLabelByCaptionDeep_(owner, rowLabel)
     If lbl Is Nothing Then Exit Function
@@ -280,7 +280,7 @@ Private Function FindSideCheck_OnSameRow_(owner As Object, ByVal rowLabel As Str
     Set FindSideCheck_OnSameRow_ = best
 End Function
 
-' ƒ‰ƒxƒ‹i•”ˆÊ–¼j‚ğ[‚­’T‚·
+' ãƒ©ãƒ™ãƒ«ï¼ˆéƒ¨ä½åï¼‰ã‚’æ·±ãæ¢ã™
 Private Function FindLabelByCaptionDeep_(container As Object, ByVal cap As String) As Object
     Dim c As Object, r As Object
     On Error Resume Next
@@ -297,7 +297,7 @@ Private Function FindLabelByCaptionDeep_(container As Object, ByVal cap As Strin
     Next
 End Function
 
-' ‰E¶‚Ì’læ“¾Eİ’è
+' å³å·¦ã®å€¤å–å¾—ãƒ»è¨­å®š
 Private Function GetKoushuku_OnRow_(owner As Object, ByVal rowLabel As String, ByVal side As String) As Boolean
     Dim chk As Object
     Set chk = FindSideCheck_OnSameRow_(owner, rowLabel, side)
@@ -312,9 +312,9 @@ End Sub
 
 
 
-' === Framei˜gj‚ğCaption‚Å“Á’è‚µ‚Ä’†‚ÌƒRƒ“ƒgƒ[ƒ‹‚ğˆµ‚¤ ===
+' === Frameï¼ˆæ ï¼‰ã‚’Captionã§ç‰¹å®šã—ã¦ä¸­ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’æ‰±ã† ===
 
-' ˜gCaption‚É•”•ªˆê’v‚·‚éFrame‚ğ[‚­’T‚·
+' æ Captionã«éƒ¨åˆ†ä¸€è‡´ã™ã‚‹Frameã‚’æ·±ãæ¢ã™
 Private Function FindFrameByCaptionDeep_(container As Object, ByVal capLike As String) As Object
     Dim c As Object, r As Object
     On Error Resume Next
@@ -331,7 +331,7 @@ Private Function FindFrameByCaptionDeep_(container As Object, ByVal capLike As S
     Next
 End Function
 
-' ˜g“à‚ÅCaptionˆê’v‚ÌCheckBox‚ğ’T‚µ‚Äæ“¾/İ’è
+' æ å†…ã§Captionä¸€è‡´ã®CheckBoxã‚’æ¢ã—ã¦å–å¾—/è¨­å®š
 Private Function GetCheckInFrameByCaptionLike_(owner As Object, ByVal frameCap As String, ByVal chkCap As String) As Boolean
     Dim fr As Object, c As Object
     Set fr = FindFrameByCaptionDeep_(owner, frameCap)
@@ -359,7 +359,7 @@ Private Sub SetCheckInFrameByCaptionLike_(owner As Object, ByVal frameCap As Str
     Next
 End Sub
 
-' ˜g“à‚Åƒ‰ƒxƒ‹Captionˆê’v¨“¯‚¶˜g‚ÌTextBox‚ğE‚¤
+' æ å†…ã§ãƒ©ãƒ™ãƒ«Captionä¸€è‡´â†’åŒã˜æ ã®TextBoxã‚’æ‹¾ã†
 Private Function GetTextInFrameByLabelCaption_(owner As Object, ByVal frameCap As String, ByVal labelCap As String) As String
     Dim fr As Object, c As Object, inner As Object
     Set fr = FindFrameByCaptionDeep_(owner, frameCap)
@@ -391,14 +391,14 @@ Private Sub SetTextInFrameByLabelCaption_(owner As Object, ByVal frameCap As Str
 End Sub
 
 
-' ˜g“à‚Åƒ‰ƒxƒ‹Captionˆê’v ¨ “¯‚¶˜g‚Åˆê”Ô‹ß‚¢ComboBox‚ğæ“¾/İ’è
+' æ å†…ã§ãƒ©ãƒ™ãƒ«Captionä¸€è‡´ â†’ åŒã˜æ ã§ä¸€ç•ªè¿‘ã„ComboBoxã‚’å–å¾—/è¨­å®š
 Private Function GetComboInFrameByLabelCaption_(owner As Object, ByVal frameCap As String, ByVal labelCap As String) As String
     Dim fr As Object, c As Object, best As Object, inner As Object
     Dim targetLbl As Object, bestDx As Single, dx As Single
     Set fr = FindFrameByCaptionDeep_(owner, frameCap)
     If fr Is Nothing Then Exit Function
 
-    ' ƒ‰ƒxƒ‹‚ğŒ©‚Â‚¯‚é
+    ' ãƒ©ãƒ™ãƒ«ã‚’è¦‹ã¤ã‘ã‚‹
     For Each c In fr.Controls
         If TypeName(c) = "Label" Then
             If InStr(1, Trim$(c.caption), Trim$(labelCap), vbTextCompare) > 0 Then
@@ -408,7 +408,7 @@ Private Function GetComboInFrameByLabelCaption_(owner As Object, ByVal frameCap 
     Next
     If targetLbl Is Nothing Then Exit Function
 
-    ' ƒ‰ƒxƒ‹‚Æ“¯‚¶e“à‚ÅA‰¡•ûŒü‚Éˆê”Ô‹ß‚¢ComboBox‚ğ‘I‚Ô
+    ' ãƒ©ãƒ™ãƒ«ã¨åŒã˜è¦ªå†…ã§ã€æ¨ªæ–¹å‘ã«ä¸€ç•ªè¿‘ã„ComboBoxã‚’é¸ã¶
     bestDx = 1E+20
     For Each inner In fr.Controls
         If TypeName(inner) = "ComboBox" Then
@@ -450,7 +450,7 @@ End Sub
 
 
 
-' --- Caption‚Åƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ğ’T‚·i•”•ªˆê’vOKj ---
+' --- Captionã§ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã‚’æ¢ã™ï¼ˆéƒ¨åˆ†ä¸€è‡´OKï¼‰ ---
 Public Function FindCheckByCaptionLike(container As Object, ByVal needle As String) As MSForms.CheckBox
     Dim c As Object
     On Error Resume Next
@@ -461,7 +461,7 @@ Public Function FindCheckByCaptionLike(container As Object, ByVal needle As Stri
                 Exit Function
             End If
         End If
-        ' Frame‚âPage‚È‚Ç“ü‚êq‚à’H‚é
+        ' Frameã‚„Pageãªã©å…¥ã‚Œå­ã‚‚è¾¿ã‚‹
         If HasControls_(c) Then
             Set FindCheckByCaptionLike = FindCheckByCaptionLike(c, needle)
             If Not FindCheckByCaptionLike Is Nothing Then Exit Function

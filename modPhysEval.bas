@@ -4,41 +4,41 @@ Option Explicit
 
 
 
-'=== ƒŒƒCƒAƒEƒg‹¤’Ê ===
-Private Const PAD_X      As Single = 12   ' © ‚·‚Å‚Ég‚Á‚Ä‚¢‚é‘S‘Ì—]”’
+'=== ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆå…±é€š ===
+Private Const PAD_X      As Single = 12   ' â† ã™ã§ã«ä½¿ã£ã¦ã„ã‚‹å…¨ä½“ä½™ç™½
 Private Const PAD_Y      As Single = 10
 Private Const GAP_Y      As Single = 6
 Private Const NOTE_H     As Single = 22
-Private Const COL1_W     As Single = 140  ' ¶‚ÌŒ©o‚µ—ñ•i‘¼‰æ–Ê‚Å‚àg—pj
-Private Const COL_EDT_W  As Single = 70   ' ‘¼‰æ–Ê—p‚Ì“ü—Í•
+Private Const COL1_W     As Single = 140  ' å·¦ã®è¦‹å‡ºã—åˆ—å¹…ï¼ˆä»–ç”»é¢ã§ã‚‚ä½¿ç”¨ï¼‰
+Private Const COL_EDT_W  As Single = 70   ' ä»–ç”»é¢ç”¨ã®å…¥åŠ›å¹…
 Private Const ROW_H     As Single = 18
 
-' === ROM qƒ^ƒu—p ’Ç‰Á’è”^ƒtƒ‰ƒO ===
-Private Const ROM_JOINT_GAP_Y As Single = 12   ' ŠÖßƒuƒƒbƒNŠÔ‚ÌcŠÔ
-Private Const ROM_MOTION_GAP_Y As Single = 4   ' ‰^“®s‚ÌcŠÔ
-Private Const ROM_GROUP_PAD    As Single = 8   ' Frame “àƒpƒfƒBƒ“ƒO
-Private Const ROM_HDR_RL_GAP   As Single = 24  ' ‰^“®–¼‚ÆR/L—ñ‚ÌŠÔ
+' === ROM å­ã‚¿ãƒ–ç”¨ è¿½åŠ å®šæ•°ï¼ãƒ•ãƒ©ã‚° ===
+Private Const ROM_JOINT_GAP_Y As Single = 12   ' é–¢ç¯€ãƒ–ãƒ­ãƒƒã‚¯é–“ã®ç¸¦é–“
+Private Const ROM_MOTION_GAP_Y As Single = 4   ' é‹å‹•è¡Œã®ç¸¦é–“
+Private Const ROM_GROUP_PAD    As Single = 8   ' Frame å†…ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°
+Private Const ROM_HDR_RL_GAP   As Single = 24  ' é‹å‹•åã¨R/Låˆ—ã®é–“
 
-Public Const USE_ROM_SUBTABS   As Boolean = True   ' qƒ^ƒu(ãˆ/‰ºˆ)‚ğg‚¤
+Public Const USE_ROM_SUBTABS   As Boolean = True   ' å­ã‚¿ãƒ–(ä¸Šè‚¢/ä¸‹è‚¢)ã‚’ä½¿ã†
 
 
-'=== ROMƒŒƒCƒAƒEƒgi‚±‚Ì4‚Â‚ÍROMê—p‚Å1‰ñ‚¾‚¯’è‹`j===
+'=== ROMãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆï¼ˆã“ã®4ã¤ã¯ROMå°‚ç”¨ã§1å›ã ã‘å®šç¾©ï¼‰===
 Private Const ROM_ROW_H      As Single = 14
 Private Const ROM_GAP_Y      As Single = 1
 Private Const ROM_HDR_GAP    As Single = 2
 Private Const ROM_COL_EDT_W  As Single = 38
 
-'=== ”õl—“‚Ì‹¤’Êƒpƒ‰ƒ[ƒ^iV‹Kj ===
-Private Const MEMO_DESIRED_H As Single = 120   ' ‚Ù‚µ‚¢‚‚³i100?160‚ÅD‚İ‚É’²®‰Âj
-Private Const MEMO_MIN_H     As Single = 72    ' Å’á‚‚³
+'=== å‚™è€ƒæ¬„ã®å…±é€šãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ï¼ˆæ–°è¦ï¼‰ ===
+Private Const MEMO_DESIRED_H As Single = 120   ' ã»ã—ã„é«˜ã•ï¼ˆ100?160ã§å¥½ã¿ã«èª¿æ•´å¯ï¼‰
+Private Const MEMO_MIN_H     As Single = 72    ' æœ€ä½é«˜ã•
 
-'=== ”õl/•ÏŒ`ƒeƒLƒXƒg—p ’è”imodPhysEval“à‚Å‹¤’Êj ===
-Private Const NOTE_W_RATE    As Single = 0.6   ' ”õlƒ{ƒbƒNƒX‚Ì‰¡• = —˜—p‰Â”\•‚Ì60%
-Private Const DEFORM_W_RATE  As Single = 0.6   ' •ÏŒ`ƒeƒLƒXƒg‚Ì‰¡• = —˜—p‰Â”\•‚Ì60%
-Private Const DEFORM_H       As Single = 120   ' •ÏŒ`ƒeƒLƒXƒg‚Ì‚‚³ipx‘Š“–j
+'=== å‚™è€ƒ/å¤‰å½¢ãƒ†ã‚­ã‚¹ãƒˆç”¨ å®šæ•°ï¼ˆmodPhysEvalå†…ã§å…±é€šï¼‰ ===
+Private Const NOTE_W_RATE    As Single = 0.6   ' å‚™è€ƒãƒœãƒƒã‚¯ã‚¹ã®æ¨ªå¹… = åˆ©ç”¨å¯èƒ½å¹…ã®60%
+Private Const DEFORM_W_RATE  As Single = 0.6   ' å¤‰å½¢ãƒ†ã‚­ã‚¹ãƒˆã®æ¨ªå¹… = åˆ©ç”¨å¯èƒ½å¹…ã®60%
+Private Const DEFORM_H       As Single = 120   ' å¤‰å½¢ãƒ†ã‚­ã‚¹ãƒˆã®é«˜ã•ï¼ˆpxç›¸å½“ï¼‰
 
-Private Const CAP_FUNC_REFLEX As String = "‹Ø‹Ù’£E”½ËiázkŠÜ‚Şj"
-Private Const CAP_FUNC_PAIN   As String = "áu’Éi•”ˆÊ^NRSj"
+Private Const CAP_FUNC_REFLEX As String = "ç­‹ç·Šå¼µãƒ»åå°„ï¼ˆç—™ç¸®å«ã‚€ï¼‰"
+Private Const CAP_FUNC_PAIN   As String = "ç–¼ç—›ï¼ˆéƒ¨ä½ï¼NRSï¼‰"
 
 
 
@@ -51,12 +51,12 @@ Public Sub PlaceMemoBelow( _
     ByVal memoName As String, _
     Optional ByVal fr1 As MSForms.Frame, _
     Optional ByVal fr2 As MSForms.Frame, _
-    Optional ByVal labelText As String = "”õl—“")
+    Optional ByVal labelText As String = "å‚™è€ƒæ¬„")
 
     Const GAP_X As Single = 8
     Const GAP_Y As Single = 4
 
-    ' Šù‘¶‚Ìƒƒ‚‚Æƒ‰ƒxƒ‹‚ğœ‹  © ‚±‚±A”¼Šp‚Ì " ‚ÉI
+    ' æ—¢å­˜ã®ãƒ¡ãƒ¢ã¨ãƒ©ãƒ™ãƒ«ã‚’é™¤å»  â† ã“ã“ã€åŠè§’ã® " ã«ï¼
     On Error Resume Next
     If ControlExists(host, memoName) Then host.Controls.Remove memoName
 
@@ -69,23 +69,23 @@ Public Sub PlaceMemoBelow( _
 Next i
 
     On Error GoTo 0
-' --- ‰º’[‚ÌŠî€‚ğŒˆ‚ß‚éifr1/fr2 ‚Ì[‚¢•û + PAD_Yj---
+' --- ä¸‹ç«¯ã®åŸºæº–ã‚’æ±ºã‚ã‚‹ï¼ˆfr1/fr2 ã®æ·±ã„æ–¹ + PAD_Yï¼‰---
 Dim yBottom As Single
 yBottom = yTop
 If Not fr1 Is Nothing Then yBottom = Application.WorksheetFunction.Max(yBottom, fr1.Top + fr1.Height + PAD_Y)
 If Not fr2 Is Nothing Then yBottom = Application.WorksheetFunction.Max(yBottom, fr2.Top + fr2.Height + PAD_Y)
 
-' ƒƒ‚—Ìˆæ‚ÌŠJnˆÊ’uiƒ‰ƒxƒ‹‚ÌTopj‚ğŒˆ’è
+' ãƒ¡ãƒ¢é ˜åŸŸã®é–‹å§‹ä½ç½®ï¼ˆãƒ©ãƒ™ãƒ«ã®Topï¼‰ã‚’æ±ºå®š
 Dim memoTop As Single, safeTopMax As Single
 memoTop = yBottom
 If memoTop < yBottom Then memoTop = yBottom
 
-' ƒ‰ƒxƒ‹Top‚ÌÅ‘å‹–—ei= c‚è‚ª ROW_H + GAP_Y + MEMO_MIN_H ‚ÍŠm•Û‚Å‚«‚éˆÊ’uj
+' ãƒ©ãƒ™ãƒ«Topã®æœ€å¤§è¨±å®¹ï¼ˆ= æ®‹ã‚ŠãŒ ROW_H + GAP_Y + MEMO_MIN_H ã¯ç¢ºä¿ã§ãã‚‹ä½ç½®ï¼‰
 safeTopMax = h - PAD_Y - (ROW_H + GAP_Y + MEMO_MIN_H)
-If safeTopMax < PAD_Y Then safeTopMax = PAD_Y     ' ƒtƒŒ[ƒ€‚ª‹É’[‚É’á‚¢ê‡‚Ì•ÛŒ¯
+If safeTopMax < PAD_Y Then safeTopMax = PAD_Y     ' ãƒ•ãƒ¬ãƒ¼ãƒ ãŒæ¥µç«¯ã«ä½ã„å ´åˆã®ä¿é™º
 If memoTop > safeTopMax Then memoTop = safeTopMax
 
-' Œ©o‚µƒ‰ƒxƒ‹
+' è¦‹å‡ºã—ãƒ©ãƒ™ãƒ«
 Dim lbl As MSForms.label
 Set lbl = host.Controls.Add("Forms.Label.1", memoName & "_lbl")
 With lbl
@@ -98,8 +98,8 @@ With lbl
 End With
 
 
-' ŒÅ’è‰ºŠñ‚¹‚Í‚â‚ß‚éF”õl—“‚Íu•]‰¿€–Ú‚Ì’¼‰º(yBottom)v‚É’u‚«AcƒTƒCƒY‚Í MEMO_DESIRED_H ‚ğãŒÀ‚É‚µ‚Ä‰º‚ÉL‚Ñ‚·‚¬‚È‚¢‚æ‚¤‚É‚·‚éi2026-01j
-' ƒeƒLƒXƒgƒ{ƒbƒNƒX–{‘Ì
+' å›ºå®šä¸‹å¯„ã›ã¯ã‚„ã‚ã‚‹ï¼šå‚™è€ƒæ¬„ã¯ã€Œè©•ä¾¡é …ç›®ã®ç›´ä¸‹(yBottom)ã€ã«ç½®ãã€ç¸¦ã‚µã‚¤ã‚ºã¯ MEMO_DESIRED_H ã‚’ä¸Šé™ã«ã—ã¦ä¸‹ã«ä¼¸ã³ã™ããªã„ã‚ˆã†ã«ã™ã‚‹ï¼ˆ2026-01ï¼‰
+' ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹æœ¬ä½“
 Dim txt As MSForms.TextBox, hCalc As Single
 Set txt = host.Controls.Add("Forms.TextBox.1", memoName)
 With txt
@@ -107,7 +107,7 @@ With txt
     .Top = lbl.Top + ROW_H
     .Width = w - PAD_X * 2
 
-    ' c‚è‚‚³‚ğŒvZ ¨ Å’á‚‚³•1ˆÈã‚ÉŠÛ‚ß‚Ä‚©‚çİ’è
+    ' æ®‹ã‚Šé«˜ã•ã‚’è¨ˆç®— â†’ æœ€ä½é«˜ã•ï¼†1ä»¥ä¸Šã«ä¸¸ã‚ã¦ã‹ã‚‰è¨­å®š
     hCalc = Application.WorksheetFunction.Min(MEMO_DESIRED_H, h - PAD_Y - .Top)
     If hCalc < MEMO_MIN_H Then hCalc = MEMO_MIN_H
     If hCalc < 1 Then hCalc = 1
@@ -119,11 +119,11 @@ With txt
     .ScrollBars = fmScrollBarsVertical
 End With
 
-' ƒ‰ƒxƒ‹‚Ì’¼‘O‚Å¶‰EƒJƒ‰ƒ€‚ÌƒtƒŒ[ƒ€‚ğ~‚ß‚é
+' ãƒ©ãƒ™ãƒ«ã®ç›´å‰ã§å·¦å³ã‚«ãƒ©ãƒ ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’æ­¢ã‚ã‚‹
 If Not fr1 Is Nothing Then fr1.Height = lbl.Top - PAD_Y
 If Not fr2 Is Nothing Then fr2.Height = lbl.Top - PAD_Y
 
-' ‚±‚Ìƒy[ƒW‚Å‚ÍƒXƒNƒ[ƒ‹‹Ö~
+' ã“ã®ãƒšãƒ¼ã‚¸ã§ã¯ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç¦æ­¢
 host.ScrollBars = fmScrollBarsNone
 host.ScrollHeight = host.Height
 
@@ -134,7 +134,7 @@ End Sub
 
 
 '========================================
-' ŒöŠJAPIFg‘Ì‹@”\•]‰¿ƒ^ƒuˆê®‚ğì¬
+' å…¬é–‹APIï¼šèº«ä½“æ©Ÿèƒ½è©•ä¾¡ã‚¿ãƒ–ä¸€å¼ã‚’ä½œæˆ
 '========================================
 Public Sub EnsurePhysicalFunctionTabs(owner As frmEval)
     Dim mp As MSForms.MultiPage: Set mp = EnsurePhysMulti(owner)
@@ -151,31 +151,31 @@ Public Sub EnsurePhysicalFunctionTabs(owner As frmEval)
     Set pgPain = FindOrAddPage(mp, CAP_FUNC_PAIN)
     
 
-    ' Šeƒy[ƒW‚ÉƒzƒXƒgƒtƒŒ[ƒ€‚ğ—pˆÓ
+    ' å„ãƒšãƒ¼ã‚¸ã«ãƒ›ã‚¹ãƒˆãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ç”¨æ„
     Dim hostRom As MSForms.Frame, hostMmt As MSForms.Frame, hostSens As MSForms.Frame, _
     hostReflex As MSForms.Frame, hostPain As MSForms.Frame, hostNote As MSForms.Frame
 
     Set hostRom = EnsureHostFrame(pgRom)
     Set hostMmt = EnsureHostFrame(pgMMT)
     Set hostSens = EnsureHostFrame(pgSens)
-    Set hostReflex = EnsureHostFrame(pgReflex)   ' © ’Ç‰Á
-    Set hostPain = EnsureHostFrame(pgPain)       ' © ’Ç‰Á
+    Set hostReflex = EnsureHostFrame(pgReflex)   ' â† è¿½åŠ 
+    Set hostPain = EnsureHostFrame(pgPain)       ' â† è¿½åŠ 
     
     Set hostNote = EnsureHostFrame(pgNote)
 
 Dim pgPar As MSForms.Page, hostPar As MSForms.Frame
 Set pgPar = FindOrAddPage(mp, CAP_FUNC_PARALYSIS)
 Set hostPar = EnsureHostFrame(pgPar)
-BuildParalysisTabUI hostPar   ' © Šù‚É“\‚Á‚½–ƒáƒUIƒrƒ‹ƒ_
+BuildParalysisTabUI hostPar   ' â† æ—¢ã«è²¼ã£ãŸéº»ç—ºUIãƒ“ãƒ«ãƒ€
 
 
 
 
-    ' ƒrƒ‹ƒhiUI¶¬j
+    ' ãƒ“ãƒ«ãƒ‰ï¼ˆUIç”Ÿæˆï¼‰
     If USE_ROM_SUBTABS Then
-    BuildROMTabs hostRom         ' © VFãˆ^‰ºˆ‚Ìqƒ^ƒu
+    BuildROMTabs hostRom         ' â† æ–°ï¼šä¸Šè‚¢ï¼ä¸‹è‚¢ã®å­ã‚¿ãƒ–
 Else
-    BuildROMSection_Compact hostRom   ' © Šù‘¶F“ñ—ñƒŒƒCƒAƒEƒgiŒİŠ·—pj
+    BuildROMSection_Compact hostRom   ' â† æ—¢å­˜ï¼šäºŒåˆ—ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆï¼ˆäº’æ›ç”¨ï¼‰
 End If
 
     BuildMMTSection owner, hostMmt
@@ -185,17 +185,17 @@ BuildPainTabUI owner, hostPain
 
     AddNotesBox owner, hostNote, TAG_FUNC_PREFIX
 
-    ' ‰Šú•\¦‚ÍROM
+    ' åˆæœŸè¡¨ç¤ºã¯ROM
     mp.value = pgRom.Index
 End Sub
 
 '========================================
-' “à•”FMultiPage‚Ì—pˆÓihostBody“àj
+' å†…éƒ¨ï¼šMultiPageã®ç”¨æ„ï¼ˆhostBodyå†…ï¼‰
 '========================================
 Private Function EnsurePhysMulti(owner As frmEval) As MSForms.MultiPage
     Dim host As MSForms.Frame: Set host = FindHostByName(owner, HOST_BODY_NAME)
     If host Is Nothing Then
-        MsgBox "ƒtƒŒ[ƒ€ '" & HOST_BODY_NAME & "' ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñBæ‚É Validate_App ‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B", vbExclamation
+        MsgBox "ãƒ•ãƒ¬ãƒ¼ãƒ  '" & HOST_BODY_NAME & "' ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚å…ˆã« Validate_App ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚", vbExclamation
         Exit Function
     End If
 
@@ -218,7 +218,7 @@ Private Function EnsurePhysMulti(owner As frmEval) As MSForms.MultiPage
         .Height = host.Height - PAD_Y * 2
     End With
 
-    ' ƒ^ƒuØ‘ÖƒtƒbƒNi«—ˆ‚ÌIMEÄ“K—p“™‚É”õ‚¦j
+    ' ã‚¿ãƒ–åˆ‡æ›¿ãƒ•ãƒƒã‚¯ï¼ˆå°†æ¥ã®IMEå†é©ç”¨ç­‰ã«å‚™ãˆï¼‰
     On Error Resume Next
     Dim mph As New MPHook
     mph.Init owner, EnsurePhysMulti
@@ -257,7 +257,7 @@ Public Function EnsureHostFrame(pg As MSForms.Page) As MSForms.Frame
         End If
     Next
 
-    ' š ‚±‚±‚©‚ç‰º‚Íu‰‰ñ‚Ì‚İv
+    ' â˜… ã“ã“ã‹ã‚‰ä¸‹ã¯ã€Œåˆå›ã®ã¿ã€
     Dim f As MSForms.Frame
     Set f = pg.Controls.Add("Forms.Frame.1")
     With f
@@ -281,17 +281,17 @@ End Function
 
 
 '========================================
-' MMTiå—v‹ØŒQE¶‰Ej
+' MMTï¼ˆä¸»è¦ç­‹ç¾¤ãƒ»å·¦å³ï¼‰
 '========================================
 Private Sub BuildMMTSection(owner As frmEval, host As MSForms.Frame)
     Dim Y As Single: Y = PAD_Y
 
     Dim groups As Variant
-    ' ‘ã•\‹ØŒQiŠÈŒ‰jFŒ¨ŠO“]^•I‹ü‹È^èŠÖß”w‹ü^ŒÒ‹ü‹È^•GL“W^‘«”w‹ü
-    groups = Array("Œ¨ŠO“]", "•I‹ü‹È", "èŠÖß”w‹ü", "ŒÒ‹ü‹È", "•GL“W", "‘«”w‹ü")
+    ' ä»£è¡¨ç­‹ç¾¤ï¼ˆç°¡æ½”ï¼‰ï¼šè‚©å¤–è»¢ï¼è‚˜å±ˆæ›²ï¼æ‰‹é–¢ç¯€èƒŒå±ˆï¼è‚¡å±ˆæ›²ï¼è†ä¼¸å±•ï¼è¶³èƒŒå±ˆ
+    groups = Array("è‚©å¤–è»¢", "è‚˜å±ˆæ›²", "æ‰‹é–¢ç¯€èƒŒå±ˆ", "è‚¡å±ˆæ›²", "è†ä¼¸å±•", "è¶³èƒŒå±ˆ")
 
-    ' Œ©o‚µ
-    Y = AddHeaderRow(host, "‹ØŒQ", Y)
+    ' è¦‹å‡ºã—
+    Y = AddHeaderRow(host, "ç­‹ç¾¤", Y)
 
     Dim i As Long
     For i = LBound(groups) To UBound(groups)
@@ -307,9 +307,9 @@ Private Function AddHeaderRow(host As MSForms.Frame, title As String, Y As Singl
     Set hTitle = host.Controls.Add("Forms.Label.1")
     With hTitle: .caption = title: .Left = PAD_X: .Top = Y: .Width = COL1_W: .Height = ROW_H: .Font.Bold = True: End With
     Set hR = host.Controls.Add("Forms.Label.1")
-    With hR: .caption = "‰E": .Left = PAD_X + COL1_W + 8: .Top = Y: .Width = COL_EDT_W: .Height = ROW_H: .TextAlign = fmTextAlignCenter: .Font.Bold = True: End With
+    With hR: .caption = "å³": .Left = PAD_X + COL1_W + 8: .Top = Y: .Width = COL_EDT_W: .Height = ROW_H: .TextAlign = fmTextAlignCenter: .Font.Bold = True: End With
     Set hL = host.Controls.Add("Forms.Label.1")
-    With hL: .caption = "¶": .Left = hR.Left + COL_EDT_W + 8: .Top = Y: .Width = COL_EDT_W: .Height = ROW_H: .TextAlign = fmTextAlignCenter: .Font.Bold = True: End With
+    With hL: .caption = "å·¦": .Left = hR.Left + COL_EDT_W + 8: .Top = Y: .Width = COL_EDT_W: .Height = ROW_H: .TextAlign = fmTextAlignCenter: .Font.Bold = True: End With
     AddHeaderRow = Y + ROW_H + 2
 End Function
 
@@ -325,10 +325,10 @@ Private Function AddMMTRow(owner As frmEval, host As MSForms.Frame, muscle As St
     SetupMMTCombo cboR: cboR.Left = PAD_X + COL1_W + 8: cboR.Top = Y
     SetupMMTCombo cboL: cboL.Left = cboR.Left + COL_EDT_W + 8: cboL.Top = Y
 
-    cboR.Tag = TAG_FUNC_PREFIX & "|MMT_" & muscle & "_‰E"
-    cboL.Tag = TAG_FUNC_PREFIX & "|MMT_" & muscle & "_¶"
+    cboR.Tag = TAG_FUNC_PREFIX & "|MMT_" & muscle & "_å³"
+    cboL.Tag = TAG_FUNC_PREFIX & "|MMT_" & muscle & "_å·¦"
 
-    ' iBI‡Œv‚Æ‚Í–³ŠÖŒW‚È‚Ì‚Å CboBIHook ‚Í–¢“K—pj
+    ' ï¼ˆBIåˆè¨ˆã¨ã¯ç„¡é–¢ä¿‚ãªã®ã§ CboBIHook ã¯æœªé©ç”¨ï¼‰
     AddMMTRow = Y + ROW_H + GAP_Y
 End Function
 
@@ -336,14 +336,14 @@ Private Sub SetupMMTCombo(cbo As MSForms.ComboBox)
     With cbo
         .Width = COL_EDT_W: .Height = ROW_H: .Style = fmStyleDropDownList
         .Clear
-        ' ˆê”Ê“I‚ÈMMT•\Œ»F0~5{}A‚¨‚æ‚Ñu•s‰Âv
+        ' ä¸€èˆ¬çš„ãªMMTè¡¨ç¾ï¼š0~5ï¼‹Â±ã€ãŠã‚ˆã³ã€Œä¸å¯ã€
         .AddItem "0"
         .AddItem "1"
         .AddItem "2-": .AddItem "2": .AddItem "2+"
         .AddItem "3-": .AddItem "3": .AddItem "3+"
         .AddItem "4-": .AddItem "4": .AddItem "4+"
         .AddItem "5"
-        .AddItem "•s‰Â"
+        .AddItem "ä¸å¯"
     End With
 End Sub
 
@@ -359,8 +359,8 @@ Private Function AddSensoryRow(host As MSForms.Frame, itemKey As String, Y As Si
     SetupSensoryCombo cboR: cboR.Left = PAD_X + COL1_W + 8: cboR.Top = Y
     SetupSensoryCombo cboL: cboL.Left = cboR.Left + COL_EDT_W + 8: cboL.Top = Y
 
-    cboR.Tag = TAG_FUNC_PREFIX & "|SENS_" & itemKey & "_‰E"
-    cboL.Tag = TAG_FUNC_PREFIX & "|SENS_" & itemKey & "_¶"
+    cboR.Tag = TAG_FUNC_PREFIX & "|SENS_" & itemKey & "_å³"
+    cboL.Tag = TAG_FUNC_PREFIX & "|SENS_" & itemKey & "_å·¦"
 
     AddSensoryRow = Y + ROW_H + GAP_Y
 End Function
@@ -369,11 +369,11 @@ Private Sub SetupSensoryCombo(cbo As MSForms.ComboBox)
     With cbo
         .Width = COL_EDT_W: .Height = ROW_H: .Style = fmStyleDropDownList
         .Clear
-        .AddItem "³í"
-        .AddItem "’á‰º"
-        .AddItem "Á¸"
-        .AddItem "–¢ŒŸ"
-        .AddItem "•s‰Â"
+        .AddItem "æ­£å¸¸"
+        .AddItem "ä½ä¸‹"
+        .AddItem "æ¶ˆå¤±"
+        .AddItem "æœªæ¤œ"
+        .AddItem "ä¸å¯"
     End With
 End Sub
 
@@ -388,8 +388,8 @@ Private Function AddMASRow(host As MSForms.Frame, groupName As String, Y As Sing
     SetupMASCombo cboR: cboR.Left = PAD_X + COL1_W + 8: cboR.Top = Y
     SetupMASCombo cboL: cboL.Left = cboR.Left + COL_EDT_W + 8: cboL.Top = Y
 
-    cboR.Tag = TAG_FUNC_PREFIX & "|TONE_MAS_" & groupName & "_‰E"
-    cboL.Tag = TAG_FUNC_PREFIX & "|TONE_MAS_" & groupName & "_¶"
+    cboR.Tag = TAG_FUNC_PREFIX & "|TONE_MAS_" & groupName & "_å³"
+    cboL.Tag = TAG_FUNC_PREFIX & "|TONE_MAS_" & groupName & "_å·¦"
 
     AddMASRow = Y + ROW_H + GAP_Y
 End Function
@@ -404,7 +404,7 @@ Private Sub SetupMASCombo(cbo As MSForms.ComboBox)
         .AddItem "2"
         .AddItem "3"
         .AddItem "4"
-        .AddItem "–¢ŒŸ"
+        .AddItem "æœªæ¤œ"
     End With
 End Sub
 
@@ -419,8 +419,8 @@ Private Function AddReflexRow(host As MSForms.Frame, reflexName As String, Y As 
     SetupReflexCombo cboR: cboR.Left = PAD_X + COL1_W + 8: cboR.Top = Y
     SetupReflexCombo cboL: cboL.Left = cboR.Left + COL_EDT_W + 8: cboL.Top = Y
 
-    cboR.Tag = TAG_FUNC_PREFIX & "|REFLEX_" & reflexName & "_‰E"
-    cboL.Tag = TAG_FUNC_PREFIX & "|REFLEX_" & reflexName & "_¶"
+    cboR.Tag = TAG_FUNC_PREFIX & "|REFLEX_" & reflexName & "_å³"
+    cboL.Tag = TAG_FUNC_PREFIX & "|REFLEX_" & reflexName & "_å·¦"
 
     AddReflexRow = Y + ROW_H + GAP_Y
 End Function
@@ -434,29 +434,29 @@ Private Sub SetupReflexCombo(cbo As MSForms.ComboBox)
         .AddItem "2+"
         .AddItem "3+"
         .AddItem "4+"
-        .AddItem "–¢ŒŸ"
+        .AddItem "æœªæ¤œ"
     End With
 End Sub
 
 Private Function AddDeformText(owner As frmEval, host As MSForms.Frame, Y As Single) As Single
     Dim lbl As MSForms.label, txt As MSForms.TextBox
 
-    ' ƒ‰ƒxƒ‹i©‘¼‚Æ“¯‚¶—ñ•‚ğg‚¤j
+    ' ãƒ©ãƒ™ãƒ«ï¼ˆâ†ä»–ã¨åŒã˜åˆ—å¹…ã‚’ä½¿ã†ï¼‰
     Set lbl = host.Controls.Add("Forms.Label.1")
     With lbl
-        .caption = "•ÏŒ`iŠŒ©j"
+        .caption = "å¤‰å½¢ï¼ˆæ‰€è¦‹ï¼‰"
         .Left = PAD_X
         .Top = Y
-        .Width = COL1_W            ' š“ˆêI
+        .Width = COL1_W            ' â˜…çµ±ä¸€ï¼
         .Height = ROW_H
     End With
 
-    ' ƒeƒLƒXƒgi©“ü—Í—ñ‚ÌŠJnˆÊ’u‚ÉƒXƒiƒbƒvj
+    ' ãƒ†ã‚­ã‚¹ãƒˆï¼ˆâ†å…¥åŠ›åˆ—ã®é–‹å§‹ä½ç½®ã«ã‚¹ãƒŠãƒƒãƒ—ï¼‰
     Set txt = host.Controls.Add("Forms.TextBox.1")
     With txt
-        .Left = PAD_X + COL1_W + 8      ' š“ˆêI
+        .Left = PAD_X + COL1_W + 8      ' â˜…çµ±ä¸€ï¼
         .Top = Y
-        ' ‰¡•‚Æ‚‚³‚Í‘O‰ñ‚Ìİ’è‚ğ—¬—pi’l‚Í‚ ‚È‚½‚ÌD‚İ‚Åj
+        ' æ¨ªå¹…ã¨é«˜ã•ã¯å‰å›ã®è¨­å®šã‚’æµç”¨ï¼ˆå€¤ã¯ã‚ãªãŸã®å¥½ã¿ã§ï¼‰
         Dim availW As Single
         availW = host.Width - .Left - PAD_X
         .Width = availW * DEFORM_W_RATE
@@ -466,37 +466,37 @@ Private Function AddDeformText(owner As frmEval, host As MSForms.Frame, Y As Sin
         .EnterKeyBehavior = True
         .WordWrap = True
         .ScrollBars = fmScrollBarsVertical
-        .Tag = TAG_FUNC_PREFIX & "|PAIN|•ÏŒ`_ŠŒ©"
+        .Tag = TAG_FUNC_PREFIX & "|PAIN|å¤‰å½¢_æ‰€è¦‹"
     End With
 
-    ' IME hookiÈ—ª‰Âj
+    ' IME hookï¼ˆçœç•¥å¯ï¼‰
     On Error Resume Next
     Dim ime As New TxtImeHook
     ime.Init txt: owner.RegisterTxtHook ime
     On Error GoTo 0
 
-    ' Ÿ‚ÌY
+    ' æ¬¡ã®Y
     AddDeformText = txt.Top + txt.Height + GAP_Y
 End Function
 
 
 
 Private Function AddPainRow(owner As frmEval, host As MSForms.Frame, Y As Single) As Single
-    ' ’Ç‰Á‚Í‘S•”ƒ[ƒJƒ‹’è”FŠO•”‚ÉˆË‘¶‚µ‚È‚¢
+    ' è¿½åŠ ã¯å…¨éƒ¨ãƒ­ãƒ¼ã‚«ãƒ«å®šæ•°ï¼šå¤–éƒ¨ã«ä¾å­˜ã—ãªã„
     Const NRS_LBL_W As Single = 28
     Const NRS_CBO_W As Single = 60
     Const GAP_X     As Single = 8
 
-    ' ƒ‰ƒxƒ‹uáu’Éi•”ˆÊjv
+    ' ãƒ©ãƒ™ãƒ«ã€Œç–¼ç—›ï¼ˆéƒ¨ä½ï¼‰ã€
     Dim lbl As MSForms.label
     Set lbl = host.Controls.Add("Forms.Label.1")
     With lbl
-        .caption = "áu’Éi•”ˆÊj"
+        .caption = "ç–¼ç—›ï¼ˆéƒ¨ä½ï¼‰"
         .Left = PAD_X: .Top = Y
         .Width = COL1_W: .Height = ROW_H
     End With
 
-    ' ‰E‘¤‚É NRSiƒ‰ƒxƒ‹{ƒRƒ“ƒ{j‚ğæ‚É”z’u‚µ‚ÄŠî€‚É‚·‚é
+    ' å³å´ã« NRSï¼ˆãƒ©ãƒ™ãƒ«ï¼‹ã‚³ãƒ³ãƒœï¼‰ã‚’å…ˆã«é…ç½®ã—ã¦åŸºæº–ã«ã™ã‚‹
     Dim lblN As MSForms.label, cbo As MSForms.ComboBox
     Set lblN = host.Controls.Add("Forms.Label.1")
     With lblN
@@ -509,31 +509,31 @@ Private Function AddPainRow(owner As frmEval, host As MSForms.Frame, Y As Single
         .Top = Y: .Width = NRS_CBO_W: .Height = ROW_H
         .Style = fmStyleDropDownList
         .Tag = TAG_FUNC_PREFIX & "|PAIN_NRS"
-        ' •K—v‚È‚ç 0`10 ‚ğ©“®‚Å–„‚ß‚éiŠù‚Éİ’è‚µ‚Ä‚¢‚é‚È‚ç‰½‚à‚µ‚È‚¢j
+        ' å¿…è¦ãªã‚‰ 0ã€œ10 ã‚’è‡ªå‹•ã§åŸ‹ã‚ã‚‹ï¼ˆæ—¢ã«è¨­å®šã—ã¦ã„ã‚‹ãªã‚‰ä½•ã‚‚ã—ãªã„ï¼‰
         If .ListCount = 0 Then
             Dim i As Integer
             For i = 0 To 10: .AddItem CStr(i): Next i
         End If
     End With
 
-    ' ‰E’[‚É‘µ‚¦‚é
+    ' å³ç«¯ã«æƒãˆã‚‹
     Dim rightEdge As Single: rightEdge = host.InsideWidth - PAD_X
     cbo.Left = rightEdge - NRS_CBO_W
     lblN.Left = cbo.Left - GAP_X - NRS_LBL_W
 
-    ' •”ˆÊƒeƒLƒXƒg‚Íu“ü—Í—ñŠJnv‚©‚ç NRS è‘O‚Ü‚Å‚ğ©“®•‚Å
+    ' éƒ¨ä½ãƒ†ã‚­ã‚¹ãƒˆã¯ã€Œå…¥åŠ›åˆ—é–‹å§‹ã€ã‹ã‚‰ NRS æ‰‹å‰ã¾ã§ã‚’è‡ªå‹•å¹…ã§
     Dim txt As MSForms.TextBox
     Set txt = host.Controls.Add("Forms.TextBox.1")
     With txt
         .Top = Y
         .Left = PAD_X + COL1_W + GAP_X
         .Width = lblN.Left - GAP_X - .Left
-        If .Width < 80 Then .Width = 80        ' ˆÀ‘S•Ù
+        If .Width < 80 Then .Width = 80        ' å®‰å…¨å¼
         .Height = ROW_H
-        .Tag = TAG_FUNC_PREFIX & "|PAIN_•”ˆÊ"
+        .Tag = TAG_FUNC_PREFIX & "|PAIN_éƒ¨ä½"
         .EnterKeyBehavior = False
         .multiline = False
-        ' “ú–{Œê“ü—Í‚Ì‚Ü‚Ü‚ÅOKB”¼ŠpŒÅ’è‚È‚ç: .IMEMode = fmIMEModeDisable
+        ' æ—¥æœ¬èªå…¥åŠ›ã®ã¾ã¾ã§OKã€‚åŠè§’å›ºå®šãªã‚‰: .IMEMode = fmIMEModeDisable
     End With
 
     AddPainRow = Y + ROW_H + GAP_Y
@@ -541,14 +541,14 @@ End Function
 
 
 '========================================
-' ”õli©—R‹Lqj¦IME‚Ğ‚ç‚ª‚ÈON
+' å‚™è€ƒï¼ˆè‡ªç”±è¨˜è¿°ï¼‰â€»IMEã²ã‚‰ãŒãªON
 '========================================
 
 Private Sub AddNotesBox(owner As frmEval, host As MSForms.Frame, keyPrefix As String)
     Dim lbl As MSForms.label
     Set lbl = host.Controls.Add("Forms.Label.1")
     With lbl
-        .caption = "”õli©—R‹Lqj"
+        .caption = "å‚™è€ƒï¼ˆè‡ªç”±è¨˜è¿°ï¼‰"
         .Left = PAD_X
         .Width = 120
         .Height = 18
@@ -564,20 +564,20 @@ Private Sub AddNotesBox(owner As frmEval, host As MSForms.Frame, keyPrefix As St
         .Height = NOTE_H
         .multiline = True
         .EnterKeyBehavior = True
-        .Tag = keyPrefix & "|”õl"
+        .Tag = keyPrefix & "|å‚™è€ƒ"
     End With
 
-    ' š‚±‚±‚ªƒ|ƒCƒ“ƒgFŒ»İ‚Ì“à—e‚Ì’¼‰º‚É•À‚×‚é
+    ' â˜…ã“ã“ãŒãƒã‚¤ãƒ³ãƒˆï¼šç¾åœ¨ã®å†…å®¹ã®ç›´ä¸‹ã«ä¸¦ã¹ã‚‹
     Dim bottom As Single
     bottom = GetContentBottom(host)
     lbl.Top = bottom + 8
     txt.Top = lbl.Top
 
-    ' ƒXƒNƒ[ƒ‹I’[‚ğ”õl‚Ì‰º‚Ü‚ÅL‚Î‚·
+    ' ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«çµ‚ç«¯ã‚’å‚™è€ƒã®ä¸‹ã¾ã§ä¼¸ã°ã™
     host.ScrollBars = fmScrollBarsVertical
     host.ScrollHeight = txt.Top + txt.Height + PAD_Y
 
-    ' IMEi”õl‚Í“ú–{Œê‘z’è‚È‚Ì‚Å On ‚Ì‚Ü‚ÜB‚Ğ‚ç‚ª‚È Hook ‚ÍŠù‘¶’Ê‚èj
+    ' IMEï¼ˆå‚™è€ƒã¯æ—¥æœ¬èªæƒ³å®šãªã®ã§ On ã®ã¾ã¾ã€‚ã²ã‚‰ãŒãª Hook ã¯æ—¢å­˜é€šã‚Šï¼‰
     On Error Resume Next
     Dim ime As New TxtImeHook
     ime.Init txt
@@ -616,7 +616,7 @@ Private Function FindMultiPageRecursive(parent As Object) As MSForms.MultiPage
 End Function
 
 
-' mpADL ”»’èi–¼‘O or ƒy[ƒWŒ©o‚µ‚Å”»’èj
+' mpADL åˆ¤å®šï¼ˆåå‰ or ãƒšãƒ¼ã‚¸è¦‹å‡ºã—ã§åˆ¤å®šï¼‰
 Private Function IsKnownMpADL(mp As MSForms.MultiPage) As Boolean
     On Error Resume Next
     If LCase$(mp.name) = "mpadl" Then
@@ -628,16 +628,16 @@ Private Function IsKnownMpADL(mp As MSForms.MultiPage) As Boolean
         c0 = mp.Pages(0).caption
         c1 = mp.Pages(1).caption
         c2 = mp.Pages(2).caption
-        If (InStr(c0, "BI") > 0 Or InStr(c0, "ƒo[ƒTƒ‹") > 0) _
+        If (InStr(c0, "BI") > 0 Or InStr(c0, "ãƒãƒ¼ã‚µãƒ«") > 0) _
         And (InStr(c1, "IADL") > 0) _
-        And (InStr(c2, "‹N‹") > 0) Then
+        And (InStr(c2, "èµ·å±…") > 0) Then
             IsKnownMpADL = True
         End If
     End If
 End Function
 
 
-'=== ’Ç‰ÁFg‘Ì‹@”\•]‰¿‚ğueƒ^ƒuviƒ‹[ƒgj‚Æ‚µ‚Äì¬i”õl‚ÍŠeqƒ^ƒu‚É”z’uj ===
+'=== è¿½åŠ ï¼šèº«ä½“æ©Ÿèƒ½è©•ä¾¡ã‚’ã€Œè¦ªã‚¿ãƒ–ã€ï¼ˆãƒ«ãƒ¼ãƒˆï¼‰ã¨ã—ã¦ä½œæˆï¼ˆå‚™è€ƒã¯å„å­ã‚¿ãƒ–ã«é…ç½®ï¼‰ ===
 
 
 
@@ -647,9 +647,9 @@ Public Sub EnsurePhysicalFunctionTabs_Root(owner As frmEval)
     Dim root As MSForms.MultiPage: Set root = FindRootMulti(owner)
     If root Is Nothing Then
         Debug.Print "[phys] root not found"
-        ' Œ©‚Â‚©‚ç‚È‚¢‚Æ‚«‚Ìó‹µ‚ğƒ_ƒ“ƒv
+        ' è¦‹ã¤ã‹ã‚‰ãªã„ã¨ãã®çŠ¶æ³ã‚’ãƒ€ãƒ³ãƒ—
         Call DumpMultiPages(owner)
-        MsgBox "Åã’i‚ÌMultiPage‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñBƒCƒ~ƒfƒBƒGƒCƒg(CTRL+G)‚ÌƒƒO‚ğ‹³‚¦‚Ä‚­‚¾‚³‚¢B"
+        MsgBox "æœ€ä¸Šæ®µã®MultiPageãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚ã‚¤ãƒŸãƒ‡ã‚£ã‚¨ã‚¤ãƒˆ(CTRL+G)ã®ãƒ­ã‚°ã‚’æ•™ãˆã¦ãã ã•ã„ã€‚"
         Exit Sub
     Else
         Debug.Print "[phys] root found: Name=" & root.name & ", Pages=" & root.Pages.Count
@@ -657,15 +657,15 @@ Public Sub EnsurePhysicalFunctionTabs_Root(owner As frmEval)
    
 
 
-    ' ƒ‹[ƒg‚Éug‘Ì‹@”\•]‰¿vƒy[ƒW‚ğ’Ç‰Á/æ“¾
+    ' ãƒ«ãƒ¼ãƒˆã«ã€Œèº«ä½“æ©Ÿèƒ½è©•ä¾¡ã€ãƒšãƒ¼ã‚¸ã‚’è¿½åŠ /å–å¾—
     Dim pgPhys As MSForms.Page
     Set pgPhys = FindOrAddPage(root, CAP_FUNC)
 
-    ' ƒy[ƒW“àƒtƒŒ[ƒ€
+    ' ãƒšãƒ¼ã‚¸å†…ãƒ•ãƒ¬ãƒ¼ãƒ 
     Dim host As MSForms.Frame
     Set host = EnsureHostFrame(pgPhys)
 
-    ' ƒy[ƒW“à‚Égqƒ^ƒu—ph‚ÌMultiPageimpPhysj‚ğ’Ç‰Á/æ“¾
+    ' ãƒšãƒ¼ã‚¸å†…ã«â€œå­ã‚¿ãƒ–ç”¨â€ã®MultiPageï¼ˆmpPhysï¼‰ã‚’è¿½åŠ /å–å¾—
     Dim mp As MSForms.MultiPage
     Dim c As Control
     For Each c In host.Controls
@@ -682,7 +682,7 @@ Public Sub EnsurePhysicalFunctionTabs_Root(owner As frmEval)
             .Width = host.Width - PAD_X * 2
             .Height = host.Height - PAD_Y * 2
         End With
-        ' ƒ^ƒuØ‘ÖƒtƒbƒN
+        ' ã‚¿ãƒ–åˆ‡æ›¿ãƒ•ãƒƒã‚¯
         On Error Resume Next
         Dim mph As New MPHook
         mph.Init owner, mp
@@ -690,7 +690,7 @@ Public Sub EnsurePhysicalFunctionTabs_Root(owner As frmEval)
         On Error GoTo 0
     End If
 
-    ' qƒ^ƒui3–‡jFROM / MMT / Š´ŠoEázkE”½ËEáu’ÉiŠeƒ^ƒu‚É”õl‚ ‚èj
+    ' å­ã‚¿ãƒ–ï¼ˆ3æšï¼‰ï¼šROM / MMT / æ„Ÿè¦šãƒ»ç—™ç¸®ãƒ»åå°„ãƒ»ç–¼ç—›ï¼ˆå„ã‚¿ãƒ–ã«å‚™è€ƒã‚ã‚Šï¼‰
     Dim pgRom As MSForms.Page, pgMMT As MSForms.Page, pgSens As MSForms.Page
     Set pgRom = FindOrAddPage(mp, CAP_FUNC_ROM)
     Set pgMMT = FindOrAddPage(mp, CAP_FUNC_MMT)
@@ -701,7 +701,7 @@ Public Sub EnsurePhysicalFunctionTabs_Root(owner As frmEval)
     Set hostMmt = EnsureHostFrame(pgMMT)
     Set hostSens = EnsureHostFrame(pgSens)
 
-    ' UI¶¬{Šeƒ^ƒu‚É”õl
+    ' UIç”Ÿæˆï¼‹å„ã‚¿ãƒ–ã«å‚™è€ƒ
     BuildROMSection_Compact hostRom
     
 
@@ -711,7 +711,7 @@ Public Sub EnsurePhysicalFunctionTabs_Root(owner As frmEval)
     BuildSensoryToneReflexPain owner, hostSens
     
 
-    ' ‰Šú•\¦
+    ' åˆæœŸè¡¨ç¤º
     mp.value = pgRom.Index
     root.value = pgPhys.Index
 End Sub
@@ -743,22 +743,22 @@ Private Sub DumpMP_Recur(parent As Object, ByVal depth As Long)
 End Sub
 
 
-'=== ’Ç‰ÁFw’è‚³‚ê‚½ƒ‹[ƒg MultiPage ‚Éug‘Ì‹@”\•]‰¿vƒy[ƒW‚ğì‚é ===
+'=== è¿½åŠ ï¼šæŒ‡å®šã•ã‚ŒãŸãƒ«ãƒ¼ãƒˆ MultiPage ã«ã€Œèº«ä½“æ©Ÿèƒ½è©•ä¾¡ã€ãƒšãƒ¼ã‚¸ã‚’ä½œã‚‹ ===
 Public Sub EnsurePhysicalFunctionTabs_Under(owner As frmEval, root As MSForms.MultiPage)
     If root Is Nothing Then
-        MsgBox "ƒ‹[ƒg MultiPage ‚ª Nothing ‚Å‚·BŒÄ‚Ño‚µ‘¤‚Å 'mp' ‚ğ“n‚µ‚Ä‚­‚¾‚³‚¢B", vbExclamation
+        MsgBox "ãƒ«ãƒ¼ãƒˆ MultiPage ãŒ Nothing ã§ã™ã€‚å‘¼ã³å‡ºã—å´ã§ 'mp' ã‚’æ¸¡ã—ã¦ãã ã•ã„ã€‚", vbExclamation
         Exit Sub
     End If
 
-    ' ƒ‹[ƒg‚Éug‘Ì‹@”\•]‰¿vƒy[ƒW‚ğ’Ç‰Á/æ“¾
+    ' ãƒ«ãƒ¼ãƒˆã«ã€Œèº«ä½“æ©Ÿèƒ½è©•ä¾¡ã€ãƒšãƒ¼ã‚¸ã‚’è¿½åŠ /å–å¾—
     Dim pgPhys As MSForms.Page
     Set pgPhys = FindOrAddPage(root, CAP_FUNC)
 
-    ' ƒy[ƒW“à‚Ìì‹ÆƒtƒŒ[ƒ€
+    ' ãƒšãƒ¼ã‚¸å†…ã®ä½œæ¥­ãƒ•ãƒ¬ãƒ¼ãƒ 
     Dim host As MSForms.Frame
     Set host = EnsureHostFrame(pgPhys)
 
-        ' --- qƒ^ƒu MultiPageimpPhysj‚ğì‚é or æ“¾ ---
+        ' --- å­ã‚¿ãƒ– MultiPageï¼ˆmpPhysï¼‰ã‚’ä½œã‚‹ or å–å¾— ---
     Dim mp As MSForms.MultiPage
     Dim c As Control
     For Each c In host.Controls
@@ -777,18 +777,18 @@ Public Sub EnsurePhysicalFunctionTabs_Under(owner As frmEval, root As MSForms.Mu
         End With
     End If
 
-       ' š Page8/9‚È‚Ç‚ÌŠù’èƒy[ƒW‚ğ‘|œ
+       ' â˜… Page8/9ãªã©ã®æ—¢å®šãƒšãƒ¼ã‚¸ã‚’æƒé™¤
     CleanDefaultPages mp
 
-    ' --- qƒ^ƒui5–‡j‚ğ—pˆÓ ---
+    ' --- å­ã‚¿ãƒ–ï¼ˆ5æšï¼‰ã‚’ç”¨æ„ ---
     Dim pgRom As MSForms.Page, pgMMT As MSForms.Page
     Dim pgSens As MSForms.Page, pgToneRef As MSForms.Page, pgPain As MSForms.Page
 
-    Set pgRom = FindOrAddPage(mp, CAP_FUNC_ROM)                     ' ROMiå—vŠÖßj
-    Set pgMMT = FindOrAddPage(mp, CAP_FUNC_MMT)                     ' ‹Ø—ÍiMMTj
-    Set pgSens = FindOrAddPage(mp, "Š´Šoi•\İE[•”j")              ' ©•ª—£
-    Set pgToneRef = FindOrAddPage(mp, "‹Ø‹Ù’£E”½ËiázkŠÜ‚Şj")     ' ©•ª—£
-    Set pgPain = FindOrAddPage(mp, "áu’Éi•”ˆÊ^NRSj")               ' ©•ª—£
+    Set pgRom = FindOrAddPage(mp, CAP_FUNC_ROM)                     ' ROMï¼ˆä¸»è¦é–¢ç¯€ï¼‰
+    Set pgMMT = FindOrAddPage(mp, CAP_FUNC_MMT)                     ' ç­‹åŠ›ï¼ˆMMTï¼‰
+    Set pgSens = FindOrAddPage(mp, "æ„Ÿè¦šï¼ˆè¡¨åœ¨ãƒ»æ·±éƒ¨ï¼‰")              ' â†åˆ†é›¢
+    Set pgToneRef = FindOrAddPage(mp, "ç­‹ç·Šå¼µãƒ»åå°„ï¼ˆç—™ç¸®å«ã‚€ï¼‰")     ' â†åˆ†é›¢
+    Set pgPain = FindOrAddPage(mp, "ç–¼ç—›ï¼ˆéƒ¨ä½ï¼NRSï¼‰")               ' â†åˆ†é›¢
 
     Dim hostRom As MSForms.Frame, hostMmt As MSForms.Frame
     Dim hostSens As MSForms.Frame, hostTone As MSForms.Frame, hostPain As MSForms.Frame
@@ -801,7 +801,7 @@ Public Sub EnsurePhysicalFunctionTabs_Under(owner As frmEval, root As MSForms.Mu
     
     
     
-' iEnsurePhysicalFunctionTabs_* ‚Ì’†A‘¼‚Ìpg`‚Æ“¯‚¶•À‚Ñ‚Éj
+' ï¼ˆEnsurePhysicalFunctionTabs_* ã®ä¸­ã€ä»–ã®pgã€œã¨åŒã˜ä¸¦ã³ã«ï¼‰
 Dim pgPar As MSForms.Page, hostPar As MSForms.Frame
 Set pgPar = FindOrAddPage(mp, CAP_FUNC_PARALYSIS)
 Set hostPar = EnsureHostFrame(pgPar)
@@ -809,11 +809,11 @@ BuildParalysisTabUI hostPar
 
 
 
-' --- UI\’z ---
+' --- UIæ§‹ç¯‰ ---
 If USE_ROM_SUBTABS Then
-    BuildROMTabs hostRom            ' © VUIiãˆ^‰ºˆ qƒ^ƒuj
+    BuildROMTabs hostRom            ' â† æ–°UIï¼ˆä¸Šè‚¢ï¼ä¸‹è‚¢ å­ã‚¿ãƒ–ï¼‰
 Else
-    BuildROMSection_Compact hostRom ' © ‹ŒUIic’uj
+    BuildROMSection_Compact hostRom ' â† æ—§UIï¼ˆæ®‹ç½®ï¼‰
 End If
 
 BuildMMTSection owner, hostMmt
@@ -823,7 +823,7 @@ BuildPainTabUI owner, hostPain
 
 
 
-    ' ‰Šú•\¦
+    ' åˆæœŸè¡¨ç¤º
     mp.value = pgRom.Index
 
 
@@ -832,7 +832,7 @@ End Sub
 
 
 
-'=== Šù’èƒy[ƒW "Page*" ‚ğ‘|œ ===
+'=== æ—¢å®šãƒšãƒ¼ã‚¸ "Page*" ã‚’æƒé™¤ ===
 Private Sub CleanDefaultPages(mp As MSForms.MultiPage)
     On Error Resume Next
     Dim i As Long
@@ -844,19 +844,19 @@ Private Sub CleanDefaultPages(mp As MSForms.MultiPage)
 End Sub
 
 
-'=== Š´Šo‚Ì‚İ ===
+'=== æ„Ÿè¦šã®ã¿ ===
 Private Sub BuildSensoryTabUI(host As MSForms.Frame)
     Dim Y As Single: Y = PAD_Y
 
-    Y = AddHeaderRow(host, "Š´Šoi•\İj", Y)
-    Y = AddSensoryRow(host, "•\İ_GŠo", Y)
-    Y = AddSensoryRow(host, "•\İ_’ÉŠo", Y)
-    Y = AddSensoryRow(host, "•\İ_‰·“xŠo", Y)
+    Y = AddHeaderRow(host, "æ„Ÿè¦šï¼ˆè¡¨åœ¨ï¼‰", Y)
+    Y = AddSensoryRow(host, "è¡¨åœ¨_è§¦è¦š", Y)
+    Y = AddSensoryRow(host, "è¡¨åœ¨_ç—›è¦š", Y)
+    Y = AddSensoryRow(host, "è¡¨åœ¨_æ¸©åº¦è¦š", Y)
 
     Y = Y + ROM_HDR_GAP
-    Y = AddHeaderRow(host, "Š´Šoi[•”j", Y)
-    Y = AddSensoryRow(host, "[•”_ˆÊ’uŠo", Y)
-    Y = AddSensoryRow(host, "[•”_U“®Šo", Y)
+    Y = AddHeaderRow(host, "æ„Ÿè¦šï¼ˆæ·±éƒ¨ï¼‰", Y)
+    Y = AddSensoryRow(host, "æ·±éƒ¨_ä½ç½®è¦š", Y)
+    Y = AddSensoryRow(host, "æ·±éƒ¨_æŒ¯å‹•è¦š", Y)
 
     Call PlaceMemoBelow(host, host.InsideWidth, host.InsideHeight, Y + ROM_HDR_GAP, "txtSensMemo")
 End Sub
@@ -867,7 +867,7 @@ End Sub
 
 
 
-'=== ‚»‚ÌƒtƒŒ[ƒ€“à‚Åˆê”Ô‰º‚ÌˆÊ’uiTop+Heightj‚ğ•Ô‚· ===
+'=== ãã®ãƒ•ãƒ¬ãƒ¼ãƒ å†…ã§ä¸€ç•ªä¸‹ã®ä½ç½®ï¼ˆTop+Heightï¼‰ã‚’è¿”ã™ ===
 Private Function GetContentBottom(host As MSForms.Frame) As Single
     Dim c As Control, bottom As Single
     For Each c In host.Controls
@@ -881,7 +881,7 @@ End Function
 
 
 
-'=== ROM‚Ì1si‹ü‹È/ŠO“]/cj¬‚³‚ß”ÅF‰EE¶ƒeƒLƒXƒg‚Í”¼Šp ===
+'=== ROMã®1è¡Œï¼ˆå±ˆæ›²/å¤–è»¢/â€¦ï¼‰å°ã•ã‚ç‰ˆï¼šå³ãƒ»å·¦ãƒ†ã‚­ã‚¹ãƒˆã¯åŠè§’ ===
 Private Function AddROMRow_Compact( _
     host As MSForms.Frame, _
     jointName As String, _
@@ -913,8 +913,8 @@ With txtL
     .IMEMode = fmIMEModeDisable
 End With
 
-txtR.Tag = TAG_FUNC_PREFIX & "|ROM|" & jointName & "|" & moveName & "|‰E"
-txtL.Tag = TAG_FUNC_PREFIX & "|ROM|" & jointName & "|" & moveName & "|¶"
+txtR.Tag = TAG_FUNC_PREFIX & "|ROM|" & jointName & "|" & moveName & "|å³"
+txtL.Tag = TAG_FUNC_PREFIX & "|ROM|" & jointName & "|" & moveName & "|å·¦"
 
 AddROMRow_Compact = yPix + ROM_ROW_H + ROM_GAP_Y
 End Function
@@ -923,18 +923,18 @@ End Function
 
 
 
-' Œã•ûŒİŠ·ƒ‰ƒbƒp[
+' å¾Œæ–¹äº’æ›ãƒ©ãƒƒãƒ‘ãƒ¼
 Public Sub BuildROMSection_Compact(host As MSForms.Frame)
     BuildROMSection_TwoCols host
 End Sub
 
 
-' Œ©o‚µiyŒ¨z‚È‚Çj
+' è¦‹å‡ºã—ï¼ˆã€è‚©ã€‘ãªã©ï¼‰
 Private Function ROM_AddHeader(host As MSForms.Frame, title As String, y0 As Single) As Single
     Dim lbl As MSForms.label
     Set lbl = host.Controls.Add("Forms.Label.1")
     With lbl
-        .caption = "y" & title & "z"
+        .caption = "ã€" & title & "ã€‘"
         .Left = PAD_X: .Top = y0: .Width = COL1_W: .Height = ROM_ROW_H
         .Font.Bold = True
     End With
@@ -942,26 +942,26 @@ Private Function ROM_AddHeader(host As MSForms.Frame, title As String, y0 As Sin
 End Function
 
 
-'=== ROM compact —p‚ÌŒÄ‚Ño‚µ–¼“ˆêƒ‰ƒbƒp[ =========================
+'=== ROM compact ç”¨ã®å‘¼ã³å‡ºã—åçµ±ä¸€ãƒ©ãƒƒãƒ‘ãƒ¼ =========================
 
-' Œ©o‚µiu‰^“®vu‰E(‹)vu¶(‹)v‚Ìsj
+' è¦‹å‡ºã—ï¼ˆã€Œé‹å‹•ã€ã€Œå³(Â°)ã€ã€Œå·¦(Â°)ã€ã®è¡Œï¼‰
 Private Function ROM_AddDirHeader(host As MSForms.Frame, y0 As Single) As Single
     ROM_AddDirHeader = AddROMDirHeader_Compact(host, y0)
 End Function
 
-'=== ROM compactFR / L Œ©o‚µiROMê—p•‚Åj ===
+'=== ROM compactï¼šR / L è¦‹å‡ºã—ï¼ˆROMå°‚ç”¨å¹…ã§ï¼‰ ===
 Private Function AddROMDirHeader_Compact(host As MSForms.Frame, y0 As Single) As Single
     Dim xR As Single, xL As Single: ROM_GetCols xR, xL
-    Dim Y As Single: Y = PX(y0)              ' © y ‚àŠÛ‚ß‚Ä‚¨‚­i”CˆÓ‚¾‚¯‚ÇˆÀ’è‚µ‚Ü‚·j
+    Dim Y As Single: Y = PX(y0)              ' â† y ã‚‚ä¸¸ã‚ã¦ãŠãï¼ˆä»»æ„ã ã‘ã©å®‰å®šã—ã¾ã™ï¼‰
 
     Dim lblR As MSForms.label, lblL As MSForms.label
 
     Set lblR = host.Controls.Add("Forms.Label.1")
     With lblR
         .caption = "R"
-        .Left = PX(xR)                        ' © ‚±‚±‚É PX
+        .Left = PX(xR)                        ' â† ã“ã“ã« PX
         .Top = Y
-        .Width = PX(ROM_COL_EDT_W)            ' © ‚±‚±‚É PX
+        .Width = PX(ROM_COL_EDT_W)            ' â† ã“ã“ã« PX
         .Height = ROM_ROW_H
         .TextAlign = fmTextAlignCenter
         .Font.Bold = True
@@ -970,9 +970,9 @@ Private Function AddROMDirHeader_Compact(host As MSForms.Frame, y0 As Single) As
     Set lblL = host.Controls.Add("Forms.Label.1")
     With lblL
         .caption = "L"
-        .Left = PX(xL)                        ' © ‚±‚±‚É PX
+        .Left = PX(xL)                        ' â† ã“ã“ã« PX
         .Top = Y
-        .Width = PX(ROM_COL_EDT_W)            ' © ‚±‚±‚É PX
+        .Width = PX(ROM_COL_EDT_W)            ' â† ã“ã“ã« PX
         .Height = ROM_ROW_H
         .TextAlign = fmTextAlignCenter
         .Font.Bold = True
@@ -985,46 +985,46 @@ End Function
 
 
 '========================================
-' ROMi“ñ—ñF¶=ãˆ / ‰E=‰ºˆj–{‘Ì
+' ROMï¼ˆäºŒåˆ—ï¼šå·¦=ä¸Šè‚¢ / å³=ä¸‹è‚¢ï¼‰æœ¬ä½“
 '========================================
 Public Sub BuildROMSection_TwoCols(host As MSForms.Frame)
     Const COL_GAP_X As Single = 12
 
-    ' Šù‘¶”z’u‚ª‚ ‚ê‚Îœ‹id•¡•`‰æ–h~j
+    ' æ—¢å­˜é…ç½®ãŒã‚ã‚Œã°é™¤å»ï¼ˆé‡è¤‡æç”»é˜²æ­¢ï¼‰
     On Error Resume Next
     host.Controls.Remove "fraROM_Upper"
     host.Controls.Remove "fraROM_Lower"
     host.Controls.Remove "txtROMMemo"
     On Error GoTo 0
 
-    ' ©‚±‚±‚Íc‚·FOn Error GoTo 0 ‚Ì’¼Œã‚©‚ç·‚µ‘Ö‚¦
+    ' â†ã“ã“ã¯æ®‹ã™ï¼šOn Error GoTo 0 ã®ç›´å¾Œã‹ã‚‰å·®ã—æ›¿ãˆ
 
 Dim w As Single, h As Single, colW As Single
 w = host.InsideWidth: h = host.InsideHeight
-' —ñ•‚ğ®”‚ÉŠÛ‚ß‚é
+' åˆ—å¹…ã‚’æ•´æ•°ã«ä¸¸ã‚ã‚‹
 colW = PX((w - (PAD_X * 2) - COL_GAP_X) / 2)
 
 Dim frUL As MSForms.Frame, frLL As MSForms.Frame
 
-' ¶—ñƒtƒŒ[ƒ€iãˆj
+' å·¦åˆ—ãƒ•ãƒ¬ãƒ¼ãƒ ï¼ˆä¸Šè‚¢ï¼‰
 Set frUL = host.Controls.Add("Forms.Frame.1", "fraROM_Upper")
 With frUL
     .caption = ""
-    .Left = PX(PAD_X)                 ' š®”ŠÛ‚ß
+    .Left = PX(PAD_X)                 ' â˜…æ•´æ•°ä¸¸ã‚
     .Top = PAD_Y
-    .Width = colW                     ' šŠÛ‚ßÏ‚İ—ñ•
+    .Width = colW                     ' â˜…ä¸¸ã‚æ¸ˆã¿åˆ—å¹…
     .Height = h - PAD_Y * 2
     .ScrollBars = fmScrollBarsNone
     .ScrollHeight = .InsideHeight
 End With
 
-' ‰E—ñƒtƒŒ[ƒ€i‰ºˆj
+' å³åˆ—ãƒ•ãƒ¬ãƒ¼ãƒ ï¼ˆä¸‹è‚¢ï¼‰
 Set frLL = host.Controls.Add("Forms.Frame.1", "fraROM_Lower")
 With frLL
     .caption = ""
-    .Left = PX(PAD_X + colW + COL_GAP_X)  ' š®”ŠÛ‚ß
+    .Left = PX(PAD_X + colW + COL_GAP_X)  ' â˜…æ•´æ•°ä¸¸ã‚
     .Top = PAD_Y
-    .Width = colW                          ' šŠÛ‚ßÏ‚İ—ñ•
+    .Width = colW                          ' â˜…ä¸¸ã‚æ¸ˆã¿åˆ—å¹…
     .Height = h - PAD_Y * 2
     .ScrollBars = fmScrollBarsNone
     .ScrollHeight = .InsideHeight
@@ -1034,43 +1034,43 @@ End With
     Dim yL As Single, yR As Single
     yL = PAD_Y: yR = PAD_Y
 
-    ' ---------- ¶—ñFãˆ ----------
-    yL = ROM_AddHeader(frUL, "ãˆ", yL)
-    yL = ROM_AddHeader(frUL, "yŒ¨ŠÖßz", yL): yL = ROM_AddDirHeader(frUL, yL)
-    yL = AddROMRow_Compact(frUL, "Œ¨", "‹ü‹È", yL)
-    yL = AddROMRow_Compact(frUL, "Œ¨", "ŠO“]", yL)
-    yL = AddROMRow_Compact(frUL, "Œ¨", "ŠOù", yL)
+    ' ---------- å·¦åˆ—ï¼šä¸Šè‚¢ ----------
+    yL = ROM_AddHeader(frUL, "ä¸Šè‚¢", yL)
+    yL = ROM_AddHeader(frUL, "ã€è‚©é–¢ç¯€ã€‘", yL): yL = ROM_AddDirHeader(frUL, yL)
+    yL = AddROMRow_Compact(frUL, "è‚©", "å±ˆæ›²", yL)
+    yL = AddROMRow_Compact(frUL, "è‚©", "å¤–è»¢", yL)
+    yL = AddROMRow_Compact(frUL, "è‚©", "å¤–æ—‹", yL)
 
-    yL = ROM_AddHeader(frUL, "y•IŠÖßz", yL): yL = ROM_AddDirHeader(frUL, yL)
-    yL = AddROMRow_Compact(frUL, "•I", "‹ü‹È", yL)
-    yL = AddROMRow_Compact(frUL, "•I", "L“W", yL)
+    yL = ROM_AddHeader(frUL, "ã€è‚˜é–¢ç¯€ã€‘", yL): yL = ROM_AddDirHeader(frUL, yL)
+    yL = AddROMRow_Compact(frUL, "è‚˜", "å±ˆæ›²", yL)
+    yL = AddROMRow_Compact(frUL, "è‚˜", "ä¼¸å±•", yL)
 
-    yL = ROM_AddHeader(frUL, "y‘O˜rz", yL): yL = ROM_AddDirHeader(frUL, yL)
-    yL = AddROMRow_Compact(frUL, "‘O˜r", "‰ñ“à", yL)
-    yL = AddROMRow_Compact(frUL, "‘O˜r", "‰ñŠO", yL)
+    yL = ROM_AddHeader(frUL, "ã€å‰è…•ã€‘", yL): yL = ROM_AddDirHeader(frUL, yL)
+    yL = AddROMRow_Compact(frUL, "å‰è…•", "å›å†…", yL)
+    yL = AddROMRow_Compact(frUL, "å‰è…•", "å›å¤–", yL)
 
-    yL = ROM_AddHeader(frUL, "yèŠÖßz", yL): yL = ROM_AddDirHeader(frUL, yL)
-    yL = AddROMRow_Compact(frUL, "èŠÖß", "¶‹ü", yL)
-    yL = AddROMRow_Compact(frUL, "èŠÖß", "”w‹ü", yL)
+    yL = ROM_AddHeader(frUL, "ã€æ‰‹é–¢ç¯€ã€‘", yL): yL = ROM_AddDirHeader(frUL, yL)
+    yL = AddROMRow_Compact(frUL, "æ‰‹é–¢ç¯€", "æŒå±ˆ", yL)
+    yL = AddROMRow_Compact(frUL, "æ‰‹é–¢ç¯€", "èƒŒå±ˆ", yL)
 
-    ' ---------- ‰E—ñF‰ºˆ ----------
-    yR = ROM_AddHeader(frLL, "‰ºˆ", yR)
-    yR = ROM_AddHeader(frLL, "yŒÒŠÖßz", yR): yR = ROM_AddDirHeader(frLL, yR)
-    yR = AddROMRow_Compact(frLL, "ŒÒ", "‹ü‹È", yR)
-    yR = AddROMRow_Compact(frLL, "ŒÒ", "ŠO“]", yR)
+    ' ---------- å³åˆ—ï¼šä¸‹è‚¢ ----------
+    yR = ROM_AddHeader(frLL, "ä¸‹è‚¢", yR)
+    yR = ROM_AddHeader(frLL, "ã€è‚¡é–¢ç¯€ã€‘", yR): yR = ROM_AddDirHeader(frLL, yR)
+    yR = AddROMRow_Compact(frLL, "è‚¡", "å±ˆæ›²", yR)
+    yR = AddROMRow_Compact(frLL, "è‚¡", "å¤–è»¢", yR)
 
-    yR = ROM_AddHeader(frLL, "y•GŠÖßz", yR): yR = ROM_AddDirHeader(frLL, yR)
-    yR = AddROMRow_Compact(frLL, "•G", "‹ü‹È", yR)
-    yR = AddROMRow_Compact(frLL, "•G", "L“W", yR)
+    yR = ROM_AddHeader(frLL, "ã€è†é–¢ç¯€ã€‘", yR): yR = ROM_AddDirHeader(frLL, yR)
+    yR = AddROMRow_Compact(frLL, "è†", "å±ˆæ›²", yR)
+    yR = AddROMRow_Compact(frLL, "è†", "ä¼¸å±•", yR)
 
-    yR = ROM_AddHeader(frLL, "y‘«ŠÖßz", yR): yR = ROM_AddDirHeader(frLL, yR)
-    yR = AddROMRow_Compact(frLL, "‘«ŠÖß", "”w‹ü", yR)
-    yR = AddROMRow_Compact(frLL, "‘«ŠÖß", "’ê‹ü", yR)
+    yR = ROM_AddHeader(frLL, "ã€è¶³é–¢ç¯€ã€‘", yR): yR = ROM_AddDirHeader(frLL, yR)
+    yR = AddROMRow_Compact(frLL, "è¶³é–¢ç¯€", "èƒŒå±ˆ", yR)
+    yR = AddROMRow_Compact(frLL, "è¶³é–¢ç¯€", "åº•å±ˆ", yR)
 
-    ' ”õl‚Í‹¤’Êƒwƒ‹ƒp[‚É“ˆêi©“®‚ÅhostƒXƒNƒ[ƒ‹‚àOFFj
+    ' å‚™è€ƒã¯å…±é€šãƒ˜ãƒ«ãƒ‘ãƒ¼ã«çµ±ä¸€ï¼ˆè‡ªå‹•ã§hostã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚‚OFFï¼‰
     Call PlaceMemoBelow(host, w, h, Application.WorksheetFunction.Max(yL, yR) + ROM_HDR_GAP, _
                         "txtROMMemo", frUL, frLL)
-    ' cãˆ/‰ºˆ‚Ìs‚ğ‚·‚×‚Äì‚èI‚¦‚½’¼Œã‚Éc
+    ' â€¦ä¸Šè‚¢/ä¸‹è‚¢ã®è¡Œã‚’ã™ã¹ã¦ä½œã‚Šçµ‚ãˆãŸç›´å¾Œã«â€¦
     NormalizeRomColumns frUL
     NormalizeRomColumns frLL
 
@@ -1078,110 +1078,110 @@ End Sub
 
 
 '========================================
-' ‹Ø‹Ù’£iMASj{ ”½Ëiƒrƒ‹ƒ_[j
-' ŒÄ‚Ño‚µ—á: BuildToneReflexTabUI hostReflex
+' ç­‹ç·Šå¼µï¼ˆMASï¼‰ï¼‹ åå°„ï¼ˆãƒ“ãƒ«ãƒ€ãƒ¼ï¼‰
+' å‘¼ã³å‡ºã—ä¾‹: BuildToneReflexTabUI hostReflex
 '========================================
 Private Sub BuildToneReflexTabUI(host As MSForms.Frame)
     Dim Y As Single: Y = PAD_Y
 
-    ' --- ‹Ø‹Ù’£iMASj ---
-    Y = AddHeaderRow(host, "‹Ø‹Ù’£iMASj", Y)
-    Y = AddMASRow(host, "ãˆ‹ü‹ØŒQ", Y)
-    Y = AddMASRow(host, "ãˆL‹ØŒQ", Y)
-    Y = AddMASRow(host, "‰ºˆ‹ü‹ØŒQ", Y)
-    Y = AddMASRow(host, "‰ºˆL‹ØŒQ", Y)
+    ' --- ç­‹ç·Šå¼µï¼ˆMASï¼‰ ---
+    Y = AddHeaderRow(host, "ç­‹ç·Šå¼µï¼ˆMASï¼‰", Y)
+    Y = AddMASRow(host, "ä¸Šè‚¢å±ˆç­‹ç¾¤", Y)
+    Y = AddMASRow(host, "ä¸Šè‚¢ä¼¸ç­‹ç¾¤", Y)
+    Y = AddMASRow(host, "ä¸‹è‚¢å±ˆç­‹ç¾¤", Y)
+    Y = AddMASRow(host, "ä¸‹è‚¢ä¼¸ç­‹ç¾¤", Y)
 
-    ' --- ”½Ë ---
+    ' --- åå°„ ---
     Y = Y + ROM_HDR_GAP
-    Y = AddHeaderRow(host, "äF”½Ë", Y)
-    Y = AddReflexRow(host, "ã˜r“ñ“ª‹ØiC5-6j", Y)
-    Y = AddReflexRow(host, "ã˜rO“ª‹ØiC7j", Y)
-    Y = AddReflexRow(host, "•GŠWäFiL2-4j", Y)
-    Y = AddReflexRow(host, "ƒAƒLƒŒƒXäFiS1j", Y)
+    Y = AddHeaderRow(host, "è…±åå°„", Y)
+    Y = AddReflexRow(host, "ä¸Šè…•äºŒé ­ç­‹ï¼ˆC5-6ï¼‰", Y)
+    Y = AddReflexRow(host, "ä¸Šè…•ä¸‰é ­ç­‹ï¼ˆC7ï¼‰", Y)
+    Y = AddReflexRow(host, "è†è“‹è…±ï¼ˆL2-4ï¼‰", Y)
+    Y = AddReflexRow(host, "ã‚¢ã‚­ãƒ¬ã‚¹è…±ï¼ˆS1ï¼‰", Y)
 
-    ' ”õli‰º’[‚ÉŠm•Ûj
+    ' å‚™è€ƒï¼ˆä¸‹ç«¯ã«ç¢ºä¿ï¼‰
     Call PlaceMemoBelow(host, host.InsideWidth, host.InsideHeight, Y + ROM_HDR_GAP, "txtReflexMemo")
 End Sub
 
 '========================================
-' áu’Éi•ÏŒ`ƒeƒLƒXƒg{•”ˆÊ{NRSjƒrƒ‹ƒ_[
-' ŒÄ‚Ño‚µ—á: BuildPainTabUI owner, hostPain
+' ç–¼ç—›ï¼ˆå¤‰å½¢ãƒ†ã‚­ã‚¹ãƒˆï¼‹éƒ¨ä½ï¼‹NRSï¼‰ãƒ“ãƒ«ãƒ€ãƒ¼
+' å‘¼ã³å‡ºã—ä¾‹: BuildPainTabUI owner, hostPain
 '========================================
 Private Sub BuildPainTabUI(owner As frmEval, host As MSForms.Frame)
     Dim Y As Single: Y = PAD_Y
 
-    Y = AddDeformText(owner, host, Y) ' •ÏŒ` ŠŒ©i©—RƒeƒLƒXƒgj
+    Y = AddDeformText(owner, host, Y) ' å¤‰å½¢ æ‰€è¦‹ï¼ˆè‡ªç”±ãƒ†ã‚­ã‚¹ãƒˆï¼‰
     Y = Y + ROM_HDR_GAP
-    Y = AddPainRow(owner, host, Y)    ' •”ˆÊ{NRS
+    Y = AddPainRow(owner, host, Y)    ' éƒ¨ä½ï¼‹NRS
 
-    ' ”õli‰º’[‚ÉŠm•Ûj
+    ' å‚™è€ƒï¼ˆä¸‹ç«¯ã«ç¢ºä¿ï¼‰
     Call PlaceMemoBelow(host, host.InsideWidth, host.InsideHeight, Y + ROM_HDR_GAP, "txtPainMemo")
 End Sub
 
 
 '========================================
-' ŒİŠ·: Š´Šo{MAS{”½Ë{áu’É ‚ğ1ƒy[ƒW‚É•`‚­iRoot—pj
-' ŒÄ‚Ño‚µŒ³: EnsurePhysicalFunctionTabs_Root
+' äº’æ›: æ„Ÿè¦šï¼‹MASï¼‹åå°„ï¼‹ç–¼ç—› ã‚’1ãƒšãƒ¼ã‚¸ã«æãï¼ˆRootç”¨ï¼‰
+' å‘¼ã³å‡ºã—å…ƒ: EnsurePhysicalFunctionTabs_Root
 '========================================
 Private Sub BuildSensoryToneReflexPain(owner As frmEval, host As MSForms.Frame)
     Dim Y As Single: Y = PAD_Y
 
-    ' --- Š´Šoi•\İj ---
-    Y = AddHeaderRow(host, "Š´Šoi•\İj", Y)
-    Y = AddSensoryRow(host, "•\İ_GŠo", Y)
-    Y = AddSensoryRow(host, "•\İ_’ÉŠo", Y)
-    Y = AddSensoryRow(host, "•\İ_‰·“xŠo", Y)
+    ' --- æ„Ÿè¦šï¼ˆè¡¨åœ¨ï¼‰ ---
+    Y = AddHeaderRow(host, "æ„Ÿè¦šï¼ˆè¡¨åœ¨ï¼‰", Y)
+    Y = AddSensoryRow(host, "è¡¨åœ¨_è§¦è¦š", Y)
+    Y = AddSensoryRow(host, "è¡¨åœ¨_ç—›è¦š", Y)
+    Y = AddSensoryRow(host, "è¡¨åœ¨_æ¸©åº¦è¦š", Y)
 
-    ' --- Š´Šoi[•”j ---
+    ' --- æ„Ÿè¦šï¼ˆæ·±éƒ¨ï¼‰ ---
     Y = Y + ROM_HDR_GAP
-    Y = AddHeaderRow(host, "Š´Šoi[•”j", Y)
-    Y = AddSensoryRow(host, "[•”_ŠÖßˆÊ’uŠo", Y)
-    Y = AddSensoryRow(host, "[•”_U“®Šo", Y)
+    Y = AddHeaderRow(host, "æ„Ÿè¦šï¼ˆæ·±éƒ¨ï¼‰", Y)
+    Y = AddSensoryRow(host, "æ·±éƒ¨_é–¢ç¯€ä½ç½®è¦š", Y)
+    Y = AddSensoryRow(host, "æ·±éƒ¨_æŒ¯å‹•è¦š", Y)
 
-    ' --- ‹Ø‹Ù’£iMASj ---
+    ' --- ç­‹ç·Šå¼µï¼ˆMASï¼‰ ---
     Y = Y + ROM_HDR_GAP
-    Y = AddHeaderRow(host, "‹Ø‹Ù’£iMASj", Y)
-    Y = AddMASRow(host, "ãˆ‹ü‹ØŒQ", Y)
-    Y = AddMASRow(host, "ãˆL‹ØŒQ", Y)
-    Y = AddMASRow(host, "‰ºˆ‹ü‹ØŒQ", Y)
-    Y = AddMASRow(host, "‰ºˆL‹ØŒQ", Y)
+    Y = AddHeaderRow(host, "ç­‹ç·Šå¼µï¼ˆMASï¼‰", Y)
+    Y = AddMASRow(host, "ä¸Šè‚¢å±ˆç­‹ç¾¤", Y)
+    Y = AddMASRow(host, "ä¸Šè‚¢ä¼¸ç­‹ç¾¤", Y)
+    Y = AddMASRow(host, "ä¸‹è‚¢å±ˆç­‹ç¾¤", Y)
+    Y = AddMASRow(host, "ä¸‹è‚¢ä¼¸ç­‹ç¾¤", Y)
 
-    ' --- ”½Ë ---
+    ' --- åå°„ ---
     Y = Y + ROM_HDR_GAP
-    Y = AddHeaderRow(host, "äF”½Ë", Y)
-    Y = AddReflexRow(host, "ã˜r“ñ“ª‹ØiC5-6j", Y)
-    Y = AddReflexRow(host, "ã˜rO“ª‹ØiC7j", Y)
-    Y = AddReflexRow(host, "•GŠWäFiL2-4j", Y)
-    Y = AddReflexRow(host, "ƒAƒLƒŒƒXäFiS1j", Y)
+    Y = AddHeaderRow(host, "è…±åå°„", Y)
+    Y = AddReflexRow(host, "ä¸Šè…•äºŒé ­ç­‹ï¼ˆC5-6ï¼‰", Y)
+    Y = AddReflexRow(host, "ä¸Šè…•ä¸‰é ­ç­‹ï¼ˆC7ï¼‰", Y)
+    Y = AddReflexRow(host, "è†è“‹è…±ï¼ˆL2-4ï¼‰", Y)
+    Y = AddReflexRow(host, "ã‚¢ã‚­ãƒ¬ã‚¹è…±ï¼ˆS1ï¼‰", Y)
 
-    ' --- •ÏŒ`i©—RƒeƒLƒXƒgj ---
+    ' --- å¤‰å½¢ï¼ˆè‡ªç”±ãƒ†ã‚­ã‚¹ãƒˆï¼‰ ---
     Y = Y + ROM_HDR_GAP
     Y = AddDeformText(owner, host, Y)
 
-    ' --- áu’Éi•”ˆÊ{NRSj ---
+    ' --- ç–¼ç—›ï¼ˆéƒ¨ä½ï¼‹NRSï¼‰ ---
     Y = Y + ROM_HDR_GAP
     Y = AddPainRow(owner, host, Y)
 
-    ' ”õlFƒy[ƒW‰º’[‚ÉŠm•Û
+    ' å‚™è€ƒï¼šãƒšãƒ¼ã‚¸ä¸‹ç«¯ã«ç¢ºä¿
     Call PlaceMemoBelow(host, host.InsideWidth, host.InsideHeight, Y + ROM_HDR_GAP, "txtSensReflexPainMemo")
 End Sub
 
-' --- ROM 1s•ª‚Ì‰E(R)/¶(L)‚ÌXÀ•W‚ğ•Ô‚·‚¾‚¯ ---
+' --- ROM 1è¡Œåˆ†ã®å³(R)/å·¦(L)ã®Xåº§æ¨™ã‚’è¿”ã™ã ã‘ ---
 Private Sub ROM_GetCols(ByRef xR As Single, ByRef xL As Single)
-    Const GAP_X As Single = 8  ' Šù‚É’è”‚ª‚ ‚ê‚Î‚±‚Ìs‚Í•s—v
-    xR = PX(PAD_X + COL1_W + GAP_X)            ' ‰E“ü—Í—“‚Ì¶’[
-    xL = PX(xR + ROM_COL_EDT_W + GAP_X)         ' ¶“ü—Í—“‚Ì¶’[
+    Const GAP_X As Single = 8  ' æ—¢ã«å®šæ•°ãŒã‚ã‚Œã°ã“ã®è¡Œã¯ä¸è¦
+    xR = PX(PAD_X + COL1_W + GAP_X)            ' å³å…¥åŠ›æ¬„ã®å·¦ç«¯
+    xL = PX(xR + ROM_COL_EDT_W + GAP_X)         ' å·¦å…¥åŠ›æ¬„ã®å·¦ç«¯
 End Sub
 
 
 
-' ¬” ¨ ÅŠñ‚èƒsƒNƒZƒ‹‚ÉƒXƒiƒbƒv
+' å°æ•° â†’ æœ€å¯„ã‚Šãƒ”ã‚¯ã‚»ãƒ«ã«ã‚¹ãƒŠãƒƒãƒ—
 Public Function PX(v As Single) As Single
     PX = Int(v + 0.5)
 End Function
 
 
-' ROMƒRƒ‰ƒ€‚ÌXˆÊ’u/•‚ğƒtƒŒ[ƒ€“à‚ÅˆêŠ‡®—ñ
+' ROMã‚³ãƒ©ãƒ ã®Xä½ç½®/å¹…ã‚’ãƒ•ãƒ¬ãƒ¼ãƒ å†…ã§ä¸€æ‹¬æ•´åˆ—
 Private Sub NormalizeRomColumns(host As MSForms.Frame)
     Dim xR As Single, xL As Single
     ROM_GetCols xR, xL
@@ -1192,9 +1192,9 @@ Private Sub NormalizeRomColumns(host As MSForms.Frame)
     For Each c In host.Controls
         Select Case TypeName(c)
             Case "TextBox"
-                ' ƒ^ƒO‚Éu‰Evu¶v‚ª“ü‚é‚æ‚¤‚É‚µ‚Ä‚¨‚­i‡BQÆj
-                If InStr(c.Tag, "‰E") > 0 Then c.Left = xR: c.Width = w
-                If InStr(c.Tag, "¶") > 0 Then c.Left = xL: c.Width = w
+                ' ã‚¿ã‚°ã«ã€Œå³ã€ã€Œå·¦ã€ãŒå…¥ã‚‹ã‚ˆã†ã«ã—ã¦ãŠãï¼ˆâ‘¢å‚ç…§ï¼‰
+                If InStr(c.Tag, "å³") > 0 Then c.Left = xR: c.Width = w
+                If InStr(c.Tag, "å·¦") > 0 Then c.Left = xL: c.Width = w
             Case "Label"
                 If c.caption = "R" Then c.Left = xR: c.Width = w
                 If c.caption = "L" Then c.Left = xL: c.Width = w
@@ -1203,38 +1203,38 @@ Private Sub NormalizeRomColumns(host As MSForms.Frame)
 End Sub
 
 '========================================================
-' –ƒáƒƒ^ƒu UI
+' éº»ç—ºã‚¿ãƒ– UI
 '========================================================
 Public Sub BuildParalysisTabUI(host As MSForms.Frame)
     Dim w As Single, h As Single, Y As Single
     w = host.Width: h = host.Height
     Y = PAD_Y
 
-    ' ---- Šî–{î•ñ ----
-    Y = AddSectionTitle(host, "Šî–{î•ñ", Y)
-    Y = AddComboRow(host, "–ƒáƒ‘¤", "cboParalysisSide", Array("‰E", "¶", "—¼‘¤"), Y)
-    Y = AddComboRow(host, "–ƒáƒ‚Ìí—Ş", "cboParalysisType", Array("•Ğ–ƒáƒ", "lˆ–ƒáƒ", "’P–ƒáƒ"), Y)
+    ' ---- åŸºæœ¬æƒ…å ± ----
+    Y = AddSectionTitle(host, "åŸºæœ¬æƒ…å ±", Y)
+    Y = AddComboRow(host, "éº»ç—ºå´", "cboParalysisSide", Array("å³", "å·¦", "ä¸¡å´"), Y)
+    Y = AddComboRow(host, "éº»ç—ºã®ç¨®é¡", "cboParalysisType", Array("ç‰‡éº»ç—º", "å››è‚¢éº»ç—º", "å˜éº»ç—º"), Y)
 
     ' ---- BRS ----
     Y = Y + ROM_HDR_GAP
-    Y = AddSectionTitle(host, "Brunnstrom Recovery StageiBRSj", Y)
+    Y = AddSectionTitle(host, "Brunnstrom Recovery Stageï¼ˆBRSï¼‰", Y)
     Dim brsValues As Variant
-    brsValues = Array("‡T", "‡U", "‡V", "‡W", "‡X", "‡Y")
-    Y = AddComboRow(host, "ãˆ", "cboBRS_Upper", brsValues, Y)
-    Y = AddComboRow(host, "èw", "cboBRS_Hand", brsValues, Y)
-    Y = AddComboRow(host, "‰ºˆ", "cboBRS_Lower", brsValues, Y)
+    brsValues = Array("â… ", "â…¡", "â…¢", "â…£", "â…¤", "â…¥")
+    Y = AddComboRow(host, "ä¸Šè‚¢", "cboBRS_Upper", brsValues, Y)
+    Y = AddComboRow(host, "æ‰‹æŒ‡", "cboBRS_Hand", brsValues, Y)
+    Y = AddComboRow(host, "ä¸‹è‚¢", "cboBRS_Lower", brsValues, Y)
 
-    ' ---- ”ºŒ»Û ----
+    ' ---- éšä¼´ç¾è±¡ ----
     Y = Y + ROM_HDR_GAP
-    Y = AddSectionTitle(host, "”ºŒ»Û", Y)
-    Y = AddCheckRow(host, "‹¤“¯‰^“®", "chkSynergy", Y)
-    Y = AddCheckRow(host, "˜A‡”½‰", "chkAssociatedRxn", Y)
+    Y = AddSectionTitle(host, "éšä¼´ç¾è±¡", Y)
+    Y = AddCheckRow(host, "å…±åŒé‹å‹•", "chkSynergy", Y)
+    Y = AddCheckRow(host, "é€£åˆåå¿œ", "chkAssociatedRxn", Y)
 
-    ' ---- ”õl ----
+    ' ---- å‚™è€ƒ ----
     PlaceMemoBelow host, w, h, Y, "txtParalysisMemo"
 End Sub
 
-'---- ¬•¨Fsƒrƒ‹ƒ_iŒ©o‚µ^ƒRƒ“ƒ{s^ƒ`ƒFƒbƒNsj----
+'---- å°ç‰©ï¼šè¡Œãƒ“ãƒ«ãƒ€ï¼ˆè¦‹å‡ºã—ï¼ã‚³ãƒ³ãƒœè¡Œï¼ãƒã‚§ãƒƒã‚¯è¡Œï¼‰----
 Private Function AddSectionTitle(host As MSForms.Frame, ttl As String, Y As Single) As Single
     Dim lbl As MSForms.label
     Set lbl = host.Controls.Add("Forms.Label.1")
@@ -1302,7 +1302,7 @@ Private Function AddCheckRow(host As MSForms.Frame, cap As String, nameChk As St
     Dim chk As MSForms.CheckBox
     Set chk = host.Controls.Add("Forms.CheckBox.1", nameChk, True)
     With chk
-        .caption = "—L"
+        .caption = "æœ‰"
         .Left = xChk
         .Top = PX(Y)
         .Width = PX(60)
@@ -1314,7 +1314,7 @@ End Function
 
 
 '============================================================
-' ROM ƒy[ƒWFqƒ^ƒuiãˆ^‰ºˆjƒrƒ‹ƒ_[
+' ROM ãƒšãƒ¼ã‚¸ï¼šå­ã‚¿ãƒ–ï¼ˆä¸Šè‚¢ï¼ä¸‹è‚¢ï¼‰ãƒ“ãƒ«ãƒ€ãƒ¼
 '============================================================
 Public Sub BuildROMTabs(host As MSForms.Frame)
     Debug.Print "[ROM] BuildROMTabs called"
@@ -1330,8 +1330,8 @@ Public Sub BuildROMTabs(host As MSForms.Frame)
     End With
 
     Dim pUpper As MSForms.Page, pLower As MSForms.Page
-    Set pUpper = mp.Pages.Add: pUpper.caption = "ãˆ": pUpper.name = "pgROM_Upper"
-    Set pLower = mp.Pages.Add: pLower.caption = "‰ºˆ": pLower.name = "pgROM_Lower"
+    Set pUpper = mp.Pages.Add: pUpper.caption = "ä¸Šè‚¢": pUpper.name = "pgROM_Upper"
+    Set pLower = mp.Pages.Add: pLower.caption = "ä¸‹è‚¢": pLower.name = "pgROM_Lower"
 
     Dim hostUpper As MSForms.Frame, hostLower As MSForms.Frame
     Set hostUpper = EnsureHostFrame(pUpper)
@@ -1349,7 +1349,7 @@ End Sub
 
 
 '------------------------------------------------------------
-' ãˆ qƒ^ƒu
+' ä¸Šè‚¢ å­ã‚¿ãƒ–
 '------------------------------------------------------------
 Public Sub BuildROM_Upper(host As MSForms.Frame)
     Dim w As Single, h As Single
@@ -1359,23 +1359,23 @@ Public Sub BuildROM_Upper(host As MSForms.Frame)
     
     
 
-    ' Œ¨
-    Y = BuildRomJointBlock(host, "Upper", "Shoulder", "y Œ¨ŠÖß z", _
+    ' è‚©
+    Y = BuildRomJointBlock(host, "Upper", "Shoulder", "ã€ è‚©é–¢ç¯€ ã€‘", _
             Split("Flex,Ext,Abd,Add,ER,IR", ","), Y)
     Y = Y + ROM_JOINT_GAP_Y
 
-    ' •I
-    Y = BuildRomJointBlock(host, "Upper", "Elbow", "y •IŠÖß z", _
+    ' è‚˜
+    Y = BuildRomJointBlock(host, "Upper", "Elbow", "ã€ è‚˜é–¢ç¯€ ã€‘", _
             Split("Flex,Ext", ","), Y)
     Y = Y + ROM_JOINT_GAP_Y
 
-    ' ‘O˜r
-    Y = BuildRomJointBlock(host, "Upper", "Forearm", "y ‘O˜r z", _
+    ' å‰è…•
+    Y = BuildRomJointBlock(host, "Upper", "Forearm", "ã€ å‰è…• ã€‘", _
             Split("Sup,Pro", ","), Y)
     Y = Y + ROM_JOINT_GAP_Y
 
-    ' èŠÖß
-    Y = BuildRomJointBlock(host, "Upper", "Wrist", "y èŠÖß z", _
+    ' æ‰‹é–¢ç¯€
+    Y = BuildRomJointBlock(host, "Upper", "Wrist", "ã€ æ‰‹é–¢ç¯€ ã€‘", _
             Split("Dorsi,Palmar,Radial,Ulnar", ","), Y)
             
             
@@ -1385,7 +1385,7 @@ Public Sub BuildROM_Upper(host As MSForms.Frame)
 End Sub
 
 '------------------------------------------------------------
-' ‰ºˆ qƒ^ƒu
+' ä¸‹è‚¢ å­ã‚¿ãƒ–
 '------------------------------------------------------------
 Public Sub BuildROM_Lower(host As MSForms.Frame)
     Dim w As Single, h As Single
@@ -1394,18 +1394,18 @@ Public Sub BuildROM_Lower(host As MSForms.Frame)
     Dim Y As Single: Y = ROM_GROUP_PAD
     
     
-    ' ŒÒ
-    Y = BuildRomJointBlock(host, "Lower", "Hip", "y ŒÒŠÖß z", _
+    ' è‚¡
+    Y = BuildRomJointBlock(host, "Lower", "Hip", "ã€ è‚¡é–¢ç¯€ ã€‘", _
             Split("Flex,Ext,Abd,Add,ER,IR", ","), Y)
     Y = Y + ROM_JOINT_GAP_Y
 
-    ' •G
-    Y = BuildRomJointBlock(host, "Lower", "Knee", "y •GŠÖß z", _
+    ' è†
+    Y = BuildRomJointBlock(host, "Lower", "Knee", "ã€ è†é–¢ç¯€ ã€‘", _
             Split("Flex,Ext", ","), Y)
     Y = Y + ROM_JOINT_GAP_Y
 
-    ' ‘«ŠÖß
-    Y = BuildRomJointBlock(host, "Lower", "Ankle", "y ‘«ŠÖß z", _
+    ' è¶³é–¢ç¯€
+    Y = BuildRomJointBlock(host, "Lower", "Ankle", "ã€ è¶³é–¢ç¯€ ã€‘", _
             Split("Dorsi,Plantar,Inv,Ev", ","), Y)
             
             
@@ -1413,9 +1413,9 @@ PlaceMemoBelow host, w, h, Y, "txtROM_Lower_Memo"
 End Sub
 
 '------------------------------------------------------------
-' ŠÖßƒuƒƒbƒNi˜g{‰^“®sj
-'   motions: "Flex","Ext"...i‰p—ªƒL[j
-'   –ß‚è: ŸƒuƒƒbƒN‚ÌŠJnTop
+' é–¢ç¯€ãƒ–ãƒ­ãƒƒã‚¯ï¼ˆæ ï¼‹é‹å‹•è¡Œï¼‰
+'   motions: "Flex","Ext"...ï¼ˆè‹±ç•¥ã‚­ãƒ¼ï¼‰
+'   æˆ»ã‚Š: æ¬¡ãƒ–ãƒ­ãƒƒã‚¯ã®é–‹å§‹Top
 '------------------------------------------------------------
 Private Function BuildRomJointBlock(host As MSForms.Frame, _
             region As String, jointKey As String, jointTitle As String, _
@@ -1428,12 +1428,12 @@ Private Function BuildRomJointBlock(host As MSForms.Frame, _
         .Left = PX(PAD_X)
         .Top = PX(y0)
         .Width = PX(host.Width - PAD_X * 2)
-        ' ‚‚³‚Ís”‚Æƒwƒbƒ_EƒpƒfƒBƒ“ƒO‚©‚çŠTZ
+        ' é«˜ã•ã¯è¡Œæ•°ã¨ãƒ˜ãƒƒãƒ€ãƒ»ãƒ‘ãƒ‡ã‚£ãƒ³ã‚°ã‹ã‚‰æ¦‚ç®—
         .Height = PX(ROM_ROW_H * (UBound(motions) - LBound(motions) + 1) + _
                      ROM_GROUP_PAD * 2 + ROM_HDR_GAP + (UBound(motions) - LBound(motions)) * ROM_MOTION_GAP_Y)
     End With
 
-    ' R/L ƒwƒbƒ_
+    ' R/L ãƒ˜ãƒƒãƒ€
     Dim xName As Single, xR As Single, xL As Single
     xName = PX(ROM_GROUP_PAD)
     xR = PX(fr.Width - ROM_GROUP_PAD - ROM_COL_EDT_W * 2 - 6)
@@ -1453,7 +1453,7 @@ Private Function BuildRomJointBlock(host As MSForms.Frame, _
         .TextAlign = fmTextAlignCenter: .Font.Bold = True
     End With
 
-    ' ‰^“®s
+    ' é‹å‹•è¡Œ
     Dim i As Long, topY As Single
     topY = PX(ROM_GROUP_PAD + ROM_HDR_GAP)
 
@@ -1463,14 +1463,14 @@ Private Function BuildRomJointBlock(host As MSForms.Frame, _
         topY = topY + ROM_MOTION_GAP_Y
     Next i
 
-    ' IME OffiTxtImeHookj‚ğƒtƒŒ[ƒ€“à‚ÌTextBox‚ÖˆêŠ‡ƒAƒ^ƒbƒ`
+    ' IME Offï¼ˆTxtImeHookï¼‰ã‚’ãƒ•ãƒ¬ãƒ¼ãƒ å†…ã®TextBoxã¸ä¸€æ‹¬ã‚¢ã‚¿ãƒƒãƒ
     AttachTxtImeHookInFrame fr
 
     BuildRomJointBlock = fr.Top + fr.Height + ROM_GAP_Y
 End Function
 
 '------------------------------------------------------------
-' 1‰^“®•ª‚Ìsiƒ‰ƒxƒ‹{R/LƒeƒLƒXƒgj
+' 1é‹å‹•åˆ†ã®è¡Œï¼ˆãƒ©ãƒ™ãƒ«ï¼‹R/Lãƒ†ã‚­ã‚¹ãƒˆï¼‰
 '------------------------------------------------------------
 Private Function BuildRomMotionRow(host As MSForms.Frame, _
         region As String, jointKey As String, motionKey As String, _
@@ -1487,24 +1487,24 @@ Private Function BuildRomMotionRow(host As MSForms.Frame, _
     End With
 
     Dim tR As MSForms.TextBox, tL As MSForms.TextBox
-    ' ‰EiRj
+    ' å³ï¼ˆRï¼‰
 Set tR = host.Controls.Add("Forms.TextBox.1", _
     "txtROM_" & region & "_" & jointKey & "_" & motionKey & "_R")
 With tR
     .Left = xR: .Top = PX(y0)
     .Width = ROM_COL_EDT_W: .Height = ROM_ROW_H
     .IMEMode = fmIMEModeDisable
-    .Tag = TAG_FUNC_PREFIX & "|ROM|" & jointKey & "|" & motionKey & "|E"   ' š‚±‚±‚ğ’Ç‰Á
+    .Tag = TAG_FUNC_PREFIX & "|ROM|" & jointKey & "|" & motionKey & "|E"   ' â˜…ã“ã“ã‚’è¿½åŠ 
 End With
 
-' ¶iLj
+' å·¦ï¼ˆLï¼‰
 Set tL = host.Controls.Add("Forms.TextBox.1", _
     "txtROM_" & region & "_" & jointKey & "_" & motionKey & "_L")
 With tL
     .Left = xL: .Top = PX(y0)
     .Width = ROM_COL_EDT_W: .Height = ROM_ROW_H
     .IMEMode = fmIMEModeDisable
-    .Tag = TAG_FUNC_PREFIX & "|ROM|" & jointKey & "|" & motionKey & "|"    ' š‚±‚±‚ğ’Ç‰Ái––”ö‚Í‹óLj
+    .Tag = TAG_FUNC_PREFIX & "|ROM|" & jointKey & "|" & motionKey & "|"    ' â˜…ã“ã“ã‚’è¿½åŠ ï¼ˆæœ«å°¾ã¯ç©ºï¼Lï¼‰
 End With
 
 
@@ -1512,49 +1512,49 @@ End With
 End Function
 
 '------------------------------------------------------------
-' ‰^“®ƒ‰ƒxƒ‹i˜a–¼j
+' é‹å‹•ãƒ©ãƒ™ãƒ«ï¼ˆå’Œåï¼‰
 '------------------------------------------------------------
 Private Function GetMotionCaption(jointKey As String, motionKey As String) As String
     Select Case jointKey
         Case "Shoulder", "Hip"
             Select Case motionKey
-                Case "Flex":   GetMotionCaption = "‹ü‹È"
-                Case "Ext":    GetMotionCaption = "L“W"
-                Case "Abd":    GetMotionCaption = "ŠO“]"
-                Case "Add":    GetMotionCaption = "“à“]"
-                Case "ER":     GetMotionCaption = "ŠOù"
-                Case "IR":     GetMotionCaption = "“àù"
+                Case "Flex":   GetMotionCaption = "å±ˆæ›²"
+                Case "Ext":    GetMotionCaption = "ä¼¸å±•"
+                Case "Abd":    GetMotionCaption = "å¤–è»¢"
+                Case "Add":    GetMotionCaption = "å†…è»¢"
+                Case "ER":     GetMotionCaption = "å¤–æ—‹"
+                Case "IR":     GetMotionCaption = "å†…æ—‹"
             End Select
         Case "Elbow", "Knee"
             Select Case motionKey
-                Case "Flex":   GetMotionCaption = "‹ü‹È"
-                Case "Ext":    GetMotionCaption = "L“W"
+                Case "Flex":   GetMotionCaption = "å±ˆæ›²"
+                Case "Ext":    GetMotionCaption = "ä¼¸å±•"
             End Select
         Case "Forearm"
             Select Case motionKey
-                Case "Sup":    GetMotionCaption = "‰ñŠO"
-                Case "Pro":    GetMotionCaption = "‰ñ“à"
+                Case "Sup":    GetMotionCaption = "å›å¤–"
+                Case "Pro":    GetMotionCaption = "å›å†…"
             End Select
         Case "Wrist"
             Select Case motionKey
-                Case "Dorsi":  GetMotionCaption = "”w‹ü"
-                Case "Palmar": GetMotionCaption = "¶‹ü"
-                Case "Radial": GetMotionCaption = "ô‹ü"
-                Case "Ulnar":  GetMotionCaption = "Ú‹ü"
+                Case "Dorsi":  GetMotionCaption = "èƒŒå±ˆ"
+                Case "Palmar": GetMotionCaption = "æŒå±ˆ"
+                Case "Radial": GetMotionCaption = "æ©ˆå±ˆ"
+                Case "Ulnar":  GetMotionCaption = "å°ºå±ˆ"
             End Select
         Case "Ankle"
             Select Case motionKey
-                Case "Dorsi":   GetMotionCaption = "”w‹ü"
-                Case "Plantar": GetMotionCaption = "’ê‹ü"
-                Case "Inv":     GetMotionCaption = "“à‚ª‚¦‚µ"
-                Case "Ev":      GetMotionCaption = "ŠO‚ª‚¦‚µ"
+                Case "Dorsi":   GetMotionCaption = "èƒŒå±ˆ"
+                Case "Plantar": GetMotionCaption = "åº•å±ˆ"
+                Case "Inv":     GetMotionCaption = "å†…ãŒãˆã—"
+                Case "Ev":      GetMotionCaption = "å¤–ãŒãˆã—"
             End Select
     End Select
 End Function
 
 '------------------------------------------------------------
-' ƒtƒŒ[ƒ€“à‚Ì TextBox ‚É IME Off ƒtƒbƒN‚ğˆêŠ‡ƒAƒ^ƒbƒ`
-'   ¦ TxtImeHook.cls ‚ÌŒöŠJƒƒ\ƒbƒh–¼ Attach ‚ğ‘z’è
+' ãƒ•ãƒ¬ãƒ¼ãƒ å†…ã® TextBox ã« IME Off ãƒ•ãƒƒã‚¯ã‚’ä¸€æ‹¬ã‚¢ã‚¿ãƒƒãƒ
+'   â€» TxtImeHook.cls ã®å…¬é–‹ãƒ¡ã‚½ãƒƒãƒ‰å Attach ã‚’æƒ³å®š
 '------------------------------------------------------------
 Private Sub AttachTxtImeHookInFrame(fr As MSForms.Frame)
     On Error Resume Next
@@ -1563,14 +1563,14 @@ Private Sub AttachTxtImeHookInFrame(fr As MSForms.Frame)
         If TypeOf ctl Is MSForms.TextBox Then
             Dim Hook As TxtImeHook
             Set Hook = New TxtImeHook
-            Hook.Init ctl   ' š‚±‚±‚ğ Attach ¨ Init ‚É
+            Hook.Init ctl   ' â˜…ã“ã“ã‚’ Attach â†’ Init ã«
         End If
     Next
     On Error GoTo 0
 End Sub
 
 
-'=== LoadLatestROMNowi2025-10-22“‡”Åj===
+'=== LoadLatestROMNowï¼ˆ2025-10-22çµ±åˆç‰ˆï¼‰===
 Public Sub LoadLatestROMNow(Optional ByVal ws As Worksheet)
     If ws Is Nothing Then Set ws = ActiveSheet
     Dim r As Long: r = LatestRowByHeader("ROM_Upper_Shoulder_Flex_R", ws)
@@ -1579,7 +1579,7 @@ Public Sub LoadLatestROMNow(Optional ByVal ws As Worksheet)
         Exit Sub
     End If
 
-    '--- ‹Œ“Ç‚ÍŒã•ûŒİŠ·‚Ì‚½‚ßƒRƒƒ“ƒgƒAƒEƒg ---
+    '--- æ—§èª­è¾¼ã¯å¾Œæ–¹äº’æ›ã®ãŸã‚ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆ ---
     'Call ParseROMData(ws.Cells(r, HeaderCol("IO_ROM", ws)).Value)
     '-----------------------------------------------------
 

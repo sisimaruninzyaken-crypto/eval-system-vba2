@@ -2,10 +2,10 @@ Attribute VB_Name = "modUFDumpSafe"
 Option Explicit
 
 '========================================================
-' Safe Dump: d•¡„‰ñ‚ğ–h‚¬AMultiPage/Page ‚ğˆÀ‘S‚Éˆµ‚¤”Å
-' - Visited(Dictionary)‚Å‘½d–K–â–h~
-' - MultiPage.Pages ‚Íê—pƒ‹[ƒviPage‚ÌLeft/Width“™‚ÍG‚ç‚È‚¢j
-' - Page ‚Íu’¼‰ºControls‚ğ—ñ‹“v‚¾‚¯BÄ‹A‚Í Frame ‚Ì‚İ‹–‰Â
+' Safe Dump: é‡è¤‡å·¡å›ã‚’é˜²ãã€MultiPage/Page ã‚’å®‰å…¨ã«æ‰±ã†ç‰ˆ
+' - Visited(Dictionary)ã§å¤šé‡è¨ªå•é˜²æ­¢
+' - MultiPage.Pages ã¯å°‚ç”¨ãƒ«ãƒ¼ãƒ—ï¼ˆPageã®Left/Widthç­‰ã¯è§¦ã‚‰ãªã„ï¼‰
+' - Page ã¯ã€Œç›´ä¸‹Controlsã‚’åˆ—æŒ™ã€ã ã‘ã€‚å†å¸°ã¯ Frame ã®ã¿è¨±å¯
 '========================================================
 
 Public Sub DumpFrmEvalTree_ToFile_Safe(Optional ByVal outPath As String = "")
@@ -48,7 +48,7 @@ End Sub
 Private Sub DumpControl_Safe(ByVal ws As Object, ByVal parent As Object, ByVal depth As Long, ByVal visited As Object)
     On Error GoTo ErrH
 
-    ' parent©g‚ğVisitedi“¯ˆêƒCƒ“ƒXƒ^ƒ“ƒX‚ÌÄ–K–h~j
+    ' parentè‡ªèº«ã‚’Visitedï¼ˆåŒä¸€ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å†è¨ªé˜²æ­¢ï¼‰
     Dim keyP As String
     keyP = ObjKey(parent)
     If keyP <> "" Then
@@ -56,7 +56,7 @@ Private Sub DumpControl_Safe(ByVal ws As Object, ByVal parent As Object, ByVal d
         visited.Add keyP, True
     End If
 
-    ' parent‚Ì’¼‰º‚¾‚¯—ñ‹“iParentˆê’v‚ÅƒtƒBƒ‹ƒ^j
+    ' parentã®ç›´ä¸‹ã ã‘åˆ—æŒ™ï¼ˆParentä¸€è‡´ã§ãƒ•ã‚£ãƒ«ã‚¿ï¼‰
     Dim c As MSForms.Control
     For Each c In parent.Controls
         If (c.parent Is parent) Then
@@ -69,7 +69,7 @@ Private Sub DumpControl_Safe(ByVal ws As Object, ByVal parent As Object, ByVal d
                 DumpMultiPage_Safe ws, c, depth + 1, visited
 
             Else
-                ' ‚»‚êˆÈŠO‚ÍÄ‹A‚µ‚È‚¢
+                ' ãã‚Œä»¥å¤–ã¯å†å¸°ã—ãªã„
             End If
         End If
     Next c
@@ -92,10 +92,10 @@ Private Sub DumpMultiPage_Safe(ByVal ws As Object, ByVal mp As MSForms.MultiPage
         Dim pg As MSForms.Page
         Set pg = mp.Pages(i)
 
-        ' Page‚ÍˆÊ’uî•ñ‚ÉG‚ê‚È‚¢i438‰ñ”ğjBName/Caption‚¾‚¯
+        ' Pageã¯ä½ç½®æƒ…å ±ã«è§¦ã‚Œãªã„ï¼ˆ438å›é¿ï¼‰ã€‚Name/Captionã ã‘
         ws.WriteLine Indent(depth) & "[Page " & i & "] Name=" & SafeStr(pg, "Name") & " Caption=" & SafeStr(pg, "Caption")
 
-        ' Page’¼‰ºControls‚ğ—ñ‹“iPage©‘Ì‚ÍÄ‹A‘ÎÛ‚É‚µ‚È‚¢j
+        ' Pageç›´ä¸‹Controlsã‚’åˆ—æŒ™ï¼ˆPageè‡ªä½“ã¯å†å¸°å¯¾è±¡ã«ã—ãªã„ï¼‰
         DumpPageChildren_Safe ws, pg, depth + 1, visited
     Next i
 
@@ -115,7 +115,7 @@ Private Sub DumpPageChildren_Safe(ByVal ws As Object, ByVal pg As MSForms.Page, 
         If (c.parent Is pg) Then
             DumpOne ws, c, depth
 
-            ' Page”z‰º‚Í Frame ‚¾‚¯Ä‹AOKi•K—v‚È‚çMultiPage‚àOKj
+            ' Pageé…ä¸‹ã¯ Frame ã ã‘å†å¸°OKï¼ˆå¿…è¦ãªã‚‰MultiPageã‚‚OKï¼‰
             If TypeName(c) = "Frame" Then
                 DumpControl_Safe ws, c, depth, visited
             ElseIf TypeName(c) = "MultiPage" Then
@@ -138,7 +138,7 @@ Private Sub DumpOne(ByVal ws As Object, ByVal c As MSForms.Control, ByVal depth 
     Dim s As String
     s = Indent(depth) & TypeName(c) & " " & SafeStr(c, "Name")
 
-    ' À•W‚ÍControl‚Ì‚İiPage‚ÍG‚ç‚È‚¢j
+    ' åº§æ¨™ã¯Controlã®ã¿ï¼ˆPageã¯è§¦ã‚‰ãªã„ï¼‰
     Dim l As Variant, t As Variant, w As Variant, h As Variant
     l = SafeNum(c, "Left")
     t = SafeNum(c, "Top")

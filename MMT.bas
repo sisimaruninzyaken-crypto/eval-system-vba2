@@ -2,7 +2,7 @@ Attribute VB_Name = "MMT"
 
 Option Explicit
 
-' === ¶¬ŒniDirectj ===
+' === ç”Ÿæˆç³»ï¼ˆDirectï¼‰ ===
 
 
 Public Sub MMT_BuildChildTabs_Direct()
@@ -10,13 +10,13 @@ Public Sub MMT_BuildChildTabs_Direct()
     Dim pg As Object
     Set pg = GetMMTPage()
     If pg Is Nothing Then
-        MsgBox "MMTƒy[ƒW‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "MMTãƒšãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
 
     Dim host As Object, mp As Object
 
-    '--- hostŠm•Ûi–³‚¯‚ê‚Îì‚éj ---
+    '--- hostç¢ºä¿ï¼ˆç„¡ã‘ã‚Œã°ä½œã‚‹ï¼‰ ---
     On Error Resume Next
     Set host = pg.Controls("fraMMTHost")
     
@@ -26,11 +26,11 @@ Public Sub MMT_BuildChildTabs_Direct()
         host.Left = 6: host.Top = 6
     End If
 
-    ' hostƒTƒCƒY‚Í–ˆ‰ñ’Ç]ipg‚ª¬‚³‚­‚Ä‚à”j’]‚µ‚È‚¢j
+    ' hostã‚µã‚¤ã‚ºã¯æ¯Žå›žè¿½å¾“ï¼ˆpgãŒå°ã•ãã¦ã‚‚ç ´ç¶»ã—ãªã„ï¼‰
     host.Width = pg.InsideWidth - 12
     host.Height = pg.InsideHeight - 12
 
-    '--- mpŠm•Ûihost”z‰ºj ---
+    '--- mpç¢ºä¿ï¼ˆhosté…ä¸‹ï¼‰ ---
     On Error Resume Next
     Set mp = host.Controls("mpMMTChild")
     
@@ -40,23 +40,23 @@ Public Sub MMT_BuildChildTabs_Direct()
         mp.Left = 0: mp.Top = 0
         mp.Style = 0
         mp.Pages.Clear
-        mp.Pages.Add.caption = "ãŽˆ"
-        mp.Pages.Add.caption = "‰ºŽˆ"
+        mp.Pages.Add.caption = "ä¸Šè‚¢"
+        mp.Pages.Add.caption = "ä¸‹è‚¢"
     End If
 
-    ' mpƒTƒCƒY‚à–ˆ‰ñ’Ç]
+    ' mpã‚µã‚¤ã‚ºã‚‚æ¯Žå›žè¿½å¾“
     mp.Width = host.InsideWidth
     mp.Height = host.InsideHeight
 
-    '--- Žqƒ^ƒu‚Ì’†g‚ðì‚è’¼‚·iMMTGEN‚¾‚¯Á‚·j ---
+    '--- å­ã‚¿ãƒ–ã®ä¸­èº«ã‚’ä½œã‚Šç›´ã™ï¼ˆMMTGENã ã‘æ¶ˆã™ï¼‰ ---
     MMT_ClearGen mp.Pages(0)
     MMT_ClearGen mp.Pages(1)
 
-    BuildMMTPage mp.Pages(0), Array("Œ¨‹ü‹È", "Œ¨L“W", "Œ¨ŠO“]", "Œ¨“àù", "Œ¨ŠOù", _
-                                    "•I‹ü‹È", "•IL“W", "‘O˜r‰ñ“à", "‘O˜r‰ñŠO", _
-                                    "ŽèŠÖß¶‹ü", "ŽèŠÖß”w‹ü", "Žw‹ü‹È", "ŽwL“W", "•êŽw‘Î—§")
-    BuildMMTPage mp.Pages(1), Array("ŒÒ‹ü‹È", "ŒÒL“W", "ŒÒŠO“]", "ŒÒ“à“]", _
-                                    "•G‹ü‹È", "•GL“W", "‘«ŠÖß”w‹ü", "‘«ŠÖß’ê‹ü", "•êæäL“W")
+    BuildMMTPage mp.Pages(0), Array("è‚©å±ˆæ›²", "è‚©ä¼¸å±•", "è‚©å¤–è»¢", "è‚©å†…æ—‹", "è‚©å¤–æ—‹", _
+                                    "è‚˜å±ˆæ›²", "è‚˜ä¼¸å±•", "å‰è…•å›žå†…", "å‰è…•å›žå¤–", _
+                                    "æ‰‹é–¢ç¯€æŽŒå±ˆ", "æ‰‹é–¢ç¯€èƒŒå±ˆ", "æŒ‡å±ˆæ›²", "æŒ‡ä¼¸å±•", "æ¯æŒ‡å¯¾ç«‹")
+    BuildMMTPage mp.Pages(1), Array("è‚¡å±ˆæ›²", "è‚¡ä¼¸å±•", "è‚¡å¤–è»¢", "è‚¡å†…è»¢", _
+                                    "è†å±ˆæ›²", "è†ä¼¸å±•", "è¶³é–¢ç¯€èƒŒå±ˆ", "è¶³é–¢ç¯€åº•å±ˆ", "æ¯è¶¾ä¼¸å±•")
     
     DoEvents
     Resize_MMTChildHost_ToPage
@@ -75,14 +75,14 @@ End Sub
 
 
 
-'--- u‹Ø—ÍvuMMTv‚ðŠÜ‚Þƒy[ƒW‚ðŽæ“¾ ---
+'--- ã€Œç­‹åŠ›ã€ã€ŒMMTã€ã‚’å«ã‚€ãƒšãƒ¼ã‚¸ã‚’å–å¾— ---
 Public Function GetMMTPage() As Object
     Dim c As Object, mp As Object, i As Long
     For Each c In frmEval.Controls
         If TypeName(c) = "MultiPage" Then
             Set mp = c
             For i = 0 To mp.Pages.Count - 1
-                If InStr(mp.Pages(i).caption, "MMT") > 0 Or InStr(mp.Pages(i).caption, "‹Ø—Í") > 0 Then
+                If InStr(mp.Pages(i).caption, "MMT") > 0 Or InStr(mp.Pages(i).caption, "ç­‹åŠ›") > 0 Then
                     Set GetMMTPage = mp.Pages(i): Exit Function
                 End If
             Next
@@ -110,14 +110,14 @@ End Sub
 
 
 
-'--- 1ƒy[ƒW•ª‚ÌUI¶¬ ---
+'--- 1ãƒšãƒ¼ã‚¸åˆ†ã®UIç”Ÿæˆ ---
 Private Sub BuildMMTPage(ByVal pg As Object, ByVal items As Variant)
     Const ROW_H As Single = 24, LBL_W As Single = 130, COL_W As Single = 90, gap As Single = 12
     Dim x0 As Single, y0 As Single: x0 = 20: y0 = 28
 
-    MakeLbl pg, "lblHdrMus", "‹ØŒQ", x0, y0 - 20, 60, 18
-    MakeLbl pg, "lblHdrR", "‰E", x0 + LBL_W + gap, y0 - 20, 30, 18
-    MakeLbl pg, "lblHdrL", "¶", x0 + LBL_W + gap + COL_W + gap, y0 - 20, 30, 18
+    MakeLbl pg, "lblHdrMus", "ç­‹ç¾¤", x0, y0 - 20, 60, 18
+    MakeLbl pg, "lblHdrR", "å³", x0 + LBL_W + gap, y0 - 20, 30, 18
+    MakeLbl pg, "lblHdrL", "å·¦", x0 + LBL_W + gap + COL_W + gap, y0 - 20, 30, 18
 
     Dim i As Long, Y As Single: Y = y0
     For i = LBound(items) To UBound(items)
@@ -129,7 +129,7 @@ Private Sub BuildMMTPage(ByVal pg As Object, ByVal items As Variant)
     Next
 End Sub
 
-'--- Ž©“®¶¬iMMTGENj‚¾‚¯‘|œ ---
+'--- è‡ªå‹•ç”Ÿæˆï¼ˆMMTGENï¼‰ã ã‘æŽƒé™¤ ---
 Private Sub MMT_ClearGen(ByVal pg As Object)
     Dim idx As Long
     For idx = pg.Controls.Count - 1 To 0 Step -1
@@ -139,17 +139,17 @@ Private Sub MMT_ClearGen(ByVal pg As Object)
     Next
 End Sub
 
-'--- Žqƒ^ƒu“à‚Ì‘S ComboBox ‚ð‚¢‚Á‚½‚ñƒNƒŠƒA ---
+'--- å­ã‚¿ãƒ–å†…ã®å…¨ ComboBox ã‚’ã„ã£ãŸã‚“ã‚¯ãƒªã‚¢ ---
 Private Sub MMT_ClearMMTCombos(ByVal mp As MSForms.MultiPage)
     Dim pg As MSForms.Page
-    Dim c As Object  'iControl‚Å‚àOKj
+    Dim c As Object  'ï¼ˆControlã§ã‚‚OKï¼‰
 
     For Each pg In mp.Pages
         For Each c In pg.Controls
             If TypeName(c) = "ComboBox" Then
                 On Error Resume Next
-                c.ListIndex = -1   '‘I‘ð‰ðœiDropDownList‚Å‚à—LŒøj
-                c.value = ""       '”O‚Ì‚½‚ß‹ó•¶Žš
+                c.ListIndex = -1   'é¸æŠžè§£é™¤ï¼ˆDropDownListã§ã‚‚æœ‰åŠ¹ï¼‰
+                c.value = ""       'å¿µã®ãŸã‚ç©ºæ–‡å­—
                 On Error GoTo 0
             End If
         Next
@@ -157,27 +157,27 @@ Private Sub MMT_ClearMMTCombos(ByVal mp As MSForms.MultiPage)
 End Sub
 
 
-' === •Û‘¶isƒx[ƒXj ===
+' === ä¿å­˜ï¼ˆè¡Œãƒ™ãƒ¼ã‚¹ï¼‰ ===
 Public Sub SaveMMTToSheet(ws As Worksheet, r As Long, owner As Object)
     Dim c As Long
     Dim s As String
 
-    ' 1) ƒwƒbƒ_[—ñiMMT_IOj‚ð—pˆÓ
+    ' 1) ãƒ˜ãƒƒãƒ€ãƒ¼åˆ—ï¼ˆMMT_IOï¼‰ã‚’ç”¨æ„
     c = FindColByHeaderExact(ws, "MMT_IO")
     If c = 0 Then
         c = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column + 1
         ws.Cells(1, c).value = "MMT_IO"
     End If
 
-    ' 2) MMT‚ð•¶Žš—ñ‰»‚µ‚Ä•Û‘¶
-    s = MMT_SaveToString()              ' ©Šù‚É‚ ‚éŠÖ”i’¼‰º‚ÉŒ©‚¦‚Ä‚¢‚é‚à‚Ìj‚ðŽg‚¤
+    ' 2) MMTã‚’æ–‡å­—åˆ—åŒ–ã—ã¦ä¿å­˜
+    s = MMT_SaveToString()              ' â†æ—¢ã«ã‚ã‚‹é–¢æ•°ï¼ˆç›´ä¸‹ã«è¦‹ãˆã¦ã„ã‚‹ã‚‚ã®ï¼‰ã‚’ä½¿ã†
     ws.Cells(r, c).value = s
 
-    ' 3) ƒƒO
+    ' 3) ãƒ­ã‚°
     Debug.Print "[MMT][SAVE] row=" & r & " col=" & c & " len=" & Len(s)
 End Sub
 
-'=== Žqƒ^ƒu(MMT) ¨ •¶Žš—ñi•Û‘¶—pƒeƒXƒgj ===
+'=== å­ã‚¿ãƒ–(MMT) â†’ æ–‡å­—åˆ—ï¼ˆä¿å­˜ç”¨ãƒ†ã‚¹ãƒˆï¼‰ ===
 Private Function MMT_SaveToString() As String
     Dim pg As Object, mp As Object, p As Long, c As Object
     Dim parts() As String, n As Long
@@ -222,36 +222,36 @@ Private Function MMT_SaveToString() As String
 End Function
 
 
-' === “Çžisƒx[ƒXj ===
+' === èª­è¾¼ï¼ˆè¡Œãƒ™ãƒ¼ã‚¹ï¼‰ ===
 
 Public Sub LoadMMTFromSheet(ws As Worksheet, r As Long, owner As Object)
     Dim c As Long, s As String
     Dim pg As Object, mp As Object
 
-    ' MMT_IO —ñ
+    ' MMT_IO åˆ—
     c = FindColByHeaderExact(ws, "MMT_IO")
     If c = 0 Then Exit Sub
 
      s = ReadStr_Compat("IO_MMT", r, ws)
     If Len(s) = 0 Then Exit Sub
 
-    ' MMTƒy[ƒW
+    ' MMTãƒšãƒ¼ã‚¸
     Set pg = GetMMTPage()
     If pg Is Nothing Then Exit Sub
 
-    ' Žqƒ^ƒu‚Ì‘¶ÝŠm”F ¨ –³‚¯‚ê‚Îì‚é
+    ' å­ã‚¿ãƒ–ã®å­˜åœ¨ç¢ºèª â†’ ç„¡ã‘ã‚Œã°ä½œã‚‹
     On Error Resume Next
     Set mp = pg.Controls("mpMMTChild")
     On Error GoTo 0
     If mp Is Nothing Then
-        MMT_BuildChildTabs_Direct          ' š‚±‚±‚ªŠÌ
+        MMT_BuildChildTabs_Direct          ' â˜…ã“ã“ãŒè‚
         On Error Resume Next
         Set mp = pg.Controls("mpMMTChild")
         On Error GoTo 0
-        If mp Is Nothing Then Exit Sub      ' ‚»‚ê‚Å‚à–³‚¯‚ê‚Î’ú‚ß‚é
+        If mp Is Nothing Then Exit Sub      ' ãã‚Œã§ã‚‚ç„¡ã‘ã‚Œã°è«¦ã‚ã‚‹
     End If
 
-    ' ’l‚ð”½‰f
+    ' å€¤ã‚’åæ˜ 
     MMT_LoadFromString_Core s
     
 
@@ -260,10 +260,10 @@ Public Sub LoadMMTFromSheet(ws As Worksheet, r As Long, owner As Object)
 End Sub
 
 '========================
-' ’¼—ñ‰»•¶Žš—ñ ¨ Žqƒ^ƒu‚Ö•œŒ³
-' Œ`Ž®F  side|€–Ú–¼|‰E’l|¶’l ; side|€–Ú–¼|‰E’l|¶’l ; ...
-'   side: 0=ãŽˆ, 1=‰ºŽˆ
-' ‰E’l/¶’l‚Í‹ó•¶Žš‚à‚ ‚è“¾‚é
+' ç›´åˆ—åŒ–æ–‡å­—åˆ— â†’ å­ã‚¿ãƒ–ã¸å¾©å…ƒ
+' å½¢å¼ï¼š  side|é …ç›®å|å³å€¤|å·¦å€¤ ; side|é …ç›®å|å³å€¤|å·¦å€¤ ; ...
+'   side: 0=ä¸Šè‚¢, 1=ä¸‹è‚¢
+' å³å€¤/å·¦å€¤ã¯ç©ºæ–‡å­—ã‚‚ã‚ã‚Šå¾—ã‚‹
 '========================
 Private Sub MMT_LoadFromString_Core(ByVal s As String)
     Dim pg As Object, mp As MSForms.MultiPage
@@ -275,7 +275,7 @@ Private Sub MMT_LoadFromString_Core(ByVal s As String)
 
     Set pg = GetMMTPage()
     If pg Is Nothing Then
-        MsgBox "MMTƒy[ƒW‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "MMTãƒšãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
 
@@ -283,11 +283,11 @@ Private Sub MMT_LoadFromString_Core(ByVal s As String)
     Set mp = pg.Controls("mpMMTChild")
     On Error GoTo 0
     If mp Is Nothing Then
-        MsgBox "Žqƒ^ƒu(mpMMTChild)‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "å­ã‚¿ãƒ–(mpMMTChild)ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
 
-    ' ’l‚¾‚¯ƒNƒŠƒA
+    ' å€¤ã ã‘ã‚¯ãƒªã‚¢
     Call MMT_ClearMMTCombos(mp)
 
     parts = Split(s, ";")
@@ -305,13 +305,13 @@ Private Sub MMT_LoadFromString_Core(ByVal s As String)
         vL = IIf(UBound(f) >= 3, CStr(f(3)), "")
 
         If side < 0 Or side > mp.Pages.Count - 1 Then
-            Debug.Print "[LOAD][MMT] side•s³: "; side; " / key="; key
+            Debug.Print "[LOAD][MMT] sideä¸æ­£: "; side; " / key="; key
             GoTo cont
         End If
 
         Set p = mp.Pages(side)
 
-        ' –¼‘O‹K‘¥FcboR_ / cboL_ { €–Ú–¼
+        ' åå‰è¦å‰‡ï¼šcboR_ / cboL_ ï¼‹ é …ç›®å
         Set cboR = Nothing: Set cboL = Nothing
         On Error Resume Next
         Set cboR = p.Controls("cboR_" & key)
@@ -321,7 +321,7 @@ Private Sub MMT_LoadFromString_Core(ByVal s As String)
         foundR = Not cboR Is Nothing
 foundL = Not cboL Is Nothing
 
-' ‹ói=’l‚È‚µj‚Íu‰½‚à‚µ‚È‚¢OKv‚Æ‚Ý‚È‚·
+' ç©ºï¼ˆ=å€¤ãªã—ï¼‰ã¯ã€Œä½•ã‚‚ã—ãªã„ï¼OKã€ã¨ã¿ãªã™
 okR = (Len(vR) = 0)
 okL = (Len(vL) = 0)
 
@@ -337,9 +337,9 @@ cont:
 End Sub
 
 
-' === ‹¤—Lƒ†[ƒeƒBƒŠƒeƒB ===
+' === å…±æœ‰ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ ===
 
-'=== 1) Œ©o‚µ‚ðŠ®‘Sˆê’v‚ÅŒŸõ‚µ‚Ä—ñ”Ô†‚ð•Ô‚·i–³‚¯‚ê‚Î0j ===
+'=== 1) è¦‹å‡ºã—ã‚’å®Œå…¨ä¸€è‡´ã§æ¤œç´¢ã—ã¦åˆ—ç•ªå·ã‚’è¿”ã™ï¼ˆç„¡ã‘ã‚Œã°0ï¼‰ ===
 Public Function FindColByHeaderExact(ws As Worksheet, header As String) As Long
     Dim f As Range
     Set f = ws.rows(1).Find(What:=header, LookIn:=xlValues, LookAt:=xlWhole)
@@ -352,7 +352,7 @@ End Function
 
 
 
-'=== 2) Œ©o‚µ—ñ‚ð•ÛØ‚µ‚Ä—ñ”Ô†‚ð•Ô‚·i–³‚¯‚ê‚Îì‚éj ===
+'=== 2) è¦‹å‡ºã—åˆ—ã‚’ä¿è¨¼ã—ã¦åˆ—ç•ªå·ã‚’è¿”ã™ï¼ˆç„¡ã‘ã‚Œã°ä½œã‚‹ï¼‰ ===
 Public Function EnsureHeaderCol(ws As Worksheet, header As String) As Long
     Dim c As Long
     c = FindColByHeaderExact(ws, header)
@@ -367,7 +367,7 @@ End Function
 
 
 
-'=== Œ©o‚µ—ñuMMT_IOv‚ð’T‚·i–³‚¯‚ê‚Îì‚éj ===
+'=== è¦‹å‡ºã—åˆ—ã€ŒMMT_IOã€ã‚’æŽ¢ã™ï¼ˆç„¡ã‘ã‚Œã°ä½œã‚‹ï¼‰ ===
 Private Function FindOrCreateHeader(ByVal ws As Worksheet, ByVal header As String) As Long
     Dim lastCol As Long, c As Long
     lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
@@ -377,13 +377,13 @@ Private Function FindOrCreateHeader(ByVal ws As Worksheet, ByVal header As Strin
             Exit Function
         End If
     Next
-    '–³‚¯‚ê‚Î––”ö+1‚Éì¬
+    'ç„¡ã‘ã‚Œã°æœ«å°¾+1ã«ä½œæˆ
     FindOrCreateHeader = lastCol + 1
     ws.Cells(1, FindOrCreateHeader).value = header
 End Function
 
 
-'=== ‹æØ‚è•¶Žš | ‚Ì n ”Ô–Ú(1Žn‚Ü‚è)‚ð•Ô‚· ===
+'=== åŒºåˆ‡ã‚Šæ–‡å­— | ã® n ç•ªç›®(1å§‹ã¾ã‚Š)ã‚’è¿”ã™ ===
 Private Function ParseField(ByVal rec As String, ByVal idx As Long) As String
     Dim a As Variant: a = Split(rec, "|")
     If idx >= 1 And idx - 1 <= UBound(a) Then

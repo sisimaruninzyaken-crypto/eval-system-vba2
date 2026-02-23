@@ -1,13 +1,13 @@
 Attribute VB_Name = "modToneReflexIO"
 Option Explicit
 
-' ƒ[ƒJƒ‹’è‹`i‘¼‚Æ‹£‡‚µ‚È‚¢‚æ‚¤ Privatej
+' ãƒ­ãƒ¼ã‚«ãƒ«å®šç¾©ï¼ˆä»–ã¨ç«¶åˆã—ãªã„ã‚ˆã† Privateï¼‰
 Private Const SEP_REC As String = "|"
 Private Const SEP_KV  As String = ":"
 Private Const SEP_RL  As String = ","
 
 '========================================================
-' ‹Ø‹Ù’£E”½ËiázkŠÜ‚Şj •Û‘¶FTONE_IO / TONE_NOTE
+' ç­‹ç·Šå¼µãƒ»åå°„ï¼ˆç—™ç¸®å«ã‚€ï¼‰ ä¿å­˜ï¼šTONE_IO / TONE_NOTE
 '========================================================
 Public Sub SaveToneReflexToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal owner As Object)
     If owner Is Nothing Then If VBA.UserForms.Count > 0 Then Set owner = VBA.UserForms(0)
@@ -16,13 +16,13 @@ Public Sub SaveToneReflexToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal o
     Dim q As New Collection, node As Object, ch As Object, tmp As Object
     Dim combos As New Collection
 
-    ' 1) u‹Ø‹Ù’£v or u”½Ëv‚ğŠÜ‚Şƒy[ƒW‚ğ“Á’è
+    ' 1) ã€Œç­‹ç·Šå¼µã€ or ã€Œåå°„ã€ã‚’å«ã‚€ãƒšãƒ¼ã‚¸ã‚’ç‰¹å®š
     On Error Resume Next
     For Each ctl In owner.Controls
         If TypeName(ctl) = "MultiPage" Then
             Set mp = ctl
             For Each pg In mp.Pages
-                If InStr(pg.caption, "‹Ø‹Ù’£") > 0 Or InStr(pg.caption, "”½Ë") > 0 Then
+                If InStr(pg.caption, "ç­‹ç·Šå¼µ") > 0 Or InStr(pg.caption, "åå°„") > 0 Then
                     Set target = pg: Exit For
                 End If
             Next pg
@@ -33,14 +33,14 @@ Public Sub SaveToneReflexToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal o
     On Error GoTo 0
     If target Is Nothing Then Set target = owner
 
-    ' 2) ‘ÎÛƒy[ƒW“à‚Ì ComboBox ‚ğûWiFrame“à‚àŒ@‚éj
+    ' 2) å¯¾è±¡ãƒšãƒ¼ã‚¸å†…ã® ComboBox ã‚’åé›†ï¼ˆFrameå†…ã‚‚æ˜ã‚‹ï¼‰
     q.Add target
     Do While q.Count > 0
         Set node = q(1): q.Remove 1
         On Error Resume Next
         For Each ch In node.Controls
             Set tmp = ch.Controls
-            If Err.Number = 0 Then q.Add ch     ' q‚ ‚è
+            If Err.Number = 0 Then q.Add ch     ' å­ã‚ã‚Š
             Err.Clear
             If TypeName(ch) = "ComboBox" Then combos.Add ch
         Next ch
@@ -48,7 +48,7 @@ Public Sub SaveToneReflexToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal o
     Loop
     If combos.Count = 0 Then Exit Sub
 
-    ' 3) d•¡œ‹ ¨ Top/Left ‚ÅˆÀ’èƒ\[ƒg
+    ' 3) é‡è¤‡é™¤å» â†’ Top/Left ã§å®‰å®šã‚½ãƒ¼ãƒˆ
     Dim seen As Object: Set seen = CreateObject("Scripting.Dictionary"): seen.CompareMode = 1
     Dim uniq As New Collection, i As Long, j As Long
     For i = 1 To combos.Count
@@ -67,11 +67,11 @@ Public Sub SaveToneReflexToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal o
         Next j
     Next i
 
-    ' 4) R¨L ƒyƒA‚ÅƒVƒŠƒAƒ‰ƒCƒYi8€–Új
+    ' 4) Râ†’L ãƒšã‚¢ã§ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºï¼ˆ8é …ç›®ï¼‰
     Dim keys As Variant
     keys = Array( _
-        "MAS_ãˆ‹ü‹ØŒQ", "MAS_ãˆL‹ØŒQ", "MAS_‰ºˆ‹ü‹ØŒQ", "MAS_‰ºˆL‹ØŒQ", _
-        "”½Ë_ã˜r“ñ“ª‹Ø", "”½Ë_ã˜rO“ª‹Ø", "”½Ë_•GŠWäF", "”½Ë_ƒAƒLƒŒƒXäF")
+        "MAS_ä¸Šè‚¢å±ˆç­‹ç¾¤", "MAS_ä¸Šè‚¢ä¼¸ç­‹ç¾¤", "MAS_ä¸‹è‚¢å±ˆç­‹ç¾¤", "MAS_ä¸‹è‚¢ä¼¸ç­‹ç¾¤", _
+        "åå°„_ä¸Šè…•äºŒé ­ç­‹", "åå°„_ä¸Šè…•ä¸‰é ­ç­‹", "åå°„_è†è“‹è…±", "åå°„_ã‚¢ã‚­ãƒ¬ã‚¹è…±")
 
     Dim pos As Long: pos = 1
     Dim k As Long, vR As String, vL As String, s As String
@@ -79,10 +79,10 @@ Public Sub SaveToneReflexToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal o
     For k = LBound(keys) To UBound(keys)
         If pos + 1 > UBound(arr) Then Exit For
 
-        ' ‰EiRj‚±‚Ì1s‚ğ·‚µ‘Ö‚¦
+        ' å³ï¼ˆRï¼‰ã“ã®1è¡Œã‚’å·®ã—æ›¿ãˆ
 vR = CStr(arr(pos).value): If Len(vR) = 0 Then vR = CStr(arr(pos).Text)
 
-' ¶iLj‚±‚Ì1s‚ğ·‚µ‘Ö‚¦
+' å·¦ï¼ˆLï¼‰ã“ã®1è¡Œã‚’å·®ã—æ›¿ãˆ
 vL = CStr(arr(pos + 1).value): If Len(vL) = 0 Then vL = CStr(arr(pos + 1).Text)
 
 
@@ -95,12 +95,12 @@ vL = CStr(arr(pos + 1).value): If Len(vL) = 0 Then vL = CStr(arr(pos + 1).Text)
         pos = pos + 2
     Next k
 
-    ' 5) ‘‚«o‚µiTONE_IOj
+    ' 5) æ›¸ãå‡ºã—ï¼ˆTONE_IOï¼‰
     Dim c As Long: c = EnsureHeaderCol(ws, "TONE_IO")
     ws.Cells(r, c).value = s
     Debug.Print "[TONE][SAVE] row=" & r & " col=" & c & " len=" & Len(s)
 
-    ' 6) ”õliÅ‚à‘å‚«‚¢ or MultiLine TextBoxj¨ TONE_NOTE
+    ' 6) å‚™è€ƒï¼ˆæœ€ã‚‚å¤§ãã„ or MultiLine TextBoxï¼‰â†’ TONE_NOTE
     Dim noteCtl As Object, box As Object, subCtl As Object, bestH As Single: bestH = 0
     Dim note As String, cNote As Long
 
@@ -126,19 +126,19 @@ End Sub
 
 
 '========================================================
-' ‹Ø‹Ù’£E”½ËiázkŠÜ‚Şj “Ç‚İ‚İFTONE_IO / TONE_NOTE
+' ç­‹ç·Šå¼µãƒ»åå°„ï¼ˆç—™ç¸®å«ã‚€ï¼‰ èª­ã¿è¾¼ã¿ï¼šTONE_IO / TONE_NOTE
 '========================================================
 Public Sub LoadToneReflexFromSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal owner As Object)
     If owner Is Nothing Then If VBA.UserForms.Count > 0 Then Set owner = VBA.UserForms(0)
 
     Dim ctl As Object, mp As Object, pg As Object, target As Object
-    ' 1) u‹Ø‹Ù’£voru”½Ëv‚ğŠÜ‚Şƒy[ƒW‚ğ“Á’è
+    ' 1) ã€Œç­‹ç·Šå¼µã€orã€Œåå°„ã€ã‚’å«ã‚€ãƒšãƒ¼ã‚¸ã‚’ç‰¹å®š
     On Error Resume Next
     For Each ctl In owner.Controls
         If TypeName(ctl) = "MultiPage" Then
             Set mp = ctl
             For Each pg In mp.Pages
-                If InStr(pg.caption, "‹Ø‹Ù’£") > 0 Or InStr(pg.caption, "”½Ë") > 0 Then
+                If InStr(pg.caption, "ç­‹ç·Šå¼µ") > 0 Or InStr(pg.caption, "åå°„") > 0 Then
                     Set target = pg: Exit For
                 End If
             Next pg
@@ -148,7 +148,7 @@ Public Sub LoadToneReflexFromSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal
     On Error GoTo 0
     If target Is Nothing Then Set target = owner
 
-    ' 2) TONE_IO ‚ğ«‘‚Éƒp[ƒXikey ¨ Array(R, L)j
+    ' 2) TONE_IO ã‚’è¾æ›¸ã«ãƒ‘ãƒ¼ã‚¹ï¼ˆkey â†’ Array(R, L)ï¼‰
     Dim c As Long, s As String, recs As Variant, rec As Variant
     Dim kv As Variant, rl As Variant
     Dim d As Object: Set d = CreateObject("Scripting.Dictionary"): d.CompareMode = 1
@@ -172,7 +172,7 @@ cont:
         Next rec
     End If
 
-    ' 3) ‘ÎÛƒy[ƒW“à‚Ì ComboBox ‚ğûWiFrame‚àŒ@‚éj¨ Top/Left ƒ\[ƒg
+    ' 3) å¯¾è±¡ãƒšãƒ¼ã‚¸å†…ã® ComboBox ã‚’åé›†ï¼ˆFrameã‚‚æ˜ã‚‹ï¼‰â†’ Top/Left ã‚½ãƒ¼ãƒˆ
     Dim q As New Collection, node As Object, ch As Object, tmp As Object
     Dim combos As New Collection
     q.Add target
@@ -207,11 +207,11 @@ cont:
         Next j
     Next i
 
-    ' 4) •Û‘¶‚Æ“¯‚¶ƒL[‡‚Å”½‰fiR¨Lj
+    ' 4) ä¿å­˜ã¨åŒã˜ã‚­ãƒ¼é †ã§åæ˜ ï¼ˆRâ†’Lï¼‰
     Dim keys As Variant
     keys = Array( _
-        "MAS_ãˆ‹ü‹ØŒQ", "MAS_ãˆL‹ØŒQ", "MAS_‰ºˆ‹ü‹ØŒQ", "MAS_‰ºˆL‹ØŒQ", _
-        "”½Ë_ã˜r“ñ“ª‹Ø", "”½Ë_ã˜rO“ª‹Ø", "”½Ë_•GŠWäF", "”½Ë_ƒAƒLƒŒƒXäF")
+        "MAS_ä¸Šè‚¢å±ˆç­‹ç¾¤", "MAS_ä¸Šè‚¢ä¼¸ç­‹ç¾¤", "MAS_ä¸‹è‚¢å±ˆç­‹ç¾¤", "MAS_ä¸‹è‚¢ä¼¸ç­‹ç¾¤", _
+        "åå°„_ä¸Šè…•äºŒé ­ç­‹", "åå°„_ä¸Šè…•ä¸‰é ­ç­‹", "åå°„_è†è“‹è…±", "åå°„_ã‚¢ã‚­ãƒ¬ã‚¹è…±")
     Dim pos As Long: pos = 1
     Dim k As Long, pair As Variant
     Dim tR As String, tL As String
@@ -222,7 +222,7 @@ cont:
         If d.exists(keys(k)) Then
             pair = d(keys(k))              ' pair(0)=R, pair(1)=L
 
-            ' --- R‘¤iValue—DæA‡‚í‚È‚¯‚ê‚ÎƒŠƒXƒg‘–¸¨•K—v‚È‚çAddItemj ---
+            ' --- Rå´ï¼ˆValueå„ªå…ˆã€åˆã‚ãªã‘ã‚Œã°ãƒªã‚¹ãƒˆèµ°æŸ»â†’å¿…è¦ãªã‚‰AddItemï¼‰ ---
             tR = CStr(pair(0))
             On Error Resume Next
             arr(pos).value = tR
@@ -242,7 +242,7 @@ cont:
  
  
 
-          ' --- L‘¤iƒŠƒXƒg‚©‚ç’¼Ú‘I‘ğB‚È‚¯‚ê‚Î’Ç‰Á‚µ‚Ä‘I‘ğj ---
+          ' --- Lå´ï¼ˆãƒªã‚¹ãƒˆã‹ã‚‰ç›´æ¥é¸æŠã€‚ãªã‘ã‚Œã°è¿½åŠ ã—ã¦é¸æŠï¼‰ ---
 tL = CStr(pair(1))
  j = -1
 On Error Resume Next
@@ -253,7 +253,7 @@ For ii = 0 To arr(pos + 1).ListCount - 1
 Next ii
 If j >= 0 Then
     arr(pos + 1).ListIndex = j
-    ' Value‚ª‹ó‚ÌƒP[ƒX‘ÎôF‘I‘ğ•¶š‚ğValue‚É‚à“ü‚ê‚é
+    ' ValueãŒç©ºã®ã‚±ãƒ¼ã‚¹å¯¾ç­–ï¼šé¸æŠæ–‡å­—ã‚’Valueã«ã‚‚å…¥ã‚Œã‚‹
     If Len(CStr(arr(pos + 1).value)) = 0 Then arr(pos + 1).value = CStr(arr(pos + 1).List(j, 0))
 ElseIf Len(tL) > 0 Then
     arr(pos + 1).AddItem tL
@@ -265,12 +265,12 @@ On Error GoTo 0
            
 
         Else
-            Debug.Print "[TONE][MISS]"; keys(k); "iƒf[ƒ^‚È‚µj"
+            Debug.Print "[TONE][MISS]"; keys(k); "ï¼ˆãƒ‡ãƒ¼ã‚¿ãªã—ï¼‰"
         End If
         pos = pos + 2
     Next k
 
-    ' 5) ”õl“Ç‚İ‚İiTONE_NOTEj
+    ' 5) å‚™è€ƒèª­ã¿è¾¼ã¿ï¼ˆTONE_NOTEï¼‰
     Dim cNote As Long, note As String
     Dim noteCtl As Object, box As Object, subCtl As Object, bestH As Single: bestH = 0
 
@@ -320,21 +320,21 @@ End Sub
 Public Sub PlacePainFactorsBesideSite()
     Dim z As MSForms.Frame, pf As MSForms.Frame, ps As MSForms.Frame, lb As MSForms.label
     Set z = frmEval.Controls("Frame12")
-    Set pf = z.Controls("fraPainFactors")    ' —UˆöEŒyŒ¸ˆöqi˜gj
-    Set ps = z.Controls("fraPainSite")       ' áu’É•”ˆÊi˜gj
-    Set lb = z.Controls("lblPainFactors")    ' ƒ‰ƒxƒ‹
+    Set pf = z.Controls("fraPainFactors")    ' èª˜å› ãƒ»è»½æ¸›å› å­ï¼ˆæ ï¼‰
+    Set ps = z.Controls("fraPainSite")       ' ç–¼ç—›éƒ¨ä½ï¼ˆæ ï¼‰
+    Set lb = z.Controls("lblPainFactors")    ' ãƒ©ãƒ™ãƒ«
 
     Dim M As Single, avail As Single
-    M = 12                                   ' —]”’
-    ' ˆÊ’u‚¾‚¯’²®Fáu’É•”ˆÊ‚Æ“¯‚¶TopA‰E—×‚Ö
+    M = 12                                   ' ä½™ç™½
+    ' ä½ç½®ã ã‘èª¿æ•´ï¼šç–¼ç—›éƒ¨ä½ã¨åŒã˜Topã€å³éš£ã¸
     pf.Top = ps.Top
     pf.Left = ps.Left + ps.Width + M
 
-    ' ‚Í‚İo‚µ–h~i•K—v‚È‚ç•‚¾‚¯‹l‚ß‚éj
+    ' ã¯ã¿å‡ºã—é˜²æ­¢ï¼ˆå¿…è¦ãªã‚‰å¹…ã ã‘è©°ã‚ã‚‹ï¼‰
     avail = z.Width - M - pf.Left
     If avail < pf.Width Then pf.Width = avail
 
-    ' ƒ‰ƒxƒ‹‚Í˜g‚Ì’¼ã‚É‘µ‚¦‚é
+    ' ãƒ©ãƒ™ãƒ«ã¯æ ã®ç›´ä¸Šã«æƒãˆã‚‹
     lb.Left = pf.Left
     lb.Top = pf.Top - lb.Height - 4
 

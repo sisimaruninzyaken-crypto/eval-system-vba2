@@ -4,14 +4,14 @@ Public gArchiveDeleteBasicID As String
 
 
 
-'--- ƒwƒbƒ_s‚©‚ç—ñ”Ô†‚ğ’T‚·iŒ©‚Â‚©‚ç‚È‚¯‚ê‚Î 0j
+'--- ãƒ˜ãƒƒãƒ€è¡Œã‹ã‚‰åˆ—ç•ªå·ã‚’æ¢ã™ï¼ˆè¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã° 0ï¼‰
 Private Function HeaderCol(ByVal hdrRow As Range, ByVal candidates As Variant) As Long
     Dim i As Long
     For i = LBound(candidates) To UBound(candidates)
         Dim c As Range
         For Each c In hdrRow.Cells
             If Trim$(CStr(c.value)) = CStr(candidates(i)) Then
-                HeaderCol = c.Column - hdrRow.Cells(1, 1).Column + 1 'CurrentRegion“à‚Ì‘Š‘Î—ñ
+                HeaderCol = c.Column - hdrRow.Cells(1, 1).Column + 1 'CurrentRegionå†…ã®ç›¸å¯¾åˆ—
                 Exit Function
             End If
         Next c
@@ -19,7 +19,7 @@ Private Function HeaderCol(ByVal hdrRow As Range, ByVal candidates As Variant) A
     HeaderCol = 0
 End Function
 
-'--- ƒA[ƒJƒCƒuƒuƒbƒN‚É“¯–¼ƒV[ƒg‚ª‚È‚¯‚ê‚Îì‚é
+'--- ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ãƒ–ãƒƒã‚¯ã«åŒåã‚·ãƒ¼ãƒˆãŒãªã‘ã‚Œã°ä½œã‚‹
 Private Function GetOrCreateSheet(ByVal wb As Workbook, ByVal sheetName As String) As Worksheet
     Dim ws As Worksheet
     On Error Resume Next
@@ -38,7 +38,7 @@ End Function
 
 Public Sub DeleteClientFrom_EvalData_ByName()
     Dim nm As String
-    nm = Trim$(InputBox("íœ‚µ‚½‚¢—˜—pÒ‚Ì–¼iŠ®‘Sˆê’vj", "EvalData íœ", ""))
+    nm = Trim$(InputBox("å‰Šé™¤ã—ãŸã„åˆ©ç”¨è€…ã®æ°åï¼ˆå®Œå…¨ä¸€è‡´ï¼‰", "EvalData å‰Šé™¤", ""))
     If nm = "" Then Exit Sub
 
     Dim ws As Worksheet: Set ws = ThisWorkbook.Worksheets("EvalData")
@@ -56,27 +56,27 @@ Public Sub DeleteClientFrom_EvalData_ByName()
         End If
     Next r
 
-    MsgBox "EvalData: " & cnt & " s‚ğíœ‚µ‚Ü‚µ‚½B", vbInformation
+    MsgBox "EvalData: " & cnt & " è¡Œã‚’å‰Šé™¤ã—ã¾ã—ãŸã€‚", vbInformation
 End Sub
 
 
 
-' “¯©“¯–¼Fíœƒ{ƒ^ƒ“‰^—p‚Å‚Í EvalData ‚©‚çÅV‚ÌID(‹ó‚Å‚È‚¢)‚ğ©“®•â•æ“¾‚·‚é‚½‚ßA’Êí‚ÍID“ü—Í‚ğ‹‚ß‚È‚¢
+' åŒå§“åŒåæ™‚ï¼šå‰Šé™¤ãƒœã‚¿ãƒ³é‹ç”¨ã§ã¯ EvalData ã‹ã‚‰æœ€æ–°ã®ID(ç©ºã§ãªã„)ã‚’è‡ªå‹•è£œåŠ©å–å¾—ã™ã‚‹ãŸã‚ã€é€šå¸¸ã¯IDå…¥åŠ›ã‚’æ±‚ã‚ãªã„
 
-' EvalData ê—pF–¼iCK=89—ñjˆê’v‚Ìs‚ğu•ÊƒuƒbƒN‚Ö‘Ş”ğv¨uŒ³‚©‚çíœv
+' EvalData å°‚ç”¨ï¼šæ°åï¼ˆCK=89åˆ—ï¼‰ä¸€è‡´ã®è¡Œã‚’ã€Œåˆ¥ãƒ–ãƒƒã‚¯ã¸é€€é¿ã€â†’ã€Œå…ƒã‹ã‚‰å‰Šé™¤ã€
 Public Sub ArchiveAndDelete_EvalData_ByName()
 
     Dim nm As String
-    nm = Trim$(InputBox("EvalDataF‘Ş”ğ¨íœ‚µ‚½‚¢–¼iŠ®‘Sˆê’vj" & vbCrLf & "¦“¯©“¯–¼‚ª‚¢‚éê‡‚ÍŸ‚ÉID‚ğ•·‚«‚Ü‚·", "EvalData —˜—pI—¹ÒƒA[ƒJƒCƒu", ""))
+    nm = Trim$(InputBox("EvalDataï¼šé€€é¿â†’å‰Šé™¤ã—ãŸã„æ°åï¼ˆå®Œå…¨ä¸€è‡´ï¼‰" & vbCrLf & "â€»åŒå§“åŒåãŒã„ã‚‹å ´åˆã¯æ¬¡ã«IDã‚’èãã¾ã™", "EvalData åˆ©ç”¨çµ‚äº†è€…ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–", ""))
     If nm = "" Then Exit Sub
 
     Dim ws As Worksheet: Set ws = ThisWorkbook.Worksheets("EvalData")
-    Const NAME_COL As Long = 89 'CKi–¼j
+    Const NAME_COL As Long = 89 'CKï¼ˆæ°åï¼‰
 
     Dim lastRow As Long
     lastRow = ws.Cells(ws.rows.Count, NAME_COL).End(xlUp).row
     If lastRow < 2 Then
-        MsgBox "EvalData ‚Éƒf[ƒ^s‚ª‚ ‚è‚Ü‚¹‚ñB", vbExclamation
+        MsgBox "EvalData ã«ãƒ‡ãƒ¼ã‚¿è¡ŒãŒã‚ã‚Šã¾ã›ã‚“ã€‚", vbExclamation
         Exit Sub
     End If
     
@@ -84,7 +84,7 @@ Public Sub ArchiveAndDelete_EvalData_ByName()
     Const ID_COL As Long = 82 'Basic.ID
 
 
-'--- “¯©“¯–¼ƒ`ƒFƒbƒNF•¡”ƒqƒbƒg‚È‚çID‚ğ’Ç‰Á‚Å•·‚­ ---
+'--- åŒå§“åŒåãƒã‚§ãƒƒã‚¯ï¼šè¤‡æ•°ãƒ’ãƒƒãƒˆãªã‚‰IDã‚’è¿½åŠ ã§èã ---
 Dim hitCount As Long: hitCount = 0
 Dim r2 As Long
 For r2 = lastRow To 2 Step -1
@@ -100,9 +100,9 @@ If hitCount >= 2 Then
     
     
     If pid = "" Then
-        pid = Trim$(InputBox("“¯©“¯–¼‚ªŒ©‚Â‚©‚è‚Ü‚µ‚½Bíœi‘Ş”ğj‚µ‚½‚¢ID‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B", "ID‚Å“Á’è", ""))
+        pid = Trim$(InputBox("åŒå§“åŒåãŒè¦‹ã¤ã‹ã‚Šã¾ã—ãŸã€‚å‰Šé™¤ï¼ˆé€€é¿ï¼‰ã—ãŸã„IDã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚", "IDã§ç‰¹å®š", ""))
         If pid = "" Then
-            MsgBox "ID–¢“ü—Í‚Ì‚½‚ß’†~‚µ‚Ü‚µ‚½B", vbExclamation
+            MsgBox "IDæœªå…¥åŠ›ã®ãŸã‚ä¸­æ­¢ã—ã¾ã—ãŸã€‚", vbExclamation
             Exit Sub
         End If
     End If
@@ -112,8 +112,8 @@ End If
     
 
     Dim ans As VbMsgBoxResult
-    ans = MsgBox("EvalData ‚Ì–¼=" & nm & " ‚ğƒA[ƒJƒCƒu‚Ö‘Ş”ğ‚µAŒ³ƒf[ƒ^‚©‚çíœ‚µ‚Ü‚·BÀs‚µ‚Ü‚·‚©H", _
-                 vbYesNo + vbQuestion, "ÅIŠm”F")
+    ans = MsgBox("EvalData ã®æ°å=" & nm & " ã‚’ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã¸é€€é¿ã—ã€å…ƒãƒ‡ãƒ¼ã‚¿ã‹ã‚‰å‰Šé™¤ã—ã¾ã™ã€‚å®Ÿè¡Œã—ã¾ã™ã‹ï¼Ÿ", _
+                 vbYesNo + vbQuestion, "æœ€çµ‚ç¢ºèª")
     If ans <> vbYes Then Exit Sub
 
     Application.ScreenUpdating = False
@@ -124,7 +124,7 @@ End If
     Dim wsA As Worksheet: Set wsA = wbArc.Worksheets(1)
     wsA.name = "EvalData"
 
-    ' ƒwƒbƒ_‘Ş”ğiA1:FW1 ‚ğ‚»‚Ì‚Ü‚Üj
+    ' ãƒ˜ãƒƒãƒ€é€€é¿ï¼ˆA1:FW1 ã‚’ãã®ã¾ã¾ï¼‰
     ws.Range("A1:FW1").Copy Destination:=wsA.Range("A1")
 
     Dim moved As Long: moved = 0
@@ -132,18 +132,18 @@ End If
 
     For r = lastRow To 2 Step -1
         If CStr(ws.Cells(r, NAME_COL).value) = nm And (pid = "" Or CStr(ws.Cells(r, ID_COL).value) = pid) Then
-            ' s‘Ş”ğiA:FW ‚Ìsj
+            ' è¡Œé€€é¿ï¼ˆA:FW ã®è¡Œï¼‰
             Dim nextA As Long
             nextA = wsA.Cells(wsA.rows.Count, 1).End(xlUp).row + 1
             ws.Range("A" & r & ":FW" & r).Copy Destination:=wsA.Range("A" & nextA)
 
-            ' Œ³‚©‚çíœ
+            ' å…ƒã‹ã‚‰å‰Šé™¤
             ws.rows(r).Delete
             moved = moved + 1
         End If
     Next r
 
-    ' ƒA[ƒJƒCƒu•Û‘¶
+    ' ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ä¿å­˜
     Dim arcPath As String, arcFile As String
     arcPath = ThisWorkbook.path
     If arcPath = "" Then arcPath = Environ$("TEMP")
@@ -155,8 +155,8 @@ End If
     Application.EnableEvents = True
     Application.ScreenUpdating = True
 
-    MsgBox "Š®—¹FEvalData ‚©‚ç " & moved & " s‚ğ‘Ş”ğ¨íœ‚µ‚Ü‚µ‚½B" & vbCrLf & _
-           "ƒA[ƒJƒCƒuF" & arcFile, vbInformation
+    MsgBox "å®Œäº†ï¼šEvalData ã‹ã‚‰ " & moved & " è¡Œã‚’é€€é¿â†’å‰Šé™¤ã—ã¾ã—ãŸã€‚" & vbCrLf & _
+           "ã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ï¼š" & arcFile, vbInformation
            
            
            gArchiveDeleteBasicID = ""
@@ -178,7 +178,7 @@ Public Sub AddHeaderArchiveDeleteButton()
 
     If btn Is Nothing Then
         Set btn = hdr.Controls.Add("Forms.CommandButton.1", "cmdArchiveDelete", True)
-        btn.caption = "I—¹Òíœ"
+        btn.caption = "çµ‚äº†è€…å‰Šé™¤"
         btn.Width = 90
         btn.Height = hdr.Controls("txtHdrPID").Height
         btn.Top = hdr.Controls("txtHdrPID").Top

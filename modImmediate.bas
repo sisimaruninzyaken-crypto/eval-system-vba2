@@ -1,7 +1,7 @@
 Attribute VB_Name = "modImmediate"
 
 
-'--- •â•i‚±‚Ìƒ‚ƒWƒ…[ƒ‹“à‚¾‚¯‚ÅŠ®Œ‹j ---
+'--- è£œåŠ©ï¼ˆã“ã®ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«å†…ã ã‘ã§å®Œçµï¼‰ ---
 Private Function NzLng(v As Variant) As Long
     If IsNumeric(v) Then NzLng = CLng(v) Else NzLng = 0
 End Function
@@ -9,9 +9,9 @@ End Function
 Private Function NormName(ByVal s As String) As String
     s = Replace(s, vbCrLf, "")
     s = Replace(s, " ", "")
-    s = Replace(s, "@", "")
+    s = Replace(s, "ã€€", "")
     On Error Resume Next
-    s = StrConv(s, vbNarrow) ' ‘SŠp¨”¼Špi‰Â”\‚È‚çj
+    s = StrConv(s, vbNarrow) ' å…¨è§’â†’åŠè§’ï¼ˆå¯èƒ½ãªã‚‰ï¼‰
     On Error GoTo 0
     NormName = LCase$(s)
 End Function
@@ -40,7 +40,7 @@ Private Sub DumpCandidate_Simple(ByVal ws As Worksheet, ByVal look As Object, By
     If NzLng(look("Basic.EvalDate")) > 0 Then dt = CStr(ws.Cells(rowNum, look("Basic.EvalDate")).value)
     Debug.Print "  [" & idx & "] row=" & rowNum & "  name=""" & nm & """  ID=" & pid & "  age=" & age & "  date=" & dt
 End Sub
-'=== ‚±‚±‚Ü‚Å ===
+'=== ã“ã“ã¾ã§ ===
 
 
 
@@ -60,8 +60,8 @@ Public Sub Test_HeaderCheck()
     Set ws = modSchema.GetEvalDataSheet()
     Set look = BuildHeaderLookup(ws)
 
-   Debug.Print "•â•‹ï:", modEvalIOEntry.FindColByHeaderExact(ws, "•â•‹ï")
-Debug.Print "ƒŠƒXƒN:", modEvalIOEntry.FindColByHeaderExact(ws, "ƒŠƒXƒN")
+   Debug.Print "è£œåŠ©å…·:", modEvalIOEntry.FindColByHeaderExact(ws, "è£œåŠ©å…·")
+Debug.Print "ãƒªã‚¹ã‚¯:", modEvalIOEntry.FindColByHeaderExact(ws, "ãƒªã‚¹ã‚¯")
 
 
 End Sub
@@ -79,7 +79,7 @@ End Sub
 
 
 
-  ' ROMƒy[ƒWF”’l—“=Label+22pxA”õl=Label+28px ‚ğgâ‘ÎÀ•Wh‚Å‘µ‚¦‚éieˆá‚¢OKj
+  ' ROMãƒšãƒ¼ã‚¸ï¼šæ•°å€¤æ¬„=Label+22pxã€å‚™è€ƒ=Label+28px ã‚’â€œçµ¶å¯¾åº§æ¨™â€ã§æƒãˆã‚‹ï¼ˆè¦ªé•ã„OKï¼‰
 Public Sub ROM_AlignFix_Set20()
     Const targetSmall As Long = 24
     Const targetNote  As Long = 28
@@ -87,12 +87,12 @@ Public Sub ROM_AlignFix_Set20()
     Dim c As Object, mp As Object, pg As Object, i As Long
     Dim bestGap As Double
 
-    ' --- ROMƒy[ƒW“Á’è ---
+    ' --- ROMãƒšãƒ¼ã‚¸ç‰¹å®š ---
     For Each c In frmEval.Controls
         If TypeName(c) = "MultiPage" Then
             For i = 0 To c.Pages.Count - 1
                 If InStr(1, CStr(c.Pages(i).caption), "ROM", vbTextCompare) > 0 _
-                Or InStr(1, CStr(c.Pages(i).caption), "å—vŠÖß", vbTextCompare) > 0 Then
+                Or InStr(1, CStr(c.Pages(i).caption), "ä¸»è¦é–¢ç¯€", vbTextCompare) > 0 Then
                     Set mp = c: Set pg = c.Pages(i): Exit For
                 End If
             Next
@@ -110,40 +110,40 @@ Public Sub ROM_AlignFix_Set20()
         If TypeName(ctrl) = "TextBox" Then
             Set txt = ctrl
 
-            ' --- ”õlŒó•â‚Ì”»’è ---
+            ' --- å‚™è€ƒå€™è£œã®åˆ¤å®š ---
             ml = False: On Error Resume Next: ml = txt.multiline: On Error GoTo 0
             isBig = (ml Or txt.Height >= 80 Or txt.Width >= 400 _
                     Or InStr(1, UCase$(txt.name), "NOTE") > 0 _
                     Or InStr(1, UCase$(txt.Tag & ""), "NOTE") > 0)
 
-            ' --- ƒ‰ƒxƒ‹“Á’è ---
+            ' --- ãƒ©ãƒ™ãƒ«ç‰¹å®š ---
             Set lbl = Nothing
             If isBig Then
-                ' ‡@ e“à‚Ìu”õlvƒ‰ƒxƒ‹
+                ' â‘  è¦ªå†…ã®ã€Œå‚™è€ƒã€ãƒ©ãƒ™ãƒ«
                 For Each tmp In txt.parent.Controls
                     If TypeName(tmp) = "Label" Then
-                        If InStr(1, CStr(tmp.caption), "”õl", vbTextCompare) > 0 Then Set lbl = tmp: Exit For
+                        If InStr(1, CStr(tmp.caption), "å‚™è€ƒ", vbTextCompare) > 0 Then Set lbl = tmp: Exit For
                     End If
                 Next tmp
-                ' ‡A Œ©‚Â‚©‚ç‚È‚¯‚ê‚Îƒy[ƒW‘S‘Ì‚Ìu”õlvƒ‰ƒxƒ‹
+                ' â‘¡ è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°ãƒšãƒ¼ã‚¸å…¨ä½“ã®ã€Œå‚™è€ƒã€ãƒ©ãƒ™ãƒ«
                 If lbl Is Nothing Then
                     For Each tmpZ In pg.Controls
                         If TypeName(tmpZ) = "Label" Then
-                            If InStr(1, CStr(tmpZ.caption), "”õl", vbTextCompare) > 0 Then Set lbl = tmpZ: Exit For
+                            If InStr(1, CStr(tmpZ.caption), "å‚™è€ƒ", vbTextCompare) > 0 Then Set lbl = tmpZ: Exit For
                         End If
                     Next tmpZ
                 End If
             End If
-            ' ‡B-•âFe“à‚ÅŒ©‚Â‚©‚ç‚È‚¯‚ê‚ÎAƒy[ƒW‘S‘Ì‚ÅÅ‹ß¶i<=jƒ‰ƒxƒ‹‚ğ’T‚·
+            ' â‘¢-è£œï¼šè¦ªå†…ã§è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°ã€ãƒšãƒ¼ã‚¸å…¨ä½“ã§æœ€è¿‘å·¦ï¼ˆ<=ï¼‰ãƒ©ãƒ™ãƒ«ã‚’æ¢ã™
 If lbl Is Nothing Then
     bestGap = 1E+20
-    Dim d As Double   ' © ‡A‚Åà–¾‚·‚é d ‚ÌéŒ¾BŠù‚Éã‚ÅéŒ¾‚µ‚Ä‚¢‚ê‚Î•s—v
+    Dim d As Double   ' â† â‘¡ã§èª¬æ˜ã™ã‚‹ d ã®å®£è¨€ã€‚æ—¢ã«ä¸Šã§å®£è¨€ã—ã¦ã„ã‚Œã°ä¸è¦
     For Each tmp In txt.parent.Controls
         If TypeName(tmp) = "Label" Then
             If tmp.Left <= txt.Left And tmp.Width <= 120 _
                And (LenB(CStr(tmp.caption)) >= 2 Or tmp.Width >= 12) Then
 
-                d = AbsTop(txt) - AbsTop(tmp)  ' ã‚É‚ ‚é‹——£‚¾‚¯Ì—p
+                d = AbsTop(txt) - AbsTop(tmp)  ' ä¸Šã«ã‚ã‚‹è·é›¢ã ã‘æ¡ç”¨
                 If d >= 0 And d <= 120 Then
                     If d < bestGap Then Set lbl = tmp: bestGap = d
                 End If
@@ -154,7 +154,7 @@ End If
 
 
 
-            ' --- ‘µ‚¦ ---
+            ' --- æƒãˆ ---
             If Not lbl Is Nothing Then
               desired = AbsTop(lbl) + IIf(isBig, targetNote, targetSmall)
 
@@ -182,20 +182,20 @@ End Sub
 
 
 
-' ”õl‚¾‚¯‚ğŠmÀ‚É®—ñFLabel(u”õlv)‚Ì24px‰º‚Ö
+' å‚™è€ƒã ã‘ã‚’ç¢ºå®Ÿã«æ•´åˆ—ï¼šLabel(ã€Œå‚™è€ƒã€)ã®24pxä¸‹ã¸
 Public Sub ROM_NoteFix_Once()
     Const target As Long = 24
     Dim c As Object, mp As Object, pg As Object, i As Long
     Dim ctrl As Object, lbl As Object, tb As Object
     Dim ml As Boolean, oldTop As Single
 
-    ' ROMƒy[ƒW“Á’è
+    ' ROMãƒšãƒ¼ã‚¸ç‰¹å®š
     For Each c In frmEval.Controls
         If TypeName(c) = "MultiPage" Then
             Set mp = c
             For i = 0 To mp.Pages.Count - 1
                 If InStr(1, CStr(mp.Pages(i).caption), "ROM", vbTextCompare) > 0 _
-                Or InStr(1, CStr(mp.Pages(i).caption), "å—vŠÖß", vbTextCompare) > 0 Then
+                Or InStr(1, CStr(mp.Pages(i).caption), "ä¸»è¦é–¢ç¯€", vbTextCompare) > 0 Then
                     Set pg = mp.Pages(i): Exit For
                 End If
             Next
@@ -204,15 +204,15 @@ Public Sub ROM_NoteFix_Once()
     Next
     If pg Is Nothing Then Debug.Print "[NoteFix] ROM page not found": Exit Sub
 
-    ' u”õlvƒ‰ƒxƒ‹
+    ' ã€Œå‚™è€ƒã€ãƒ©ãƒ™ãƒ«
     For Each ctrl In pg.Controls
         If TypeName(ctrl) = "Label" Then
-            If InStr(1, CStr(ctrl.caption), "”õl", vbTextCompare) > 0 Then Set lbl = ctrl: Exit For
+            If InStr(1, CStr(ctrl.caption), "å‚™è€ƒ", vbTextCompare) > 0 Then Set lbl = ctrl: Exit For
         End If
     Next
-    If lbl Is Nothing Then Debug.Print "[NoteFix] ”õlƒ‰ƒxƒ‹‚È‚µ": Exit Sub
+    If lbl Is Nothing Then Debug.Print "[NoteFix] å‚™è€ƒãƒ©ãƒ™ãƒ«ãªã—": Exit Sub
 
-    ' Å‘åƒTƒCƒY‚ÌMultiLineƒeƒLƒXƒgi”õl–{‘Ìj
+    ' æœ€å¤§ã‚µã‚¤ã‚ºã®MultiLineãƒ†ã‚­ã‚¹ãƒˆï¼ˆå‚™è€ƒæœ¬ä½“ï¼‰
     For Each ctrl In pg.Controls
         If TypeName(ctrl) = "TextBox" Then
             ml = False: On Error Resume Next: ml = ctrl.multiline: On Error GoTo 0
@@ -225,16 +225,16 @@ Public Sub ROM_NoteFix_Once()
             End If
         End If
     Next
-    If tb Is Nothing Then Debug.Print "[NoteFix] ”õlƒeƒLƒXƒg‚È‚µ": Exit Sub
+    If tb Is Nothing Then Debug.Print "[NoteFix] å‚™è€ƒãƒ†ã‚­ã‚¹ãƒˆãªã—": Exit Sub
 
     oldTop = tb.Top
     tb.Top = lbl.Top + target
-    Debug.Print "[NoteFix] Top: " & oldTop & " -> " & tb.Top & "  (Label.Top=" & lbl.Top & ", ƒ¢=" & (tb.Top - lbl.Top) & ")"
+    Debug.Print "[NoteFix] Top: " & oldTop & " -> " & tb.Top & "  (Label.Top=" & lbl.Top & ", Î”=" & (tb.Top - lbl.Top) & ")"
 End Sub
 
 
 
-' eƒ`ƒF[ƒ“‚ğÅ‘å20’i‚Ü‚Å‚Å‘Å‚¿Ø‚éˆÀ‘S”Å
+' è¦ªãƒã‚§ãƒ¼ãƒ³ã‚’æœ€å¤§20æ®µã¾ã§ã§æ‰“ã¡åˆ‡ã‚‹å®‰å…¨ç‰ˆ
 Private Function AbsTop(ByVal o As Object) As Single
     On Error Resume Next
     Dim t As Single: t = NzTop(o)
@@ -296,31 +296,31 @@ End Function
 
 
 
-' ROMƒy[ƒW“à‚Ì‘SCheckBox‚ğuŒ³ˆÊ’u‚©‚ç”ñ—İÏ‚Å12pxãv‚É”z’ui‚‚³/ƒtƒHƒ“ƒg‚ÍG‚ç‚È‚¢j
+' ROMãƒšãƒ¼ã‚¸å†…ã®å…¨CheckBoxã‚’ã€Œå…ƒä½ç½®ã‹ã‚‰éç´¯ç©ã§12pxä¸Šã€ã«é…ç½®ï¼ˆé«˜ã•/ãƒ•ã‚©ãƒ³ãƒˆã¯è§¦ã‚‰ãªã„ï¼‰
 Public Sub ROM_CheckBoxes_Up12_OnROM_Recursive_Once_V2()
     Dim mp As Object, pg As Object, i As Long, found As Boolean
     Dim stk As Collection, cont As Object, c As Object
     Dim j As Long, baseTop As Double, pos As Long
     Dim tagKey As String: tagKey = "CBBase="
 
-    ' ?? ROMƒy[ƒW‚ğ“Á’èiCaption‚É ROM / ‚q‚n‚l / å—vŠÖß / ŠÖß‰Â“®ˆæ ‚ğŠÜ‚Şj??
+    ' ?? ROMãƒšãƒ¼ã‚¸ã‚’ç‰¹å®šï¼ˆCaptionã« ROM / ï¼²ï¼¯ï¼­ / ä¸»è¦é–¢ç¯€ / é–¢ç¯€å¯å‹•åŸŸ ã‚’å«ã‚€ï¼‰??
     For Each mp In frmEval.Controls
         If TypeName(mp) = "MultiPage" Then
             For i = 0 To mp.Pages.Count - 1
                 Set pg = mp.Pages(i)
                 If (InStr(1, CStr(pg.caption), "ROM", vbTextCompare) > 0) _
-                   Or (InStr(1, CStr(pg.caption), "‚q‚n‚l", vbTextCompare) > 0) _
-                   Or (InStr(1, CStr(pg.caption), "å—vŠÖß", vbTextCompare) > 0) _
-                   Or (InStr(1, CStr(pg.caption), "ŠÖß‰Â“®ˆæ", vbTextCompare) > 0) Then
+                   Or (InStr(1, CStr(pg.caption), "ï¼²ï¼¯ï¼­", vbTextCompare) > 0) _
+                   Or (InStr(1, CStr(pg.caption), "ä¸»è¦é–¢ç¯€", vbTextCompare) > 0) _
+                   Or (InStr(1, CStr(pg.caption), "é–¢ç¯€å¯å‹•åŸŸ", vbTextCompare) > 0) Then
                     found = True: Exit For
                 End If
             Next
             If found Then Exit For
         End If
     Next
-    If Not found Then MsgBox "ROMƒy[ƒW‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation: Exit Sub
+    If Not found Then MsgBox "ROMãƒšãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation: Exit Sub
 
-    ' ?? “ü‚êq(Frame, Page, MultiPage“à‚ÌPage)‚àŠÜ‚ß‚Ä‘–¸iVBA Collection ƒXƒ^ƒbƒNj??
+    ' ?? å…¥ã‚Œå­(Frame, Page, MultiPageå†…ã®Page)ã‚‚å«ã‚ã¦èµ°æŸ»ï¼ˆVBA Collection ã‚¹ã‚¿ãƒƒã‚¯ï¼‰??
     Set stk = New Collection
     stk.Add pg
 
@@ -329,7 +329,7 @@ Public Sub ROM_CheckBoxes_Up12_OnROM_Recursive_Once_V2()
 
         On Error Resume Next
         For Each c In cont.Controls
-            ' qƒRƒ“ƒeƒi‚ÍƒXƒ^ƒbƒN‚ÉÏ‚Ş
+            ' å­ã‚³ãƒ³ãƒ†ãƒŠã¯ã‚¹ã‚¿ãƒƒã‚¯ã«ç©ã‚€
             Select Case TypeName(c)
                 Case "Frame", "Page"
                     stk.Add c
@@ -339,7 +339,7 @@ Public Sub ROM_CheckBoxes_Up12_OnROM_Recursive_Once_V2()
                     Next
             End Select
 
-            ' CheckBox‚¾‚¯ Top ‚ğuŒ³Top?12v‚Éi”ñ—İÏ^‚‚³‚ÍG‚ç‚È‚¢j
+            ' CheckBoxã ã‘ Top ã‚’ã€Œå…ƒTop?12ã€ã«ï¼ˆéç´¯ç©ï¼é«˜ã•ã¯è§¦ã‚‰ãªã„ï¼‰
             If TypeName(c) = "CheckBox" Then
                 With c
                     pos = InStr(1, .Tag, tagKey, vbTextCompare)
@@ -367,20 +367,20 @@ End Sub
 
 
 
-' ROMƒ^ƒu‚ÌÅIŒŸØFTextBox‚‚³‚20 ‚ÆACheckBox‚ªuŒ³Top?12v‚©‚çƒYƒŒ‚Ä‚¢‚éŒ”‚ğ•\¦
+' ROMã‚¿ãƒ–ã®æœ€çµ‚æ¤œè¨¼ï¼šTextBoxé«˜ã•â‰ 20 ã¨ã€CheckBoxãŒã€Œå…ƒTop?12ã€ã‹ã‚‰ã‚ºãƒ¬ã¦ã„ã‚‹ä»¶æ•°ã‚’è¡¨ç¤º
 Public Sub ROM_VerifyOnce()
     Dim mp As Object, pg As Object, c As Object, i As Long, found As Boolean
     Dim ngTB As Long, ngCB As Long, base As Double, pos As Long, cap As String
 
-    ' ROMƒy[ƒW“Á’è
+    ' ROMãƒšãƒ¼ã‚¸ç‰¹å®š
     For Each mp In frmEval.Controls
         If TypeName(mp) = "MultiPage" Then
             For i = 0 To mp.Pages.Count - 1
                 cap = CStr(mp.Pages(i).caption)
                 If InStr(1, cap, "ROM", vbTextCompare) > 0 Or _
-                   InStr(1, cap, "‚q‚n‚l", vbTextCompare) > 0 Or _
-                   InStr(1, cap, "å—vŠÖß", vbTextCompare) > 0 Or _
-                   InStr(1, cap, "ŠÖß‰Â“®ˆæ", vbTextCompare) > 0 Then
+                   InStr(1, cap, "ï¼²ï¼¯ï¼­", vbTextCompare) > 0 Or _
+                   InStr(1, cap, "ä¸»è¦é–¢ç¯€", vbTextCompare) > 0 Or _
+                   InStr(1, cap, "é–¢ç¯€å¯å‹•åŸŸ", vbTextCompare) > 0 Then
                     Set pg = mp.Pages(i): found = True: Exit For
                 End If
             Next
@@ -389,7 +389,7 @@ Public Sub ROM_VerifyOnce()
     Next
     If Not found Then Debug.Print "[VERIFY] ROM page not found": Exit Sub
 
-    ' ŒŸØ
+    ' æ¤œè¨¼
     For Each c In pg.Controls
         If TypeName(c) = "TextBox" Then
             If c.multiline = False And c.Height <> 15 Then ngTB = ngTB + 1
@@ -399,7 +399,7 @@ Public Sub ROM_VerifyOnce()
                 base = val(Mid$(c.Tag, pos + 7))
                 If Abs((base - 12) - c.Top) > 0.5 Then ngCB = ngCB + 1
             Else
-                ngCB = ngCB + 1  ' Šî€–¢‹L˜^‚àƒYƒŒˆµ‚¢
+                ngCB = ngCB + 1  ' åŸºæº–æœªè¨˜éŒ²ã‚‚ã‚ºãƒ¬æ‰±ã„
             End If
         End If
     Next
@@ -410,29 +410,29 @@ End Sub
 
 
 
-' ROMƒy[ƒW“à‚Ì‘S‚Ä‚Ì’PsTextBox‚ğ‚‚³20‚ÉŒÅ’èiFrame‚â“ü‚êq‚àŠÜ‚ß‚ÄÄ‹Aj
+' ROMãƒšãƒ¼ã‚¸å†…ã®å…¨ã¦ã®å˜è¡ŒTextBoxã‚’é«˜ã•20ã«å›ºå®šï¼ˆFrameã‚„å…¥ã‚Œå­ã‚‚å«ã‚ã¦å†å¸°ï¼‰
 Public Sub ROM_Fix_TextBoxHeight_Recursive_OnROM_Once()
     Const h As Single = 15
     Dim mp As Object, pg As Object, i As Long, found As Boolean
 
-    ' ROMƒy[ƒW‚ğ“Á’è
+    ' ROMãƒšãƒ¼ã‚¸ã‚’ç‰¹å®š
     For Each mp In frmEval.Controls
         If TypeName(mp) = "MultiPage" Then
             For i = 0 To mp.Pages.Count - 1
                 Set pg = mp.Pages(i)
                 If InStr(1, CStr(pg.caption), "ROM", vbTextCompare) > 0 _
-                   Or InStr(1, CStr(pg.caption), "‚q‚n‚l", vbTextCompare) > 0 _
-                   Or InStr(1, CStr(pg.caption), "å—vŠÖß", vbTextCompare) > 0 _
-                   Or InStr(1, CStr(pg.caption), "ŠÖß‰Â“®ˆæ", vbTextCompare) > 0 Then
+                   Or InStr(1, CStr(pg.caption), "ï¼²ï¼¯ï¼­", vbTextCompare) > 0 _
+                   Or InStr(1, CStr(pg.caption), "ä¸»è¦é–¢ç¯€", vbTextCompare) > 0 _
+                   Or InStr(1, CStr(pg.caption), "é–¢ç¯€å¯å‹•åŸŸ", vbTextCompare) > 0 Then
                     found = True: Exit For
                 End If
             Next
             If found Then Exit For
         End If
     Next
-    If Not found Then MsgBox "ROMƒy[ƒW‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB": Exit Sub
+    If Not found Then MsgBox "ROMãƒšãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚": Exit Sub
 
-    ' Ä‹Aˆ—ŠJn
+    ' å†å¸°å‡¦ç†é–‹å§‹
     Call FixTextBoxHeightRecursive(pg, h)
 End Sub
 
@@ -457,7 +457,7 @@ End Sub
 
 
 
-'--- ‘ÎÛƒy[ƒWi‹Ø—Í/MMTj‚Ì“Á’è ---
+'--- å¯¾è±¡ãƒšãƒ¼ã‚¸ï¼ˆç­‹åŠ›/MMTï¼‰ã®ç‰¹å®š ---
 Private Function GetMMTPage() As Object
     Dim c As Object, mp As Object, i As Long
     For Each c In frmEval.Controls
@@ -466,7 +466,7 @@ Private Function GetMMTPage() As Object
             For i = 0 To mp.Pages.Count - 1
                 Dim cap As String
                 cap = mp.Pages(i).caption
-                If InStr(cap, "MMT") > 0 Or InStr(cap, "‹Ø—Í") > 0 Then
+                If InStr(cap, "MMT") > 0 Or InStr(cap, "ç­‹åŠ›") > 0 Then
                     Set GetMMTPage = mp.Pages(i)
                     Exit Function
                 End If
@@ -476,7 +476,7 @@ Private Function GetMMTPage() As Object
     Set GetMMTPage = Nothing
 End Function
 
-'--- ©“®¶¬ƒ^ƒO‚Ì‚à‚Ì‚¾‚¯íœ ---
+'--- è‡ªå‹•ç”Ÿæˆã‚¿ã‚°ã®ã‚‚ã®ã ã‘å‰Šé™¤ ---
 Private Sub MMT_ClearGen(pg As Object)
     Dim idx As Long
     For idx = pg.Controls.Count - 1 To 0 Step -1
@@ -486,7 +486,7 @@ Private Sub MMT_ClearGen(pg As Object)
     Next
 End Sub
 
-'--- 1ƒy[ƒW‚Ô‚ñ‚ÌƒŒƒCƒAƒEƒg¶¬ ---
+'--- 1ãƒšãƒ¼ã‚¸ã¶ã‚“ã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆç”Ÿæˆ ---
 Private Sub BuildPage(pg As Object, items As Variant)
     Const ROW_H As Single = 24
     Const LBL_W As Single = 130
@@ -496,10 +496,10 @@ Private Sub BuildPage(pg As Object, items As Variant)
     Dim x0 As Single, y0 As Single
     x0 = 20: y0 = 28
 
-    ' Œ©o‚µ
-    MakeLabel pg, "lblHdr_Muscle", "‹ØŒQ", x0, y0 - 20, 60, 18
-    MakeLabel pg, "lblHdr_R", "‰E", x0 + LBL_W + gap, y0 - 20, 30, 18
-    MakeLabel pg, "lblHdr_L", "¶", x0 + LBL_W + gap + COL_W + gap, y0 - 20, 30, 18
+    ' è¦‹å‡ºã—
+    MakeLabel pg, "lblHdr_Muscle", "ç­‹ç¾¤", x0, y0 - 20, 60, 18
+    MakeLabel pg, "lblHdr_R", "å³", x0 + LBL_W + gap, y0 - 20, 30, 18
+    MakeLabel pg, "lblHdr_L", "å·¦", x0 + LBL_W + gap + COL_W + gap, y0 - 20, 30, 18
 
     Dim i As Long, Y As Single
     Y = y0
@@ -514,7 +514,7 @@ Private Sub BuildPage(pg As Object, items As Variant)
     Next i
 End Sub
 
-'--- Label ¶¬ ---
+'--- Label ç”Ÿæˆ ---
 Private Sub MakeLabel(pg As Object, nm As String, cap As String, l As Single, t As Single, w As Single, h As Single)
     Dim o As MSForms.label
     Set o = pg.Controls.Add("Forms.Label.1", nm, True)
@@ -525,7 +525,7 @@ Private Sub MakeLabel(pg As Object, nm As String, cap As String, l As Single, t 
     End With
 End Sub
 
-'--- ComboBox ¶¬iMMT 0`5j ---
+'--- ComboBox ç”Ÿæˆï¼ˆMMT 0ã€œ5ï¼‰ ---
 Private Sub MakeCombo(pg As Object, nm As String, l As Single, t As Single, w As Single, h As Single)
     Dim o As MSForms.ComboBox
     Set o = pg.Controls.Add("Forms.ComboBox.1", nm, True)
@@ -540,36 +540,36 @@ End Sub
 
 
 
-'=== MMT ŒZ’íƒy[ƒW•û®FMMT_ãˆ / MMT_‰ºˆ ‚ğ’Ç‰Á‚µ‚Ä€–Ú¶¬ ===
+'=== MMT å…„å¼Ÿãƒšãƒ¼ã‚¸æ–¹å¼ï¼šMMT_ä¸Šè‚¢ / MMT_ä¸‹è‚¢ ã‚’è¿½åŠ ã—ã¦é …ç›®ç”Ÿæˆ ===
 Public Sub MMT_BuildSiblingTabs()
     Dim mp As Object, iMMT As Long
     If Not FindMMT_MultiPage(mp, iMMT) Then
-        MsgBox "MMT/‹Ø—Í ƒy[ƒW‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation: Exit Sub
+        MsgBox "MMT/ç­‹åŠ› ãƒšãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation: Exit Sub
     End If
 
     Dim pgUpper As Object, pgLower As Object
-    Set pgUpper = EnsurePage(mp, "MMT_ãˆ", iMMT + 1)
-    Set pgLower = EnsurePage(mp, "MMT_‰ºˆ", iMMT + 2)
+    Set pgUpper = EnsurePage(mp, "MMT_ä¸Šè‚¢", iMMT + 1)
+    Set pgLower = EnsurePage(mp, "MMT_ä¸‹è‚¢", iMMT + 2)
 
     Dim upperItems, lowerItems
-    upperItems = Array("Œ¨‹ü‹È", "Œ¨L“W", "Œ¨ŠO“]", "Œ¨“àù", "Œ¨ŠOù", "•I‹ü‹È", "•IL“W", "‘O˜r‰ñ“à", "‘O˜r‰ñŠO", "èŠÖß¶‹ü", "èŠÖß”w‹ü", "w‹ü‹È", "wL“W", "•êw‘Î—§")
-    lowerItems = Array("ŒÒ‹ü‹È", "ŒÒL“W", "ŒÒŠO“]", "ŒÒ“à“]", "•G‹ü‹È", "•GL“W", "‘«ŠÖß”w‹ü", "‘«ŠÖß’ê‹ü", "•êæäL“W")
+    upperItems = Array("è‚©å±ˆæ›²", "è‚©ä¼¸å±•", "è‚©å¤–è»¢", "è‚©å†…æ—‹", "è‚©å¤–æ—‹", "è‚˜å±ˆæ›²", "è‚˜ä¼¸å±•", "å‰è…•å›å†…", "å‰è…•å›å¤–", "æ‰‹é–¢ç¯€æŒå±ˆ", "æ‰‹é–¢ç¯€èƒŒå±ˆ", "æŒ‡å±ˆæ›²", "æŒ‡ä¼¸å±•", "æ¯æŒ‡å¯¾ç«‹")
+    lowerItems = Array("è‚¡å±ˆæ›²", "è‚¡ä¼¸å±•", "è‚¡å¤–è»¢", "è‚¡å†…è»¢", "è†å±ˆæ›²", "è†ä¼¸å±•", "è¶³é–¢ç¯€èƒŒå±ˆ", "è¶³é–¢ç¯€åº•å±ˆ", "æ¯è¶¾ä¼¸å±•")
 
     ClearGenerated pgUpper: ClearGenerated pgLower
     BuildMMTPage pgUpper, upperItems
     BuildMMTPage pgLower, lowerItems
 
-    MsgBox "MMT_ãˆ^MMT_‰ºˆ ‚ğì¬‚µ‚Ü‚µ‚½B", vbInformation
+    MsgBox "MMT_ä¸Šè‚¢ï¼MMT_ä¸‹è‚¢ ã‚’ä½œæˆã—ã¾ã—ãŸã€‚", vbInformation
 End Sub
 
-'--- MMTƒy[ƒW‚ğŠÜ‚Ş MultiPage ‚Æ‚»‚ÌƒCƒ“ƒfƒbƒNƒX‚ğæ“¾ ---
+'--- MMTãƒšãƒ¼ã‚¸ã‚’å«ã‚€ MultiPage ã¨ãã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å–å¾— ---
 Private Function FindMMT_MultiPage(ByRef mp As Object, ByRef idx As Long) As Boolean
     Dim c As Object, i As Long
     For Each c In frmEval.Controls
         If TypeName(c) = "MultiPage" Then
             For i = 0 To c.Pages.Count - 1
                 Dim cap$: cap = c.Pages(i).caption
-                If InStr(cap, "MMT") > 0 Or InStr(cap, "‹Ø—Í") > 0 Then
+                If InStr(cap, "MMT") > 0 Or InStr(cap, "ç­‹åŠ›") > 0 Then
                     Set mp = c: idx = i: FindMMT_MultiPage = True: Exit Function
                 End If
             Next
@@ -577,7 +577,7 @@ Private Function FindMMT_MultiPage(ByRef mp As Object, ByRef idx As Long) As Boo
     Next
 End Function
 
-'--- w’èˆÊ’u‚Éƒy[ƒW‚ğ—pˆÓi‚ ‚ê‚ÎÄ—˜—pj ---
+'--- æŒ‡å®šä½ç½®ã«ãƒšãƒ¼ã‚¸ã‚’ç”¨æ„ï¼ˆã‚ã‚Œã°å†åˆ©ç”¨ï¼‰ ---
 Private Function EnsurePage(mp As Object, title As String, atIndex As Long) As Object
     Dim i As Long
     For i = 0 To mp.Pages.Count - 1
@@ -590,7 +590,7 @@ Private Function EnsurePage(mp As Object, title As String, atIndex As Long) As O
     Set EnsurePage = pg
 End Function
 
-'--- ©“®¶¬‚Ì‘|œ ---
+'--- è‡ªå‹•ç”Ÿæˆã®æƒé™¤ ---
 Private Sub ClearGenerated(pg As Object)
     Dim j As Long
     For j = pg.Controls.Count - 1 To 0 Step -1
@@ -598,14 +598,14 @@ Private Sub ClearGenerated(pg As Object)
     Next
 End Sub
 
-'--- MMT 1ƒy[ƒW•ª‚ÌUI¶¬ ---
+'--- MMT 1ãƒšãƒ¼ã‚¸åˆ†ã®UIç”Ÿæˆ ---
 Private Sub BuildMMTPage(pg As Object, items As Variant)
     Const ROW_H As Single = 24, LBL_W As Single = 130, COL_W As Single = 90, gap As Single = 12
     Dim x0 As Single, y0 As Single: x0 = 20: y0 = 28
 
-    MakeLbl pg, "lblHdrMus", "‹ØŒQ", x0, y0 - 20, 60, 18
-    MakeLbl pg, "lblHdrR", "‰E", x0 + LBL_W + gap, y0 - 20, 30, 18
-    MakeLbl pg, "lblHdrL", "¶", x0 + LBL_W + gap + COL_W + gap, y0 - 20, 30, 18
+    MakeLbl pg, "lblHdrMus", "ç­‹ç¾¤", x0, y0 - 20, 60, 18
+    MakeLbl pg, "lblHdrR", "å³", x0 + LBL_W + gap, y0 - 20, 30, 18
+    MakeLbl pg, "lblHdrL", "å·¦", x0 + LBL_W + gap + COL_W + gap, y0 - 20, 30, 18
 
     Dim i As Long, Y As Single: Y = y0
     For i = LBound(items) To UBound(items)
@@ -640,18 +640,18 @@ End Sub
 
 
 
-'=== MMT‚Ìqƒ^ƒuiãˆ^‰ºˆj‚ğAMMTƒy[ƒW“à‚ÌFrame‚Éû—e‚µ‚Äì¬ ===
+'=== MMTã®å­ã‚¿ãƒ–ï¼ˆä¸Šè‚¢ï¼ä¸‹è‚¢ï¼‰ã‚’ã€MMTãƒšãƒ¼ã‚¸å†…ã®Frameã«åå®¹ã—ã¦ä½œæˆ ===
 Public Sub MMT_BuildChildTabs_Frame()
     Dim pg As Object
     Set pg = GetMMTPage()
-    If pg Is Nothing Then MsgBox "MMTƒy[ƒW‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", vbExclamation: Exit Sub
+    If pg Is Nothing Then MsgBox "MMTãƒšãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", vbExclamation: Exit Sub
 
     Dim fra As MSForms.Frame, mp As MSForms.MultiPage
     On Error Resume Next
     Set fra = pg.Controls("fraMMTWrap")
     On Error GoTo 0
     If fra Is Nothing Then
-        ' Frame‚ğƒtƒH[ƒ€‚É’Ç‰Á‚µ‚Ä‚©‚çe‚ğMMTƒy[ƒW‚Ö
+        ' Frameã‚’ãƒ•ã‚©ãƒ¼ãƒ ã«è¿½åŠ ã—ã¦ã‹ã‚‰è¦ªã‚’MMTãƒšãƒ¼ã‚¸ã¸
         Set fra = frmEval.Controls.Add("Forms.Frame.1", "fraMMTWrap", True)
         Set fra.parent = pg
         With fra
@@ -674,18 +674,18 @@ Public Sub MMT_BuildChildTabs_Frame()
             .Style = 0
             .TabsPerRow = 4
             .Pages.Clear
-            .Pages.Add.caption = "ãˆ"
-            .Pages.Add.caption = "‰ºˆ"
+            .Pages.Add.caption = "ä¸Šè‚¢"
+            .Pages.Add.caption = "ä¸‹è‚¢"
         End With
     End If
 
-    ' ’†g‚ğ\’z
+    ' ä¸­èº«ã‚’æ§‹ç¯‰
     MMT_ClearGen mp.Pages(0)
     MMT_ClearGen mp.Pages(1)
-    BuildPage mp.Pages(0), Array("Œ¨‹ü‹È", "Œ¨L“W", "Œ¨ŠO“]", "Œ¨“àù", "Œ¨ŠOù", "•I‹ü‹È", "•IL“W", "‘O˜r‰ñ“à", "‘O˜r‰ñŠO", "èŠÖß¶‹ü", "èŠÖß”w‹ü", "w‹ü‹È", "wL“W", "•êw‘Î—§")
-    BuildPage mp.Pages(1), Array("ŒÒ‹ü‹È", "ŒÒL“W", "ŒÒŠO“]", "ŒÒ“à“]", "•G‹ü‹È", "•GL“W", "‘«ŠÖß”w‹ü", "‘«ŠÖß’ê‹ü", "•êæäL“W")
+    BuildPage mp.Pages(0), Array("è‚©å±ˆæ›²", "è‚©ä¼¸å±•", "è‚©å¤–è»¢", "è‚©å†…æ—‹", "è‚©å¤–æ—‹", "è‚˜å±ˆæ›²", "è‚˜ä¼¸å±•", "å‰è…•å›å†…", "å‰è…•å›å¤–", "æ‰‹é–¢ç¯€æŒå±ˆ", "æ‰‹é–¢ç¯€èƒŒå±ˆ", "æŒ‡å±ˆæ›²", "æŒ‡ä¼¸å±•", "æ¯æŒ‡å¯¾ç«‹")
+    BuildPage mp.Pages(1), Array("è‚¡å±ˆæ›²", "è‚¡ä¼¸å±•", "è‚¡å¤–è»¢", "è‚¡å†…è»¢", "è†å±ˆæ›²", "è†ä¼¸å±•", "è¶³é–¢ç¯€èƒŒå±ˆ", "è¶³é–¢ç¯€åº•å±ˆ", "æ¯è¶¾ä¼¸å±•")
 
-    MsgBox "MMTƒy[ƒW“à‚Éqƒ^ƒuiãˆ^‰ºˆj‚ğì¬‚µ‚Ü‚µ‚½B", vbInformation
+    MsgBox "MMTãƒšãƒ¼ã‚¸å†…ã«å­ã‚¿ãƒ–ï¼ˆä¸Šè‚¢ï¼ä¸‹è‚¢ï¼‰ã‚’ä½œæˆã—ã¾ã—ãŸã€‚", vbInformation
 End Sub
 
 
@@ -700,13 +700,13 @@ Public Sub Swap_DailyLogList_ToMonthlyDraftBox()
     Dim host As Object          ' fraDailyLog
     Dim tb As MSForms.Control   ' TextBox
 
-    ' d—vFNew ‚Íg‚í‚È‚¢iInitialize‚Å—‚¿‚éŠÂ‹«‚ª‚ ‚é‚½‚ßj
-    Set uf = frmEval            ' ‹N“®’†‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğQÆ
+    ' é‡è¦ï¼šNew ã¯ä½¿ã‚ãªã„ï¼ˆInitializeã§è½ã¡ã‚‹ç’°å¢ƒãŒã‚ã‚‹ãŸã‚ï¼‰
+    Set uf = frmEval            ' èµ·å‹•ä¸­ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å‚ç…§
 
     Set lb = uf.Controls("lstDailyLogList")
-    Set host = lb.parent        ' fraDailyLog ‚Ì‚Í‚¸
+    Set host = lb.parent        ' fraDailyLog ã®ã¯ãš
 
-    ' Šù‚Éì‚Á‚Ä‚ ‚ê‚Î‚»‚ê‚ğg‚¤
+    ' æ—¢ã«ä½œã£ã¦ã‚ã‚Œã°ãã‚Œã‚’ä½¿ã†
     On Error Resume Next
     Set tb = host.Controls("txtMonthlyMonitoringDraft")
     On Error GoTo EH
@@ -715,18 +715,18 @@ Public Sub Swap_DailyLogList_ToMonthlyDraftBox()
         Set tb = host.Controls.Add("Forms.TextBox.1", "txtMonthlyMonitoringDraft", True)
     End If
 
-    ' ˆÊ’u‚ÆƒTƒCƒY‚ğ lstDailyLogList ‚É‡‚í‚¹‚é
+    ' ä½ç½®ã¨ã‚µã‚¤ã‚ºã‚’ lstDailyLogList ã«åˆã‚ã›ã‚‹
     tb.Left = lb.Left
     tb.Top = lb.Top
     tb.Width = lb.Width
     tb.Height = lb.Height
 
-    ' g‚¢Ÿè‚ÌÅ¬ŒÀiWordWrap“™‚ÍG‚ç‚È‚¢j
+    ' ä½¿ã„å‹æ‰‹ã®æœ€å°é™ï¼ˆWordWrapç­‰ã¯è§¦ã‚‰ãªã„ï¼‰
     tb.multiline = True
     tb.EnterKeyBehavior = True
     tb.ScrollBars = fmScrollBarsVertical
 
-    ' ListBox ‚Í‰B‚·i–ß‚µ‚½‚¢‚É–ß‚¹‚éj
+    ' ListBox ã¯éš ã™ï¼ˆæˆ»ã—ãŸã„æ™‚ã«æˆ»ã›ã‚‹ï¼‰
     lb.Visible = False
     tb.Visible = True
 
@@ -757,7 +757,7 @@ Public Sub Ensure_MonthlyDraftBox_UnderFraDailyLog()
     Set f = uf.Controls("fraDailyLog")
     Set lb = f.Controls("lstDailyLogList")
 
-    ' Šù‘¶‚ª‚ ‚ê‚Îæ“¾A‚È‚¯‚ê‚Îì¬ifraDailyLog ’¼‰ºj
+    ' æ—¢å­˜ãŒã‚ã‚Œã°å–å¾—ã€ãªã‘ã‚Œã°ä½œæˆï¼ˆfraDailyLog ç›´ä¸‹ï¼‰
     On Error Resume Next
     Set tb = f.Controls("txtMonthlyMonitoringDraft")
     On Error GoTo EH
@@ -766,7 +766,7 @@ Public Sub Ensure_MonthlyDraftBox_UnderFraDailyLog()
         Set tb = f.Controls.Add("Forms.TextBox.1", "txtMonthlyMonitoringDraft", True)
     End If
 
-    ' ListBox‚Æ“¯‚¶‹éŒ`‚É‡‚í‚¹‚éiŠm’è’lj
+    ' ListBoxã¨åŒã˜çŸ©å½¢ã«åˆã‚ã›ã‚‹ï¼ˆç¢ºå®šå€¤ï¼‰
     tb.Left = 12
     tb.Top = 294
     tb.Width = 987.3
@@ -809,7 +809,7 @@ End Sub
 Public Sub Verify_MonthlyExport_OpensWorkbook()
     Debug.Print "Before: ActiveWB=" & ActiveWorkbook.name & "  Count=" & Workbooks.Count
 
-    ' ‚¢‚Üg‚Á‚Ä‚éŒÄ‚Ño‚µ‚Æ“¯‚¶
+    ' ã„ã¾ä½¿ã£ã¦ã‚‹å‘¼ã³å‡ºã—ã¨åŒã˜
     Call ExportMonitoring_ToMonthlyWorkbook( _
         CDate(frmEval.Controls("txtDailyDate").Text), _
         frmEval.Controls("frHeader").Controls("txtHdrName").Text, _
@@ -817,7 +817,7 @@ Public Sub Verify_MonthlyExport_OpensWorkbook()
 
     Debug.Print "After:  ActiveWB=" & ActiveWorkbook.name & "  Count=" & Workbooks.Count
 
-    ' ŠJ‚¢‚Ä‚¢‚éƒuƒbƒN–¼‚ğ—ñ‹“
+    ' é–‹ã„ã¦ã„ã‚‹ãƒ–ãƒƒã‚¯åã‚’åˆ—æŒ™
     ListOpenWorkbooks
 End Sub
 

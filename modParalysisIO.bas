@@ -8,53 +8,53 @@ Private Function ColOf(ws As Worksheet, header As String) As Long
     If Not f Is Nothing Then ColOf = f.Column
 End Function
 
-' ---- ‚Ü‚Æ‚ßæ“¾iƒL[•t Collectionj----
+' ---- ã¾ã¨ã‚å–å¾—ï¼ˆã‚­ãƒ¼ä»˜ Collectionï¼‰----
 Public Function GetParalysisState(ByVal owner As frmEval) As Collection
     Dim col As New Collection
     On Error Resume Next
-    col.Add GetCtlText(owner, "cboParalysisSide"), "–ƒáƒ‘¤"
-    col.Add GetCtlText(owner, "cboParalysisType"), "–ƒáƒ‚Ìí—Ş"
-    col.Add GetCtlText(owner, "cboBRS_Upper"), "BRS_ãˆ"
-    col.Add GetCtlText(owner, "cboBRS_Hand"), "BRS_èw"
-    col.Add GetCtlText(owner, "cboBRS_Lower"), "BRS_‰ºˆ"
-    col.Add GetCtlCheck(owner, "chkSynergy"), "‹¤“¯‰^“®"
-    col.Add GetCtlCheck(owner, "chkAssociatedRxn"), "˜A‡”½‰"
-    col.Add GetCtlText(owner, "txtParalysisMemo"), "–ƒáƒ_”õl"
+    col.Add GetCtlText(owner, "cboParalysisSide"), "éº»ç—ºå´"
+    col.Add GetCtlText(owner, "cboParalysisType"), "éº»ç—ºã®ç¨®é¡"
+    col.Add GetCtlText(owner, "cboBRS_Upper"), "BRS_ä¸Šè‚¢"
+    col.Add GetCtlText(owner, "cboBRS_Hand"), "BRS_æ‰‹æŒ‡"
+    col.Add GetCtlText(owner, "cboBRS_Lower"), "BRS_ä¸‹è‚¢"
+    col.Add GetCtlCheck(owner, "chkSynergy"), "å…±åŒé‹å‹•"
+    col.Add GetCtlCheck(owner, "chkAssociatedRxn"), "é€£åˆåå¿œ"
+    col.Add GetCtlText(owner, "txtParalysisMemo"), "éº»ç—º_å‚™è€ƒ"
     Set GetParalysisState = col
 End Function
 
-' ---- •Û‘¶FŒ©o‚µ‚ª–³‚¯‚ê‚Î©“®‚Åì¬ ----
+' ---- ä¿å­˜ï¼šè¦‹å‡ºã—ãŒç„¡ã‘ã‚Œã°è‡ªå‹•ã§ä½œæˆ ----
 Public Sub SaveParalysisToSheet(ws As Worksheet, rowNum As Long, owner As frmEval)
     Dim s As Collection: Set s = GetParalysisState(owner)
     Dim look As Object: Set look = BuildHeaderLookup(ws)
 
     Dim k As Variant, c As Long
-    For Each k In Array("–ƒáƒ‘¤", "–ƒáƒ‚Ìí—Ş", "BRS_ãˆ", "BRS_èw", "BRS_‰ºˆ", "‹¤“¯‰^“®", "˜A‡”½‰", "–ƒáƒ_”õl")
-        c = ResolveColOrCreate(ws, look, CStr(k))   ' © Œ©o‚µ©“®¶¬
+    For Each k In Array("éº»ç—ºå´", "éº»ç—ºã®ç¨®é¡", "BRS_ä¸Šè‚¢", "BRS_æ‰‹æŒ‡", "BRS_ä¸‹è‚¢", "å…±åŒé‹å‹•", "é€£åˆåå¿œ", "éº»ç—º_å‚™è€ƒ")
+        c = ResolveColOrCreate(ws, look, CStr(k))   ' â† è¦‹å‡ºã—è‡ªå‹•ç”Ÿæˆ
         ws.Cells(rowNum, c).value = s(CStr(k))
     Next k
 End Sub
 
-' ---- “ÇF—ñ‚ª‚ ‚éê‡‚Ì‚İ“Ç‚ŞiˆÀ‘Sj ----
+' ---- èª­è¾¼ï¼šåˆ—ãŒã‚ã‚‹å ´åˆã®ã¿èª­ã‚€ï¼ˆå®‰å…¨ï¼‰ ----
 Public Sub LoadParalysisFromSheet(ws As Worksheet, rowNum As Long, owner As frmEval)
     Dim look As Object: Set look = BuildHeaderLookup(ws)
     Dim c As Long
 
     Dim v As Variant
 
-c = ResolveColumn(look, "–ƒáƒ‘¤"): If c > 0 Then v = ws.Cells(rowNum, c).value: SetComboSafe owner, "cboParalysisSide", v
-c = ResolveColumn(look, "–ƒáƒ‚Ìí—Ş"): If c > 0 Then v = ws.Cells(rowNum, c).value: SetComboSafe owner, "cboParalysisType", v
-c = ResolveColumn(look, "BRS_ãˆ"): If c > 0 Then v = ws.Cells(rowNum, c).value: SetComboSafe owner, "cboBRS_Upper", v
-c = ResolveColumn(look, "BRS_èw"): If c > 0 Then v = ws.Cells(rowNum, c).value: SetComboSafe owner, "cboBRS_Hand", v
-c = ResolveColumn(look, "BRS_‰ºˆ"): If c > 0 Then v = ws.Cells(rowNum, c).value: SetComboSafe owner, "cboBRS_Lower", v
+c = ResolveColumn(look, "éº»ç—ºå´"): If c > 0 Then v = ws.Cells(rowNum, c).value: SetComboSafe owner, "cboParalysisSide", v
+c = ResolveColumn(look, "éº»ç—ºã®ç¨®é¡"): If c > 0 Then v = ws.Cells(rowNum, c).value: SetComboSafe owner, "cboParalysisType", v
+c = ResolveColumn(look, "BRS_ä¸Šè‚¢"): If c > 0 Then v = ws.Cells(rowNum, c).value: SetComboSafe owner, "cboBRS_Upper", v
+c = ResolveColumn(look, "BRS_æ‰‹æŒ‡"): If c > 0 Then v = ws.Cells(rowNum, c).value: SetComboSafe owner, "cboBRS_Hand", v
+c = ResolveColumn(look, "BRS_ä¸‹è‚¢"): If c > 0 Then v = ws.Cells(rowNum, c).value: SetComboSafe owner, "cboBRS_Lower", v
 
-    c = ResolveColumn(look, "‹¤“¯‰^“®"):        If c > 0 Then FindCtlDeep(owner, "chkSynergy").value = (ws.Cells(rowNum, c).value = "—L")
-    c = ResolveColumn(look, "˜A‡”½‰"):        If c > 0 Then FindCtlDeep(owner, "chkAssociatedRxn").value = (ws.Cells(rowNum, c).value = "—L")
-    c = ResolveColumn(look, "–ƒáƒ_”õl"):       If c > 0 Then FindCtlDeep(owner, "txtParalysisMemo").value = ws.Cells(rowNum, c).value
+    c = ResolveColumn(look, "å…±åŒé‹å‹•"):        If c > 0 Then FindCtlDeep(owner, "chkSynergy").value = (ws.Cells(rowNum, c).value = "æœ‰")
+    c = ResolveColumn(look, "é€£åˆåå¿œ"):        If c > 0 Then FindCtlDeep(owner, "chkAssociatedRxn").value = (ws.Cells(rowNum, c).value = "æœ‰")
+    c = ResolveColumn(look, "éº»ç—º_å‚™è€ƒ"):       If c > 0 Then FindCtlDeep(owner, "txtParalysisMemo").value = ws.Cells(rowNum, c).value
 End Sub
 
 
-' ’l‚ªƒRƒ“ƒ{‚ÌƒŠƒXƒg‚É‚ ‚é‚¾‚¯‘I‘ğ‚·‚éi–³‚¯‚ê‚Î–¢‘I‘ğj
+' å€¤ãŒã‚³ãƒ³ãƒœã®ãƒªã‚¹ãƒˆã«ã‚ã‚‹æ™‚ã ã‘é¸æŠã™ã‚‹ï¼ˆç„¡ã‘ã‚Œã°æœªé¸æŠï¼‰
 Private Sub SetComboSafe(owner As Object, ctlName As String, ByVal v As Variant)
     Dim cB As MSForms.ComboBox
     Dim s As String, i As Long, hit As Long
@@ -69,10 +69,10 @@ Private Sub SetComboSafe(owner As Object, ctlName As String, ByVal v As Variant)
     Next
 
     If hit >= 0 Then
-        cB.ListIndex = hit              ' © ˆÀ‘S‚É‘I‘ğ
+        cB.ListIndex = hit              ' â† å®‰å…¨ã«é¸æŠ
     Else
-        cB.ListIndex = -1               ' © Œ©‚Â‚©‚ç‚È‚¯‚ê‚ÎƒNƒŠƒAi‹ój
-        ' •K—v‚È‚ç‚±‚±‚ÅFcb.AddItem s : cb.Value = s   ' ©“®‚Å€–Ú‚ğ’Ç‰Á‚µ‚Ä‘I‘ğ
+        cB.ListIndex = -1               ' â† è¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°ã‚¯ãƒªã‚¢ï¼ˆç©ºï¼‰
+        ' å¿…è¦ãªã‚‰ã“ã“ã§ï¼šcb.AddItem s : cb.Value = s   ' è‡ªå‹•ã§é …ç›®ã‚’è¿½åŠ ã—ã¦é¸æŠ
     End If
 End Sub
 

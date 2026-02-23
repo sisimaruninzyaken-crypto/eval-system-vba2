@@ -1,12 +1,12 @@
 Attribute VB_Name = "modROMIO"
 Option Explicit
 
-' ===== “üŒûFROM‚ğ•Û‘¶iŒ©o‚µ‚Í–³‚¯‚ê‚Îì‚éj =====
+' ===== å…¥å£ï¼šROMã‚’ä¿å­˜ï¼ˆè¦‹å‡ºã—ã¯ç„¡ã‘ã‚Œã°ä½œã‚‹ï¼‰ =====
 Public Sub SaveROMToSheet(ws As Worksheet, rowNum As Long, owner As frmEval)
     Dim look As Object
 Set look = BuildHeaderLookup(ws)
 
-    ' ãˆ
+    ' ä¸Šè‚¢
     SaveROMblock ws, rowNum, owner, look, "Upper", "Shoulder", Array("Flex", "Ext", "Abd", "Add", "ER", "IR")
     SaveROMblock ws, rowNum, owner, look, "Upper", "Elbow", Array("Flex", "Ext")
     SaveROMblock ws, rowNum, owner, look, "Upper", "Forearm", Array("Sup", "Pro")
@@ -15,14 +15,14 @@ Set look = BuildHeaderLookup(ws)
     
     
 
-    ' ‰ºˆ
+    ' ä¸‹è‚¢
     SaveROMblock ws, rowNum, owner, look, "Lower", "Hip", Array("Flex", "Ext", "Abd", "Add", "ER", "IR")
     SaveROMblock ws, rowNum, owner, look, "Lower", "Knee", Array("Flex", "Ext")
     SaveROMblock ws, rowNum, owner, look, "Lower", "Ankle", Array("Dorsi", "Plantar", "Inv", "Ev")
     SaveROMMemo ws, rowNum, owner, look, "Lower"
 End Sub
 
-' ===== “üŒûFROM‚ğ“ÇiŒ©o‚µ‚ª‚ ‚é—ñ‚¾‚¯“Ç‚Şj =====
+' ===== å…¥å£ï¼šROMã‚’èª­è¾¼ï¼ˆè¦‹å‡ºã—ãŒã‚ã‚‹åˆ—ã ã‘èª­ã‚€ï¼‰ =====
 Public Sub LoadROMFromSheet(ws As Worksheet, rowNum As Long, owner As frmEval)
     Dim look As Object: Set look = BuildHeaderLookup(ws)
 
@@ -36,14 +36,14 @@ Public Sub LoadROMFromSheet(ws As Worksheet, rowNum As Long, owner As frmEval)
 
 
 
-    ' ãˆ
+    ' ä¸Šè‚¢
     LoadROMblock ws, rowNum, owner, look, "Upper", "Shoulder", Array("Flex", "Ext", "Abd", "Add", "ER", "IR")
     LoadROMblock ws, rowNum, owner, look, "Upper", "Elbow", Array("Flex", "Ext")
     LoadROMblock ws, rowNum, owner, look, "Upper", "Forearm", Array("Sup", "Pro")
     LoadROMblock ws, rowNum, owner, look, "Upper", "Wrist", Array("Dorsi", "Palmar", "Radial", "Ulnar")
     LoadROMMemo ws, rowNum, owner, look, "Upper"
 
-    ' ‰ºˆ
+    ' ä¸‹è‚¢
     LoadROMblock ws, rowNum, owner, look, "Lower", "Hip", Array("Flex", "Ext", "Abd", "Add", "ER", "IR")
     LoadROMblock ws, rowNum, owner, look, "Lower", "Knee", Array("Flex", "Ext")
     LoadROMblock ws, rowNum, owner, look, "Lower", "Ankle", Array("Dorsi", "Plantar", "Inv", "Ev")
@@ -51,7 +51,7 @@ Public Sub LoadROMFromSheet(ws As Worksheet, rowNum As Long, owner As frmEval)
 End Sub
 
 
-' ==== “à•”F1ƒuƒƒbƒN•Û‘¶/“ÇE”õl‚Ì•Û‘¶/“Ç ====
+' ==== å†…éƒ¨ï¼š1ãƒ–ãƒ­ãƒƒã‚¯ä¿å­˜/èª­è¾¼ãƒ»å‚™è€ƒã®ä¿å­˜/èª­è¾¼ ====
 
 Private Sub SaveROMblock(ws As Worksheet, rowNum As Long, owner As Object, look As Object, _
                          layer As String, joint As String, motions As Variant)
@@ -62,7 +62,7 @@ Private Sub SaveROMblock(ws As Worksheet, rowNum As Long, owner As Object, look 
             hdr = "ROM_" & layer & "_" & joint & "_" & CStr(M) & "_" & CStr(side)
             ctl = "txtROM_" & layer & "_" & joint & "_" & CStr(M) & "_" & CStr(side)
             v = GetCtlText(owner, ctl)                              ' ModUtil
-            col = ResolveColOrCreate(ws, look, hdr)                 ' š–³‚¯‚ê‚ÎŒ©o‚µì¬
+            col = ResolveColOrCreate(ws, look, hdr)                 ' â˜…ç„¡ã‘ã‚Œã°è¦‹å‡ºã—ä½œæˆ
             ws.Cells(rowNum, col).value = v
         Next side
     Next M
@@ -83,7 +83,7 @@ Private Sub LoadROMblock(ws As Worksheet, rowNum As Long, owner As Object, look 
             Dim hdr$, ctl$, col&
             hdr = "ROM_" & layer & "_" & joint & "_" & CStr(M) & "_" & CStr(side)
             ctl = "txtROM_" & layer & "_" & joint & "_" & CStr(M) & "_" & CStr(side)
-            col = ResolveColumn(look, hdr)                          ' –³‚¯‚ê‚ÎƒXƒLƒbƒv
+            col = ResolveColumn(look, hdr)                          ' ç„¡ã‘ã‚Œã°ã‚¹ã‚­ãƒƒãƒ—
             Dim v As String: v = ReadStr_Compat(hdr, rowNum, ws)
 If Len(v) > 0 Then FindCtlDeep(owner, ctl).Text = v
 
@@ -110,16 +110,16 @@ Private Sub LoadROMMemo(ws As Worksheet, rowNum As Long, owner As Object, look A
 End Sub
 
 
-'=== Šî–{î•ñ‚ÌŒó•â–¼‚ğˆê——•\¦iƒCƒ~ƒfƒBƒGƒCƒg‚Éo—Íj ===
+'=== åŸºæœ¬æƒ…å ±ã®å€™è£œåã‚’ä¸€è¦§è¡¨ç¤ºï¼ˆã‚¤ãƒŸãƒ‡ã‚£ã‚¨ã‚¤ãƒˆã«å‡ºåŠ›ï¼‰ ===
 Public Sub FindNamesForBasics()
     On Error Resume Next
     'Load frmEval: frmEval.Show vbModeless
     
     Dim keys, k, c As Object
-    ' © —~‚µ‚¢€–Ú‚ÌƒL[ƒ[ƒhB•K—v‚È‚ç‘Œ¸‚µ‚ÄOK
+    ' â† æ¬²ã—ã„é …ç›®ã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã€‚å¿…è¦ãªã‚‰å¢—æ¸›ã—ã¦OK
     keys = Array("Date", "Age", "Sex", "Eval", "Evaluator", "Name", _
                  "Onset", "CareLevel", "Dementia", "ADL", "Needs", "NeedsPt", "NeedsFam", _
-                 "Diagnosis", "Living", "¶Šˆ", "åf’f")
+                 "Diagnosis", "Living", "ç”Ÿæ´»", "ä¸»è¨ºæ–­")
     
     Debug.Print "----- candidates -----"
     For Each k In keys
@@ -135,7 +135,7 @@ End Sub
 
 
 
-'=== Local: 1s–Ú‚ÉŒ©o‚µ‚ª–³‚¯‚ê‚Îì‚Á‚Ä—ñ”Ô†‚ğ•Ô‚· ===
+'=== Local: 1è¡Œç›®ã«è¦‹å‡ºã—ãŒç„¡ã‘ã‚Œã°ä½œã£ã¦åˆ—ç•ªå·ã‚’è¿”ã™ ===
 Private Function HeaderColEnsure(ws As Worksheet, ByVal header As String) As Long
     Dim M As Variant, lastCol As Long
     M = Application.Match(header, ws.rows(1), 0)

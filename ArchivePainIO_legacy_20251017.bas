@@ -6,28 +6,28 @@ Option Explicit
 
 
 
-'\\ İ’èi—Œ`‚Ì4“_F•K—v‚É‰‚¶‚ÄŒã‚Å·‚µ‘Ö‚¦‰Â”\j \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-Private Const PAGE_HINT As String = "áu’É"            ' ‘ÎÛƒ^ƒu‚ÌŒ©o‚µ‚Ìˆê•”i—áFuáu’Évu’É‚İv‚È‚Çj
-Private Const HEADER_IO As String = "IO_Pain"         ' –{‘Ì‚ÌƒVƒŠƒAƒ‰ƒCƒY—ñ
-Private Const HEADER_NOTE As String = ""              ' ”õl—ñFŒ»sd—l‚Å‚Í”p~
-     ' ”õl—ñi•s—v‚È‚ç‹ó•¶š‚É‚·‚éj
-Private keys As Variant                                ' R/LƒyƒA‰»‚Ì˜_—ƒL[B•K—v‚É‰‚¶‚ÄŒÅ’è‰»‰Â
-' —áFŒã‚Å•K—v‚È‚ç Array("VAS","PainQual","PainCourse","PainSite","PainFactors","PainDuration")
+'â€•â€• è¨­å®šï¼ˆé››å½¢ã®4ç‚¹ï¼šå¿…è¦ã«å¿œã˜ã¦å¾Œã§å·®ã—æ›¿ãˆå¯èƒ½ï¼‰ â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
+Private Const PAGE_HINT As String = "ç–¼ç—›"            ' å¯¾è±¡ã‚¿ãƒ–ã®è¦‹å‡ºã—ã®ä¸€éƒ¨ï¼ˆä¾‹ï¼šã€Œç–¼ç—›ã€ã€Œç—›ã¿ã€ãªã©ï¼‰
+Private Const HEADER_IO As String = "IO_Pain"         ' æœ¬ä½“ã®ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºåˆ—
+Private Const HEADER_NOTE As String = ""              ' å‚™è€ƒåˆ—ï¼šç¾è¡Œä»•æ§˜ã§ã¯å»ƒæ­¢
+     ' å‚™è€ƒåˆ—ï¼ˆä¸è¦ãªã‚‰ç©ºæ–‡å­—ã«ã™ã‚‹ï¼‰
+Private keys As Variant                                ' R/Lãƒšã‚¢åŒ–ã®è«–ç†ã‚­ãƒ¼ã€‚å¿…è¦ã«å¿œã˜ã¦å›ºå®šåŒ–å¯
+' ä¾‹ï¼šå¾Œã§å¿…è¦ãªã‚‰ Array("VAS","PainQual","PainCourse","PainSite","PainFactors","PainDuration")
 
-' ‹æØ‚èiƒeƒ“ƒvƒŒŠù’èj
-Private Const SEP_REC As String = "|"  ' ƒŒƒR[ƒh‹æØ‚è
-Private Const SEP_KV  As String = ":"  ' ƒL[‚Æ’l
-Private Const SEP_RL  As String = ","  ' R/L ˜AŒ‹
-
-
+' åŒºåˆ‡ã‚Šï¼ˆãƒ†ãƒ³ãƒ—ãƒ¬æ—¢å®šï¼‰
+Private Const SEP_REC As String = "|"  ' ãƒ¬ã‚³ãƒ¼ãƒ‰åŒºåˆ‡ã‚Š
+Private Const SEP_KV  As String = ":"  ' ã‚­ãƒ¼ã¨å€¤
+Private Const SEP_RL  As String = ","  ' R/L é€£çµ
 
 
-'\\ ƒpƒuƒŠƒbƒNAPIi•Û‘¶j \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+'â€•â€• ãƒ‘ãƒ–ãƒªãƒƒã‚¯APIï¼ˆä¿å­˜ï¼‰ â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
 Public Sub SavePainToSheet(ByVal ws As Worksheet, ByVal r As Long, ByVal owner As Object)
 
     Dim pg As Object
     On Error Resume Next
-    Set pg = owner.Controls.Item("mpPhys").Pages(4)   ' áu’Éi•”ˆÊ^NRSj
+    Set pg = owner.Controls.Item("mpPhys").Pages(4)   ' ç–¼ç—›ï¼ˆéƒ¨ä½ï¼NRSï¼‰
     On Error GoTo 0
     If pg Is Nothing Then
     
@@ -39,18 +39,18 @@ End If
 
     Dim combos As Collection
     Set combos = New Collection
-    CollectCombos pg, combos  ' Page’¼‰º{Frame“à‚ÌComboBox‚ğÄ‹AûW
+    CollectCombos pg, combos  ' Pageç›´ä¸‹ï¼‹Frameå†…ã®ComboBoxã‚’å†å¸°åé›†
 
     If combos.Count = 0 Then
        
 
     End If
 
-    ' Top/Left ƒ\[ƒgiTOL=6‚ÌŠÈˆÕè‡’lFTop—Dæ¨Leftj
+    ' Top/Left ã‚½ãƒ¼ãƒˆï¼ˆTOL=6ã®ç°¡æ˜“é–¾å€¤ï¼šTopå„ªå…ˆâ†’Leftï¼‰
     Dim arr() As Variant: arr = ControlsToArray(combos)
     SortByTopLeft arr, 6
 
-    ' R/L ƒyƒAƒŠƒ“ƒO‚µ‚ÄƒVƒŠƒAƒ‰ƒCƒY
+    ' R/L ãƒšã‚¢ãƒªãƒ³ã‚°ã—ã¦ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚º
     Dim dict As Object: Set dict = CreateObject("Scripting.Dictionary")
     Dim i As Long, nm As String, base As String, side As String, valText As String
 
@@ -63,9 +63,9 @@ End If
         
         base = BaseNameRL(nm, side) ' side="R" or "L" or ""
         If Not dict.exists(base) Then dict.Add base, CreateObject("Scripting.Dictionary")
-        If Len(side) = 0 Then side = "V" ' ’P“Æ€–ÚiR/L‚Å‚È‚¢j
+        If Len(side) = 0 Then side = "V" ' å˜ç‹¬é …ç›®ï¼ˆR/Lã§ãªã„ï¼‰
         dict(base)(side) = valText
-        ' ”CˆÓFŠù’m‚ÌƒL[‡‚ğg‚¤ê‡‚Í KEYS ‚ğŒã’i‚Å—˜—p
+        ' ä»»æ„ï¼šæ—¢çŸ¥ã®ã‚­ãƒ¼é †ã‚’ä½¿ã†å ´åˆã¯ KEYS ã‚’å¾Œæ®µã§åˆ©ç”¨
         
       
 
@@ -76,7 +76,7 @@ End If
     Dim parts As Collection: Set parts = New Collection
     Dim k As Variant, rec As String, vR As String, vL As String, vV As String
 
-    ' Šù’èFŒŸo‡iTop/Leftj‚Åo—ÍBŒÅ’è‡‚É‚µ‚½‚¢ê‡‚Í KEYS ‚ğg—p
+    ' æ—¢å®šï¼šæ¤œå‡ºé †ï¼ˆTop/Leftï¼‰ã§å‡ºåŠ›ã€‚å›ºå®šé †ã«ã—ãŸã„å ´åˆã¯ KEYS ã‚’ä½¿ç”¨
     For Each k In dict.keys
         vR = NzS(dict(k), "R")
         vL = NzS(dict(k), "L")
@@ -89,7 +89,7 @@ End If
         parts.Add rec
     Next
     
-        ' === ‘±ŠúŠÔi”šFtxtPainDurationj‚ğ’P“ÆƒL[‚Æ‚µ‚Ä•Û‘¶ ===
+        ' === æŒç¶šæœŸé–“ï¼ˆæ•°å­—ï¼štxtPainDurationï¼‰ã‚’å˜ç‹¬ã‚­ãƒ¼ã¨ã—ã¦ä¿å­˜ ===
     Dim durText As String
     On Error Resume Next
     durText = CStr(pg.Controls("txtPainDuration").Text)
@@ -100,7 +100,7 @@ End If
 
     
 
-' === ListBoxi•¡”‘I‘ğj‚Ì•Û‘¶‚ğ’Ç‰Á ===
+' === ListBoxï¼ˆè¤‡æ•°é¸æŠï¼‰ã®ä¿å­˜ã‚’è¿½åŠ  ===
 Dim c As Object, sel As String, j As Long, base2 As String
 For Each c In pg.Controls
     If TypeName(c) = "ListBox" Then
@@ -111,9 +111,9 @@ For Each c In pg.Controls
                 sel = sel & CStr(c.List(j))
             End If
         Next
-        ' ‰½‚à‘I‚Î‚ê‚Ä‚¢‚È‚¢ê‡‚Í‹ó‚Ì‚Ü‚Üio—Í‚µ‚È‚¢j
+        ' ä½•ã‚‚é¸ã°ã‚Œã¦ã„ãªã„å ´åˆã¯ç©ºã®ã¾ã¾ï¼ˆå‡ºåŠ›ã—ãªã„ï¼‰
         If Len(sel) > 0 Then
-            ' —áFlstPainQual ¨ PainQual, lstPainSite ¨ PainSite
+            ' ä¾‹ï¼šlstPainQual â†’ PainQual, lstPainSite â†’ PainSite
             base2 = c.name
             If LCase$(Left$(base2, 3)) = "lst" Then base2 = Mid$(base2, 4)
             
@@ -122,9 +122,9 @@ For Each c In pg.Controls
         End If
     End If
 Next
-' === ’Ç‰Á‚±‚±‚Ü‚Å ===
+' === è¿½åŠ ã“ã“ã¾ã§ ===
 
-' === CheckBoxiTrue‚Ì‚İj‚ğ‚Ü‚Æ‚ß‚Ä•Û‘¶ ===
+' === CheckBoxï¼ˆTrueã®ã¿ï¼‰ã‚’ã¾ã¨ã‚ã¦ä¿å­˜ ===
 Dim factors As Collection: Set factors = New Collection
 CollectChecksRecursive pg, factors
 If factors.Count > 0 Then
@@ -136,33 +136,33 @@ End If
 
 
 
-' === ’Ç‰Á‚±‚±‚Ü‚Å ===
+' === è¿½åŠ ã“ã“ã¾ã§ ===
 
-' === VASi0 ‚Å‚à•Û‘¶j ===
+' === VASï¼ˆ0 ã§ã‚‚ä¿å­˜ï¼‰ ===
 Dim vasText As String
 On Error Resume Next
-vasText = CStr(pg.Controls("fraVAS").Controls("txtVAS").Text)   ' TextBox —Dæ
-If Len(vasText) = 0 Then vasText = CStr(pg.Controls("fraVAS").Controls("sldVAS").value)  ' ScrollBar ‘ã‘Ö
+vasText = CStr(pg.Controls("fraVAS").Controls("txtVAS").Text)   ' TextBox å„ªå…ˆ
+If Len(vasText) = 0 Then vasText = CStr(pg.Controls("fraVAS").Controls("sldVAS").value)  ' ScrollBar ä»£æ›¿
 On Error GoTo 0
 
-' u0v‚à—LŒø’l‚Æ‚µ‚Ä•Û‘¶‚·‚é
+' ã€Œ0ã€ã‚‚æœ‰åŠ¹å€¤ã¨ã—ã¦ä¿å­˜ã™ã‚‹
 If (Len(vasText) > 0) Or vasText = "0" Then
     parts.Add "VAS" & SEP_KV & " " & vasText
 End If
-' === ’Ç‰Á‚±‚±‚Ü‚Å ===
+' === è¿½åŠ ã“ã“ã¾ã§ ===
 
 
     Dim outText As String: outText = JoinCollection(parts, SEP_REC)
     Debug.Print "[IO-FINAL]", outText
 
 
-    ' ”õliPage“à‚ÌÅ‘åTextBoxƒeƒLƒXƒgj
+    ' å‚™è€ƒï¼ˆPageå†…ã®æœ€å¤§TextBoxãƒ†ã‚­ã‚¹ãƒˆï¼‰
     Dim noteText As String: noteText = LargestTextBoxValue(pg)
 
 
     Debug.Print "[IO-FINAL]", outText
 
-    ' ‘‚«‚İ
+    ' æ›¸ãè¾¼ã¿
     ws.Cells(r, EnsureHeaderCol(ws, HEADER_IO)).value = outText
     If LenB(HEADER_NOTE) > 0 Then
         ws.Cells(r, EnsureHeaderCol(ws, HEADER_NOTE)).value = noteText
@@ -178,7 +178,7 @@ End If
     
 End Sub
 
-'\\ •â•F‘ÎÛMultiPage‚ÆPage’Tõ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+'â€•â€• è£œåŠ©ï¼šå¯¾è±¡MultiPageã¨Pageæ¢ç´¢ â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
 Private Function FindTargetMultiPage(ByVal owner As Object, ByVal hint As String, ByRef outPage As Object) As Object
     Dim ctl As Object, mp As Object, i As Long
     For Each ctl In owner.Controls
@@ -197,7 +197,7 @@ Private Function FindTargetMultiPage(ByVal owner As Object, ByVal hint As String
     Set FindTargetMultiPage = Nothing
 End Function
 
-'\\ •â•FPage”z‰º‚ÌComboBox‚ğÄ‹AûWiFrame“àŠÜ‚Şj \\\\\\\\\\\\\\\\\\\\\\\\\
+'â€•â€• è£œåŠ©ï¼šPageé…ä¸‹ã®ComboBoxã‚’å†å¸°åé›†ï¼ˆFrameå†…å«ã‚€ï¼‰ â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
 Private Sub CollectCombos(ByVal container As Object, ByRef bag As Collection)
     Dim ctl As Object
     For Each ctl In container.Controls
@@ -208,7 +208,7 @@ Private Sub CollectCombos(ByVal container As Object, ByRef bag As Collection)
     Next
 End Sub
 
-'\\ •â•FCombos¨”z—ñiName/Top/Left/Refj \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+'â€•â€• è£œåŠ©ï¼šCombosâ†’é…åˆ—ï¼ˆName/Top/Left/Refï¼‰ â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
 Private Function ControlsToArray(ByVal bag As Collection) As Variant
     Dim i As Long, o As Object
     Dim arr() As Variant
@@ -233,7 +233,7 @@ Private Sub SortByTopLeft(ByRef arr As Variant, ByVal tol As Long)
     Next i
 End Sub
 
-'\\ •â•FR/L Šî’ê–¼’Šo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+'â€•â€• è£œåŠ©ï¼šR/L åŸºåº•åæŠ½å‡º â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
 Private Function BaseNameRL(ByVal name As String, ByRef side As String) As String
     Dim s As String: s = UCase$(name)
     If Right$(s, 2) = "_R" Then side = "R": BaseNameRL = Left$(name, Len(name) - 2): Exit Function
@@ -241,7 +241,7 @@ Private Function BaseNameRL(ByVal name As String, ByRef side As String) As Strin
     side = "": BaseNameRL = name
 End Function
 
-'\\ •â•FCombo‚Ì’læ“¾iStyle=2‘ÎôFValue¨ListIndex¨AddItemj \\\\\\\\\\\\\\\\\
+'â€•â€• è£œåŠ©ï¼šComboã®å€¤å–å¾—ï¼ˆStyle=2å¯¾ç­–ï¼šValueâ†’ListIndexâ†’AddItemï¼‰ â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
 Private Function ComboValueText(ByVal cbo As Object) As String
     On Error Resume Next
     Dim t As String
@@ -250,13 +250,13 @@ Private Function ComboValueText(ByVal cbo As Object) As String
         If cbo.ListIndex >= 0 Then t = CStr(cbo.List(cbo.ListIndex))
     End If
     If LenB(t) = 0 Then
-        ' –¢“o˜^’l‚ª“ü‚Á‚Ä‚¢‚éƒP[ƒX‚É”õ‚¦‚ÄText‚àŒ©‚é
+        ' æœªç™»éŒ²å€¤ãŒå…¥ã£ã¦ã„ã‚‹ã‚±ãƒ¼ã‚¹ã«å‚™ãˆã¦Textã‚‚è¦‹ã‚‹
         t = CStr(cbo.Text)
     End If
     ComboValueText = t
 End Function
 
-'\\ •â•FÅ‘åTextBox‚Ì’li”õl‘z’èj \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+'â€•â€• è£œåŠ©ï¼šæœ€å¤§TextBoxã®å€¤ï¼ˆå‚™è€ƒæƒ³å®šï¼‰ â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
 Private Function LargestTextBoxValue(ByVal container As Object) As String
     Dim ctl As Object, area As Double, maxArea As Double, best As Object
     For Each ctl In container.Controls
@@ -265,13 +265,13 @@ Private Function LargestTextBoxValue(ByVal container As Object) As String
             If area > maxArea Then maxArea = area: Set best = ctl
         ElseIf TypeName(ctl) = "Frame" Then
             Dim s As String: s = LargestTextBoxValue(ctl)
-            If LenB(s) > 0 And area = 0 Then LargestTextBoxValue = s ' ƒlƒXƒg‘¤‚ÅŒˆ‚Ü‚Á‚½‚çÌ—p
+            If LenB(s) > 0 And area = 0 Then LargestTextBoxValue = s ' ãƒã‚¹ãƒˆå´ã§æ±ºã¾ã£ãŸã‚‰æ¡ç”¨
         End If
     Next
     If Not best Is Nothing Then LargestTextBoxValue = CStr(best.Text)
 End Function
 
-'\\ ¬•¨ƒ†[ƒeƒBƒŠƒeƒB \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+'â€•â€• å°ç‰©ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
 Private Function NzS(ByVal dict As Object, ByVal k As String) As String
     If dict.exists(k) Then NzS = CStr(dict(k)) Else NzS = ""
 End Function
@@ -332,11 +332,11 @@ End Sub
 
 Public Sub SavePain_CheckOnce()
     Dim uf As Object: Set uf = frmEval
-    ' ƒ`ƒFƒbƒN1‚ÂONi—UˆöF“®ì‚Å‘ˆ«j
+    ' ãƒã‚§ãƒƒã‚¯1ã¤ONï¼ˆèª˜å› ï¼šå‹•ä½œã§å¢—æ‚ªï¼‰
     uf.Controls("mpPhys").Pages(4).Controls("fraPainFactors").Controls("chkPainProv_Move").value = True
-    ' •Û‘¶iƒ{ƒ^ƒ“‘Š“–j
+    ' ä¿å­˜ï¼ˆãƒœã‚¿ãƒ³ç›¸å½“ï¼‰
     SaveEvaluation_Append_From uf
-    ' ’¼‹ßs‚ÌIO/NOTE‚ğ”’l•\¦
+    ' ç›´è¿‘è¡Œã®IO/NOTEã‚’æ•°å€¤è¡¨ç¤º
     Dim ws As Worksheet, lr As Long
     Set ws = ThisWorkbook.Worksheets("EvalData")
     lr = ws.Cells(ws.rows.Count, 1).End(xlUp).row
@@ -350,14 +350,14 @@ End Sub
 Public Sub SavePain_AppendTest_Once()
     Dim uf As Object: Set uf = frmEval
     On Error Resume Next
-    uf.txtName.Text = "ŒŸØAppend"
+    uf.txtName.Text = "æ¤œè¨¼Append"
     uf.Controls("chkDiffOnly").value = False
     On Error GoTo 0
 
-    ' •Û‘¶i‘S‘Ì•Û‘¶ƒ‹[ƒgj
+    ' ä¿å­˜ï¼ˆå…¨ä½“ä¿å­˜ãƒ«ãƒ¼ãƒˆï¼‰
     SaveEvaluation_Append_From uf
 
-    ' ’¼‹ßs‚ÌIO/NOTE‚ğ‰Â‹‰»
+    ' ç›´è¿‘è¡Œã®IO/NOTEã‚’å¯è¦–åŒ–
     Dim ws As Worksheet, lr As Long
     Set ws = ThisWorkbook.Worksheets("EvalData")
     lr = ws.Cells(ws.rows.Count, 1).End(xlUp).row
@@ -370,7 +370,7 @@ End Sub
 Public Sub Test_SaveAtRow_Once()
     Dim ws As Worksheet, rr As Long
     Set ws = ThisWorkbook.Worksheets("EvalData")
-    rr = 108   ' © ”CˆÓ‚ÌŒŸØs
+    rr = 108   ' â† ä»»æ„ã®æ¤œè¨¼è¡Œ
 
     'SaveAllSectionsToSheet ws, rr, frmEval
 
@@ -385,7 +385,7 @@ End Sub
 Public Sub SavePain_FillAndAppend_Once()
     Dim uf As Object: Set uf = frmEval
     On Error Resume Next
-    uf.txtName.Text = "ŒŸØAppend3"
+    uf.txtName.Text = "æ¤œè¨¼Append3"
     uf.Controls("chkDiffOnly").value = False
     With uf.Controls("mpPhys").Pages(4)
         .Controls("cmbPainOnset").ListIndex = 0
@@ -434,14 +434,14 @@ End Sub
 
 '======================================================================
 
-'=== [TEMP] •Û‘¶Œnƒnƒ“ƒhƒ‰“Á’èƒXƒLƒƒƒi ================================
+'=== [TEMP] ä¿å­˜ç³»ãƒãƒ³ãƒ‰ãƒ©ç‰¹å®šã‚¹ã‚­ãƒ£ãƒŠ ================================
 Public Sub Scan_SaveHandlers()
     Dim vbComp As Object, cm As Object
     Dim lineCount As Long, i As Long
     Dim pat1 As String, pat2 As String, pat3 As String
-    pat1 = "•Û‘¶"         ' ƒƒbƒZ[ƒW•¶Œ¾
-    pat2 = "Save"         ' ƒTƒuƒ‹[ƒ`ƒ“–¼ƒL[ƒ[ƒh
-    pat3 = "Application.Caller" ' ƒV[ƒgƒ{ƒ^ƒ“‘z’è
+    pat1 = "ä¿å­˜"         ' ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸æ–‡è¨€
+    pat2 = "Save"         ' ã‚µãƒ–ãƒ«ãƒ¼ãƒãƒ³åã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
+    pat3 = "Application.Caller" ' ã‚·ãƒ¼ãƒˆãƒœã‚¿ãƒ³æƒ³å®š
 
     For Each vbComp In ThisWorkbook.VBProject.VBComponents
         Set cm = vbComp.CodeModule
