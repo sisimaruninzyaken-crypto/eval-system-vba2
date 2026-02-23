@@ -2994,6 +2994,12 @@ Me.Controls("mpPhys").Pages(0).Controls("Frame8").Controls("mpROM").Height = Me.
     Call BuildEvalShell_Once
     Call CreateHeaderButtons_Once
 
+    On Error Resume Next
+    Set btnLoadPrevCtl.parent = Me.Controls("frHeader")
+    btnLoadPrevCtl.Top = 10
+    btnLoadPrevCtl.Left = Me.Controls("frHeader").InsideWidth - btnLoadPrevCtl.Width - 280
+    On Error GoTo 0
+
     Tidy_DailyLog_Once
 
     
