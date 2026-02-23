@@ -535,6 +535,48 @@ Private Function GetCtlTextGeneric(owner As Object, ctlName As String) As String
     GetCtlTextGeneric = CStr(c.value)
 End Function
 
+Private Function GetHdrKanaText(owner As Object) As String
+    Dim c As Object
+
+    On Error Resume Next
+    Set c = owner.Controls("frHeader").Controls("txtHdrKana")
+    On Error GoTo 0
+
+    If c Is Nothing Then
+        On Error Resume Next
+        Set c = owner.Controls("txtHdrKana")
+        On Error GoTo 0
+    End If
+
+    If c Is Nothing Then
+        GetHdrKanaText = ""
+    Else
+        On Error Resume Next
+        GetHdrKanaText = Trim$(CStr(c.value))
+        On Error GoTo 0
+    End If
+End Function
+
+Private Sub SetHdrKanaText(owner As Object, ByVal v As Variant)
+    Dim c As Object
+
+    On Error Resume Next
+    Set c = owner.Controls("frHeader").Controls("txtHdrKana")
+    On Error GoTo 0
+
+    If c Is Nothing Then
+        On Error Resume Next
+        Set c = owner.Controls("txtHdrKana")
+        On Error GoTo 0
+    End If
+
+    If c Is Nothing Then Exit Sub
+
+    On Error Resume Next
+    c.value = CStr(v)
+    On Error GoTo 0
+End Sub
+
 ' 汎用：コンボを安全にセット（リストにある時だけ選択）
 Private Sub SetComboSafe_Basic(owner As Object, ctlName As String, ByVal v As Variant)
     Dim cB As MSForms.ComboBox
@@ -597,6 +639,10 @@ map = Array( _
             Debug.Print "[BASIC][SAVE]", head, "->", v
         End If
     Next i
+
+    c = EnsureHeader(ws, "Basic.NameKana")
+    ws.Cells(r, c).value = GetHdrKanaText(owner)
+    Debug.Print "[BASIC][SAVE] Basic.NameKana ->", CStr(ws.Cells(r, c).value)
     
     Dim idVal As String: idVal = GetID_FromBasicInfo(owner)
     If Len(idVal) > 0 Then ws.Cells(r, EnsureHeader(ws, "Basic.ID")).value = idVal
@@ -665,6 +711,9 @@ Public Sub LoadBasicInfoFromSheet_FromMe(ws As Worksheet, ByVal r As Long, owner
             
         End If
     Next i
+
+    c = FindHeaderCol(ws, "Basic.NameKana")
+    If c > 0 Then SetHdrKanaText owner, ws.Cells(r, c).value
 
     '--- チェック群の復元（補助具／リスク） ---
     Dim csv As String
@@ -1791,7 +1840,7 @@ If Not cLvl Is Nothing Then vLevel = Trim$(cLvl.value)
     vSpeed = Trim$(owner.Controls("cmbWalkSpeed").value)
     On Error GoTo 0
 
-    ' 安定性チェック（chkWalkStab_〜 を全部拾う）
+    ' 安定性チェック（chkWalkStab_～ を全部拾う）
     Set hits = New Collection
     For Each c In owner.Controls
         If TypeName(c) = "CheckBox" Then
@@ -1904,7 +1953,7 @@ Public Function Build_WalkRLA_IO(owner As Object) As String
         probsStr = ""
         level = ""
 
-        ' --- チェック（RLA_<phase>_〜）を拾う ---
+        ' --- チェック（RLA_<phase>_～）を拾う ---
         For Each c In owner.Controls
             If TypeName(c) = "CheckBox" Then
                 nm = CStr(c.name)
