@@ -17,6 +17,7 @@ Attribute VB_Exposed = False
 
 
 
+
 Option Explicit
 
 '=== frmEval ヘッダ：共通で使う変数 ===
@@ -406,8 +407,8 @@ Private Sub BuildAssistiveChecksInWalkEval(ByVal assistiveCsv As String)
     Dim i As Long
     For i = frTarget.Controls.Count - 1 To 0 Step -1
         If TypeName(frTarget.Controls(i)) = "CheckBox" Then
-            If frTarget.Controls(i).Tag = "AssistiveGroup" Then
-                frTarget.Controls.Remove frTarget.Controls(i).Name
+            If frTarget.Controls(i).tag = "AssistiveGroup" Then
+                frTarget.Controls.Remove frTarget.Controls(i).name
             End If
         End If
     Next
@@ -421,7 +422,7 @@ Private Sub BuildAssistiveChecksInWalkEval(ByVal assistiveCsv As String)
     Next
 
     Dim addTop As Single
-    addTop = IIf(maxBottom <= 0, 8, maxBottom + 8)
+    addTop = IIf(maxBottom <= 0, 120, maxBottom + 120)
 
     Dim frAssist As MSForms.Frame
     Set frAssist = BuildCheckFrame(frTarget, "補助具", 8, addTop, frTarget.InsideWidth - 16, MakeList(assistiveCsv), "AssistiveGroup")
