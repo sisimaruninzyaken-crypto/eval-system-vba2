@@ -13,10 +13,16 @@ Public Sub Align_LoadPrevButton_NextToHdrKana(ByVal f As Object)
     Set kana = hdr.Controls("txtHdrKana")
     If kana Is Nothing Then Exit Sub
 
-    Set btn = f.Controls("btnLoadPrevCtl")
+    Set btn = hdr.Controls("cmdHdrLoadPrev")
+    If btn Is Nothing Then Set btn = f.Controls("btnLoadPrevCtl")
     If btn Is Nothing Then Exit Sub
     On Error GoTo 0
 
-    btn.Left = hdr.Left + kana.Left + kana.Width + 12
-    btn.Top = hdr.Top + kana.Top
+    If btn.parent Is hdr Then
+        btn.Left = kana.Left + kana.Width + 12
+        btn.Top = kana.Top
+    Else
+        btn.Left = hdr.Left + kana.Left + kana.Width + 12
+        btn.Top = hdr.Top + kana.Top
+    End If
 End Sub
