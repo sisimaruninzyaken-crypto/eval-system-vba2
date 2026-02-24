@@ -2204,6 +2204,10 @@ Me.Repaint
 
 End Sub
 
+Private Sub cmdHdrLoadPrev_Click()
+    Call btnLoadPrevCtl_Click
+End Sub
+
 
 ' 下から遡って氏名一致の「最新?最大5件」を集め、
 ' 件数=1ならそれを返し、2以上なら番号選択のInputBoxを出す
