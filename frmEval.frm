@@ -92,6 +92,7 @@ End Enum
 
 Private mQuitMode As QuitMode
 Private mHdrArchiveHook As clsHdrBtnHook
+Private mHdrLoadPrevHook As clsHdrBtnHook
 Private mPrintBtnHook As clsPrintBtnHook
 Private mHdrNameSink As cHdrNameSink
 Private mNameSuggestSink As cNameSuggestSink
@@ -708,8 +709,8 @@ Private Function KeyNormalize(ByVal v As Variant) As String
     s = StrConv(s, vbNarrow)
     On Error GoTo 0
 
-    ' よくあるハイフン類の統一（??−‐→-）
-    s = Replace(s, "−", "-")
+    ' よくあるハイフン類の統一（??－‐→-）
+    s = Replace(s, "－", "-")
     s = Replace(s, "?", "-")
     s = Replace(s, "?", "-")
     s = Replace(s, "‐", "-")
@@ -2108,7 +2109,7 @@ Private Function ValidateForm(ByRef errmsg As String) As Boolean
         If Trim$(Me.Controls("txtAge").Text) = "" Or Not IsNumeric(Me.Controls("txtAge").Text) Then
             ok = False: sb = sb & "・年齢を数値で入力してください。" & vbCrLf
         ElseIf val(Me.Controls("txtAge").Text) < 0 Or val(Me.Controls("txtAge").Text) > 120 Then
-            ok = False: sb = sb & "・年齢は0〜120で入力してください。" & vbCrLf
+            ok = False: sb = sb & "・年齢は0～120で入力してください。" & vbCrLf
         End If
     End If
 
@@ -2119,12 +2120,12 @@ Private Function ValidateForm(ByRef errmsg As String) As Boolean
         End If
     End If
 
-    ok = ok And CheckRange(Me, "txtTenMWalk", 0, 300, "10m歩行（秒）は0〜300で入力してください。", sb)
-    ok = ok And CheckRange(Me, "txtTUG", 0, 300, "TUG（秒）は0〜300で入力してください。", sb)
-    ok = ok And CheckRange(Me, "txtFiveSTS", 0, 300, "5回立ち上がり（秒）は0〜300で入力してください。", sb)
-    ok = ok And CheckRange(Me, "txtSemi", 0, 300, "セミタンデム（秒）は0〜300で入力してください。", sb)
-    ok = ok And CheckRange(Me, "txtGripR", 0, 120, "握力 右（kg）は0〜120で入力してください。", sb)
-    ok = ok And CheckRange(Me, "txtGripL", 0, 120, "握力 左（kg）は0〜120で入力してください。", sb)
+    ok = ok And CheckRange(Me, "txtTenMWalk", 0, 300, "10m歩行（秒）は0～300で入力してください。", sb)
+    ok = ok And CheckRange(Me, "txtTUG", 0, 300, "TUG（秒）は0～300で入力してください。", sb)
+    ok = ok And CheckRange(Me, "txtFiveSTS", 0, 300, "5回立ち上がり（秒）は0～300で入力してください。", sb)
+    ok = ok And CheckRange(Me, "txtSemi", 0, 300, "セミタンデム（秒）は0～300で入力してください。", sb)
+    ok = ok And CheckRange(Me, "txtGripR", 0, 120, "握力 右（kg）は0～120で入力してください。", sb)
+    ok = ok And CheckRange(Me, "txtGripL", 0, 120, "握力 左（kg）は0～120で入力してください。", sb)
 
     errmsg = IIf(ok, "", sb)
     ValidateForm = ok
@@ -2204,8 +2205,12 @@ Me.Repaint
 
 End Sub
 
-Private Sub cmdHdrLoadPrev_Click()
+Public Sub HandleHdrLoadPrevClick()
     Call btnLoadPrevCtl_Click
+End Sub
+
+Private Sub cmdHdrLoadPrev_Click()
+    Call HandleHdrLoadPrevClick
 End Sub
 
 
@@ -2889,7 +2894,9 @@ Me.Left = Application.Left + (Application.Width - Me.Width) / 2: Me.Top = Applic
     DoEvents
 
     Call LegacyInit
+#If APP_DEBUG Then
     Debug.Print "[PostInit] CtlCount=" & Me.Controls.Count
+#End If
 
 TidyBaseLayout_Once
 
@@ -3018,6 +3025,13 @@ Me.Controls("mpPhys").Pages(0).Controls("Frame8").Controls("mpROM").Height = Me.
 On Error Resume Next
 Set mHdrArchiveHook = New clsHdrBtnHook
 Set mHdrArchiveHook.btn = Me.Controls("frHeader").Controls("cmdArchiveDelete")
+Set mHdrLoadPrevHook = New clsHdrBtnHook
+Set mHdrLoadPrevHook.btn = Me.Controls("frHeader").Controls("cmdHdrLoadPrev")
+mHdrLoadPrevHook.tag = "LoadPrev"
+Set mHdrLoadPrevHook.owner = Me
+With Me.Controls("MultiPage1").Pages(0).Controls("Frame32").Controls("btnLoadPrevCtl")
+    .Visible = False
+End With
 On Error GoTo 0
 
 AddPrintButton_TestEval
@@ -4523,7 +4537,7 @@ Dim l As MSForms.label
 
 On Error Resume Next
 '--- 直下 ---
-Set l = Me.Controls("lblVAS"):           If Not l Is Nothing Then l.WordWrap = False: l.caption = "VAS（0〜100）": l.WordWrap = False: l.AutoSize = False: l.Width = 120
+Set l = Me.Controls("lblVAS"):           If Not l Is Nothing Then l.WordWrap = False: l.caption = "VAS（0～100）": l.WordWrap = False: l.AutoSize = False: l.Width = 120
 Set l = Me.Controls("lblPainQual"):      If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
 Set l = Me.Controls("lblPainCourse"):    If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
 Set l = Me.Controls("lblPainSite"):      If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 150
@@ -4532,7 +4546,7 @@ Set l = Me.Controls("lblPainFactors"):   If Not l Is Nothing Then l.WordWrap = F
 '--- Frame3 内 ---
 Set f = Me.Controls("Frame3")
 If Not f Is Nothing Then
-    Set l = f.Controls("lblVAS"):         If Not l Is Nothing Then l.WordWrap = False: l.caption = "VAS（0〜100）": l.WordWrap = False: l.AutoSize = False: l.Width = 120
+    Set l = f.Controls("lblVAS"):         If Not l Is Nothing Then l.WordWrap = False: l.caption = "VAS（0～100）": l.WordWrap = False: l.AutoSize = False: l.Width = 120
     Set l = f.Controls("lblPainQual"):    If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
     Set l = f.Controls("lblPainCourse"):  If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
     Set l = f.Controls("lblPainSite"):    If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 150
@@ -4542,7 +4556,7 @@ End If
 '--- Frame12 内 ---
 Set f = Me.Controls("Frame12")
 If Not f Is Nothing Then
-    Set l = f.Controls("lblVAS"):         If Not l Is Nothing Then l.WordWrap = False: l.caption = "VAS（0〜100）": l.WordWrap = False: l.AutoSize = False: l.Width = 120
+    Set l = f.Controls("lblVAS"):         If Not l Is Nothing Then l.WordWrap = False: l.caption = "VAS（0～100）": l.WordWrap = False: l.AutoSize = False: l.Width = 120
     Set l = f.Controls("lblPainQual"):    If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
     Set l = f.Controls("lblPainCourse"):  If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 140
     Set l = f.Controls("lblPainSite"):    If Not l Is Nothing Then l.WordWrap = False: l.AutoSize = False: l.Width = 150
@@ -4565,7 +4579,7 @@ Private Sub FixPainCaptionsAndWidth()
             End If
             ' 右：VASの表記を固定
             If InStr(c.caption, "VAS") > 0 Then
-                c.caption = "VAS（0〜100）"
+                c.caption = "VAS（0～100）"
             End If
         End If
     Next
@@ -4584,7 +4598,7 @@ Public Sub FixPainLabels_Final()
                 CallByName l, "AutoSize", VbLet, False  ' 固定に戻す（折返し防止）
                 On Error GoTo 0
             ElseIf c.name = "lblVAS" Then
-                c.caption = "VAS（0〜100）"
+                c.caption = "VAS（0～100）"
             End If
         End If
     Next
@@ -4601,7 +4615,7 @@ Public Sub FixPainLabels_Final()
                         CallByName l, "AutoSize", VbLet, False
                         On Error GoTo 0
                     ElseIf c.name = "lblVAS" Then
-                        c.caption = "VAS（0〜100）"
+                        c.caption = "VAS（0～100）"
                     End If
                 End If
             Next
@@ -4713,10 +4727,10 @@ Private Sub BuildWalkIndep_DistanceOutdoor()
         .Height = 18
         If .ListCount = 0 Then
             .AddItem "5m未満"
-            .AddItem "5〜10m"
-            .AddItem "10〜30m"
-            .AddItem "30〜50m"
-            .AddItem "50〜100m"
+            .AddItem "5～10m"
+            .AddItem "10～30m"
+            .AddItem "30～50m"
+            .AddItem "50～100m"
             .AddItem "100m以上"
         End If
     End With
@@ -5098,7 +5112,7 @@ Private Sub BuildWalkAbnormal_Checks()
     Dim D_items As Variant
 
     ' ----------------------
-    ' A：片麻痺・脳血管障害（1〜10）
+    ' A：片麻痺・脳血管障害（1～10）
     ' ----------------------
     A_items = Array( _
         "すり足歩行", _
@@ -5114,7 +5128,7 @@ Private Sub BuildWalkAbnormal_Checks()
     )
 
     ' ----------------------
-    ' B：パーキンソン系（1〜9）
+    ' B：パーキンソン系（1～9）
     ' ----------------------
     B_items = Array( _
         "小刻み歩行", _
@@ -5129,7 +5143,7 @@ Private Sub BuildWalkAbnormal_Checks()
     )
 
     ' ----------------------
-    ' C：整形・高齢者不安定歩行（1〜10）
+    ' C：整形・高齢者不安定歩行（1～10）
     ' ----------------------
     C_items = Array( _
         "よちよち歩行（筋力低下）", _
@@ -5145,7 +5159,7 @@ Private Sub BuildWalkAbnormal_Checks()
     )
 
     ' ----------------------
-    ' D：協調障害・失調（1〜8）
+    ' D：協調障害・失調（1～8）
     ' ----------------------
     D_items = Array( _
         "失調性歩行（ワイドベース）", _

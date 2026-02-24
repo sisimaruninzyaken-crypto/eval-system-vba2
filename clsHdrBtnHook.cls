@@ -11,10 +11,18 @@ Option Explicit
 
 Public WithEvents btn As MSForms.CommandButton
 Attribute btn.VB_VarHelpID = -1
+Public tag As String
+Public owner As Object
 
 Private Sub Btn_Click()
-    
-    ArchiveAndDelete_EvalData_ByName
+    Select Case LCase$(Trim$(tag))
+        Case "loadprev"
+            If Not owner Is Nothing Then
+                CallByName owner, "HandleHdrLoadPrevClick", VbMethod
+            End If
+        Case Else
+            ArchiveAndDelete_EvalData_ByName
+    End Select
 End Sub
 
 
