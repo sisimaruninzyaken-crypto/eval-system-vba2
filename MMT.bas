@@ -16,32 +16,20 @@ Public Sub MMT_BuildChildTabs_Direct()
 
     Dim host As Object, mp As Object
 
-    '--- host確保（無ければ作る） ---
-    On Error Resume Next
-    Set host = pg.Controls("fraMMTHost")
-    
+    Set host = GetMMTHost(pg)
     If host Is Nothing Then
-        Set host = pg.Controls.Add("Forms.Frame.1", "fraMMTHost", True)
-        host.caption = ""
-        host.Left = 6: host.Top = 6
+        MsgBox "MMTホストが見つかりません。", vbExclamation
+        Exit Sub
     End If
 
     ' hostサイズは毎回追従（pgが小さくても破綻しない）
     host.Width = pg.InsideWidth - 12
     host.Height = pg.InsideHeight - 12
 
-    '--- mp確保（host配下） ---
-    On Error Resume Next
-    Set mp = host.Controls("mpMMTChild")
-    
-
+    Set mp = GetMMTChildTabs(pg, host)
     If mp Is Nothing Then
-        Set mp = host.Controls.Add("Forms.MultiPage.1", "mpMMTChild", True)
-        mp.Left = 0: mp.Top = 0
-        mp.Style = 0
-        mp.Pages.Clear
-        mp.Pages.Add.caption = "上肢"
-        mp.Pages.Add.caption = "下肢"
+        MsgBox "子タブ(mpMMTChild)が作成できません。", vbExclamation
+        Exit Sub
     End If
 
     ' mpサイズも毎回追従
@@ -87,11 +75,6 @@ Public Function GetMMTHost(ByVal pg As Object) As Object
         On Error Resume Next
         Set host = pg.Controls("Frame9")
         On Error GoTo 0
-        If Not host Is Nothing Then
-            On Error Resume Next
-            host.Name = "fraMMTHost"
-            On Error GoTo 0
-        End If
     End If
 
     Set GetMMTHost = host
@@ -100,28 +83,43 @@ End Function
 Public Function GetMMTChildTabs(ByVal pg As Object, Optional ByVal host As Object = Nothing) As Object
     Dim mp As Object
 
-    If host Is Nothing Then Set host = GetMMTHost(pg)
-    If host Is Nothing Then Exit Function
-
     On Error Resume Next
-    Set mp = host.Controls("mpMMTChild")
+    Set mp = FindCtlDeep(frmEval, "mpMMTChild")
     On Error GoTo 0
 
     If mp Is Nothing Then
-        Set mp = host.Controls.Add("Forms.MultiPage.1", "mpMMTChild", True)
-        mp.Left = 0
-        mp.Top = 0
-        mp.Style = 0
-        mp.Pages.Clear
-        mp.Pages.Add.Caption = ChrW(&H4E0A) & ChrW(&H80A2)
-        mp.Pages.Add.Caption = ChrW(&H4E0B) & ChrW(&H80A2)
+        On Error Resume Next
+        Set host = pg.Controls("Frame9")
+        On Error GoTo 0
+        If host Is Nothing Then Set host = GetMMTHost(pg)
+        If host Is Nothing Then Exit Function
+
+        On Error Resume Next
+        Set mp = host.Controls("mpMMTChild")
+        On Error GoTo 0
+    ElseIf host Is Nothing Then
+        On Error Resume Next
+        Set host = mp.Parent
+        On Error GoTo 0
     End If
 
-    If mp.Pages.Count < 2 Then
-        Do While mp.Pages.Count < 2
-            mp.Pages.Add
-        Loop
+    If mp Is Nothing Then
+        Set mp = host.Controls.Add("Forms.MultiPage.1", "mpMMTChild", True)
     End If
+
+    mp.Left = 0
+    mp.Top = 0
+    mp.Width = host.InsideWidth
+    mp.Height = host.InsideHeight
+    mp.Style = 0
+    mp.ZOrder 0
+
+    Do While mp.Pages.Count > 2
+        mp.Pages.Remove mp.Pages.Count - 1
+    Loop
+    Do While mp.Pages.Count < 2
+        mp.Pages.Add
+    Loop
     mp.Pages(0).Caption = ChrW(&H4E0A) & ChrW(&H80A2)
     mp.Pages(1).Caption = ChrW(&H4E0B) & ChrW(&H80A2)
 
