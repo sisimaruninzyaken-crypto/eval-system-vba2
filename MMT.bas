@@ -16,20 +16,32 @@ Public Sub MMT_BuildChildTabs_Direct()
 
     Dim host As Object, mp As Object
 
-    Set host = GetMMTHost(pg)
+    '--- host確保（無ければ作る） ---
+    On Error Resume Next
+    Set host = pg.Controls("Frame9")
+    
     If host Is Nothing Then
-        MsgBox "MMTホストが見つかりません。", vbExclamation
-        Exit Sub
+        Set host = pg.Controls.Add("Forms.Frame.1", "fraMMTHost", True)
+        host.caption = ""
+        host.Left = 6: host.Top = 6
     End If
 
     ' hostサイズは毎回追従（pgが小さくても破綻しない）
     host.Width = pg.InsideWidth - 12
     host.Height = pg.InsideHeight - 12
 
-    Set mp = GetMMTChildTabs(pg, host)
+    '--- mp確保（host配下） ---
+    On Error Resume Next
+   On Error Resume Next: Set mp = host.Controls("mpMMTChild"): On Error GoTo 0: If mp Is Nothing Then Exit Sub
+    
+
     If mp Is Nothing Then
-        MsgBox "子タブ(mpMMTChild)が作成できません。", vbExclamation
-        Exit Sub
+        Set mp = host.Controls.Add("Forms.MultiPage.1", "mpMMTChild", True)
+        mp.Left = 0: mp.Top = 0
+        mp.Style = 0
+        mp.Pages.Clear
+        mp.Pages.Add.caption = "上肢"
+        mp.Pages.Add.caption = "下肢"
     End If
 
     ' mpサイズも毎回追従
@@ -67,61 +79,51 @@ End Sub
 Public Function GetMMTHost(ByVal pg As Object) As Object
     Dim host As Object
 
-    On Error Resume Next
     Set host = pg.Controls("fraMMTHost")
-    On Error GoTo 0
-
+    If Not host Is Nothing Then Debug.Print "[MMT][HOST] got fraMMTHost type=" & TypeName(host) & " name=" & host.name
+    
     If host Is Nothing Then
-        On Error Resume Next
+        
         Set host = pg.Controls("Frame9")
-        On Error GoTo 0
+        If Not host Is Nothing Then Debug.Print "[MMT][HOST] got Frame9 type=" & TypeName(host) & " name=" & host.name
+        
     End If
 
     Set GetMMTHost = host
 End Function
 
 Public Function GetMMTChildTabs(ByVal pg As Object, Optional ByVal host As Object = Nothing) As Object
+    
+    Debug.Print "[MMT][CHILD] parent Type=" & TypeName(pg) & " Name=" & pg.name
+Debug.Print "[MMT][CHILD] parent Controls.Count=" & pg.Controls.Count
+Debug.Print "[MMT][CHILD] parent Visible=" & pg.Visible & " Enabled=" & pg.Enabled
+    
     Dim mp As Object
 
+    If host Is Nothing Then Set host = GetMMTHost(pg)
+    If host Is Nothing Then Exit Function
+
     On Error Resume Next
-    Set mp = FindCtlDeep(frmEval, "mpMMTChild")
+    Set mp = host.Controls("mpMMTChild")
     On Error GoTo 0
 
     If mp Is Nothing Then
-        On Error Resume Next
-        Set host = pg.Controls("Frame9")
-        On Error GoTo 0
-        If host Is Nothing Then Set host = GetMMTHost(pg)
-        If host Is Nothing Then Exit Function
-
-        On Error Resume Next
-        Set mp = host.Controls("mpMMTChild")
-        On Error GoTo 0
-    ElseIf host Is Nothing Then
-        On Error Resume Next
-        Set host = mp.Parent
-        On Error GoTo 0
-    End If
-
-    If mp Is Nothing Then
         Set mp = host.Controls.Add("Forms.MultiPage.1", "mpMMTChild", True)
+        mp.Left = 0
+        mp.Top = 0
+        mp.Style = 0
+        mp.Pages.Clear
+        mp.Pages.Add.caption = ChrW(&H4E0A) & ChrW(&H80A2)
+        mp.Pages.Add.caption = ChrW(&H4E0B) & ChrW(&H80A2)
     End If
 
-    mp.Left = 0
-    mp.Top = 0
-    mp.Width = host.InsideWidth
-    mp.Height = host.InsideHeight
-    mp.Style = 0
-    mp.ZOrder 0
-
-    Do While mp.Pages.Count > 2
-        mp.Pages.Remove mp.Pages.Count - 1
-    Loop
-    Do While mp.Pages.Count < 2
-        mp.Pages.Add
-    Loop
-    mp.Pages(0).Caption = ChrW(&H4E0A) & ChrW(&H80A2)
-    mp.Pages(1).Caption = ChrW(&H4E0B) & ChrW(&H80A2)
+    If mp.Pages.Count < 2 Then
+        Do While mp.Pages.Count < 2
+            mp.Pages.Add
+        Loop
+    End If
+    mp.Pages(0).caption = ChrW(&H4E0A) & ChrW(&H80A2)
+    mp.Pages(1).caption = ChrW(&H4E0B) & ChrW(&H80A2)
 
     Set GetMMTChildTabs = mp
 End Function
@@ -273,42 +275,47 @@ End Function
 
 
 ' === 読込（行ベース） ===
-
 Public Sub LoadMMTFromSheet(ws As Worksheet, r As Long, owner As Object)
+
+    Debug.Print "[MMT][ENTER] r=" & r
+
     Dim c As Long, s As String
     Dim pg As Object, mp As Object
 
     ' MMT_IO 列
     c = FindColByHeaderExact(ws, "MMT_IO")
+    Debug.Print "[MMT] col=" & c
     If c = 0 Then Exit Sub
 
-     s = ReadStr_Compat("IO_MMT", r, ws)
+    s = ReadStr_Compat("IO_MMT", r, ws)
+    Debug.Print "[MMT] s.len=" & Len(s)
     If Len(s) = 0 Then Exit Sub
 
     ' MMTページ
+    Debug.Print "[MMT] before GetMMTPage"
     Set pg = GetMMTPage()
+    Debug.Print "[MMT] after GetMMTPage", TypeName(pg)
+
     If pg Is Nothing Then Exit Sub
 
-    ' 子タブの存在確認 → 無ければ作る
-    On Error Resume Next
+    ' 子タブの存在確認
+    Debug.Print "[MMT] before GetMMTChildTabs"
     Set mp = GetMMTChildTabs(pg)
-    On Error GoTo 0
+    Debug.Print "[MMT] after GetMMTChildTabs", TypeName(mp)
+
     If mp Is Nothing Then
-        MMT_BuildChildTabs_Direct          ' ★ここが肝
-        On Error Resume Next
+        Debug.Print "[MMT] building child tabs"
+        MMT_BuildChildTabs_Direct
         Set mp = GetMMTChildTabs(pg)
-        On Error GoTo 0
-        If mp Is Nothing Then Exit Sub      ' それでも無ければ諦める
+        Debug.Print "[MMT] after rebuild", TypeName(mp)
+        If mp Is Nothing Then Exit Sub
     End If
 
-    ' 値を反映
+    Debug.Print "[MMT] before LoadFromString"
     MMT_LoadFromString_Core s
-    
+    Debug.Print "[MMT] after LoadFromString"
 
-
-    
 End Sub
-
 '========================
 ' 直列化文字列 → 子タブへ復元
 ' 形式：  side|項目名|右値|左値 ; side|項目名|右値|左値 ; ...
