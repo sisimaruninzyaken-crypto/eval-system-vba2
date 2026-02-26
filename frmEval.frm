@@ -3812,11 +3812,10 @@ Public Sub AddPainQualUI()
     Dim items As Variant
     Dim i As Long
 
-    ' 既存チェック（安全版）
-Dim t As Object: Err.Clear
-On Error Resume Next: Set t = Me.Controls("lstPainQual")
-If Err.Number = 0 And Not t Is Nothing Then On Error GoTo 0: Exit Sub
-On Error GoTo 0
+    ' 既存チェック（重複生成防止）
+    Dim t As Object
+    Set t = FindCtlDeep(Me, "lstPainQual")
+    If Not t Is Nothing Then Exit Sub
 
 
     ' 既存NRSの親フレームに追加する
@@ -3868,10 +3867,9 @@ Public Sub AddPainFactorsUI()
     Dim i As Long, Y As Single
 
     ' 既存チェック（重複生成防止）
-    Dim t As Object: Err.Clear
-    On Error Resume Next: Set t = Me.Controls("fraPainFactors")
-    If Err.Number = 0 And Not t Is Nothing Then On Error GoTo 0: Exit Sub
-    On Error GoTo 0
+    Dim t As Object
+    Set t = FindCtlDeep(Me, "fraPainFactors")
+    If Not t Is Nothing Then Exit Sub
 
     ' 追加先は疼痛タブのフレーム（NRSの親）
     Set host = Me.Controls("cmbNRS_Move").parent
@@ -3939,11 +3937,10 @@ Public Sub AddVASUI()
     Dim tb As MSForms.TextBox
     Dim sb As MSForms.ScrollBar
 
-    ' 重複生成防止
-    Dim t As Object: Err.Clear
-    On Error Resume Next: Set t = Me.Controls("fraVAS")
-    If Err.Number = 0 And Not t Is Nothing Then On Error GoTo 0: Exit Sub
-    On Error GoTo 0
+    ' 既存チェック（重複生成防止）
+    Dim t As Object
+    Set t = FindCtlDeep(Me, "fraVAS")
+    If Not t Is Nothing Then Exit Sub
 
     ' 追加先＝疼痛タブのフレーム（NRSの親）
     Set host = Me.Controls("cmbNRS_Move").parent
@@ -4010,11 +4007,10 @@ Public Sub AddPainCourseUI()
     Dim tb As MSForms.TextBox
     Dim i As Long
 
-    ' 重複生成防止
-    Dim t As Object: Err.Clear
-    On Error Resume Next: Set t = Me.Controls("fraPainCourse")
-    If Err.Number = 0 And Not t Is Nothing Then On Error GoTo 0: Exit Sub
-    On Error GoTo 0
+    ' 既存チェック（重複生成防止）
+    Dim t As Object
+    Set t = FindCtlDeep(Me, "fraPainCourse")
+    If Not t Is Nothing Then Exit Sub
 
     ' 追加先＝疼痛タブのフレーム（NRSの親）
     Set host = Me.Controls("cmbNRS_Move").parent
@@ -4080,11 +4076,10 @@ Public Sub AddPainSiteUI()
     Dim i As Long
     Dim items As Variant
 
-    ' 重複生成防止
-    Dim t As Object: Err.Clear
-    On Error Resume Next: Set t = Me.Controls("fraPainSite")
-    If Err.Number = 0 And Not t Is Nothing Then On Error GoTo 0: Exit Sub
-    On Error GoTo 0
+    ' 既存チェック（重複生成防止）
+    Dim t As Object
+    Set t = FindCtlDeep(Me, "fraPainSite")
+    If Not t Is Nothing Then Exit Sub
 
     ' 追加先＝疼痛タブのフレーム（NRSの親）
     Set host = Me.Controls("cmbNRS_Move").parent
