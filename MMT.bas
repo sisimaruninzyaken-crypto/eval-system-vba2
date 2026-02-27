@@ -16,32 +16,26 @@ Public Sub MMT_BuildChildTabs_Direct()
 
     Dim host As Object, mp As Object
 
+
     '--- host確保（無ければ作る） ---
-    On Error Resume Next
-    Set host = pg.Controls("Frame9")
+    Set host = GetMMTHost(pg)
     
     If host Is Nothing Then
-        Set host = pg.Controls.Add("Forms.Frame.1", "fraMMTHost", True)
-        host.caption = ""
-        host.Left = 6: host.Top = 6
+        MsgBox "MMTホストが見つかりません。", vbExclamation
+        Exit Sub
     End If
 
     ' hostサイズは毎回追従（pgが小さくても破綻しない）
     host.Width = pg.InsideWidth - 12
     host.Height = pg.InsideHeight - 12
-
-    '--- mp確保（host配下） ---
-    On Error Resume Next
-   On Error Resume Next: Set mp = host.Controls("mpMMTChild"): On Error GoTo 0: If mp Is Nothing Then Exit Sub
     
-
+    '--- mp確保（host配下） ---
+    Set mp = GetMMTChildTabs(pg, host)
+    
     If mp Is Nothing Then
-        Set mp = host.Controls.Add("Forms.MultiPage.1", "mpMMTChild", True)
-        mp.Left = 0: mp.Top = 0
-        mp.Style = 0
-        mp.Pages.Clear
-        mp.Pages.Add.caption = "上肢"
-        mp.Pages.Add.caption = "下肢"
+
+        MsgBox "子タブ(mpMMTChild)が作成できません。", vbExclamation
+        Exit Sub
     End If
 
     ' mpサイズも毎回追従
@@ -72,43 +66,104 @@ RRTRACE:
 End Sub
 
 
-
-
-
-'--- 「筋力」「MMT」を含むページを取得 ---
 Public Function GetMMTHost(ByVal pg As Object) As Object
     Dim host As Object
-
-    Set host = pg.Controls("fraMMTHost")
-    If Not host Is Nothing Then Debug.Print "[MMT][HOST] got fraMMTHost type=" & TypeName(host) & " name=" & host.name
+    Dim cand As Variant
+    Dim i As Long
+    Dim j As Long
+    Dim c As Object
+    Dim mpProbe As Object
     
-    If host Is Nothing Then
+    If pg Is Nothing Then Exit Function
+    
+    ' 1) 候補名を優先
+    For Each cand In Array("fraMMTHost", "Frame9", "fraMMTWrap")
+        On Error Resume Next
+        Set host = pg.Controls(CStr(cand))
+        On Error GoTo 0
         
-        Set host = pg.Controls("Frame9")
-        If Not host Is Nothing Then Debug.Print "[MMT][HOST] got Frame9 type=" & TypeName(host) & " name=" & host.name
-        
-    End If
-
-    Set GetMMTHost = host
+        If Not host Is Nothing Then
+            If TypeName(host) = "Frame" Then
+#If APP_DEBUG Then
+                Debug.Print "[MMT][HOST] name-hit=" & CStr(cand) & " type=" & TypeName(host)
+#End If
+                Set GetMMTHost = host
+                Exit Function
+            End If
+            Set host = Nothing
+        End If
+    Next cand
+    
+    ' 2) Frame を走査して特徴で推定
+    For i = 0 To pg.Controls.Count - 1
+        Set c = pg.Controls(i)
+        If TypeName(c) = "Frame" Then
+            
+            ' mpMMTChild を持っているか（アクセスエラーもあり得るのでガード）
+            Set mpProbe = Nothing
+            On Error Resume Next
+            Set mpProbe = c.Controls("mpMMTChild")
+            On Error GoTo 0
+            
+            If Not mpProbe Is Nothing Then
+#If APP_DEBUG Then
+                Debug.Print "[MMT][HOST] inferred=" & c.name & " (has mpMMTChild)"
+#End If
+                Set GetMMTHost = c
+                Exit Function
+            End If
+            
+            ' MultiPage 子を持っているか
+            On Error Resume Next
+            If c.Controls.Count > 0 Then
+                For j = 0 To c.Controls.Count - 1
+                    If TypeName(c.Controls(j)) = "MultiPage" Then
+#If APP_DEBUG Then
+                        Debug.Print "[MMT][HOST] inferred=" & c.name & " (has MultiPage child)"
+#End If
+                        Set GetMMTHost = c
+                        Exit Function
+                    End If
+                Next j
+            End If
+            On Error GoTo 0
+        End If
+    Next i
+    
+#If APP_DEBUG Then
+    Debug.Print "[MMT][HOST] not found -> skip"
+#End If
 End Function
 
 Public Function GetMMTChildTabs(ByVal pg As Object, Optional ByVal host As Object = Nothing) As Object
-    
-    Debug.Print "[MMT][CHILD] parent Type=" & TypeName(pg) & " Name=" & pg.name
-Debug.Print "[MMT][CHILD] parent Controls.Count=" & pg.Controls.Count
-Debug.Print "[MMT][CHILD] parent Visible=" & pg.Visible & " Enabled=" & pg.Enabled
-    
     Dim mp As Object
-
+    Dim i As Long
+    
     If host Is Nothing Then Set host = GetMMTHost(pg)
     If host Is Nothing Then Exit Function
-
+    
     On Error Resume Next
     Set mp = host.Controls("mpMMTChild")
     On Error GoTo 0
-
+    
     If mp Is Nothing Then
+        On Error Resume Next
+        For i = 0 To host.Controls.Count - 1
+            If TypeName(host.Controls(i)) = "MultiPage" Then
+                Set mp = host.Controls(i)
+                Exit For
+            End If
+        Next i
+        On Error GoTo 0
+    End If
+    
+    If mp Is Nothing Then
+        On Error Resume Next
         Set mp = host.Controls.Add("Forms.MultiPage.1", "mpMMTChild", True)
+        On Error GoTo 0
+        
+        If mp Is Nothing Then Exit Function
+        
         mp.Left = 0
         mp.Top = 0
         mp.Style = 0
@@ -116,17 +171,19 @@ Debug.Print "[MMT][CHILD] parent Visible=" & pg.Visible & " Enabled=" & pg.Enabl
         mp.Pages.Add.caption = ChrW(&H4E0A) & ChrW(&H80A2)
         mp.Pages.Add.caption = ChrW(&H4E0B) & ChrW(&H80A2)
     End If
-
+    
     If mp.Pages.Count < 2 Then
         Do While mp.Pages.Count < 2
             mp.Pages.Add
         Loop
     End If
+    
     mp.Pages(0).caption = ChrW(&H4E0A) & ChrW(&H80A2)
     mp.Pages(1).caption = ChrW(&H4E0B) & ChrW(&H80A2)
-
+    
     Set GetMMTChildTabs = mp
 End Function
+
 
 Public Function GetMMTPage() As Object
     Dim c As Object, mp As Object, i As Long
